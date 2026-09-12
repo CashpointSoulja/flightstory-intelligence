@@ -87,13 +87,27 @@ async function initEvidenceUniverse() {
   art.querySelectorAll('.catalog-node').forEach(node => node.addEventListener('click', () => { query.value = node.dataset.universeQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
 }
 
+function deslopInterface() {
+  const eyebrow = document.querySelector('.eyebrow');
+  if (eyebrow) eyebrow.innerHTML = 'A LIVING ARCHIVE FOR BETTER DECISIONS';
+  document.querySelectorAll('.rail-heading span').forEach(node => node.remove());
+  document.querySelectorAll('.signal-meta span:last-child').forEach(node => { if (node.textContent.includes('%') || node.textContent.includes('/')) node.textContent = 'REVIEW'; });
+  document.querySelectorAll('.signal-bars').forEach(node => { node.innerHTML = '<span>clear opening</span><span>complete thought</span><span>context review</span>'; node.className = 'signal-reasons'; });
+  const style = document.createElement('style');
+  style.textContent = '.signal-reasons{display:flex;gap:12px;flex-wrap:wrap;margin:0 0 15px}.signal-reasons span{color:var(--muted);font:9px "DM Mono";border-bottom:1px solid rgba(199,167,255,.35);padding-bottom:4px}';
+  document.head.appendChild(style);
+  const footer = document.querySelector('footer');
+  if (footer) footer.innerHTML = '<span>FLIGHTSTORY INTELLIGENCE</span><span>Search the archive. Verify the moment.</span>';
+}
+
 renderQueue();
 initDiscovery();
+deslopInterface();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const archiveMeta = document.querySelector('.rail-item.active small');
-  if (archiveMeta) archiveMeta.textContent = '0 indexed · 367 catalogue candidates';
+  if (archiveMeta) archiveMeta.textContent = '0 indexed, 367 catalogue candidates';
   const badge = document.querySelector('.status');
-  if (badge && status.configured) badge.innerHTML = '<span></span> InsForge linked · demo index';
+  if (badge && status.configured) badge.innerHTML = '<span></span> InsForge linked';
 }).catch(() => {});
 const authScript = document.createElement('script');
 authScript.type = 'module';
