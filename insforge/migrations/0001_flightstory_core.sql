@@ -1,6 +1,5 @@
 create schema if not exists flightstory;
-create schema if not exists extensions;
-create extension if not exists vector with schema extensions;
+create extension if not exists vector;
 
 create table flightstory.workspaces (
   id uuid primary key default gen_random_uuid(),
@@ -64,7 +63,7 @@ create table flightstory.transcript_segments (
   confidence numeric(5,4) check (confidence is null or confidence between 0 and 1),
   words jsonb not null default '[]'::jsonb,
   search_text tsvector generated always as (to_tsvector('english', text)) stored,
-  embedding extensions.vector(1536),
+  embedding vector(1536),
   unique (transcript_version_id, segment_index)
 );
 

@@ -6,10 +6,10 @@ Status: MVP definition and architecture baseline, 12 September 2026
 
 - GitHub: https://github.com/CashpointSoulja/flightstory-intelligence (private, `main` pushed)
 - Vercel: https://flightstory-intelligence.vercel.app (`READY`, GitHub-connected production deployment)
-- Supabase: pending a separate Free Plan organisation named `Special Projects`; the connected paid organisation is not used for this product
+- InsForge: project `FlightStory-Intelligence` created and linked in `eu-central`; database schema applied and verified
 - Current app: Steven.com-inspired UI, local evidence fallback, timestamp links, persistent clip queue, and refusal for unsupported topics
 - Current backend: portable SQL migration in `supabase/migrations/0001_flightstory_core.sql`
-- Not yet complete: real Supabase connection, live OpenAI key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
+- Not yet complete: live model key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
 
 ## Product in one line
 
@@ -143,7 +143,7 @@ Interaction rules:
 ```text
 GitHub
   -> Vercel: Next.js + TypeScript UI and short API routes
-  -> Supabase: Auth + Postgres + pgvector + private Storage
+  -> InsForge: Auth + Postgres + pgvector + private Storage
   -> Trigger.dev: durable ingestion, transcription, embeddings, graph extraction, FFmpeg
   -> AssemblyAI: canonical word timestamps and provisional speaker labels
   -> OpenAI: server-side grounded synthesis, extraction, ranking
@@ -159,7 +159,7 @@ Normal product operation should not depend on the Mac being switched on.
 
 1. Catalogue official episode IDs and metadata from March 2023 onward.
 2. Obtain authorised source video/audio files or approved source URLs.
-3. Upload source media directly to private Supabase Storage.
+3. Upload source media directly to private InsForge Storage.
 4. Trigger a durable job that uses FFmpeg to create 16 kHz mono audio and a smaller proxy video.
 5. Send audio to AssemblyAI for word-level timestamps, confidence, utterances, and provisional speaker labels.
 6. Keep the original provider response and any corrected transcript separately.
@@ -248,16 +248,16 @@ Show the reasons behind the score. Never display a single unexplained “viral s
 - `main` maps to production.
 - feature branches and pull requests map to Vercel previews.
 - Vercel hosts the web app and short server requests.
-- A dedicated Supabase project named `Special Projects` stores database records, vectors, auth, and private files.
+- The dedicated InsForge project `FlightStory-Intelligence` stores database records, vectors, auth, and private files.
 - A background worker handles long media jobs and retries.
 
 The current connected GitHub MCP exposes file and commit operations but no repository-creation operation. Create the private repository through the connected GitHub account or CLI only after confirming the destination, then connect that repository to Vercel.
 
-The `Special Projects` Supabase project is a provisioning prerequisite. It must remain separate from existing operational projects, with versioned migrations and private storage so the product can migrate cleanly later.
+InsForge is the active MVP backend. Keep the SQL migrations and provider adapters portable so the product can move to Supabase, Neon, or another Postgres backend later without changing the product model.
 
-## Free fallback if Supabase remains blocked
+## Portable backend fallback
 
-The primary destination remains the dedicated `Special Projects` Supabase project. If its organisation cannot be created, use a portable fallback without changing the product model:
+InsForge is the active backend. If it ever becomes unsuitable, use a portable fallback without changing the product model:
 
 ```text
 Vercel app
@@ -268,7 +268,7 @@ Vercel app
 
 The existing SQL contract is PostgreSQL-shaped, so Neon is the closest replacement. Keep the same table names, IDs, timestamps, migration files, server-only environment variables, and private-media boundary. Only the database/storage adapters should change.
 
-Do not downgrade existing operational projects or move product data into them to unblock this app. The free fallback is for development and the initial internal pilot; move to the dedicated Supabase project when available.
+Keep the same table names, IDs, timestamps, migration files, server-only environment variables, and private-media boundary. Only the database/storage adapters should change.
 
 ## Audit and review gates
 

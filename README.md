@@ -8,8 +8,9 @@ An evidence-first internal intelligence layer for the Diary of a CEO archive: as
 - Search works against labelled demo evidence and refuses empty topics.
 - Timestamp links and persistent clip queue are implemented.
 - The repository is private and pushed to https://github.com/CashpointSoulja/flightstory-intelligence.
-- The portable Supabase migration is in `supabase/migrations/0001_flightstory_core.sql`.
-- Supabase project provisioning is pending the `Special Projects` organisation becoming available.
+- The connected backend is InsForge project `FlightStory-Intelligence` in `eu-central`.
+- The portable Postgres migration is in `supabase/migrations/0001_flightstory_core.sql`.
+- InsForge credentials are local-only in `.env.local`; never commit them.
 
 ## Run locally
 
@@ -37,7 +38,7 @@ Every episode needs an explicit source and rights state:
 ## Architecture
 
 ```text
-Vercel UI/API → Special Projects Supabase
+Vercel UI/API → InsForge Postgres/Auth/Storage
                          ↓
              durable ingestion worker
                          ↓
