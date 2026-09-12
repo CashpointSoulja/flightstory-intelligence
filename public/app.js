@@ -61,6 +61,8 @@ function initDiscovery() {
 renderQueue();
 initDiscovery();
 fetch('/api/backend').then(response => response.json()).then(status => {
+  const archiveMeta = document.querySelector('.rail-item.active small');
+  if (archiveMeta) archiveMeta.textContent = '0 indexed · 367 catalogue candidates';
   const badge = document.querySelector('.status');
   if (badge && status.configured) badge.innerHTML = '<span></span> InsForge linked · demo index';
 }).catch(() => {});
