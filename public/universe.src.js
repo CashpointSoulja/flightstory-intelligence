@@ -51,6 +51,7 @@ const nodeGeometry = new THREE.SphereGeometry(.055, 8, 8);
 const evidenceGeometry = new THREE.SphereGeometry(.15, 16, 16);
 const nodes = [];
 const catalogue = await fetch('/api/catalog').then(response => response.ok ? response.json() : []).catch(() => []);
+const graph = await fetch('/topic-graph.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
 
 function addNode(data, position, geometry, scale = 1) {
   const material = new THREE.MeshBasicMaterial({ color: data.color || 0x8c8792, transparent: true, opacity: data.kind === 'episode' ? .72 : 1 });
@@ -63,29 +64,16 @@ function addNode(data, position, geometry, scale = 1) {
   return mesh;
 }
 
-const topicRules = [
-  ['AI & technology', /\b(ai|artificial intelligence|technology|tech|future|robot|internet|social media)\b/i],
-  ['Health & longevity', /\b(health|longevity|sleep|insulin|weight|fitness|exercise|nutrition|diet|brain|dopamine)\b/i],
-  ['Mind & psychology', /\b(mind|psycholog|trauma|anxiety|depression|emotion|fear|happiness|mental)\b/i],
-  ['Business & money', /\b(business|money|wealth|founder|entrepreneur|company|invest|econom|capital|career)\b/i],
-  ['Relationships', /\b(relationship|love|marriage|dating|family|friend|lonely|conversation|people)\b/i],
-  ['Leadership', /\b(leader|leadership|ceo|manager|team|culture|power|decision)\b/i],
-  ['Identity & purpose', /\b(identity|purpose|meaning|life|success|failure|story|belief|self)\b/i],
-  ['Science & truth', /\b(science|truth|lie|evidence|research|doctor|expert|history|world)\b/i],
-];
-const topicMap = new Map(topicRules.map(([title]) => [title, []]));
-for (const episode of catalogue) {
-  const match = topicRules.find(([, pattern]) => pattern.test(episode.title));
-  if (match) topicMap.get(match[0]).push(episode);
-}
-const topics = [...topicMap].filter(([, episodes]) => episodes.length >= 3).map(([title, episodes]) => ({ title, episodes }));
-const topicNodes = topics.map((topic, index) => {
-  const angle = index * 2.399963;
-  const radius = 2.9 + (index % 3) * 1.15;
-  const position = new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * .8, ((index % 3) - 1) * .55);
-  return addNode({ kind: 'topic', title: topic.title, episodes: topic.episodes, query: topic.title, color: 0xa79bb8 }, position, nodeGeometry, 1 + Math.min(topic.episodes.length, 16) / 18);
+const topicPositions = new Map();
+const topicNodes = graph.nodes.map((topic, index) => {
+  const phi = Math.acos(1 - 2 * (index + .5) / Math.max(graph.nodes.length, 1));
+  const theta = Math.PI * (3 - Math.sqrt(5)) * index;
+  const radius = 3.8 + (index % 9) * .16;
+  const position = new THREE.Vector3(Math.cos(theta) * Math.sin(phi) * radius, Math.cos(phi) * radius * .72, Math.sin(theta) * Math.sin(phi) * radius);
+  topicPositions.set(topic.id, position);
+  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, seconds: topic.seconds, query: topic.label, color: 0xa79bb8 }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 45);
 });
-const topicLabels = topicNodes.map(node => {
+const topicLabels = topicNodes.slice(0, 36).map(node => {
   const label = document.createElement('span');
   label.className = 'universe-node-label';
   label.textContent = node.userData.title;
@@ -102,9 +90,14 @@ const linkMaterial = new THREE.LineBasicMaterial({ color: 0xc7a7ff, transparent:
 for (const node of evidenceNodes) {
   root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), linkMaterial));
 }
-for (const node of topicNodes) {
+for (const node of topicNodes.slice(0, 36)) {
   root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), new THREE.LineBasicMaterial({ color: 0x686271, transparent: true, opacity: .18 })));
 }
+const edgePositions = [];
+for (const edge of graph.edges) { const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target); if (from && to) edgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
+const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x665b78, transparent: true, opacity: .16 }));
+graphLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
+root.add(graphLines);
 
 const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xf3f0ed, size: .025, transparent: true, opacity: .38 }));
 const starPositions = [];
@@ -113,7 +106,7 @@ stars.geometry.setAttribute('position', new THREE.Float32BufferAttribute(starPos
 scene.add(stars);
 
 const headingMeta = stage.querySelector('.universe-heading span');
-headingMeta.textContent = `3 EVIDENCE · ${topics.length} TOPICS · ${catalogue.length} EPISODES`;
+headingMeta.textContent = `${topicNodes.length} TOPICS · ${graph.edges.length} CONNECTIONS`;
 const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
 const inspectorMeta = inspector.querySelector('small');
@@ -124,7 +117,7 @@ function selectNode(node) {
   selected = node;
   const data = node.userData;
   inspectorTitle.textContent = data.title;
-  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.episodes.length} catalogue episodes · title-derived topic · transcript indexing pending`;
+  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.occurrences} transcript mentions · source ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
   openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : 'Search this topic ↗';
   inspector.classList.add('visible');
   root.add(node);

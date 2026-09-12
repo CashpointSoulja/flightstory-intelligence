@@ -106,7 +106,7 @@ deslopInterface();
 if (query.value) form.requestSubmit();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const archiveMeta = document.querySelector('.rail-item.active small');
-  if (archiveMeta) archiveMeta.textContent = '0 indexed, 367 catalogue candidates';
+  if (archiveMeta) archiveMeta.textContent = '294 transcripts, 73 pending';
   const badge = document.querySelector('.status');
   if (badge && status.configured) badge.innerHTML = '<span></span> InsForge linked';
 }).catch(() => {});
