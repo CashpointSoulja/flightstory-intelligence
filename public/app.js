@@ -103,7 +103,7 @@ function deslopInterface() {
 renderQueue();
 initDiscovery();
 deslopInterface();
-if (query.value.includes('confidence')) { query.value = 'What did Vanessa Van Edwards say about talking too much?'; form.requestSubmit(); }
+if (query.value) form.requestSubmit();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const archiveMeta = document.querySelector('.rail-item.active small');
   if (archiveMeta) archiveMeta.textContent = '0 indexed, 367 catalogue candidates';
