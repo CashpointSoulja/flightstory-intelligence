@@ -7,6 +7,7 @@ const root = dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT || 3000);
 const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 const insforgeUrl = process.env.NEXT_PUBLIC_INSFORGE_URL || '';
+const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
 
 const evidence = [
   { id: 'hormozi-confidence', episode: 'The Diary Of A CEO with Alex Hormozi', guest: 'Alex Hormozi', videoId: 'hormozi-demo', start: 2472, end: 2538, topic: 'confidence', quote: 'Confidence is not something you wait for. It is built by keeping promises to yourself, especially the small ones.', note: 'A practical view: confidence follows evidence of action.' },
@@ -45,6 +46,9 @@ const server = http.createServer(async (request, response) => {
   try {
     if (request.method === 'GET' && request.url === '/api/backend') {
       return send(response, 200, { provider: insforgeUrl ? 'insforge' : 'demo', configured: Boolean(insforgeUrl), project: insforgeUrl ? new URL(insforgeUrl).hostname : null });
+    }
+    if (request.method === 'GET' && request.url === '/api/config') {
+      return send(response, 200, { insforgeUrl, insforgeAnonKey });
     }
     if (request.method === 'POST' && request.url === '/api/search') {
       const { query } = await body(request);
