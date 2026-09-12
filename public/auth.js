@@ -13,8 +13,9 @@ if (config.insforgeUrl && config.insforgeAnonKey) {
   const { data } = await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }));
   if (data?.user) {
     button.textContent = `Signed in · ${data.user.profile?.name || data.user.email}`;
-    await insforge.database.rpc('flightstory.bootstrap_workspace', { workspace_name: 'FlightStory Intelligence' }).catch(() => {});
-    const { data: episodes } = await insforge.database.rpc('flightstory.list_episodes').catch(() => ({ data: null }));
+    const archiveDb = insforge.database.schema('flightstory');
+    await archiveDb.rpc('bootstrap_workspace', { workspace_name: 'FlightStory Intelligence' }).catch(() => {});
+    const { data: episodes } = await archiveDb.rpc('list_episodes').catch(() => ({ data: null }));
     if (Array.isArray(episodes)) {
       const archiveMeta = document.querySelector('.rail-item.active small');
       const status = document.querySelector('.status');
