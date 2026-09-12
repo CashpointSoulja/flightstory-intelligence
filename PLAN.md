@@ -255,6 +255,21 @@ The current connected GitHub MCP exposes file and commit operations but no repos
 
 The `Special Projects` Supabase project is a provisioning prerequisite. It must remain separate from existing operational projects, with versioned migrations and private storage so the product can migrate cleanly later.
 
+## Free fallback if Supabase remains blocked
+
+The primary destination remains the dedicated `Special Projects` Supabase project. If its organisation cannot be created, use a portable fallback without changing the product model:
+
+```text
+Vercel app
+  -> Neon Free PostgreSQL + pgvector
+  -> Cloudflare R2 for large media
+  -> GitHub Actions for controlled batch jobs
+```
+
+The existing SQL contract is PostgreSQL-shaped, so Neon is the closest replacement. Keep the same table names, IDs, timestamps, migration files, server-only environment variables, and private-media boundary. Only the database/storage adapters should change.
+
+Do not downgrade existing operational projects or move product data into them to unblock this app. The free fallback is for development and the initial internal pilot; move to the dedicated Supabase project when available.
+
 ## Audit and review gates
 
 Architecture and design are reviewed continuously, not only at the end.
