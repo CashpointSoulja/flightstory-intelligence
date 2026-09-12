@@ -13,6 +13,7 @@ if (config.insforgeUrl && config.insforgeAnonKey) {
   const { data } = await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }));
   if (data?.user) {
     button.textContent = `Signed in · ${data.user.profile?.name || data.user.email}`;
+    await insforge.database.rpc('flightstory.bootstrap_workspace', { workspace_name: 'FlightStory Intelligence' }).catch(() => {});
     button.addEventListener('click', async () => { await insforge.auth.signOut(); location.reload(); });
   } else {
     button.textContent = 'Sign in with GitHub';
