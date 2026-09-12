@@ -24,6 +24,12 @@ Open http://localhost:3000.
 npm run check
 ```
 
+Import a prepared timestamped episode after the authenticated workspace exists:
+
+```bash
+node scripts/import_episode.mjs /path/to/episode.json <workspace-id>
+```
+
 ## Product boundary
 
 The target archive is DOAC episodes from March 2023 onward, not every channel upload. The catalogue must classify long-form episodes separately from clips, shorts, trailers, and other videos before ingestion.
