@@ -14,6 +14,13 @@ if (config.insforgeUrl && config.insforgeAnonKey) {
   if (data?.user) {
     button.textContent = `Signed in · ${data.user.profile?.name || data.user.email}`;
     await insforge.database.rpc('flightstory.bootstrap_workspace', { workspace_name: 'FlightStory Intelligence' }).catch(() => {});
+    const { data: episodes } = await insforge.database.rpc('flightstory.list_episodes').catch(() => ({ data: null }));
+    if (Array.isArray(episodes)) {
+      const archiveMeta = document.querySelector('.rail-item.active small');
+      const status = document.querySelector('.status');
+      if (archiveMeta) archiveMeta.textContent = `${episodes.length} indexed episode${episodes.length === 1 ? '' : 's'}`;
+      if (status) status.innerHTML = `<span></span> InsForge live archive · ${episodes.length}`;
+    }
     button.addEventListener('click', async () => { await insforge.auth.signOut(); location.reload(); });
   } else {
     button.textContent = 'Sign in with GitHub';
