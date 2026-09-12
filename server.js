@@ -8,6 +8,7 @@ const port = Number(process.env.PORT || 3000);
 const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 const insforgeUrl = process.env.NEXT_PUBLIC_INSFORGE_URL || '';
 const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
+const catalogPath = join(root, 'public', 'catalog.json');
 
 const evidence = [
   { id: 'vanessa-talk-too-much', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 0, end: 18, topic: 'conversation talk too much cues', quote: 'How do you know you talk too much? So, first thing is non-verbal cues. Someone is checking out if they are opening their mouth as if to say something. I call it like the open fish.', note: 'A practical conversational cue: notice when the other person is trying to enter the conversation.' },
@@ -48,6 +49,10 @@ const server = http.createServer(async (request, response) => {
     }
     if (request.method === 'GET' && request.url === '/api/config') {
       return send(response, 200, { insforgeUrl, insforgeAnonKey });
+    }
+    if (request.method === 'GET' && request.url === '/api/catalog') {
+      const catalog = JSON.parse(await readFile(catalogPath, 'utf8'));
+      return send(response, 200, catalog.episodes.filter(item => item.eligibleForTranscription).map(({ id, title, publishedAt, durationSeconds }) => ({ id, title, publishedAt, durationSeconds })));
     }
     if (request.method === 'POST' && request.url === '/api/search') {
       const { query } = await body(request);
