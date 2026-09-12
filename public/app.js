@@ -58,8 +58,27 @@ function initDiscovery() {
   document.querySelectorAll('[data-discovery-query]').forEach(button => button.addEventListener('click', () => { query.value = button.dataset.discoveryQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
 }
 
+function initEvidenceUniverse() {
+  const art = document.querySelector('.hero-art');
+  if (!art) return;
+  const moments = [
+    { query: 'How do you know you talk too much?', label: 'TALK TOO MUCH', guest: 'VANESSA VAN EDWARDS', time: '00:00', x: 22, y: 62, tone: 'lilac' },
+    { query: 'What is the best conversation starter?', label: 'HIGHLIGHT OF YOUR DAY', guest: 'VANESSA VAN EDWARDS', time: '01:06', x: 72, y: 31, tone: 'mint' },
+    { query: 'How does technology affect loneliness?', label: 'LESS CONVERSATION', guest: 'VANESSA VAN EDWARDS', time: '00:33', x: 77, y: 73, tone: 'copper' }
+  ];
+  const style = document.createElement('style');
+  style.textContent = `
+    .hero-art{background:radial-gradient(circle at 50% 48%,rgba(199,167,255,.13),transparent 20%),#08080d}
+    .hero-art img{display:none}.universe-grid{position:absolute;inset:0;opacity:.18;background:linear-gradient(rgba(255,255,255,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.06) 1px,transparent 1px);background-size:72px 72px}.universe-svg{position:absolute;inset:7% 7% 8%;width:86%;height:84%;overflow:visible}.universe-svg path,.universe-svg line{fill:none;stroke:rgba(199,167,255,.45);stroke-width:.7}.universe-core{position:absolute;left:50%;top:49%;transform:translate(-50%,-50%);width:76px;height:76px;border:1px solid rgba(199,167,255,.7);border-radius:50%;display:grid;place-items:center;color:#f3f0ed;background:radial-gradient(circle,rgba(199,167,255,.48),rgba(199,167,255,.06) 58%,transparent 70%);box-shadow:0 0 42px rgba(199,167,255,.28);font:18px Georgia,serif;z-index:2}.universe-core small{position:absolute;top:calc(100% + 9px);white-space:nowrap;color:#aaa2b4;font:9px 'DM Mono';letter-spacing:.13em}.universe-node{position:absolute;z-index:3;transform:translate(-50%,-50%);border:0;background:none;color:var(--paper);text-align:left;cursor:pointer;padding:7px}.universe-node .node-dot{display:block;width:12px;height:12px;border-radius:50%;background:var(--lilac);box-shadow:0 0 0 5px rgba(199,167,255,.12),0 0 23px 7px rgba(199,167,255,.6);margin:auto}.universe-node.mint .node-dot{background:var(--mint);box-shadow:0 0 0 5px rgba(182,243,212,.11),0 0 23px 7px rgba(182,243,212,.5)}.universe-node.copper .node-dot{background:var(--copper);box-shadow:0 0 0 5px rgba(220,152,105,.12),0 0 23px 7px rgba(220,152,105,.5)}.universe-node:hover .node-dot,.universe-node:focus-visible .node-dot{transform:scale(1.22)}.node-label{display:block;margin-top:11px;white-space:nowrap;font:10px 'DM Mono';letter-spacing:.09em;color:#eeeaf0}.node-meta{display:block;margin-top:5px;white-space:nowrap;font:9px 'DM Mono';color:#938a9e}.universe-header,.universe-footer{position:absolute;z-index:4;font:10px 'DM Mono';letter-spacing:.14em;color:var(--paper)}.universe-header{left:18px;top:18px}.universe-header span{color:var(--muted);margin-left:11px}.universe-footer{right:18px;bottom:18px;text-align:right;color:var(--lilac);line-height:1.5}.universe-footer small{display:block;color:#8b8393;font-size:9px}.universe-caption{position:absolute;z-index:4;left:50%;top:calc(49% + 55px);transform:translateX(-50%);font:9px 'DM Mono';letter-spacing:.1em;color:#857c8e;white-space:nowrap}@media(max-width:700px){.node-label{font-size:8px}.node-meta{font-size:8px}.universe-node{padding:4px}.universe-core{width:62px;height:62px}.universe-caption{font-size:8px}}
+  `;
+  document.head.appendChild(style);
+  art.innerHTML = `<div class="universe-grid" aria-hidden="true"></div><div class="universe-header">EVIDENCE UNIVERSE <span>3 LIVE MOMENTS</span></div><svg class="universe-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M4 63 C24 10,74 7,96 31 C72 59,38 77,4 63Z"/><path d="M14 91 C25 34,67 19,88 75 C60 92,35 95,14 91Z"/><path d="M7 31 C37 17,72 29,94 88"/><line x1="50" y1="49" x2="22" y2="62"/><line x1="50" y1="49" x2="72" y2="31"/><line x1="50" y1="49" x2="77" y2="73"/></svg><div class="universe-core">✦<small>CONVERSATION</small></div><div class="universe-caption">SELECT A MOMENT TO INSPECT THE SOURCE</div>${moments.map(moment => `<button class="universe-node ${moment.tone}" type="button" style="left:${moment.x}%;top:${moment.y}%" data-universe-query="${moment.query}"><span class="node-dot"></span><span class="node-label">${moment.label}</span><span class="node-meta">${moment.guest} · ${moment.time}</span></button>`).join('')}<div class="universe-footer">THE KNOWLEDGE<br>IS IN THERE<small>EVERY POINT IS A CITATION</small></div>`;
+  art.querySelectorAll('[data-universe-query]').forEach(node => node.addEventListener('click', () => { query.value = node.dataset.universeQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
+}
+
 renderQueue();
 initDiscovery();
+initEvidenceUniverse();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const archiveMeta = document.querySelector('.rail-item.active small');
   if (archiveMeta) archiveMeta.textContent = '0 indexed · 367 catalogue candidates';
