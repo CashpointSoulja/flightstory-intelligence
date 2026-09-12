@@ -80,7 +80,7 @@ const topicNodes = graph.nodes.map((topic, index) => {
   const theta = arm * (Math.PI * 2 / 5) + progress * 12.5 + (index % 7) * .035;
   const position = new THREE.Vector3(Math.cos(theta) * radius, (Math.sin(theta * 1.7 + arm) * .46 + Math.sin(index * 2.41) * .14) * radius, Math.sin(theta) * radius * .58);
   topicPositions.set(topic.id, position);
-  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
+  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
 });
 const topicLabels = topicNodes.slice(0, 36).map(node => {
   const label = document.createElement('span');
@@ -126,7 +126,7 @@ function selectNode(node) {
   selected = node;
   const data = node.userData;
   inspectorTitle.textContent = data.title;
-  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.occurrences} transcript mentions · source ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
   openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
   inspector.classList.add('visible');
   root.add(node);
