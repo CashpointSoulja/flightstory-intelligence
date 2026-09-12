@@ -65,13 +65,22 @@ function addNode(data, position, geometry, scale = 1) {
 }
 
 const topicPositions = new Map();
+const topicFamilies = [
+  ['health', /brain|sleep|health|weight|fitness|diet|cancer|disease|body|exercise|nutrition|dopamine|insulin|aging|ageing|sex|pregnan|menopause/i, 0xe5bd77],
+  ['mind', /mind|psych|anxiety|depress|trauma|emotion|fear|happiness|lonely|confidence|identity|addict/i, 0xbba4ff],
+  ['money', /money|wealth|business|company|invest|econom|career|founder|million|finance|capital|work/i, 0x94bfff],
+  ['culture', /ai|technology|future|politic|war|world|history|science|truth|religion|social|media/i, 0xa6e8c3],
+  ['relationships', /love|relationship|marriage|dating|family|friend|conversation|people|parent|woman|man/i, 0xe78c6a]
+];
+const topicColor = label => topicFamilies.find(([, pattern]) => pattern.test(label))?.[2] || 0xa79bb8;
 const topicNodes = graph.nodes.map((topic, index) => {
-  const phi = Math.acos(1 - 2 * (index + .5) / Math.max(graph.nodes.length, 1));
-  const theta = Math.PI * (3 - Math.sqrt(5)) * index;
-  const radius = 3.8 + (index % 9) * .16;
-  const position = new THREE.Vector3(Math.cos(theta) * Math.sin(phi) * radius, Math.cos(phi) * radius * .72, Math.sin(theta) * Math.sin(phi) * radius);
+  const arm = index % 5;
+  const progress = index / Math.max(graph.nodes.length, 1);
+  const radius = 1.4 + progress * 7.1;
+  const theta = arm * (Math.PI * 2 / 5) + progress * 12.5 + (index % 7) * .035;
+  const position = new THREE.Vector3(Math.cos(theta) * radius, (Math.sin(theta * 1.7 + arm) * .46 + Math.sin(index * 2.41) * .14) * radius, Math.sin(theta) * radius * .58);
   topicPositions.set(topic.id, position);
-  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, seconds: topic.seconds, query: topic.label, color: 0xa79bb8 }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 45);
+  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
 });
 const topicLabels = topicNodes.slice(0, 36).map(node => {
   const label = document.createElement('span');
@@ -118,7 +127,7 @@ function selectNode(node) {
   const data = node.userData;
   inspectorTitle.textContent = data.title;
   inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.occurrences} transcript mentions · source ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
-  openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : 'Search this topic ↗';
+  openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
   inspector.classList.add('visible');
   root.add(node);
 }
@@ -126,7 +135,7 @@ function selectNode(node) {
 openButton.addEventListener('click', () => {
   const data = selected?.userData;
   if (!data) return;
-  if (data.kind === 'evidence') window.open(`https://www.youtube.com/watch?v=${data.videoId}&t=${data.seconds}s`, '_blank', 'noopener');
+  if (data.kind === 'evidence' || data.kind === 'topic') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }
 });
 stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
@@ -140,8 +149,8 @@ tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1
 stage.appendChild(tooltip);
 
 function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : `${hitNode.userData.title} · ${hitNode.userData.episodes.length} episodes`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
-canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (!hitNode) return; selectNode(hitNode); const data = hitNode.userData; if (data.kind === 'topic') window.open(`${data.source}&t=${data.seconds}s`, '_blank', 'noopener'); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(host);
