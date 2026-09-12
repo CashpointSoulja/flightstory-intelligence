@@ -1,8 +1,34 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { ConstellationField } from '@designcodeio/threeui';
 
 const host = document.querySelector('.hero-art');
 if (!host) throw new Error('Evidence Universe host not found');
+if (!document.querySelector('link[href="/threeui.css"]')) {
+  const threeUiStyles = document.createElement('link');
+  threeUiStyles.rel = 'stylesheet';
+  threeUiStyles.href = '/threeui.css';
+  document.head.appendChild(threeUiStyles);
+}
+
+const neuralField = document.createElement('div');
+neuralField.className = 'threeui-neural-field';
+host.appendChild(neuralField);
+createRoot(neuralField).render(React.createElement(ConstellationField, {
+  variant: 'connectivity-graph',
+  mode: 'dark',
+  speed: 0.35,
+  size: 0.85,
+  strokeWidth: 0.65,
+  length: 0.8,
+  density: 0.9,
+  opacity: 0.5,
+  hue: 0.72,
+  saturation: 0.55,
+  brightness: 0.8,
+}));
 
 const evidence = [
   { id: 'vanessa-talk-too-much', title: 'Talk too much', guest: 'Vanessa Van Edwards', time: '00:00', seconds: 0, videoId: 'q2cg1gEYWJQ', query: 'How do you know you talk too much?', color: 0xc7a7ff },
@@ -12,7 +38,8 @@ const evidence = [
 
 const styles = document.createElement('style');
 styles.textContent = `
-  .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d}
+  .threeui-neural-field{position:absolute;inset:0;z-index:0;opacity:.55;pointer-events:none}.threeui-neural-field canvas{display:block;width:100%!important;height:100%!important}
+  .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d;z-index:1}
   .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}.universe-stage canvas:focus-visible{outline:1px solid var(--lilac);outline-offset:-4px}
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'DM Mono',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
   .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:230px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'DM Mono';padding:8px 0 0;cursor:pointer}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'DM Mono';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}
@@ -23,6 +50,7 @@ document.head.appendChild(styles);
 host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">EVIDENCE UNIVERSE <span>LOADING</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector"><strong></strong><small></small><button type="button" data-open>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
+stage.appendChild(neuralField);
 const canvas = document.createElement('canvas');
 canvas.setAttribute('role', 'img');
 canvas.setAttribute('aria-label', 'Interactive 3D archive universe. Drag to orbit, scroll to zoom, and click a node to inspect an episode or citation.');
@@ -61,11 +89,27 @@ function addNode(data, position, geometry, scale = 1) {
   return mesh;
 }
 
-const episodeNodes = catalogue.slice(0, 140).map((episode, index) => {
+const topicRules = [
+  ['AI & technology', /\b(ai|artificial intelligence|technology|tech|future|robot|internet|social media)\b/i],
+  ['Health & longevity', /\b(health|longevity|sleep|insulin|weight|fitness|exercise|nutrition|diet|brain|dopamine)\b/i],
+  ['Mind & psychology', /\b(mind|psycholog|trauma|anxiety|depression|emotion|fear|happiness|mental)\b/i],
+  ['Business & money', /\b(business|money|wealth|founder|entrepreneur|company|invest|econom|capital|career)\b/i],
+  ['Relationships', /\b(relationship|love|marriage|dating|family|friend|lonely|conversation|people)\b/i],
+  ['Leadership', /\b(leader|leadership|ceo|manager|team|culture|power|decision)\b/i],
+  ['Identity & purpose', /\b(identity|purpose|meaning|life|success|failure|story|belief|self)\b/i],
+  ['Science & truth', /\b(science|truth|lie|evidence|research|doctor|expert|history|world)\b/i],
+];
+const topicMap = new Map(topicRules.map(([title]) => [title, []]));
+for (const episode of catalogue) {
+  const match = topicRules.find(([, pattern]) => pattern.test(episode.title));
+  if (match) topicMap.get(match[0]).push(episode);
+}
+const topics = [...topicMap].filter(([, episodes]) => episodes.length >= 3).map(([title, episodes]) => ({ title, episodes }));
+const topicNodes = topics.map((topic, index) => {
   const angle = index * 2.399963;
-  const radius = 2.3 + ((index * 37) % 70) / 20;
+  const radius = 2.8 + ((index * 37) % 70) / 20;
   const position = new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * .72, ((index % 17) - 8) * .24);
-  return addNode({ kind: 'episode', title: episode.title, publishedAt: episode.publishedAt, durationSeconds: episode.durationSeconds, query: episode.title, color: 0x8b8792 }, position, nodeGeometry, 1 + (index % 3) * .35);
+  return addNode({ kind: 'topic', title: topic.title, episodes: topic.episodes, query: topic.title, color: 0xa79bb8 }, position, nodeGeometry, 1 + Math.min(topic.episodes.length, 16) / 18);
 });
 
 const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2.2, 1.55, .4), new THREE.Vector3(2.8, -.95, -.5)];
@@ -86,6 +130,9 @@ const linkMaterial = new THREE.LineBasicMaterial({ color: 0xc7a7ff, transparent:
 for (const node of evidenceNodes) {
   root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), linkMaterial));
 }
+for (const node of topicNodes) {
+  root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), new THREE.LineBasicMaterial({ color: 0x686271, transparent: true, opacity: .18 })));
+}
 
 const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xf3f0ed, size: .025, transparent: true, opacity: .38 }));
 const starPositions = [];
@@ -94,7 +141,7 @@ stars.geometry.setAttribute('position', new THREE.Float32BufferAttribute(starPos
 scene.add(stars);
 
 const headingMeta = stage.querySelector('.universe-heading span');
-headingMeta.textContent = `3 EVIDENCE · ${catalogue.length} EPISODES`;
+headingMeta.textContent = `3 EVIDENCE · ${topics.length} TOPICS · ${catalogue.length} EPISODES`;
 const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
 const inspectorMeta = inspector.querySelector('small');
@@ -104,9 +151,9 @@ let selected = evidenceNodes[0];
 function selectNode(node) {
   selected = node;
   const data = node.userData;
-  inspectorTitle.textContent = data.kind === 'evidence' ? data.title : data.title;
-  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${new Date(data.publishedAt).toLocaleDateString('en-GB')} · catalogue record · transcript pending`;
-  openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : 'Search this episode ↗';
+  inspectorTitle.textContent = data.title;
+  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.episodes.length} catalogue episodes · title-derived topic · transcript indexing pending`;
+  openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : 'Search this topic ↗';
   inspector.classList.add('visible');
   root.add(node);
 }
@@ -128,7 +175,7 @@ tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1
 stage.appendChild(tooltip);
 
 function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.title; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : `${hitNode.userData.title} · ${hitNode.userData.episodes.length} episodes`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
 canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }

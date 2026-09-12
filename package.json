@@ -11,7 +11,10 @@
     "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs"
   },
   "dependencies": {
+    "@designcodeio/threeui": "^1.2.0",
     "@insforge/sdk": "^1.5.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "three": "^0.186.0"
   },
   "devDependencies": {
