@@ -7,9 +7,10 @@ Status: MVP definition and architecture baseline, 12 September 2026
 - GitHub: https://github.com/CashpointSoulja/flightstory-intelligence (private, `main` pushed)
 - Vercel: https://flightstory-intelligence.vercel.app (`READY`, GitHub-connected production deployment)
 - InsForge: project `FlightStory-Intelligence` created and linked in `eu-central`; database schema applied and verified
+- InsForge Storage: five private buckets provisioned for audio, transcripts, proxies, renders, and thumbnails
 - Current app: Steven.com-inspired UI, local evidence fallback, timestamp links, persistent clip queue, and refusal for unsupported topics
 - Current backend: portable SQL migration in `supabase/migrations/0001_flightstory_core.sql`
-- Not yet complete: live model key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
+- Not yet complete: completed browser sign-in/workspace membership, live model key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
 
 ## Product in one line
 
