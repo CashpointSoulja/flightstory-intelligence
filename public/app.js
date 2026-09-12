@@ -58,7 +58,7 @@ function initDiscovery() {
   document.querySelectorAll('[data-discovery-query]').forEach(button => button.addEventListener('click', () => { query.value = button.dataset.discoveryQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
 }
 
-function initEvidenceUniverse() {
+async function initEvidenceUniverse() {
   const art = document.querySelector('.hero-art');
   if (!art) return;
   const moments = [
@@ -74,6 +74,17 @@ function initEvidenceUniverse() {
   document.head.appendChild(style);
   art.innerHTML = `<div class="universe-grid" aria-hidden="true"></div><div class="universe-header">EVIDENCE UNIVERSE <span>3 LIVE MOMENTS</span></div><svg class="universe-svg" viewBox="0 0 100 100" aria-hidden="true"><path d="M4 63 C24 10,74 7,96 31 C72 59,38 77,4 63Z"/><path d="M14 91 C25 34,67 19,88 75 C60 92,35 95,14 91Z"/><path d="M7 31 C37 17,72 29,94 88"/><line x1="50" y1="49" x2="22" y2="62"/><line x1="50" y1="49" x2="72" y2="31"/><line x1="50" y1="49" x2="77" y2="73"/></svg><div class="universe-core">✦<small>CONVERSATION</small></div><div class="universe-caption">SELECT A MOMENT TO INSPECT THE SOURCE</div>${moments.map(moment => `<button class="universe-node ${moment.tone}" type="button" style="left:${moment.x}%;top:${moment.y}%" data-universe-query="${moment.query}"><span class="node-dot"></span><span class="node-label">${moment.label}</span><span class="node-meta">${moment.guest} · ${moment.time}</span></button>`).join('')}<div class="universe-footer">THE KNOWLEDGE<br>IS IN THERE<small>EVERY POINT IS A CITATION</small></div>`;
   art.querySelectorAll('[data-universe-query]').forEach(node => node.addEventListener('click', () => { query.value = node.dataset.universeQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
+  const catalogue = await fetch('/api/catalog').then(response => response.ok ? response.json() : []).catch(() => []);
+  const nodes = catalogue.slice(0, 140).map((episode, index) => { const angle = index * 2.399963; const radius = 12 + ((index * 37) % 38); return { episode, x: 50 + Math.cos(angle) * radius, y: 49 + Math.sin(angle) * radius * .72 }; });
+  const edges = nodes.filter((_, index) => index % 2 === 0).map((node, index) => { const target = nodes[(index * 11 + 17) % nodes.length]; return `<line x1="${node.x.toFixed(2)}" y1="${node.y.toFixed(2)}" x2="${target.x.toFixed(2)}" y2="${target.y.toFixed(2)}"/>`; }).join('');
+  art.querySelector('.universe-svg')?.insertAdjacentHTML('beforeend', edges);
+  const universeMeta = art.querySelector('.universe-header span');
+  if (universeMeta) universeMeta.textContent = `3 EVIDENCE · ${catalogue.length} EPISODES`;
+  const nodeStyle = document.createElement('style');
+  nodeStyle.textContent = '.universe-svg line{stroke:rgba(199,167,255,.16);stroke-width:.35}.catalog-node{position:absolute;z-index:1;width:5px;height:5px;border:0;border-radius:50%;background:rgba(243,240,237,.42);box-shadow:0 0 8px rgba(243,240,237,.18);padding:0;cursor:pointer}.catalog-node:hover,.catalog-node:focus-visible{background:var(--paper);box-shadow:0 0 0 5px rgba(243,240,237,.08),0 0 15px rgba(243,240,237,.8);outline:0}';
+  document.head.appendChild(nodeStyle);
+  art.insertAdjacentHTML('beforeend', nodes.map(({ episode, x, y }) => `<button class="catalog-node" type="button" style="left:${x}%;top:${y}%" title="${escapeHtml(episode.title)}" aria-label="Catalogue episode: ${escapeHtml(episode.title)}" data-universe-query="${escapeHtml(episode.title)}"></button>`).join(''));
+  art.querySelectorAll('.catalog-node').forEach(node => node.addEventListener('click', () => { query.value = node.dataset.universeQuery; form.requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }));
 }
 
 renderQueue();
