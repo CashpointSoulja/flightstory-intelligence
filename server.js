@@ -34,7 +34,9 @@ async function searchOpenAI(query) {
   const response = await fetch('https://api.openai.com/v1/responses', { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${process.env.OPENAI_API_KEY}` }, body: JSON.stringify({ model, input: [{ role: 'system', content: instructions() }, { role: 'user', content: `Question: ${query}\n\nEvidence:\n${evidence.map(item => JSON.stringify(item)).join('\n')}` }], temperature: 0.2 }) });
   if (!response.ok) throw new Error(`OpenAI request failed (${response.status})`);
   const data = await response.json();
-  const parsed = JSON.parse(data.output_text);
+  const outputText = data.output_text ?? data.output?.flatMap(item => item.content || []).find(part => part.type === 'output_text')?.text;
+  if (!outputText) throw new Error('OpenAI response contained no text output');
+  const parsed = JSON.parse(outputText.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
   return { answer: parsed.answer, citations: evidence.filter(item => parsed.citationIds?.includes(item.id)), mode: 'openai' };
 }
 
@@ -58,7 +60,7 @@ const server = http.createServer(async (request, response) => {
       const { query } = await body(request);
       if (typeof query !== 'string' || query.trim().length < 2 || query.length > 500) return send(response, 400, { error: 'Enter a question between 2 and 500 characters.' });
       let result;
-      try { result = await searchOpenAI(query.trim()); } catch (error) { result = null; }
+      try { result = await searchOpenAI(query.trim()); } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; }
       send(response, 200, result || searchLocal(query.trim()));
       return;
     }

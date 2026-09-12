@@ -4,11 +4,17 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
+    "build": "npm run build:universe",
+    "build:universe": "esbuild public/universe.src.js --bundle --format=esm --minify --outfile=public/universe.js",
+    "dev": "npm run build:universe && node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
     "start": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
     "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs"
   },
   "dependencies": {
-    "@insforge/sdk": "^1.5.2"
+    "@insforge/sdk": "^1.5.2",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
   }
 }

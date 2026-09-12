@@ -89,7 +89,6 @@ async function initEvidenceUniverse() {
 
 renderQueue();
 initDiscovery();
-initEvidenceUniverse();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const archiveMeta = document.querySelector('.rail-item.active small');
   if (archiveMeta) archiveMeta.textContent = '0 indexed · 367 catalogue candidates';
@@ -100,3 +99,7 @@ const authScript = document.createElement('script');
 authScript.type = 'module';
 authScript.src = '/auth.js';
 document.body.appendChild(authScript);
+const universeScript = document.createElement('script');
+universeScript.type = 'module';
+universeScript.src = '/universe.js';
+document.body.appendChild(universeScript);
