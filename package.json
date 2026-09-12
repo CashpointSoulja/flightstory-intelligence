@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
     "start": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
-    "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check scripts/import_episode.mjs"
+    "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs"
   },
   "dependencies": {
     "@insforge/sdk": "^1.5.2"
