@@ -15,7 +15,8 @@ const evidence = [
 ];
 
 function searchLocal(query) {
-  const words = query.toLowerCase().split(/\W+/).filter(Boolean);
+  const stopwords = new Set(['what', 'did', 'have', 'guests', 'guest', 'say', 'said', 'about', 'the', 'and', 'or', 'who', 'which', 'where', 'has', 'any', 'to', 'of', 'in', 'on', 'for', 'me', 'this', 'that']);
+  const words = query.toLowerCase().split(/\W+/).filter(word => word.length > 2 && !stopwords.has(word));
   const ranked = evidence.map(item => ({ item, score: words.reduce((score, word) => score + ((item.topic + ' ' + item.quote + ' ' + item.note).toLowerCase().includes(word) ? 1 : 0), 0) })).sort((a, b) => b.score - a.score);
   const matches = ranked.filter(({ score }) => score > 0).slice(0, 4).map(({ item }) => item);
   if (!matches.length) return { answer: 'I could not verify that in the indexed archive. Try a topic such as confidence, dopamine, focus, failure or identity.', citations: [], mode: 'local-fallback' };
