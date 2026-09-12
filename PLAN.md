@@ -2,6 +2,15 @@
 
 Status: MVP definition and architecture baseline, 12 September 2026
 
+## Live implementation state
+
+- GitHub: https://github.com/CashpointSoulja/flightstory-intelligence (private, `main` pushed)
+- Vercel: https://flightstory-intelligence.vercel.app (`READY`, GitHub-connected production deployment)
+- Supabase: pending a separate Free Plan organisation named `Special Projects`; the connected paid organisation is not used for this product
+- Current app: Steven.com-inspired UI, local evidence fallback, timestamp links, persistent clip queue, and refusal for unsupported topics
+- Current backend: portable SQL migration in `supabase/migrations/0001_flightstory_core.sql`
+- Not yet complete: real Supabase connection, live OpenAI key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
+
 ## Product in one line
 
 Ask the DOAC archive anything and get an evidence-backed answer that points to the exact second of the exact episode, with a YouTube link and a path to create a reviewed clip.
