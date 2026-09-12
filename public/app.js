@@ -60,7 +60,7 @@ renderQueue();
 initDiscovery();
 fetch('/api/backend').then(response => response.json()).then(status => {
   const badge = document.querySelector('.status');
-  if (badge && status.configured) badge.innerHTML = '<span></span> InsForge backend linked';
+  if (badge && status.configured) badge.innerHTML = '<span></span> InsForge linked · demo index';
 }).catch(() => {});
 const authScript = document.createElement('script');
 authScript.type = 'module';
