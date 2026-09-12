@@ -9,6 +9,7 @@ An evidence-first internal intelligence layer for the Diary of a CEO archive: as
 - Timestamp links and persistent clip queue are implemented.
 - The repository is private and pushed to https://github.com/CashpointSoulja/flightstory-intelligence.
 - The connected backend is InsForge project `FlightStory-Intelligence` in `eu-central`.
+- The verified 560-entry DOAC catalogue is stored privately as `catalog/doac-from-2023.json`.
 - The portable Postgres migration is in `supabase/migrations/0001_flightstory_core.sql`.
 - InsForge credentials are local-only in `.env.local`; never commit them.
 

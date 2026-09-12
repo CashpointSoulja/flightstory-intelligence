@@ -8,6 +8,7 @@ Status: MVP definition and architecture baseline, 12 September 2026
 - Vercel: https://flightstory-intelligence.vercel.app (`READY`, GitHub-connected production deployment)
 - InsForge: project `FlightStory-Intelligence` created and linked in `eu-central`; database schema applied and verified
 - InsForge Storage: five private buckets provisioned for audio, transcripts, proxies, renders, and thumbnails
+- InsForge Storage: private `catalog/doac-from-2023.json` manifest uploaded and verified (560 entries)
 - InsForge advisor: 0 critical findings and 0 warnings after workspace/RLS/index hardening
 - Current app: Steven.com-inspired UI, local evidence fallback, timestamp links, persistent clip queue, and refusal for unsupported topics
 - Current backend: portable SQL migration in `supabase/migrations/0001_flightstory_core.sql`
