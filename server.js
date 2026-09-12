@@ -64,7 +64,8 @@ const server = http.createServer(async (request, response) => {
       send(response, 200, result || searchLocal(query.trim()));
       return;
     }
-    const requested = request.url === '/' ? '/index.html' : request.url.split('?')[0];
+    const path = request.url.split('?')[0];
+    const requested = path === '/' ? '/index.html' : path;
     const file = join(root, 'public', requested);
     if (!file.startsWith(join(root, 'public'))) return send(response, 403, { error: 'Forbidden' });
     send(response, 200, await readFile(file), types[extname(file)] || 'application/octet-stream');
