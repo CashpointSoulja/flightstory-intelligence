@@ -42,12 +42,12 @@ styles.textContent = `
   .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d;z-index:1}
   .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}.universe-stage canvas:focus-visible{outline:1px solid var(--lilac);outline-offset:-4px}
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'DM Mono',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
-  .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:230px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'DM Mono';padding:8px 0 0;cursor:pointer}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'DM Mono';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}
+  .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:230px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'DM Mono';padding:8px 0 0;cursor:pointer}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'DM Mono';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}.universe-map-key{position:absolute;left:50%;top:25%;transform:translateX(-50%);display:flex;gap:25px;color:rgba(243,240,237,.78);font:10px 'DM Mono';letter-spacing:.16em}.universe-map-key span{position:relative}.universe-map-key span+span:before{content:'→';position:absolute;left:-18px;color:var(--lilac)}
   @media(max-width:700px){.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
 `;
 styles.textContent += '.universe-hint{top:42px;bottom:auto}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">EVIDENCE UNIVERSE <span>LOADING</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector"><strong></strong><small></small><button type="button" data-open>Inspect source ↗</button></div></div></div>`;
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">EVIDENCE UNIVERSE <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector"><strong></strong><small></small><button type="button" data-open>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
 stage.appendChild(neuralField);
@@ -58,6 +58,8 @@ canvas.tabIndex = 0;
 stage.prepend(canvas);
 
 const scene = new THREE.Scene();
+scene.add(new THREE.AmbientLight(0xb8a6d8, 1.7));
+const keyLight = new THREE.DirectionalLight(0xf3f0ed, 2.8); keyLight.position.set(3, 5, 6); scene.add(keyLight);
 const camera = new THREE.PerspectiveCamera(38, 1, .1, 1000);
 camera.position.set(0, 0, 19);
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
@@ -73,6 +75,31 @@ controls.maxPolarAngle = Math.PI - .45;
 
 const root = new THREE.Group();
 scene.add(root);
+const ringMaterials = [
+  new THREE.MeshStandardMaterial({ color: 0x6e6879, metalness: .8, roughness: .3, transparent: true, opacity: .86 }),
+  new THREE.MeshStandardMaterial({ color: 0x3e3b48, metalness: .72, roughness: .34, transparent: true, opacity: .92 }),
+  new THREE.MeshStandardMaterial({ color: 0x272530, metalness: .65, roughness: .4, transparent: true, opacity: .96 })
+];
+const ringGroup = new THREE.Group();
+ringGroup.rotation.set(-.17, .06, -.08);
+root.add(ringGroup);
+function ringLabel(text, radius, y = 0) {
+  const canvas = document.createElement('canvas');
+  canvas.width = 720; canvas.height = 92;
+  const context = canvas.getContext('2d');
+  context.fillStyle = '#f3f0ed'; context.font = '600 34px DM Mono'; context.letterSpacing = '8px'; context.textAlign = 'center';
+  context.fillText(text, 360, 54);
+  const texture = new THREE.CanvasTexture(canvas);
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: texture, transparent: true, opacity: .86 }));
+  sprite.scale.set(2.9, .37, 1); sprite.position.set(0, y, radius + .04); ringGroup.add(sprite);
+}
+[[3.2, .18], [4.55, .04], [5.9, -.12]].forEach(([radius, y], index) => {
+  const ring = new THREE.Mesh(new THREE.TorusGeometry(radius, index === 0 ? .23 : .18, 14, 160), ringMaterials[index]);
+  ring.rotation.x = Math.PI / 2; ring.position.y = y; ringGroup.add(ring);
+});
+ringLabel('CITATIONS', 3.2, .18);
+ringLabel('GUESTS', 4.55, .04);
+ringLabel('TOPICS', 5.9, -.12);
 const nodeGeometry = new THREE.SphereGeometry(.055, 8, 8);
 const evidenceGeometry = new THREE.SphereGeometry(.15, 16, 16);
 const nodes = [];
@@ -107,8 +134,8 @@ for (const episode of catalogue) {
 const topics = [...topicMap].filter(([, episodes]) => episodes.length >= 3).map(([title, episodes]) => ({ title, episodes }));
 const topicNodes = topics.map((topic, index) => {
   const angle = index * 2.399963;
-  const radius = 2.8 + ((index * 37) % 70) / 20;
-  const position = new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * .72, ((index % 17) - 8) * .24);
+  const radius = [5.9, 4.55, 3.2][index % 3];
+  const position = new THREE.Vector3(Math.cos(angle) * radius, [ -.12, .04, .18 ][index % 3], Math.sin(angle) * radius);
   return addNode({ kind: 'topic', title: topic.title, episodes: topic.episodes, query: topic.title, color: 0xa79bb8 }, position, nodeGeometry, 1 + Math.min(topic.episodes.length, 16) / 18);
 });
 
@@ -116,15 +143,6 @@ const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2
 const evidenceNodes = evidence.map((item, index) => addNode({ ...item, kind: 'evidence' }, evidencePositions[index], evidenceGeometry));
 const core = addNode({ kind: 'core', title: 'Conversation', query: 'What have guests said about conversation?' }, new THREE.Vector3(0, 0, 0), new THREE.SphereGeometry(.23, 20, 20), 1);
 core.material.color.set(0xf3f0ed);
-
-const orbitMaterial = new THREE.LineBasicMaterial({ color: 0x8d79b2, transparent: true, opacity: .24 });
-for (const rotation of [[.35, .1, -.2], [-.5, .6, .2], [.2, -.45, .8]]) {
-  const curve = new THREE.EllipseCurve(0, 0, 5.6, 3.6, 0, Math.PI * 2, false, 0);
-  const points = curve.getPoints(120).map(point => new THREE.Vector3(point.x, point.y, 0));
-  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), orbitMaterial);
-  line.rotation.set(...rotation);
-  root.add(line);
-}
 
 const linkMaterial = new THREE.LineBasicMaterial({ color: 0xc7a7ff, transparent: true, opacity: .55 });
 for (const node of evidenceNodes) {
