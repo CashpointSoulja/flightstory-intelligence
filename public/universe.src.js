@@ -75,10 +75,12 @@ const topicFamilies = [
 ];
 const topicColor = label => topicFamilies.find(([, pattern]) => pattern.test(label))?.[2] || 0xa79bb8;
 const clusterCenters = [new THREE.Vector3(-4.4, 1.6, -.4), new THREE.Vector3(-2.1, -2.1, .2), new THREE.Vector3(.1, 2.5, -.2), new THREE.Vector3(2.7, .55, .3), new THREE.Vector3(4.3, -1.45, -.1)];
+const familyCounts = topicFamilies.map(([, pattern]) => graph.nodes.filter(topic => pattern.test(topic.label)).length);
+const familyIndexes = topicFamilies.map(() => 0);
 const topicNodes = graph.nodes.map((topic, index) => {
   const family = topicFamilies.findIndex(([, pattern]) => pattern.test(topic.label));
-  const cluster = clusterCenters[Math.max(family, 0) % clusterCenters.length];
-  const theta = index * 2.399963 + (family < 0 ? 0 : family * .3); const spread = 1.1 + (index % 13) * .035;
+  const familyIndex = Math.max(family, 0) % clusterCenters.length; const localIndex = familyIndexes[familyIndex]++; const localProgress = localIndex / Math.max(familyCounts[familyIndex] - 1, 1);
+  const cluster = clusterCenters[familyIndex]; const theta = localIndex * 2.399963 + familyIndex * .7; const spread = 1.2 + Math.sqrt(localProgress) * 4.1;
   const position = new THREE.Vector3(cluster.x + Math.cos(theta) * spread, cluster.y + Math.sin(theta) * spread * .7, cluster.z + Math.sin(index * 1.73) * .75);
   topicPositions.set(topic.id, position);
   return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);

@@ -14,7 +14,7 @@ Current graph inventory:
 235 distinct trusted source videos represented by selected node links
 ```
 
-The 241 video nodes come from the current local transcript set after channel provenance validation. The catalogue contains more records than trusted transcripts; failed, ambiguous, mismatched, or non-DOAC YouTube matches are kept out of the trusted graph until they are repaired.
+The 241 video nodes come from the current local transcript set after channel provenance validation. The topic graph applies an additional catalogue-title check and currently uses 234 transcript files. The catalogue contains more records than trusted transcripts; failed, ambiguous, mismatched, or non-DOAC YouTube matches are kept out of the trusted graph until they are repaired.
 
 ## Brain-inspired architecture
 
