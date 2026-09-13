@@ -8,13 +8,13 @@ Current graph inventory:
 
 ```text
 1,000 topic nodes
-294 video nodes
+241 video nodes
 12,000 transcript-topic connections
-1,776 OpenAI semantic video links
-249 distinct source videos represented by selected node links
+1,428 OpenAI semantic video links
+235 distinct trusted source videos represented by selected node links
 ```
 
-The 294 video nodes come from the current local transcript set. The catalogue contains more records than validated transcripts; failed or ambiguous YouTube matches are kept out of the trusted graph until they are repaired.
+The 241 video nodes come from the current local transcript set after channel provenance validation. The catalogue contains more records than trusted transcripts; failed, ambiguous, mismatched, or non-DOAC YouTube matches are kept out of the trusted graph until they are repaired.
 
 ## Brain-inspired architecture
 

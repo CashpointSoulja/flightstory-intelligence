@@ -83,7 +83,7 @@ const topicNodes = graph.nodes.map((topic, index) => {
   topicPositions.set(topic.id, position);
   return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
 });
-const topicLabels = topicNodes.slice(0, 36).map(node => {
+const topicLabels = topicNodes.slice(0, 12).map(node => {
   const label = document.createElement('span');
   label.className = 'universe-node-label';
   label.textContent = node.userData.title;
