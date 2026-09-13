@@ -52,6 +52,7 @@ const evidenceGeometry = new THREE.SphereGeometry(.15, 16, 16);
 const nodes = [];
 const catalogue = await fetch('/api/catalog').then(response => response.ok ? response.json() : []).catch(() => []);
 const graph = await fetch('/topic-graph.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
+const videoGraph = await fetch('/video-links.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
 
 function addNode(data, position, geometry, scale = 1) {
   const material = new THREE.MeshBasicMaterial({ color: data.color || 0x8c8792, transparent: true, opacity: data.kind === 'episode' ? .72 : 1 });
@@ -89,6 +90,13 @@ const topicLabels = topicNodes.slice(0, 36).map(node => {
   stage.appendChild(label);
   return { node, label };
 });
+const videoPositions = new Map();
+const videoNodes = videoGraph.nodes.map((video, index) => {
+  const progress = index / Math.max(videoGraph.nodes.length, 1); const arm = index % 5; const radius = 6.2 + (index % 11) * .12; const theta = arm * (Math.PI * 2 / 5) + progress * 12.5;
+  const position = new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta * 1.6 + arm) * radius * .24, Math.sin(theta) * radius * .58);
+  videoPositions.set(video.id, position);
+  return addNode({ kind: 'video', title: video.title, source: video.source, seconds: video.seconds, query: video.title, color: topicColor(video.title) }, position, nodeGeometry, 1.5);
+});
 
 const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2.2, 1.55, .4), new THREE.Vector3(2.8, -.95, -.5)];
 const evidenceNodes = evidence.map((item, index) => addNode({ ...item, kind: 'evidence' }, evidencePositions[index], evidenceGeometry));
@@ -107,6 +115,11 @@ for (const edge of graph.edges) { const from = topicPositions.get(edge.source); 
 const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x665b78, transparent: true, opacity: .16 }));
 graphLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
 root.add(graphLines);
+const videoEdgePositions = [];
+for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
+const videoLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe5bd77, transparent: true, opacity: .24 }));
+videoLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(videoEdgePositions, 3));
+root.add(videoLines);
 
 const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xf3f0ed, size: .025, transparent: true, opacity: .38 }));
 const starPositions = [];
@@ -115,7 +128,7 @@ stars.geometry.setAttribute('position', new THREE.Float32BufferAttribute(starPos
 scene.add(stars);
 
 const headingMeta = stage.querySelector('.universe-heading span');
-headingMeta.textContent = `${topicNodes.length} TOPICS · ${graph.edges.length} CONNECTIONS`;
+headingMeta.textContent = `${topicNodes.length} TOPICS · ${videoNodes.length} VIDEOS · ${videoGraph.edges.length} LINKS`;
 const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
 const inspectorMeta = inspector.querySelector('small');
@@ -126,8 +139,8 @@ function selectNode(node) {
   selected = node;
   const data = node.userData;
   inspectorTitle.textContent = data.title;
-  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
-  openButton.textContent = data.kind === 'evidence' ? `Watch from ${data.time} ↗` : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
+  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
   inspector.classList.add('visible');
   root.add(node);
 }
@@ -135,7 +148,7 @@ function selectNode(node) {
 openButton.addEventListener('click', () => {
   const data = selected?.userData;
   if (!data) return;
-  if (data.kind === 'evidence' || data.kind === 'topic') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
+  if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }
 });
 stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
@@ -149,8 +162,8 @@ tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1
 stage.appendChild(tooltip);
 
 function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
-canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (!hitNode) return; selectNode(hitNode); const data = hitNode.userData; if (data.kind === 'topic') window.open(`${data.source}&t=${data.seconds}s`, '_blank', 'noopener'); });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (!hitNode) return; selectNode(hitNode); const data = hitNode.userData; if (data.kind === 'topic' || data.kind === 'video') window.open(`${data.source}&t=${data.seconds}s`, '_blank', 'noopener'); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(host);
