@@ -83,7 +83,7 @@ const topicNodes = graph.nodes.map((topic, index) => {
   const cluster = clusterCenters[familyIndex]; const theta = localIndex * 2.399963 + familyIndex * .7; const spread = 1.2 + Math.sqrt(localProgress) * 4.1;
   const position = new THREE.Vector3(cluster.x + Math.cos(theta) * spread, cluster.y + Math.sin(theta) * spread * .7, cluster.z + Math.sin(index * 1.73) * .75);
   topicPositions.set(topic.id, position);
-  return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
+  return addNode({ id: topic.id, kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
 });
 const topicLabels = topicNodes.slice(0, 12).map(node => {
   const label = document.createElement('span');
@@ -100,8 +100,9 @@ const videoNodes = videoGraph.nodes.map((video, index) => {
   const progress = index / Math.max(videoGraph.nodes.length, 1); const arm = index % 5; const radius = 6.2 + (index % 11) * .12; const theta = arm * (Math.PI * 2 / 5) + progress * 12.5;
   const position = new THREE.Vector3(Math.cos(theta) * radius, Math.sin(theta * 1.6 + arm) * radius * .24, Math.sin(theta) * radius * .58);
   videoPositions.set(video.id, position);
-  return addNode({ kind: 'video', title: video.title, source: video.source, seconds: video.seconds, query: video.title, color: topicColor(video.title) }, position, nodeGeometry, 1.5);
+  return addNode({ id: video.id, kind: 'video', title: video.title, source: video.source, seconds: video.seconds, query: video.title, color: topicColor(video.title) }, position, nodeGeometry, 1.5);
 });
+const graphAccess = document.createElement('details'); graphAccess.className = 'universe-access'; const graphSummary = document.createElement('summary'); graphSummary.textContent = 'Browse nodes as links'; graphAccess.appendChild(graphSummary); const graphList = document.createElement('div'); graphList.className = 'universe-access-list'; for (const node of [...topicNodes.slice(0, 30), ...videoNodes.slice(0, 30)]) { const data = node.userData; const link = document.createElement('a'); link.textContent = data.kind === 'video' ? `VIDEO · ${data.title}` : `TOPIC · ${data.title}`; link.href = `${data.source}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); } graphAccess.appendChild(graphList); stage.appendChild(graphAccess);
 
 const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2.2, 1.55, .4), new THREE.Vector3(2.8, -.95, -.5)];
 const evidenceNodes = evidence.map((item, index) => addNode({ ...item, kind: 'evidence' }, evidencePositions[index], evidenceGeometry));
@@ -126,6 +127,9 @@ for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.sour
 const videoLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe5bd77, transparent: true, opacity: .24 }));
 videoLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(videoEdgePositions, 3));
 root.add(videoLines);
+const videoById = new Map(videoGraph.nodes.map(video => [video.id, video]));
+const connectionMarkers = [];
+for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (!from || !to) continue; const marker = addNode({ kind: 'connection', title: 'Semantic connection', score: edge.score, relationship: edge.relationship, fromVideo: videoById.get(edge.source), toVideo: videoById.get(edge.target), source: videoById.get(edge.source)?.source, seconds: videoById.get(edge.source)?.seconds }, from.clone().add(to).multiplyScalar(.5), new THREE.SphereGeometry(.13, 6, 6), .8); marker.material.opacity = 0; connectionMarkers.push(marker); }
 const sparkPositions = new Float32Array(videoEdgePairs.length * 3); const sparks = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xffe3a6, size: .065, transparent: true, opacity: .9, depthWrite: false })); sparks.geometry.setAttribute('position', new THREE.Float32BufferAttribute(sparkPositions, 3)); root.add(sparks);
 
 const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xf3f0ed, size: .025, transparent: true, opacity: .38 }));
@@ -140,15 +144,22 @@ const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
 const inspectorMeta = inspector.querySelector('small');
 const openButton = inspector.querySelector('[data-open]');
+const secondSource = document.createElement('a'); secondSource.className = 'second-source'; secondSource.target = '_blank'; secondSource.rel = 'noreferrer'; secondSource.textContent = 'Open second source ↗'; inspector.appendChild(secondSource);
 let selected = evidenceNodes[0];
+const activeIds = new Set();
 
 function selectNode(node) {
   selected = node;
   const data = node.userData;
-  inspectorTitle.textContent = data.title;
-  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  activeIds.clear(); if (data.id) activeIds.add(data.id);
+  if (data.kind === 'topic') for (const edge of graph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
+  if (data.kind === 'video') for (const edge of videoGraph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
+  if (data.kind === 'connection') { activeIds.add(data.fromVideo?.id); activeIds.add(data.toVideo?.id); }
+  inspectorTitle.textContent = data.kind === 'connection' ? `${data.fromVideo?.title || 'Source A'} ↔ ${data.toVideo?.title || 'Source B'}` : data.title;
+  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
   openButton.hidden = data.kind === 'core';
-  openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
+  secondSource.hidden = data.kind !== 'connection';
+  if (data.kind === 'connection') { openButton.textContent = 'Open first source ↗'; secondSource.href = `${data.toVideo.source}&t=${data.toVideo.seconds}s`; } else openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
   inspector.classList.add('visible');
   root.add(node);
 }
@@ -156,7 +167,8 @@ function selectNode(node) {
 openButton.addEventListener('click', () => {
   const data = selected?.userData;
   if (!data) return;
-  if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
+  if (data.kind === 'connection') window.open(`${data.fromVideo.source}&t=${data.fromVideo.seconds}s`, '_blank', 'noopener');
+  else if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }
 });
 stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
@@ -170,7 +182,7 @@ tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1
 stage.appendChild(tooltip);
 
 function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
 canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
@@ -180,5 +192,5 @@ selectNode(evidenceNodes[0]);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
-function animate() { requestAnimationFrame(animate); const now = performance.now() / 1000; if (!reducedMotion) { root.rotation.y += .00045; stars.rotation.y -= .00012; } videoLines.material.opacity = .11 + (Math.sin(now * 1.6) + 1) * .09; for (let index = 0; index < videoEdgePairs.length; index += 1) { const [from, to] = videoEdgePairs[index]; const phase = (now * (.08 + (index % 7) * .012) + index / videoEdgePairs.length) % 1; sparkPositions[index * 3] = from.x + (to.x - from.x) * phase; sparkPositions[index * 3 + 1] = from.y + (to.y - from.y) * phase; sparkPositions[index * 3 + 2] = from.z + (to.z - from.z) * phase; } sparks.geometry.attributes.position.needsUpdate = true; controls.update(); updateTopicLabels(); renderer.render(scene, camera); }
+function animate() { requestAnimationFrame(animate); const now = performance.now() / 1000; if (!reducedMotion) { root.rotation.y += .00045; stars.rotation.y -= .00012; } videoLines.material.opacity = (activeIds.size ? .25 : .08) + (Math.sin(now * 1.6) + 1) * .05; for (const node of topicNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72; for (const node of videoNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? 1 : .18) : .75; for (let index = 0; index < videoEdgePairs.length; index += 1) { const [from, to] = videoEdgePairs[index]; const phase = (now * (.08 + (index % 7) * .012) + index / videoEdgePairs.length) % 1; sparkPositions[index * 3] = from.x + (to.x - from.x) * phase; sparkPositions[index * 3 + 1] = from.y + (to.y - from.y) * phase; sparkPositions[index * 3 + 2] = from.z + (to.z - from.z) * phase; } sparks.geometry.attributes.position.needsUpdate = true; controls.update(); updateTopicLabels(); renderer.render(scene, camera); }
 animate();
