@@ -86,3 +86,20 @@ regenerate embeddings and visual graph
 ```
 
 The next upgrade should add transcript chunk embeddings, speaker attribution, and an LLM-generated relationship label for the strongest video links. Those labels must always link back to the two source moments that support them.
+
+## Ten-pass recursive quality review
+
+Completed 13 September 2026:
+
+1. Data integrity — passed: 1,000 topic nodes and 12,000 topic links.
+2. Channel provenance — passed: the semantic graph uses channel-validated DOAC sources.
+3. Source diversity — passed: 241 video nodes map to 241 source URLs.
+4. Timestamp coverage — passed: every current video node has a non-zero transcript timestamp.
+5. Semantic graph — passed: 1,428 OpenAI embedding links.
+6. Topic graph — passed: 12,000 transcript co-occurrence links.
+7. Source URL format — passed: video nodes use YouTube watch URLs.
+8. Edge integrity — passed: every semantic edge resolves to two video nodes.
+9. Build and syntax — passed: `npm run build` and `npm run check`.
+10. Production parity — passed: production loads the graph, Three.js canvas, and no visible archive error.
+
+The review also removed a source-collapsing bug, rejected non-DOAC search results, moved nodes away from the opening timestamp, reduced label collisions, and added pulsing links with moving signal particles. The next quality gate is relation-specific chunk timestamps: each semantic edge should eventually point to the exact two transcript chunks that produced it.
