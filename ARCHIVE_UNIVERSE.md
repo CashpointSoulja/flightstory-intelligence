@@ -103,3 +103,22 @@ Completed 13 September 2026:
 10. Production parity — passed: production loads the graph, Three.js canvas, and no visible archive error.
 
 The review also removed a source-collapsing bug, rejected non-DOAC search results, moved nodes away from the opening timestamp, reduced label collisions, and added pulsing links with moving signal particles. The next quality gate is relation-specific chunk timestamps: each semantic edge should eventually point to the exact two transcript chunks that produced it.
+
+## 100-pass role review
+
+The review system uses ten passes per role. Each pass follows `observe → hypothesis → one change → test → retain or revert`.
+
+| Passes | Role | Focus |
+|---:|---|---|
+| 1–10 | Product manager | primary job, evidence contract, coverage states, success metric |
+| 11–20 | Provenance engineer | canonical IDs, channel validation, source confidence, rejected-source queue |
+| 21–30 | Transcription specialist | captions, timestamps, speaker states, caption uncertainty, transcript QA |
+| 31–40 | Retrieval / LLM engineer | archive-wide retrieval, chunk evidence, citation validation, refusal states |
+| 41–50 | Neuroscientist | distributed activation, weighted edges, decay, inhibition, avoid biological overclaiming |
+| 51–60 | Graph analyst | concept quality, aliases, centrality, communities, noisy-edge control |
+| 61–70 | Three.js developer | galaxy placement, visual encoding, animation state, performance budgets |
+| 71–80 | UI / UX designer | selection, inspection, source actions, progressive detail, keyboard alternative |
+| 81–90 | User advocate | research, clips, comms, commercial workflows, trust language, recovery from failure |
+| 91–100 | Orchestrator / developer | integration order, tests, versioning, rollback, production parity, learning loop |
+
+The first integrated cycle fixed archive-wide retrieval, source provenance, stale-search protection, node selection behaviour, source timestamps, cluster density, label collisions, and production verification. The remaining high-value work is relation-specific chunk evidence, speaker attribution, edge inspection, and durable team workspaces.

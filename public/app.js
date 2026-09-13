@@ -9,6 +9,7 @@ const queueCount = document.querySelector('#queue-count');
 const clipList = document.querySelector('#clip-list');
 let current = [];
 let queue = JSON.parse(localStorage.getItem('flightstory-clips') || '[]');
+let searchRequest = 0;
 
 const formatTime = seconds => `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
 const watchUrl = item => `https://www.youtube.com/watch?v=${item.videoId}&t=${item.start}s`;
@@ -36,7 +37,7 @@ function renderResults(result) {
   if (current[0]) selectEvidence(current[0]); else { if (evidenceStatus) evidenceStatus.textContent = 'NOT FOUND'; evidenceContent.className = 'evidence-empty'; evidenceContent.innerHTML = '<div class="evidence-glow">∅</div><p>No supported moment found.<br>Try a different archive question.</p>'; }
 }
 
-form.addEventListener('submit', async event => { event.preventDefault(); const value = query.value.trim(); if (!value) return; heading.textContent = value; count.textContent = 'SEARCHING'; content.innerHTML = '<div class="welcome"><div class="welcome-node">◌</div><h3>Following the signal…</h3><p>Searching the indexed conversations and checking the evidence.</p></div>'; try { const response = await fetch('/api/search', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ query: value }) }); renderResults(await response.json()); } catch { renderResults({ answer: 'The archive is temporarily unavailable. Check that the local server is running.', citations: [], mode: 'local-fallback' }); } });
+form.addEventListener('submit', async event => { event.preventDefault(); const value = query.value.trim(); if (!value) return; const request = ++searchRequest; heading.textContent = value; count.textContent = 'SEARCHING'; if (evidenceStatus) evidenceStatus.textContent = 'WAITING'; evidenceContent.className = 'evidence-empty'; evidenceContent.innerHTML = '<span>○</span><p>Checking the new question…</p>'; content.innerHTML = '<div class="welcome"><div class="welcome-node">◌</div><h3>Following the signal…</h3><p>Searching the indexed conversations and checking the evidence.</p></div>'; try { const response = await fetch('/api/search', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ query: value }) }); const result = await response.json(); if (request === searchRequest) renderResults(result); } catch { if (request === searchRequest) renderResults({ answer: 'The archive is temporarily unavailable. Check that the local server is running.', citations: [], mode: 'local-fallback' }); } });
 
 function initDiscovery() {
   const clips = document.querySelector('#clips');

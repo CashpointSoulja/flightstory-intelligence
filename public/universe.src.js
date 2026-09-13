@@ -146,7 +146,8 @@ function selectNode(node) {
   selected = node;
   const data = node.userData;
   inspectorTitle.textContent = data.title;
-  inspectorMeta.textContent = data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  openButton.hidden = data.kind === 'core';
   openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
   inspector.classList.add('visible');
   root.add(node);
@@ -170,7 +171,7 @@ stage.appendChild(tooltip);
 
 function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
 canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
-canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (!hitNode) return; selectNode(hitNode); const data = hitNode.userData; if (data.kind === 'topic' || data.kind === 'video') window.open(`${data.source}&t=${data.seconds}s`, '_blank', 'noopener'); });
+canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(host);

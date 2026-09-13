@@ -9,20 +9,23 @@ const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
 const insforgeUrl = process.env.NEXT_PUBLIC_INSFORGE_URL || '';
 const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
 const catalogPath = join(root, 'public', 'catalog.json');
+const searchIndexPath = join(root, 'public', 'search-index.json');
 
 const evidence = [
   { id: 'vanessa-talk-too-much', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 0, end: 18, topic: 'conversation talk too much cues', quote: 'How do you know you talk too much? So, first thing is non-verbal cues. Someone is checking out if they are opening their mouth as if to say something. I call it like the open fish.', note: 'A practical conversational cue: notice when the other person is trying to enter the conversation.' },
   { id: 'vanessa-loneliness', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 33, end: 65, topic: 'conversation loneliness technology voice notes', quote: "And because we're having less conversations, one in six people worldwide are affected by loneliness. And I now more than ever am sending 9-minute voice notes to my friends.", note: 'A cultural observation: technology changes the amount and shape of human conversation.' },
   { id: 'vanessa-highlight', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 66, end: 81, topic: 'conversation networking questions highlight day', quote: 'The best conversation starter was actually what was the highlight of your day? Because the moment we asked how are you, what do you do? They ran out of things to talk about.', note: 'A tested conversation prompt that creates a richer opening than generic small talk.' }
 ];
+let searchableEvidence = evidence;
+try { searchableEvidence = JSON.parse(await readFile(searchIndexPath, 'utf8')).segments; } catch { /* local demo fallback */ }
 
 function searchLocal(query) {
   const stopwords = new Set(['what', 'did', 'have', 'guests', 'guest', 'say', 'said', 'about', 'the', 'and', 'or', 'who', 'which', 'where', 'has', 'any', 'to', 'of', 'in', 'on', 'for', 'me', 'this', 'that']);
   const words = query.toLowerCase().split(/\W+/).filter(word => word.length > 2 && !stopwords.has(word));
-  const ranked = evidence.map(item => ({ item, score: words.reduce((score, word) => score + ((item.topic + ' ' + item.quote + ' ' + item.note).toLowerCase().includes(word) ? 1 : 0), 0) })).sort((a, b) => b.score - a.score);
+  const ranked = searchableEvidence.map(item => ({ item, score: words.reduce((score, word) => score + ((item.searchText || item.quote || '').toLowerCase().includes(word) ? 1 : 0), 0) })).sort((a, b) => b.score - a.score);
   const matches = ranked.filter(({ score }) => score > 0).slice(0, 4).map(({ item }) => item);
-  if (!matches.length) return { answer: 'I could not verify that in the indexed archive. Try a topic such as confidence, dopamine, focus, failure or identity.', citations: [], mode: 'local-fallback' };
-  return { answer: `${matches.length} relevant moments are indexed. Across these conversations, the archive suggests that ${matches[0].note.toLowerCase()} The evidence below keeps the interpretation tied to the original episode.`, citations: matches, mode: 'local-fallback' };
+  if (!matches.length) return { answer: 'I could not verify that in the indexed archive. Try another topic or ask about a different guest.', citations: [], mode: 'local-fallback' };
+  return { answer: `${matches.length} transcript moments matched this question. The archive returns the source passages below so the interpretation can be checked directly.`, citations: matches, mode: 'local-fallback' };
 }
 
 function instructions() {
@@ -31,13 +34,15 @@ function instructions() {
 
 async function searchOpenAI(query) {
   if (!process.env.OPENAI_API_KEY) return null;
-  const response = await fetch('https://api.openai.com/v1/responses', { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${process.env.OPENAI_API_KEY}` }, body: JSON.stringify({ model, input: [{ role: 'system', content: instructions() }, { role: 'user', content: `Question: ${query}\n\nEvidence:\n${evidence.map(item => JSON.stringify(item)).join('\n')}` }], temperature: 0.2 }) });
+  const ranked = searchableEvidence.map(item => ({ item, score: query.toLowerCase().split(/\W+/).filter(Boolean).reduce((score, word) => score + ((item.searchText || item.quote).toLowerCase().includes(word) ? 1 : 0), 0) })).sort((a, b) => b.score - a.score).slice(0, 24).map(({ item }) => item);
+  if (!ranked.length || !ranked.some(item => item.quote)) return null;
+  const response = await fetch('https://api.openai.com/v1/responses', { method: 'POST', headers: { 'content-type': 'application/json', authorization: `Bearer ${process.env.OPENAI_API_KEY}` }, body: JSON.stringify({ model, input: [{ role: 'system', content: instructions() }, { role: 'user', content: `Question: ${query}\n\nEvidence:\n${ranked.map(item => JSON.stringify(item)).join('\n')}` }], temperature: 0.2 }) });
   if (!response.ok) throw new Error(`OpenAI request failed (${response.status})`);
   const data = await response.json();
   const outputText = data.output_text ?? data.output?.flatMap(item => item.content || []).find(part => part.type === 'output_text')?.text;
   if (!outputText) throw new Error('OpenAI response contained no text output');
   const parsed = JSON.parse(outputText.trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, ''));
-  return { answer: parsed.answer, citations: evidence.filter(item => parsed.citationIds?.includes(item.id)), mode: 'openai' };
+  return { answer: parsed.answer, citations: ranked.filter(item => parsed.citationIds?.includes(item.id)), mode: 'openai' };
 }
 
 async function body(request) { let value = ''; for await (const chunk of request) value += chunk; return JSON.parse(value || '{}'); }
