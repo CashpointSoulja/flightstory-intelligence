@@ -74,12 +74,12 @@ const topicFamilies = [
   ['relationships', /love|relationship|marriage|dating|family|friend|conversation|people|parent|woman|man/i, 0xe78c6a]
 ];
 const topicColor = label => topicFamilies.find(([, pattern]) => pattern.test(label))?.[2] || 0xa79bb8;
+const clusterCenters = [new THREE.Vector3(-4.4, 1.6, -.4), new THREE.Vector3(-2.1, -2.1, .2), new THREE.Vector3(.1, 2.5, -.2), new THREE.Vector3(2.7, .55, .3), new THREE.Vector3(4.3, -1.45, -.1)];
 const topicNodes = graph.nodes.map((topic, index) => {
-  const arm = index % 5;
-  const progress = index / Math.max(graph.nodes.length, 1);
-  const radius = 1.4 + progress * 7.1;
-  const theta = arm * (Math.PI * 2 / 5) + progress * 12.5 + (index % 7) * .035;
-  const position = new THREE.Vector3(Math.cos(theta) * radius, (Math.sin(theta * 1.7 + arm) * .46 + Math.sin(index * 2.41) * .14) * radius, Math.sin(theta) * radius * .58);
+  const family = topicFamilies.findIndex(([, pattern]) => pattern.test(topic.label));
+  const cluster = clusterCenters[Math.max(family, 0) % clusterCenters.length];
+  const theta = index * 2.399963 + (family < 0 ? 0 : family * .3); const spread = 1.1 + (index % 13) * .035;
+  const position = new THREE.Vector3(cluster.x + Math.cos(theta) * spread, cluster.y + Math.sin(theta) * spread * .7, cluster.z + Math.sin(index * 1.73) * .75);
   topicPositions.set(topic.id, position);
   return addNode({ kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
 });
@@ -90,6 +90,9 @@ const topicLabels = topicNodes.slice(0, 36).map(node => {
   stage.appendChild(label);
   return { node, label };
 });
+for (const [index, center] of clusterCenters.entries()) {
+  const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 128; const context = canvas.getContext('2d'); const color = new THREE.Color(topicFamilies[index][2]); const gradient = context.createRadialGradient(64, 64, 2, 64, 64, 64); gradient.addColorStop(0, `rgba(${Math.round(color.r * 255)},${Math.round(color.g * 255)},${Math.round(color.b * 255)},.22)`); gradient.addColorStop(1, 'rgba(0,0,0,0)'); context.fillStyle = gradient; context.fillRect(0, 0, 128, 128); const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), transparent: true, depthWrite: false, opacity: .75 })); sprite.position.copy(center); sprite.scale.set(4.4, 4.4, 1); root.add(sprite);
+}
 const videoPositions = new Map();
 const videoNodes = videoGraph.nodes.map((video, index) => {
   const progress = index / Math.max(videoGraph.nodes.length, 1); const arm = index % 5; const radius = 6.2 + (index % 11) * .12; const theta = arm * (Math.PI * 2 / 5) + progress * 12.5;
@@ -116,10 +119,12 @@ const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.
 graphLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
 root.add(graphLines);
 const videoEdgePositions = [];
-for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
+const videoEdgePairs = [];
+for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) { videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); if (videoEdgePairs.length < 220) videoEdgePairs.push([from, to]); } }
 const videoLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe5bd77, transparent: true, opacity: .24 }));
 videoLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(videoEdgePositions, 3));
 root.add(videoLines);
+const sparkPositions = new Float32Array(videoEdgePairs.length * 3); const sparks = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xffe3a6, size: .065, transparent: true, opacity: .9, depthWrite: false })); sparks.geometry.setAttribute('position', new THREE.Float32BufferAttribute(sparkPositions, 3)); root.add(sparks);
 
 const stars = new THREE.Points(new THREE.BufferGeometry(), new THREE.PointsMaterial({ color: 0xf3f0ed, size: .025, transparent: true, opacity: .38 }));
 const starPositions = [];
@@ -172,5 +177,5 @@ selectNode(evidenceNodes[0]);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
-function animate() { requestAnimationFrame(animate); if (!reducedMotion) { root.rotation.y += .00045; stars.rotation.y -= .00012; } controls.update(); updateTopicLabels(); renderer.render(scene, camera); }
+function animate() { requestAnimationFrame(animate); const now = performance.now() / 1000; if (!reducedMotion) { root.rotation.y += .00045; stars.rotation.y -= .00012; } videoLines.material.opacity = .11 + (Math.sin(now * 1.6) + 1) * .09; for (let index = 0; index < videoEdgePairs.length; index += 1) { const [from, to] = videoEdgePairs[index]; const phase = (now * (.08 + (index % 7) * .012) + index / videoEdgePairs.length) % 1; sparkPositions[index * 3] = from.x + (to.x - from.x) * phase; sparkPositions[index * 3 + 1] = from.y + (to.y - from.y) * phase; sparkPositions[index * 3 + 2] = from.z + (to.z - from.z) * phase; } sparks.geometry.attributes.position.needsUpdate = true; controls.update(); updateTopicLabels(); renderer.render(scene, camera); }
 animate();
