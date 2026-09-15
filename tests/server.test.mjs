@@ -175,6 +175,19 @@ test('local fallback keeps intentional one-word searches and refuses weak multi-
   });
 });
 
+test('public demo finds the best conversation starter for both icebreaker spellings', async () => {
+  await withServer({}, async url => {
+    for (const query of ['What is a good icebreaker?', 'What is a good ice breaker?']) {
+      const response = await post(url, JSON.stringify({ query }));
+      assert.equal(response.status, 200);
+      const result = await response.json();
+      assert.equal(result.mode, 'local-demo');
+      assert.deepEqual(result.citations.map(item => item.id), ['vanessa-highlight']);
+      assert.deepEqual([result.citations[0].start, result.citations[0].end], [66, 81]);
+    }
+  });
+});
+
 test('scopes named guest questions before ranking and keeps explicit comparisons', async () => {
   const corpus = [
     { id: 'v1', guest: 'Vanessa Van Edwards', episode: 'V episode', quote: 'She notices when people talk too much.', start: 1, end: 2 },
