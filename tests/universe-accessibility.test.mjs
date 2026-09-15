@@ -11,16 +11,22 @@ test('accessible archive nodes select in-app and keep source opening as a separa
   assert.match(graph, /const sourceLink = document\.createElement\('a'\)/);
   assert.match(graph, /sourceLink\.target = '_blank'/);
   assert.match(graph, /for \(const \[key, button\] of graphSelectionButtons\) button\.setAttribute\('aria-pressed', String\(key === `\$\{data\.kind\}:\$\{data\.id\}`\)\)/);
-  assert.match(graph, /canvas\.addEventListener\('pointerdown', event => \{ const hitNode = hit\(event\)\[0\]\?\.object; if \(hitNode\) selectNode\(hitNode\); \}\)/);
+  assert.match(graph, /canvas\.addEventListener\('pointerdown', event => \{ const hitNode = hit\(event, true\)\[0\]\?\.object; if \(hitNode\) selectNode\(hitNode\); \}\)/);
   assert.match(graph, /class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong><\/strong><small><\/small>/);
   assert.match(graph, /3D archive map\. Use Browse featured archive nodes to select a topic, video, or citation/);
   assert.doesNotMatch(graph, /canvas\.tabIndex\s*=\s*0/);
 });
 
-test('selecting an archive node focuses it in the map and moves focus to its inspector', async () => {
+test('selecting an archive node moves focus to its inspector', async () => {
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
 
-  assert.match(graph, /function selectNode\(node\) \{[\s\S]*?const position = node\.getWorldPosition\(new THREE\.Vector3\(\)\);[\s\S]*?controls\.target\.copy\(position\);[\s\S]*?camera\.position\.copy\(position\)\.add\(offset\);/);
   assert.match(graph, /class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"/);
   assert.match(graph, /inspector\.classList\.add\('visible'\);\s*inspector\.focus\(\{ preventScroll: true \}\);/);
+});
+
+test('3D clicks fall back to nearby visible nodes only after an exact raycast misses', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+
+  assert.match(graph, /const intersections = raycaster\.intersectObjects\(visibleNodes\);\s*if \(intersections\.length \|\| !pointerDown\) return intersections;/);
+  assert.match(graph, /nearestNodeWithinRadius\(projected, event\.clientX, event\.clientY\)/);
 });
