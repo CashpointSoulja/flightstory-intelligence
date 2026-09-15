@@ -56,7 +56,7 @@ npm test
 npm run build
 ```
 
-Workspace search tests inject a synthetic corpus and mock auth/search responses; they do not need real transcript data or live InsForge credentials. The workflow is configured for Node.js 24 on pushes and pull requests; it has not run on GitHub yet.
+Workspace search tests inject a synthetic corpus and mock auth/search responses; they do not need real transcript data or live InsForge credentials. The Node.js 24 GitHub Actions workflow has passed on PR #1 and on the merged main branch; those checks do not validate live InsForge auth or RLS.
 
 ## Release notes
 
