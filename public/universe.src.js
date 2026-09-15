@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { formatTime } from './archive-ui.js';
+import { formatTime, graphLayerVisibility, graphNodeIsVisible } from './archive-ui.js';
 
 const host = document.querySelector('.hero-art');
 if (!host) throw new Error('Evidence Universe host not found');
@@ -93,8 +93,9 @@ const topicLabels = topicNodes.slice(0, 12).map(node => {
   stage.appendChild(label);
   return { node, label };
 });
+const topicBackgrounds = [];
 for (const [index, center] of clusterCenters.entries()) {
-  const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 128; const context = canvas.getContext('2d'); const color = new THREE.Color(topicFamilies[index][2]); const gradient = context.createRadialGradient(64, 64, 2, 64, 64, 64); gradient.addColorStop(0, `rgba(${Math.round(color.r * 255)},${Math.round(color.g * 255)},${Math.round(color.b * 255)},.22)`); gradient.addColorStop(1, 'rgba(0,0,0,0)'); context.fillStyle = gradient; context.fillRect(0, 0, 128, 128); const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), transparent: true, depthWrite: false, opacity: .75 })); sprite.position.copy(center); sprite.scale.set(4.4, 4.4, 1); root.add(sprite);
+  const canvas = document.createElement('canvas'); canvas.width = 128; canvas.height = 128; const context = canvas.getContext('2d'); const color = new THREE.Color(topicFamilies[index][2]); const gradient = context.createRadialGradient(64, 64, 2, 64, 64, 64); gradient.addColorStop(0, `rgba(${Math.round(color.r * 255)},${Math.round(color.g * 255)},${Math.round(color.b * 255)},.22)`); gradient.addColorStop(1, 'rgba(0,0,0,0)'); context.fillStyle = gradient; context.fillRect(0, 0, 128, 128); const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: new THREE.CanvasTexture(canvas), transparent: true, depthWrite: false, opacity: .75 })); sprite.position.copy(center); sprite.scale.set(4.4, 4.4, 1); root.add(sprite); topicBackgrounds.push(sprite);
 }
 const videoPositions = new Map();
 const videoNodes = videoGraph.nodes.map((video, index) => {
@@ -103,19 +104,22 @@ const videoNodes = videoGraph.nodes.map((video, index) => {
   videoPositions.set(video.id, position);
   return addNode({ id: video.id, kind: 'video', title: video.title, source: video.source, seconds: video.seconds, query: video.title, color: topicColor(video.title) }, position, nodeGeometry, 1.5);
 });
-const graphAccess = document.createElement('details'); graphAccess.className = 'universe-access'; const graphSummary = document.createElement('summary'); graphSummary.textContent = 'Browse nodes as links'; graphAccess.appendChild(graphSummary); const graphList = document.createElement('div'); graphList.className = 'universe-access-list'; for (const node of [...topicNodes.slice(0, 30), ...videoNodes.slice(0, 30)]) { const data = node.userData; const link = document.createElement('a'); link.textContent = data.kind === 'video' ? `VIDEO · ${data.title}` : `TOPIC · ${data.title}`; link.href = `${data.source}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); } graphAccess.appendChild(graphList); stage.appendChild(graphAccess);
+const graphAccess = document.createElement('details'); graphAccess.className = 'universe-access'; const graphSummary = document.createElement('summary'); graphSummary.textContent = 'Browse all archive nodes as links'; graphAccess.appendChild(graphSummary); const graphList = document.createElement('div'); graphList.className = 'universe-access-list'; for (const node of [...topicNodes.slice(0, 30), ...videoNodes.slice(0, 30)]) { const data = node.userData; const link = document.createElement('a'); link.textContent = data.kind === 'video' ? `VIDEO · ${data.title}` : `TOPIC · ${data.title}`; link.href = `${data.source}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); } graphAccess.appendChild(graphList); stage.appendChild(graphAccess);
 
 const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2.2, 1.55, .4), new THREE.Vector3(2.8, -.95, -.5)];
 const evidenceNodes = evidence.map((item, index) => addNode({ ...item, kind: 'evidence' }, evidencePositions[index], evidenceGeometry));
+for (const node of evidenceNodes) { const data = node.userData; const link = document.createElement('a'); link.textContent = `CITATION · ${data.guest} · ${data.title}`; link.href = `https://www.youtube.com/watch?v=${encodeURIComponent(data.videoId)}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); }
 const core = addNode({ kind: 'core', title: 'Conversation', query: 'What have guests said about conversation?' }, new THREE.Vector3(0, 0, 0), new THREE.SphereGeometry(.23, 20, 20), 1);
 core.material.color.set(0xf3f0ed);
 
 const linkMaterial = new THREE.LineBasicMaterial({ color: 0xc7a7ff, transparent: true, opacity: .55 });
+const evidenceCoreLines = [];
 for (const node of evidenceNodes) {
-  root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), linkMaterial));
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), linkMaterial); root.add(line); evidenceCoreLines.push(line);
 }
+const topicCoreLines = [];
 for (const node of topicNodes.slice(0, 36)) {
-  root.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), new THREE.LineBasicMaterial({ color: 0x686271, transparent: true, opacity: .18 })));
+  const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), new THREE.LineBasicMaterial({ color: 0x686271, transparent: true, opacity: .18 })); root.add(line); topicCoreLines.push(line);
 }
 const edgePositions = [];
 for (const edge of graph.edges) { const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target); if (from && to) edgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
@@ -149,6 +153,43 @@ const openButton = inspector.querySelector('[data-open]');
 const secondSource = document.createElement('a'); secondSource.className = 'second-source'; secondSource.target = '_blank'; secondSource.rel = 'noreferrer'; secondSource.textContent = 'Open second source ↗'; secondSource.hidden = true; inspector.appendChild(secondSource);
 let selected = null;
 const activeIds = new Set();
+const graphLayerButtons = [...document.querySelectorAll('.layer[data-graph-layer]')];
+let activeGraphLayer = 'topics';
+let visibleNodes = [];
+
+function setGraphLayer(layer) {
+  const visible = graphLayerVisibility(layer);
+  topicNodes.forEach(node => { node.visible = visible.topics; });
+  videoNodes.forEach(node => { node.visible = visible.videos; });
+  evidenceNodes.forEach(node => { node.visible = visible.evidence; });
+  topicLabels.forEach(({ label }) => { label.hidden = !visible.topics; });
+  topicBackgrounds.forEach(background => { background.visible = visible.topics; });
+  topicCoreLines.forEach(line => { line.visible = visible.topics; });
+  evidenceCoreLines.forEach(line => { line.visible = visible.evidence; });
+  graphLines.visible = visible.topics;
+  videoLines.visible = visible.videos;
+  connectionMarkers.forEach(marker => { marker.visible = visible.videos; });
+  sparks.visible = visible.videos;
+  core.visible = true;
+  visibleNodes = nodes.filter(node => graphNodeIsVisible(layer, node.userData.kind));
+  if (activeGraphLayer !== layer) {
+    activeIds.clear();
+    if (selected && selected.userData.kind !== 'core' && !visible[selected.userData.kind]) {
+      selected = null;
+      inspector.hidden = true;
+      inspector.classList.remove('visible');
+    }
+  }
+  activeGraphLayer = layer;
+  graphLayerButtons.forEach(button => {
+    const active = button.dataset.graphLayer === layer;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+}
+
+graphLayerButtons.forEach(button => button.addEventListener('click', () => setGraphLayer(button.dataset.graphLayer)));
+setGraphLayer('topics');
 
 function selectNode(node) {
   selected = node;
@@ -175,7 +216,7 @@ openButton.addEventListener('click', () => {
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); }
 });
 stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
-stage.querySelector('[data-focus]').addEventListener('click', () => { camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
+stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
 
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
@@ -184,7 +225,7 @@ tooltip.className = 'universe-tooltip';
 tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1px solid rgba(199,167,255,.35);background:rgba(8,8,13,.9);color:#f3f0ed;font:9px DM Mono,monospace;pointer-events:none;z-index:5;max-width:190px';
 stage.appendChild(tooltip);
 
-function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(nodes); }
+function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(visibleNodes); }
 canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
 canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
 
