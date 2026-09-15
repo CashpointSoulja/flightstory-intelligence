@@ -30,6 +30,21 @@ canvas.setAttribute('aria-label', 'Interactive 3D archive map. Drag to orbit, sc
 canvas.tabIndex = 0;
 stage.prepend(canvas);
 
+const graphLayerButtons = [...document.querySelectorAll('.layer[data-graph-layer]')];
+let requestedGraphLayer = 'topics';
+let applyGraphLayer = null;
+function setGraphLayer(layer) {
+  if (!['topics', 'videos', 'evidence'].includes(layer)) return;
+  requestedGraphLayer = layer;
+  graphLayerButtons.forEach(button => {
+    const active = button.dataset.graphLayer === layer;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+  applyGraphLayer?.(layer);
+}
+graphLayerButtons.forEach(button => button.addEventListener('click', () => setGraphLayer(button.dataset.graphLayer)));
+
 const scene = new THREE.Scene();
 scene.add(new THREE.AmbientLight(0xb8a6d8, 1.7));
 const keyLight = new THREE.DirectionalLight(0xf3f0ed, 2.8); keyLight.position.set(3, 5, 6); scene.add(keyLight);
@@ -45,6 +60,8 @@ controls.maxDistance = 34;
 controls.enablePan = false;
 controls.minPolarAngle = .45;
 controls.maxPolarAngle = Math.PI - .45;
+stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
+stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
 
 const root = new THREE.Group();
 scene.add(root);
@@ -153,11 +170,10 @@ const openButton = inspector.querySelector('[data-open]');
 const secondSource = document.createElement('a'); secondSource.className = 'second-source'; secondSource.target = '_blank'; secondSource.rel = 'noreferrer'; secondSource.textContent = 'Open second source ↗'; secondSource.hidden = true; inspector.appendChild(secondSource);
 let selected = null;
 const activeIds = new Set();
-const graphLayerButtons = [...document.querySelectorAll('.layer[data-graph-layer]')];
 let activeGraphLayer = 'topics';
 let visibleNodes = [];
 
-function setGraphLayer(layer) {
+applyGraphLayer = layer => {
   const visible = graphLayerVisibility(layer);
   topicNodes.forEach(node => { node.visible = visible.topics; });
   videoNodes.forEach(node => { node.visible = visible.videos; });
@@ -186,10 +202,8 @@ function setGraphLayer(layer) {
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
-}
-
-graphLayerButtons.forEach(button => button.addEventListener('click', () => setGraphLayer(button.dataset.graphLayer)));
-setGraphLayer('topics');
+};
+setGraphLayer(requestedGraphLayer);
 
 function selectNode(node) {
   selected = node;
@@ -215,9 +229,6 @@ openButton.addEventListener('click', () => {
   else if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); }
 });
-stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
-stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
-
 const raycaster = new THREE.Raycaster();
 const pointer = new THREE.Vector2();
 const tooltip = document.createElement('div');

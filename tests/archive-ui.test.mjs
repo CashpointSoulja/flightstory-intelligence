@@ -228,10 +228,21 @@ test('map layer controls sync button state and visibility while the accessible l
   assert.match(graph, /evidenceCoreLines\.forEach\(line => \{ line\.visible = visible\.evidence; \}\)/);
   assert.match(graph, /visibleNodes = nodes\.filter\(node => graphNodeIsVisible\(layer, node\.userData\.kind\)\)/);
   assert.match(graph, /raycaster\.intersectObjects\(visibleNodes\)/);
-  assert.match(graph, /setGraphLayer\('topics'\)/);
+  assert.match(graph, /let requestedGraphLayer = 'topics'/);
+  assert.match(graph, /setGraphLayer\(requestedGraphLayer\)/);
   assert.match(graph, /setGraphLayer\('evidence'\); camera\.position\.set/);
   assert.match(graph, /CITATION · \$\{data\.guest\} · \$\{data\.title\}/);
   assert.match(graph, /Browse all archive nodes as links/);
+});
+
+test('map controls queue the latest layer choice while graph data loads', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+  const graphFetch = graph.indexOf("const catalogue = await fetch('/api/catalog')");
+  assert.ok(graph.indexOf('graphLayerButtons.forEach(button => button.addEventListener') < graphFetch);
+  assert.ok(graph.indexOf("stage.querySelector('[data-reset]').addEventListener") < graphFetch);
+  assert.ok(graph.indexOf("stage.querySelector('[data-focus]').addEventListener") < graphFetch);
+  assert.match(graph, /requestedGraphLayer = layer;[\s\S]*?applyGraphLayer\?\.\(layer\)/);
+  assert.ok(graph.indexOf('applyGraphLayer = layer =>') < graph.indexOf('setGraphLayer(requestedGraphLayer)'));
 });
 
 test('citation metadata is readable and can wrap at mobile widths', async () => {
