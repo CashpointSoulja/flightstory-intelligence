@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
-import { canSaveSharedDraft, citationClipInput, rangeEditInput, setReviewButtonsDisabled, sourceHeading } from '../public/shared-review.js';
+import { boardClipsPageUrl, canSaveSharedDraft, citationClipInput, isValidClipPage, mergeClipPage, rangeEditInput, setReviewButtonsDisabled, sourceHeading } from '../public/shared-review.js';
 
 test('formats whole and fractional seconds as readable timestamps', () => {
   assert.equal(formatTime(0), '00:00');
@@ -67,6 +67,30 @@ test('shared draft saving stays locked across citation changes until the request
   assert.equal(canSaveSharedDraft(input, 'board', true), false);
   assert.equal(canSaveSharedDraft(null, 'board', false), false);
   assert.equal(canSaveSharedDraft(input, '', false), false);
+});
+
+test('shared clip pages validate their cursor and append without losing or duplicating loaded clips', () => {
+  const firstPage = { clips: [{ id: 'a' }, { id: 'b' }], hasMore: true, nextOffset: 2 };
+  const secondPage = { clips: [{ id: 'b' }, { id: 'c' }], hasMore: false, nextOffset: null };
+  assert.equal(isValidClipPage(firstPage, 0), true);
+  assert.equal(isValidClipPage(secondPage, 2), true);
+  assert.equal(isValidClipPage({ ...firstPage, nextOffset: 50 }, 0), false);
+  assert.equal(isValidClipPage({ clips: [], hasMore: true, nextOffset: 0 }, 0), false);
+  assert.deepEqual(mergeClipPage(firstPage.clips, secondPage.clips), [{ id: 'a' }, { id: 'b' }, { id: 'c' }]);
+  assert.equal(boardClipsPageUrl('board/id', 50), '/api/boards/board%2Fid/clips?offset=50');
+});
+
+test('shared queue exposes an accessible Load older clips action and mutation refresh keeps loaded pages', async () => {
+  const ui = await readFile(new URL('../public/shared-review.js', import.meta.url), 'utf8');
+  assert.match(ui, /data-load-more aria-label="Load older clips"/);
+  assert.match(ui, /async function loadOlderClips\(button\)/);
+  assert.match(ui, /function appendClipPage\(items\)[\s\S]*?clips\.insertAdjacentHTML\('beforeend', items\.map\(renderClip\)/);
+  assert.match(ui, /appendClipPage\(newClips\)/);
+  assert.match(ui, /const keepCount = preserveLoaded \? loadedClips\.length : 0/);
+  assert.match(ui, /while \(items\.length < keepCount && page\.hasMore\)/);
+  assert.match(ui, /async function refreshAfterMutation\(\)\s*\{\s*await loadClips\(\{ preserveLoaded: true \}\)/);
+  assert.equal((ui.match(/await refreshAfterMutation\(\)/g) || []).length, 3, 'save, edit, and submit/review refresh the pages already loaded');
+  assert.match(ui, /const moreButton = event\.target\.closest\('\[data-load-more\]'\)/);
 });
 
 test('review decision buttons disable together and can recover after a failed request', async () => {
