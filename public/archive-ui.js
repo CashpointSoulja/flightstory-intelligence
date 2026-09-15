@@ -33,6 +33,14 @@ export function isValidClipRange(startValue, endValue, durationSeconds) {
   return Number.isFinite(start) && Number.isFinite(end) && start >= 0 && end > start && (!Number.isFinite(duration) || duration <= 0 || end <= duration);
 }
 
+export function graphLayerVisibility(layer) {
+  return { topics: layer === 'topics', videos: layer === 'videos', evidence: layer === 'evidence' };
+}
+
+export function graphNodeIsVisible(layer, kind) {
+  return kind === 'core' || kind === 'connection' && layer === 'videos' || graphLayerVisibility(layer)[kind] === true;
+}
+
 export function loadSavedItems(storageProvider) {
   try {
     const parsed = JSON.parse(storageProvider().getItem('flightstory-clips') || '[]');

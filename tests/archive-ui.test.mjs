@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { formatTime, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
+import { formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
 import { canSaveSharedDraft, citationClipInput, rangeEditInput, setReviewButtonsDisabled, sourceHeading } from '../public/shared-review.js';
 
 test('formats whole and fractional seconds as readable timestamps', () => {
@@ -11,6 +11,18 @@ test('formats whole and fractional seconds as readable timestamps', () => {
   assert.equal(formatTime(61.5), '01:01.50');
   assert.equal(formatTime(59.999), '01:00');
   assert.equal(formatTime(3661.5), '01:01:01.50');
+});
+
+test('graph layer state shows exactly its selected node family', () => {
+  assert.deepEqual(graphLayerVisibility('topics'), { topics: true, videos: false, evidence: false });
+  assert.deepEqual(graphLayerVisibility('videos'), { topics: false, videos: true, evidence: false });
+  assert.deepEqual(graphLayerVisibility('evidence'), { topics: false, videos: false, evidence: true });
+  for (const layer of ['topics', 'videos', 'evidence']) {
+    assert.equal(graphNodeIsVisible(layer, 'core'), true);
+    assert.equal(graphNodeIsVisible(layer, layer), true);
+    for (const other of ['topics', 'videos', 'evidence'].filter(kind => kind !== layer)) assert.equal(graphNodeIsVisible(layer, other), false);
+    assert.equal(graphNodeIsVisible(layer, 'connection'), layer === 'videos');
+  }
 });
 
 test('only creates YouTube links when a source has a video id', () => {
@@ -198,8 +210,44 @@ test('mobile archive map reduces label clutter but keeps controls and accessible
   assert.match(graph, /@media\(max-width:700px\)\{\.universe-node-label,\.universe-map-key\{display:none\}/);
   assert.match(styles, /@media\(max-width:700px\)\{\.universe-node-label,\.universe-map-key\{display:none!important\}\}/);
   assert.match(graph, /\.universe-controls\{top:auto;right:12px;bottom:12px\}/);
-  assert.match(graph, /graphSummary\.textContent = 'Browse nodes as links'/);
+  assert.match(graph, /graphSummary\.textContent = 'Browse all archive nodes as links'/);
   assert.doesNotMatch(graph, /\.universe-access(?:\s|,|\{)[^}]*display\s*:\s*none/);
+});
+
+test('map layer controls sync button state and visibility while the accessible link list retains citations', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+  const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
+  assert.match(html, /data-graph-layer="topics" aria-pressed="true" disabled/);
+  assert.match(html, /data-graph-layer="videos" aria-pressed="false" disabled/);
+  assert.match(html, /data-graph-layer="evidence" aria-pressed="false" disabled/);
+  assert.match(styles, /\.layer:disabled\{opacity:\.45;cursor:wait\}/);
+  assert.match(graph, /button\.classList\.toggle\('active', active\);\s*button\.setAttribute\('aria-pressed', String\(active\)\)/);
+  assert.match(graph, /topicLabels\.forEach\(\(\{ label \}\) => \{ label\.hidden = !visible\.topics; \}\)/);
+  assert.match(graph, /topicBackgrounds\.forEach\(background => \{ background\.visible = visible\.topics; \}\)/);
+  assert.match(graph, /graphLines\.visible = visible\.topics/);
+  assert.match(graph, /videoLines\.visible = visible\.videos/);
+  assert.match(graph, /evidenceCoreLines\.forEach\(line => \{ line\.visible = visible\.evidence; \}\)/);
+  assert.match(graph, /visibleNodes = nodes\.filter\(node => graphNodeIsVisible\(layer, node\.userData\.kind\)\)/);
+  assert.match(graph, /raycaster\.intersectObjects\(visibleNodes\)/);
+  assert.match(graph, /let requestedGraphLayer = 'topics'/);
+  assert.match(graph, /setGraphLayer\(requestedGraphLayer\)/);
+  assert.match(graph, /setGraphLayer\('evidence'\); camera\.position\.set/);
+  assert.match(graph, /CITATION · \$\{data\.guest\} · \$\{data\.title\}/);
+  assert.match(graph, /Browse all archive nodes as links/);
+});
+
+test('map controls queue the latest layer choice while graph data loads', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+  const graphFetch = graph.indexOf("const catalogue = await fetch('/api/catalog')");
+  const bind = graph.indexOf('graphLayerButtons.forEach(button => button.addEventListener');
+  const syncDefault = graph.indexOf('setGraphLayer(requestedGraphLayer)');
+  const enable = graph.indexOf('graphLayerButtons.forEach(button => { button.disabled = false; })');
+  assert.ok(bind >= 0 && bind < syncDefault && syncDefault < enable && enable < graphFetch);
+  assert.ok(graph.indexOf("stage.querySelector('[data-reset]').addEventListener") < graphFetch);
+  assert.ok(graph.indexOf("stage.querySelector('[data-focus]').addEventListener") < graphFetch);
+  assert.match(graph, /requestedGraphLayer = layer;[\s\S]*?applyGraphLayer\?\.\(layer\)/);
+  assert.ok(graph.indexOf('applyGraphLayer = layer =>') < graph.lastIndexOf('setGraphLayer(requestedGraphLayer)'));
 });
 
 test('citation metadata is readable and can wrap at mobile widths', async () => {
