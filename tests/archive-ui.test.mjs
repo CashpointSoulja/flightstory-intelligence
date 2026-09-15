@@ -112,16 +112,17 @@ test('starts with no prefilled or automatic search', async () => {
 test('citation cards expose keyboard button semantics and the result count stays on one line', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
-  assert.match(app, /class="citation"[^>]*role="button" tabindex="0" aria-pressed="false"/);
-  assert.match(app, /event\.key === 'Enter' \|\| event\.key === ' '/);
+  assert.match(app, /class="citation"[^>]*role="button" tabindex="0" aria-current="false"/);
+  assert.doesNotMatch(app, /class="citation"[^>]*aria-pressed=/);
+  assert.match(app, /if \(event\.key === 'Enter' \|\| event\.key === ' '\) \{ event\.preventDefault\(\); selectEvidence\(item\); \}/);
   assert.match(app, /current\.length === 1 \? 'MOMENT' : 'MOMENTS'/);
   assert.match(styles, /\.result-count\{flex:0 0 auto;white-space:nowrap\}/);
   assert.match(styles, /\.results-head\{align-items:flex-start\}/);
 });
 
-test('selecting a citation synchronizes pressed state on every card', async () => {
+test('selecting a citation synchronizes the single current source on every card', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
-  assert.match(app, /const selectedId = String\(item\.id\);[\s\S]*?document\.querySelectorAll\('\.citation'\)\.forEach\(node => \{\s*const selected = node\.dataset\.id === selectedId;[\s\S]*?node\.setAttribute\('aria-pressed', String\(selected\)\)/);
+  assert.match(app, /const selectedId = String\(item\.id\);[\s\S]*?document\.querySelectorAll\('\.citation'\)\.forEach\(node => \{\s*const selected = node\.dataset\.id === selectedId;[\s\S]*?node\.setAttribute\('aria-current', String\(selected\)\)/);
 });
 
 test('the interactive graph color token resolves from the root theme', async () => {
