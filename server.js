@@ -12,6 +12,8 @@ const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
 const searchAccessMode = process.env.SEARCH_ACCESS_MODE || 'demo';
 const flightstoryWorkspaceId = process.env.FLIGHTSTORY_WORKSPACE_ID || '';
 const catalogPath = join(root, 'public', 'catalog.json');
+const BOARD_CLIP_PAGE_SIZE = 50;
+const BOARD_CLIP_MAX_OFFSET = 100_000;
 
 const evidence = [
   { id: 'vanessa-talk-too-much', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 0, end: 18, topic: 'conversation talk too much cues', quote: 'How do you know you talk too much? So, first thing is non-verbal cues. Someone is checking out if they are opening their mouth as if to say something. I call it like the open fish.', note: 'A practical conversational cue: notice when the other person is trying to enter the conversation.' },
@@ -207,13 +209,17 @@ const workspaceOperations = {
     if (error) throw error;
     return data || [];
   },
-  async listBoardClips(token, { url, anonKey, workspaceId, boardId }) {
+  async listBoardClips(token, { url, anonKey, workspaceId, boardId, offset }) {
     const client = workspaceClient(token, { url, anonKey }).database.schema('flightstory');
     const { data: clips, error } = await client.from('clips')
       .select('id,workspace_id,board_id,episode_id,transcript_version_id,source_segment_id,created_by,start_ms,end_ms,suggested_start_ms,suggested_end_ms,title,hook,status,created_at,updated_at,reviewed_at,review_decision')
-      .eq('workspace_id', workspaceId).eq('board_id', boardId).order('created_at', { ascending: false });
+      .eq('workspace_id', workspaceId).eq('board_id', boardId)
+      .order('created_at', { ascending: false }).order('id', { ascending: false })
+      .range(offset, offset + BOARD_CLIP_PAGE_SIZE);
     if (error) throw error;
-    const rows = clips || [];
+    const fetchedRows = clips || [];
+    const hasMore = fetchedRows.length > BOARD_CLIP_PAGE_SIZE;
+    const rows = fetchedRows.slice(0, BOARD_CLIP_PAGE_SIZE);
     const episodeIds = [...new Set(rows.map(row => row.episode_id))];
     const segmentIds = [...new Set(rows.map(row => row.source_segment_id).filter(Boolean))];
     const clipIds = rows.map(row => row.id);
@@ -227,7 +233,11 @@ const workspaceOperations = {
     const episodes = byId(episodesResult.data), segments = byId(segmentsResult.data);
     const reviews = new Map();
     for (const review of reviewsResult.data || []) if (!reviews.has(review.clip_id)) reviews.set(review.clip_id, { decision: review.decision, note: review.note, createdAt: review.created_at });
-    return rows.map(({ render_storage_path, ...clip }) => ({ ...clip, episode: episodes.get(clip.episode_id) || null, source: segments.get(clip.source_segment_id) || null, latestReview: reviews.get(clip.id) || null }));
+    return {
+      clips: rows.map(({ render_storage_path, ...clip }) => ({ ...clip, episode: episodes.get(clip.episode_id) || null, source: segments.get(clip.source_segment_id) || null, latestReview: reviews.get(clip.id) || null })),
+      hasMore,
+      nextOffset: hasMore ? offset + rows.length : null
+    };
   },
   createBoard(token, { url, anonKey, workspaceId, name, requestId }) {
     return rpc(workspaceClient(token, { url, anonKey }), 'create_research_board', { target_workspace_id: workspaceId, board_name: name, request_id: requestId });
@@ -248,6 +258,14 @@ const workspaceOperations = {
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 function isUuid(value) { return typeof value === 'string' && UUID.test(value); }
+function boardClipOffset(requestUrl) {
+  const values = new URL(requestUrl, 'http://localhost').searchParams.getAll('offset');
+  if (!values.length) return 0;
+  if (values.length !== 1 || !/^(0|[1-9]\d*)$/.test(values[0])) throw new RequestBodyError(400, 'Offset must be a whole number between 0 and 100000.');
+  const offset = Number(values[0]);
+  if (!Number.isSafeInteger(offset) || offset > BOARD_CLIP_MAX_OFFSET) throw new RequestBodyError(400, 'Offset must be a whole number between 0 and 100000.');
+  return offset;
+}
 function optionalText(value, max, field) {
   if (value !== undefined && value !== null && (typeof value !== 'string' || value.length > max)) throw new RequestBodyError(400, `${field} must be ${max} characters or fewer.`);
   return typeof value === 'string' ? value.trim() || null : null;
@@ -368,8 +386,12 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         if (boardMatch && request.method === 'GET') {
           const boardId = boardMatch[1];
           if (!isUuid(boardId)) return send(response, 400, { error: 'Invalid board id.' });
-          const clips = await workspaceOps.listBoardClips(token, { ...options, boardId });
-          return send(response, 200, { clips: (clips || []).map(clip => publicClip(clip, access)) });
+          const offset = boardClipOffset(request.url);
+          const page = await workspaceOps.listBoardClips(token, { ...options, boardId, offset });
+          if (!Array.isArray(page?.clips) || typeof page.hasMore !== 'boolean' || (page.hasMore ? !Number.isSafeInteger(page.nextOffset) || page.nextOffset !== offset + page.clips.length : page.nextOffset !== null)) {
+            throw new Error('Workspace board clips returned an invalid page.');
+          }
+          return send(response, 200, { clips: page.clips.map(clip => publicClip(clip, access)), hasMore: page.hasMore, nextOffset: page.nextOffset });
         }
         if (request.method === 'POST' && pathname === '/api/clips') {
           const input = strictObject(await body(request), ['boardId', 'segmentId', 'requestId', 'startMs', 'endMs', 'title', 'hook']);

@@ -584,13 +584,13 @@ test('board clip listing removes storage paths and returns only a safe review-el
   const boardId = '11111111-1111-4111-8111-111111111120';
   await withServer(workspaceOptions({
     authorizeWorkspace: async () => ({ status: 'authorized', role: 'admin', userId: 'reviewer-id' }),
-    workspaceOps: { listBoardClips: async () => [{
+    workspaceOps: { listBoardClips: async () => ({ clips: [{
     id: '11111111-1111-4111-8111-111111111121', status: 'needs_review', start_ms: 100, end_ms: 500,
     created_by: 'creator-id', render_storage_path: 'private/render.mp4', storage_path: 'private/source.mp4', credentials: 'secret',
     episode: { id: 'e1', title: 'Episode', duration_seconds: 60, storage_path: 'private/episode.mp4' },
     source: { id: 's1', text: 'Evidence', start_ms: 100, end_ms: 500, embedding: [1] },
     latestReview: { decision: 'rejected', note: 'Tighten the hook', createdAt: '2026-01-01', reviewed_by: 'user-secret' }
-  }] } }), async url => {
+    }], hasMore: false, nextOffset: null }) } }), async url => {
     const response = await requestJson(url, `/api/boards/${boardId}/clips`);
     assert.equal(response.status, 200);
     const text = await response.text();
@@ -602,6 +602,57 @@ test('board clip listing removes storage paths and returns only a safe review-el
     assert.equal(clip.source.text, 'Evidence');
     assert.equal(clip.latestReview.note, 'Tighten the hook');
   });
+});
+
+test('shared board clip API serves stable synthetic pages and validates bounded offsets', async () => {
+  const boardId = '11111111-1111-4111-8111-111111111120';
+  const rows = Array.from({ length: 103 }, (_, index) => ({
+    id: `clip-${index}`, created_by: 'creator', status: 'suggested', start_ms: index, end_ms: index + 1,
+    episode: { id: `episode-${index}` }, source: { id: `segment-${index}` }
+  }));
+  const requestedOffsets = [];
+  let membershipChecks = 0;
+  await withServer(workspaceOptions({
+    authorizeWorkspace: async () => { membershipChecks++; return { status: 'authorized', role: 'member', userId: 'creator' }; },
+    workspaceOps: { listBoardClips: async (_token, options) => {
+      requestedOffsets.push(options.offset);
+      const clips = rows.slice(options.offset, options.offset + 50);
+      const hasMore = options.offset + clips.length < rows.length;
+      return { clips, hasMore, nextOffset: hasMore ? options.offset + clips.length : null };
+    } }
+  }), async url => {
+    const pages = [];
+    for (const offset of [0, 50, 100]) {
+      const response = await requestJson(url, `/api/boards/${boardId}/clips?offset=${offset}`);
+      assert.equal(response.status, 200);
+      pages.push(await response.json());
+    }
+    assert.deepEqual(pages.map(page => page.clips.length), [50, 50, 3]);
+    assert.deepEqual(pages.map(page => [page.hasMore, page.nextOffset]), [[true, 50], [true, 100], [false, null]]);
+    assert.deepEqual(pages.flatMap(page => page.clips).map(clip => clip.id), rows.map(clip => clip.id));
+    assert.deepEqual(requestedOffsets, [0, 50, 100]);
+    assert.equal(membershipChecks, 3);
+    assert.equal(pages[0].clips[0].canEdit, true);
+
+    for (const query of ['offset=-1', 'offset=1.5', 'offset=100001', 'offset=1&offset=2', 'offset=abc']) {
+      const response = await requestJson(url, `/api/boards/${boardId}/clips?${query}`);
+      assert.equal(response.status, 400, query);
+    }
+    assert.deepEqual(requestedOffsets, [0, 50, 100], 'invalid offsets must not read board rows');
+    assert.equal(membershipChecks, 8, 'membership is rechecked for every page request');
+  });
+});
+
+test('shared board clip SDK query is ordered deterministically and joins only the fetched page', async () => {
+  const { readFile } = await import('node:fs/promises');
+  const server = await readFile(new URL('../server.js', import.meta.url), 'utf8');
+  const listQuery = server.match(/async listBoardClips\([\s\S]*?\n  },\n  createBoard/)?.[0];
+  assert.ok(listQuery);
+  assert.match(listQuery, /\.order\('created_at', \{ ascending: false \}\)\.order\('id', \{ ascending: false \}\)\s*\.range\(offset, offset \+ BOARD_CLIP_PAGE_SIZE\)/);
+  assert.match(listQuery, /const rows = fetchedRows\.slice\(0, BOARD_CLIP_PAGE_SIZE\)/);
+  assert.match(listQuery, /const episodeIds = \[\.\.\.new Set\(rows\.map/);
+  assert.match(listQuery, /const segmentIds = \[\.\.\.new Set\(rows\.map/);
+  assert.match(listQuery, /const clipIds = rows\.map/);
 });
 
 test('workspace RPC migrations are mirrored and execute as the caller', async () => {

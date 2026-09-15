@@ -18,6 +18,28 @@ export function setReviewButtonsDisabled(card, disabled) {
   card.querySelectorAll('[data-review]').forEach(button => { button.disabled = disabled; });
 }
 
+export function isValidClipPage(page, offset) {
+  if (!Number.isSafeInteger(offset) || offset < 0 || !Array.isArray(page?.clips) || typeof page.hasMore !== 'boolean') return false;
+  return page.hasMore
+    ? page.clips.length > 0 && page.nextOffset === offset + page.clips.length
+    : page.nextOffset === null;
+}
+
+export function mergeClipPage(current, incoming) {
+  const seen = new Set(current.map(clip => clip.id));
+  const merged = [...current];
+  for (const clip of incoming) {
+    if (seen.has(clip.id)) continue;
+    seen.add(clip.id);
+    merged.push(clip);
+  }
+  return merged;
+}
+
+export function boardClipsPageUrl(boardId, offset) {
+  return `/api/boards/${encodeURIComponent(boardId)}/clips?offset=${offset}`;
+}
+
 export function citationClipInput(citation) {
   if (!citation || typeof citation.id !== 'string' || !UUID.test(citation.id)) return null;
   const startMs = Number.isSafeInteger(citation.start_ms) ? citation.start_ms : secondsToMs(citation.start);
@@ -46,7 +68,7 @@ export async function initSharedReview(auth) {
   root.innerHTML = `<div class="shared-review-intro"><p class="eyebrow">TEAM WORKSPACE</p><h2>Shared clip review</h2><p>Save transcript moments to a board, then submit them for a teammate to review.</p></div>
     <div class="shared-review-tools"><label>Board<select data-board><option value="">Loading boards…</option></select></label><form data-create-board><label>New board<input name="name" maxlength="160" required placeholder="e.g. Campaign cutdowns"></label><button type="submit">Create board</button></form></div>
     <section class="shared-current" aria-labelledby="shared-current-title"><div><p class="eyebrow">SELECTED SOURCE</p><h3 id="shared-current-title">Choose a workspace citation</h3><p data-current-quote class="shared-quote">Select an evidence moment from the research results.</p><p data-current-meta class="shared-meta"></p></div><button type="button" data-save-source disabled>Save as shared draft</button></section>
-    <p class="shared-status" data-shared-status role="status" aria-live="polite"></p><div class="shared-clips" data-shared-clips><p class="clip-empty">Choose a board to see its shared clips.</p></div>`;
+    <p class="shared-status" data-shared-status role="status" aria-live="polite" tabindex="-1"></p><div class="shared-clips" data-shared-clips role="region" aria-label="Shared clips"><p class="clip-empty">Choose a board to see its shared clips.</p></div>`;
 
   const boardSelect = root.querySelector('[data-board]');
   const status = root.querySelector('[data-shared-status]');
@@ -54,6 +76,11 @@ export async function initSharedReview(auth) {
   const saveButton = root.querySelector('[data-save-source]');
   let boards = [];
   let boardId = '';
+  let loadedClips = [];
+  let clipNextOffset = 0;
+  let clipHasMore = false;
+  let clipLoadingMore = false;
+  let clipRequestId = 0;
   let savingDraft = false;
   let selectedCitation = window.selectedArchiveCitation || null;
 
@@ -91,33 +118,121 @@ export async function initSharedReview(auth) {
     saveButton.textContent = input ? 'Save as shared draft' : 'Workspace citation required';
   }
 
-  function renderClips(items = []) {
-    clips.innerHTML = items.length ? items.map(clip => {
-      const startMs = clip.start_ms;
-      const endMs = clip.end_ms;
-      const episode = clip.episode || {};
-      const source = clip.source || {};
-      const review = clip.latestReview || {};
-      const statusLabel = String(clip.status || 'draft').replaceAll('_', ' ').toUpperCase();
-      const sourceUrl = watchUrl({ videoId: episode.youtube_video_id, start: startMs / 1000 });
-      const editableStatus = ['suggested', 'rejected'].includes(clip.status);
-      const editable = editableStatus && clip.canEdit === true;
-      const submit = clip.status === 'suggested' && clip.canEdit === true;
-      const creatorMessage = clip.status === 'suggested'
-        ? 'Only the clip creator can edit or submit this draft.'
-        : 'Only the clip creator can edit this draft.';
-      return `<article class="shared-clip" data-clip="${escapeHtml(clip.id)}" data-title="${escapeHtml(clip.title || '')}" data-hook="${escapeHtml(clip.hook || '')}"><div class="shared-clip-copy"><span class="shared-state">${escapeHtml(statusLabel)}</span><h3>${escapeHtml(clip.title || episode.title || 'Untitled clip')}</h3><p class="shared-meta">${escapeHtml(episode.guest || 'Unknown guest')} · ${formatTime(startMs / 1000)}–${formatTime(endMs / 1000)}</p><blockquote>${escapeHtml(source.text || clip.hook || 'Source transcript unavailable.')}</blockquote>${sourceUrl ? `<a class="shared-source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">Watch source ↗</a>` : ''}${review.note ? `<p class="review-note"><strong>${escapeHtml(review.decision || 'Review')}:</strong> ${escapeHtml(review.note)}</p>` : ''}</div>
+  function renderClip(clip) {
+    const startMs = clip.start_ms;
+    const endMs = clip.end_ms;
+    const episode = clip.episode || {};
+    const source = clip.source || {};
+    const review = clip.latestReview || {};
+    const statusLabel = String(clip.status || 'draft').replaceAll('_', ' ').toUpperCase();
+    const sourceUrl = watchUrl({ videoId: episode.youtube_video_id, start: startMs / 1000 });
+    const editableStatus = ['suggested', 'rejected'].includes(clip.status);
+    const editable = editableStatus && clip.canEdit === true;
+    const submit = clip.status === 'suggested' && clip.canEdit === true;
+    const creatorMessage = clip.status === 'suggested'
+      ? 'Only the clip creator can edit or submit this draft.'
+      : 'Only the clip creator can edit this draft.';
+    return `<article class="shared-clip" data-clip="${escapeHtml(clip.id)}" data-title="${escapeHtml(clip.title || '')}" data-hook="${escapeHtml(clip.hook || '')}"><div class="shared-clip-copy"><span class="shared-state">${escapeHtml(statusLabel)}</span><h3>${escapeHtml(clip.title || episode.title || 'Untitled clip')}</h3><p class="shared-meta">${escapeHtml(episode.guest || 'Unknown guest')} · ${formatTime(startMs / 1000)}–${formatTime(endMs / 1000)}</p><blockquote>${escapeHtml(source.text || clip.hook || 'Source transcript unavailable.')}</blockquote>${sourceUrl ? `<a class="shared-source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">Watch source ↗</a>` : ''}${review.note ? `<p class="review-note"><strong>${escapeHtml(review.decision || 'Review')}:</strong> ${escapeHtml(review.note)}</p>` : ''}</div>
         ${editable ? `<form data-range-form><label>In <small>seconds</small><input name="start" type="number" min="0" step="0.001" value="${seconds(startMs)}" required></label><label>Out <small>seconds</small><input name="end" type="number" min="0" step="0.001" value="${seconds(endMs)}" required></label><button type="submit">Save range</button></form>` : ''}
         <div class="shared-clip-actions">${submit ? '<button type="button" data-submit>Submit for review</button>' : ''}${editableStatus && !editable ? `<p>${creatorMessage}</p>` : ''}${clip.status === 'needs_review' && clip.canReview === true ? '<textarea data-review-note maxlength="2000" aria-label="Review note" placeholder="Add a note for the producer (optional)"></textarea><button type="button" data-review="approved">Approve</button><button type="button" data-review="rejected">Request changes</button>' : ''}${clip.status === 'needs_review' && clip.canReview !== true ? '<p>Waiting for an eligible teammate to review.</p>' : ''}</div></article>`;
-    }).join('') : '<p class="clip-empty">No shared clips on this board yet.</p>';
   }
 
-  async function loadClips() {
+  function loadMoreMarkup() {
+    return clipHasMore ? `<button type="button" class="shared-load-more" data-load-more aria-label="Load older clips"${clipLoadingMore ? ' disabled' : ''}>${clipLoadingMore ? 'Loading older clips…' : 'Load older clips'}</button>` : '';
+  }
+
+  function renderClips() {
+    const cards = loadedClips.length ? loadedClips.map(renderClip).join('') : '<p class="clip-empty">No shared clips on this board yet.</p>';
+    clips.innerHTML = cards + loadMoreMarkup();
+  }
+
+  function appendClipPage(items) {
+    clips.querySelector('[data-load-more]')?.remove();
+    clips.querySelector('.clip-empty')?.remove();
+    if (items.length) clips.insertAdjacentHTML('beforeend', items.map(renderClip).join(''));
+    clips.insertAdjacentHTML('beforeend', loadMoreMarkup());
+  }
+
+  async function loadClips({ preserveLoaded = false } = {}) {
     renderCurrent();
-    if (!boardId) { renderClips(); return; }
-    clips.innerHTML = '<p class="clip-empty">Loading board clips…</p>';
-    try { renderClips((await api(`/api/boards/${encodeURIComponent(boardId)}/clips`)).clips || []); }
-    catch (error) { clips.innerHTML = ''; setStatus(error.message, 'error'); }
+    const selectedBoard = boardId;
+    const requestId = ++clipRequestId;
+    const keepCount = preserveLoaded ? loadedClips.length : 0;
+    const scrollY = preserveLoaded ? window.scrollY : null;
+    clipLoadingMore = false;
+    if (!selectedBoard) {
+      loadedClips = []; clipNextOffset = 0; clipHasMore = false;
+      clips.removeAttribute('aria-busy');
+      renderClips(); return;
+    }
+    if (!preserveLoaded) {
+      loadedClips = []; clipNextOffset = 0; clipHasMore = false;
+      clips.setAttribute('aria-busy', 'true');
+      clips.innerHTML = '<p class="clip-empty">Loading board clips…</p>';
+    } else clips.setAttribute('aria-busy', 'true');
+    try {
+      let page = await api(boardClipsPageUrl(selectedBoard, 0));
+      if (requestId !== clipRequestId || selectedBoard !== boardId) return;
+      if (!isValidClipPage(page, 0)) throw new Error('The board returned an invalid clip page. Refresh and try again.');
+      let items = page.clips;
+      while (items.length < keepCount && page.hasMore) {
+        const offset = page.nextOffset;
+        page = await api(boardClipsPageUrl(selectedBoard, offset));
+        if (requestId !== clipRequestId || selectedBoard !== boardId) return;
+        if (!isValidClipPage(page, offset)) throw new Error('The board returned an invalid clip page. Refresh and try again.');
+        items = mergeClipPage(items, page.clips);
+      }
+      loadedClips = items;
+      clipNextOffset = page.nextOffset ?? items.length;
+      clipHasMore = page.hasMore;
+      clips.removeAttribute('aria-busy');
+      renderClips();
+      if (preserveLoaded) window.scrollTo(0, scrollY);
+    } catch (error) {
+      if (requestId !== clipRequestId || selectedBoard !== boardId) return;
+      clips.removeAttribute('aria-busy');
+      if (!preserveLoaded) { loadedClips = []; clipNextOffset = 0; clipHasMore = false; clips.innerHTML = ''; }
+      setStatus(error.message, 'error');
+    }
+  }
+
+  async function loadOlderClips(button) {
+    if (clipLoadingMore || !clipHasMore || !boardId) return;
+    const shouldRefocus = document.activeElement === button;
+    const selectedBoard = boardId;
+    const requestId = clipRequestId;
+    const offset = clipNextOffset;
+    clipLoadingMore = true;
+    clips.setAttribute('aria-busy', 'true');
+    button.disabled = true;
+    button.textContent = 'Loading older clips…';
+    try {
+      const page = await api(boardClipsPageUrl(selectedBoard, offset));
+      if (requestId !== clipRequestId || selectedBoard !== boardId) return;
+      if (!isValidClipPage(page, offset)) throw new Error('The board returned an invalid clip page. Refresh and try again.');
+      const loadedIds = new Set(loadedClips.map(clip => clip.id));
+      const newClips = page.clips.filter(clip => !loadedIds.has(clip.id));
+      loadedClips = mergeClipPage(loadedClips, page.clips);
+      clipNextOffset = page.nextOffset ?? loadedClips.length;
+      clipHasMore = page.hasMore;
+      clipLoadingMore = false;
+      clips.removeAttribute('aria-busy');
+      appendClipPage(newClips);
+      setStatus('Older clips loaded.');
+      if (shouldRefocus) (clips.querySelector('[data-load-more]') || status).focus({ preventScroll: true });
+    } catch (error) {
+      if (requestId !== clipRequestId || selectedBoard !== boardId) return;
+      clipLoadingMore = false;
+      clips.removeAttribute('aria-busy');
+      button.disabled = false;
+      button.textContent = 'Load older clips';
+      setStatus(error.message, 'error');
+    }
+  }
+
+  async function refreshAfterMutation() {
+    await loadClips({ preserveLoaded: true });
+    status.focus({ preventScroll: true });
   }
 
   async function loadBoards(preferredId = '') {
@@ -156,7 +271,7 @@ export async function initSharedReview(auth) {
     saveButton.disabled = true;
     try {
       await api('/api/clips', 'POST', { boardId, ...input, requestId: crypto.randomUUID() });
-      setStatus('Shared draft saved to this board.'); await loadClips();
+      setStatus('Shared draft saved to this board.'); await refreshAfterMutation();
     } catch (error) { setStatus(error.message, 'error'); }
     finally { savingDraft = false; renderCurrent(); }
   });
@@ -169,10 +284,12 @@ export async function initSharedReview(auth) {
     if (!payload) { setStatus('Enter a valid range: out must be after in.', 'error'); return; }
     try {
       await api(`/api/clips/${encodeURIComponent(card.dataset.clip)}/range`, 'PATCH', payload);
-      setStatus('Range updated.'); await loadClips();
+      setStatus('Range updated.'); await refreshAfterMutation();
     } catch (error) { setStatus(error.message, 'error'); }
   });
   clips.addEventListener('click', async event => {
+    const moreButton = event.target.closest('[data-load-more]');
+    if (moreButton) { await loadOlderClips(moreButton); return; }
     const button = event.target.closest('[data-submit], [data-review]');
     if (!button) return;
     const card = button.closest('[data-clip]');
@@ -191,7 +308,7 @@ export async function initSharedReview(auth) {
         });
         setStatus(button.dataset.review === 'approved' ? 'Clip approved.' : 'Changes requested.');
       }
-      await loadClips();
+      await refreshAfterMutation();
     } catch (error) {
       setStatus(error.message, 'error');
       if (button.hasAttribute('data-review')) setReviewButtonsDisabled(card, false);
