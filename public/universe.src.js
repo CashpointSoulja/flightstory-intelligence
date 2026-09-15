@@ -44,6 +44,8 @@ function setGraphLayer(layer) {
   applyGraphLayer?.(layer);
 }
 graphLayerButtons.forEach(button => button.addEventListener('click', () => setGraphLayer(button.dataset.graphLayer)));
+setGraphLayer(requestedGraphLayer);
+graphLayerButtons.forEach(button => { button.disabled = false; });
 
 const scene = new THREE.Scene();
 scene.add(new THREE.AmbientLight(0xb8a6d8, 1.7));

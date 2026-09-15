@@ -217,9 +217,11 @@ test('mobile archive map reduces label clutter but keeps controls and accessible
 test('map layer controls sync button state and visibility while the accessible link list retains citations', async () => {
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
-  assert.match(html, /data-graph-layer="topics" aria-pressed="true"/);
-  assert.match(html, /data-graph-layer="videos" aria-pressed="false"/);
-  assert.match(html, /data-graph-layer="evidence" aria-pressed="false"/);
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
+  assert.match(html, /data-graph-layer="topics" aria-pressed="true" disabled/);
+  assert.match(html, /data-graph-layer="videos" aria-pressed="false" disabled/);
+  assert.match(html, /data-graph-layer="evidence" aria-pressed="false" disabled/);
+  assert.match(styles, /\.layer:disabled\{opacity:\.45;cursor:wait\}/);
   assert.match(graph, /button\.classList\.toggle\('active', active\);\s*button\.setAttribute\('aria-pressed', String\(active\)\)/);
   assert.match(graph, /topicLabels\.forEach\(\(\{ label \}\) => \{ label\.hidden = !visible\.topics; \}\)/);
   assert.match(graph, /topicBackgrounds\.forEach\(background => \{ background\.visible = visible\.topics; \}\)/);
@@ -238,11 +240,14 @@ test('map layer controls sync button state and visibility while the accessible l
 test('map controls queue the latest layer choice while graph data loads', async () => {
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
   const graphFetch = graph.indexOf("const catalogue = await fetch('/api/catalog')");
-  assert.ok(graph.indexOf('graphLayerButtons.forEach(button => button.addEventListener') < graphFetch);
+  const bind = graph.indexOf('graphLayerButtons.forEach(button => button.addEventListener');
+  const syncDefault = graph.indexOf('setGraphLayer(requestedGraphLayer)');
+  const enable = graph.indexOf('graphLayerButtons.forEach(button => { button.disabled = false; })');
+  assert.ok(bind >= 0 && bind < syncDefault && syncDefault < enable && enable < graphFetch);
   assert.ok(graph.indexOf("stage.querySelector('[data-reset]').addEventListener") < graphFetch);
   assert.ok(graph.indexOf("stage.querySelector('[data-focus]').addEventListener") < graphFetch);
   assert.match(graph, /requestedGraphLayer = layer;[\s\S]*?applyGraphLayer\?\.\(layer\)/);
-  assert.ok(graph.indexOf('applyGraphLayer = layer =>') < graph.indexOf('setGraphLayer(requestedGraphLayer)'));
+  assert.ok(graph.indexOf('applyGraphLayer = layer =>') < graph.lastIndexOf('setGraphLayer(requestedGraphLayer)'));
 });
 
 test('citation metadata is readable and can wrap at mobile widths', async () => {
