@@ -1,6 +1,8 @@
 
 .env
 .env.local
+/data/search-index.json
+/public/search-index.json
 node_modules/
 .DS_Store
 .vercel
@@ -20,3 +22,4 @@ audit/
 .roo
 .trae
 .windsurf
+.env*

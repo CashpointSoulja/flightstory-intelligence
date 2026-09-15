@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { formatTime } from './archive-ui.js';
 
 const host = document.querySelector('.hero-art');
 if (!host) throw new Error('Evidence Universe host not found');
@@ -16,16 +17,16 @@ styles.textContent = `
   .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}.universe-stage canvas:focus-visible{outline:1px solid var(--lilac);outline-offset:-4px}
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'DM Mono',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
   .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:230px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'DM Mono';padding:8px 0 0;cursor:pointer}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'DM Mono';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}.universe-map-key{position:absolute;left:50%;top:25%;transform:translateX(-50%);display:flex;gap:25px;color:rgba(243,240,237,.78);font:10px 'DM Mono';letter-spacing:.16em}.universe-map-key span{position:relative}.universe-map-key span+span:before{content:'→';position:absolute;left:-18px;color:var(--lilac)}
-  @media(max-width:700px){.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
+  @media(max-width:700px){.universe-node-label,.universe-map-key{display:none}.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
 `;
 styles.textContent += '.universe-hint{top:42px;bottom:auto}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">EVIDENCE UNIVERSE <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector"><strong></strong><small></small><button type="button" data-open>Inspect source ↗</button></div></div></div>`;
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
 const canvas = document.createElement('canvas');
 canvas.setAttribute('role', 'img');
-canvas.setAttribute('aria-label', 'Interactive 3D archive universe. Drag to orbit, scroll to zoom, and click a node to inspect an episode or citation.');
+canvas.setAttribute('aria-label', 'Interactive 3D archive map. Drag to orbit, scroll to zoom, and click a node to inspect an episode or citation.');
 canvas.tabIndex = 0;
 stage.prepend(canvas);
 
@@ -140,12 +141,13 @@ scene.add(stars);
 
 const headingMeta = stage.querySelector('.universe-heading span');
 headingMeta.textContent = `${topicNodes.length} TOPICS · ${videoNodes.length} VIDEOS · ${videoGraph.edges.length} LINKS`;
+window.dispatchEvent(new CustomEvent('archive:counts', { detail: { topics: topicNodes.length, episodes: videoNodes.length, evidence: evidenceNodes.length, graphTranscripts: graph.transcriptCount || 0 } }));
 const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
 const inspectorMeta = inspector.querySelector('small');
 const openButton = inspector.querySelector('[data-open]');
-const secondSource = document.createElement('a'); secondSource.className = 'second-source'; secondSource.target = '_blank'; secondSource.rel = 'noreferrer'; secondSource.textContent = 'Open second source ↗'; inspector.appendChild(secondSource);
-let selected = evidenceNodes[0];
+const secondSource = document.createElement('a'); secondSource.className = 'second-source'; secondSource.target = '_blank'; secondSource.rel = 'noreferrer'; secondSource.textContent = 'Open second source ↗'; secondSource.hidden = true; inspector.appendChild(secondSource);
+let selected = null;
 const activeIds = new Set();
 
 function selectNode(node) {
@@ -156,10 +158,11 @@ function selectNode(node) {
   if (data.kind === 'video') for (const edge of videoGraph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
   if (data.kind === 'connection') { activeIds.add(data.fromVideo?.id); activeIds.add(data.toVideo?.id); }
   inspectorTitle.textContent = data.kind === 'connection' ? `${data.fromVideo?.title || 'Source A'} ↔ ${data.toVideo?.title || 'Source B'}` : data.title;
-  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${data.time} · citation-grade moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')}`;
+  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
   openButton.hidden = data.kind === 'core';
   secondSource.hidden = data.kind !== 'connection';
-  if (data.kind === 'connection') { openButton.textContent = 'Open first source ↗'; secondSource.href = `${data.toVideo.source}&t=${data.toVideo.seconds}s`; } else openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${Math.floor(data.seconds / 60)}:${String(Math.floor(data.seconds % 60)).padStart(2, '0')} ↗`;
+  if (data.kind === 'connection') { openButton.textContent = 'Open first source ↗'; secondSource.href = `${data.toVideo.source}&t=${data.toVideo.seconds}s`; } else openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${formatTime(data.seconds)} ↗`;
+  inspector.hidden = false;
   inspector.classList.add('visible');
   root.add(node);
 }
@@ -169,7 +172,7 @@ openButton.addEventListener('click', () => {
   if (!data) return;
   if (data.kind === 'connection') window.open(`${data.fromVideo.source}&t=${data.fromVideo.seconds}s`, '_blank', 'noopener');
   else if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
-  else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); window.scrollTo({ top: document.querySelector('#archive').offsetTop, behavior: 'smooth' }); }
+  else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); }
 });
 stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
 stage.querySelector('[data-focus]').addEventListener('click', () => { camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
@@ -188,7 +191,6 @@ canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
 new ResizeObserver(resize).observe(host);
 resize();
-selectNode(evidenceNodes[0]);
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }

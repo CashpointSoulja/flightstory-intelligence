@@ -1,13 +1,14 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-const episodeDir = process.argv[2] || '/Users/whtnybiatch/doac-memory/data/episodes';
+const episodeDir = process.argv[2] || 'data/episodes';
 const output = process.argv[3] || 'public/video-links.json';
 const model = process.env.OPENAI_EMBED_MODEL || 'text-embedding-3-small';
 const key = process.env.OPENAI_API_KEY;
 if (!key) throw new Error('OPENAI_API_KEY is required');
 const files = (await readdir(episodeDir)).filter(file => file.endsWith('.json'));
-const episodes = (await Promise.all(files.map(file => readFile(`${episodeDir}/${file}`, 'utf8').then(JSON.parse)))).filter(Boolean);
-const enrichedEpisodes = await Promise.all(episodes.map(async episode => { try { const info = JSON.parse(await readFile(`${episodeDir}/../raw/${episode.id}.info.json`, 'utf8')); return { ...episode, channelId: info.channel_id }; } catch { return { ...episode, channelId: null }; } }));
+const episodes = (await Promise.all(files.map(file => readFile(join(episodeDir, file), 'utf8').then(JSON.parse)))).filter(Boolean);
+const enrichedEpisodes = await Promise.all(episodes.map(async episode => { try { const info = JSON.parse(await readFile(join(episodeDir, '..', 'raw', `${episode.id}.info.json`), 'utf8')); return { ...episode, channelId: info.channel_id }; } catch { return { ...episode, channelId: null }; } }));
 const trustedEpisodes = enrichedEpisodes.filter(episode => episode.channelId === 'UCGq-a57w-aPwyi3pW7XLiHw');
 const compact = episode => {
   const segments = episode.segments || []; const sampleCount = Math.min(16, segments.length);

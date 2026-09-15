@@ -1,0 +1,10 @@
+data/search-index.json
+public/search-index.json
+data/episodes/
+raw/
+.env*
+.insforge/
+/migrations/
+/insforge/migrations/
+/supabase/migrations/
+/tests/

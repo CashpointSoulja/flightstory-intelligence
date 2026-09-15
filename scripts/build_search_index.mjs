@@ -1,13 +1,14 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
+import { join } from 'node:path';
 
-const dir = process.argv[2] || '/Users/whtnybiatch/doac-memory/data/episodes';
-const output = process.argv[3] || 'public/search-index.json';
+const dir = process.argv[2] || 'data/episodes';
+const output = process.argv[3] || 'data/search-index.json';
 const files = (await readdir(dir)).filter(file => file.endsWith('.json'));
 const rows = [];
 for (const file of files) {
-  const episode = JSON.parse(await readFile(`${dir}/${file}`, 'utf8'));
+  const episode = JSON.parse(await readFile(join(dir, file), 'utf8'));
   let info;
-  try { info = JSON.parse(await readFile(`${dir}/../raw/${episode.id}.info.json`, 'utf8')); } catch { continue; }
+  try { info = JSON.parse(await readFile(join(dir, '..', 'raw', `${episode.id}.info.json`), 'utf8')); } catch { continue; }
   if (info.channel_id !== 'UCGq-a57w-aPwyi3pW7XLiHw') continue;
   const videoId = episode.url.match(/[?&]v=([^&]+)/)?.[1] || episode.id;
   const segments = episode.segments || [];

@@ -8,7 +8,9 @@
     "build:universe": "esbuild public/universe.src.js --bundle --format=esm --minify --outfile=public/universe.js",
     "dev": "npm run build:universe && node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
     "start": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
-    "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs"
+    "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check public/shared-review.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs",
+    "test": "node --test",
+    "test:ui": "node --test"
   },
   "dependencies": {
     "@designcodeio/threeui": "^1.2.0",
