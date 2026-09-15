@@ -30,7 +30,7 @@ styles.textContent = `
 styles.textContent += '.universe-hint{top:42px;bottom:auto}';
 styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
 const canvas = document.createElement('canvas');
@@ -241,6 +241,12 @@ setGraphLayer(requestedGraphLayer);
 function selectNode(node) {
   selected = node;
   const data = node.userData;
+  const position = node.getWorldPosition(new THREE.Vector3());
+  const offset = camera.position.clone().sub(controls.target);
+  offset.setLength(Math.max(8, offset.length()));
+  controls.target.copy(position);
+  camera.position.copy(position).add(offset);
+  controls.update();
   for (const [key, button] of graphSelectionButtons) button.setAttribute('aria-pressed', String(key === `${data.kind}:${data.id}`));
   activeIds.clear(); if (data.id) activeIds.add(data.id);
   if (data.kind === 'topic') for (const edge of graph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
@@ -253,6 +259,7 @@ function selectNode(node) {
   if (data.kind === 'connection') { openButton.textContent = 'Open first source ↗'; secondSource.href = `${data.toVideo.source}&t=${data.toVideo.seconds}s`; } else openButton.textContent = data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${formatTime(data.seconds)} ↗`;
   inspector.hidden = false;
   inspector.classList.add('visible');
+  inspector.focus({ preventScroll: true });
   root.add(node);
   requestRender();
 }
