@@ -2,17 +2,16 @@
 
 Status: MVP definition and architecture baseline, 12 September 2026
 
-## Live implementation state
+## Live implementation state — checked 15 September 2026
 
-- GitHub: https://github.com/CashpointSoulja/flightstory-intelligence (private, `main` pushed)
-- Vercel: https://flightstory-intelligence.vercel.app (`READY`, GitHub-connected production deployment)
-- InsForge: project `FlightStory-Intelligence` created and linked in `eu-central`; database schema applied and verified
-- InsForge Storage: five private buckets provisioned for audio, transcripts, proxies, renders, and thumbnails
-- InsForge Storage: private `catalog/doac-from-2023.json` manifest uploaded and verified (560 entries)
-- InsForge advisor: 0 critical findings and 0 warnings after workspace/RLS/index hardening
-- Current app: Steven.com-inspired UI, local evidence fallback, timestamp links, persistent clip queue, and refusal for unsupported topics
-- Current backend: portable SQL migration in `supabase/migrations/0001_flightstory_core.sql`
-- Not yet complete: completed browser sign-in/workspace membership, live model key, authorised episode media, full archive ingestion, connections engine, trend layer, and rendered clip worker
+- Public app: https://flightstory-intelligence.vercel.app. Its live `/api/config` reports `searchAccessMode: demo`; the three built-in examples are the only searchable corpus in this mode. Public demo matching stays local and never calls OpenAI. Workspace AI synthesis is reserved for signed-in users whose workspace membership is verified.
+- Workspace code path: requires a valid signed-in session, exact membership in the configured workspace, and the RLS-protected `search_transcript_segments` RPC. It can synthesize up to six short claims; each requires a verbatim quote and source ID, and the server checks the quote appears in that retrieved segment. Responses API application-state storage is disabled with `store:false`. Missing access or corpus fails closed; it never falls back to public demo data.
+- InsForge read-only counts: 0 workspaces, 0 members, 0 episodes, 0 rights-approved/ready episodes, 0 transcript versions, 0 canonical transcript versions, 0 transcript segments, 0 research boards, 0 clips, and 0 processing jobs. Therefore workspace search has no usable internal corpus or members today.
+- Product gaps: the public demo can create locally saved clip drafts, edit their range, and mark them reviewed on this device; these are not shared team decisions or rendered clips. Citation results now show their full source window. Shared-review APIs return safe `canEdit`/`canReview` flags so the UI does not offer actions that the creator/member/owner role cannot perform; database RPCs remain authoritative. A signed-in workspace board/review UI, API routes, and migrations 0006/0007 are packaged in code, but demo mode keeps them closed and the live InsForge ledger has not recorded the migrations. Local SQL integration and mocked workspace browser flow pass, but there is still no live authenticated InsForge/RLS test; the database has zero workspaces or corpus rows. The public corpus is one source with three excerpts. Source rights and transcript retention are not operationally approved. Board clip listing needs pagination before large-team use. A durable media worker and observed producer pilot remain absent. The API limiter is per-process, not a shared quota. Do not call this production-ready or an internal creator-technology system.
+- Repository release blocker: GitHub repo remains `PRIVATE`, and historical Git contains `public/search-index.json` (confirmed at commit `8133be0`). Keep the repo private until rights to that historical transcript text are established or the history is cleaned.
+- Latest release loop: Vercel production deployment `dpl_CaUUfrWq21QNSfxjwfT1YXAnFptY` is Ready at `https://flightstory-intelligence.vercel.app`. Live sample search returned one cited demo excerpt with `00:00–00:18 · PROVISIONAL` visible in the result and the same source window in the selected-source panel; the watch action opens at 00:00. The local draft path was tested through create, edit, review, and remove, ending with zero test drafts. Mobile at 390px has no horizontal overflow and citation metadata renders at 10px. The shared-board route returned 404 in demo mode and `/search-index.json` returned 404. Browser QA found zero console errors. Public config remains `searchAccessMode: demo`; the live index reports one transcript source and three searchable excerpts.
+- Verification: `npm test` passes 60/60; `npm run check`, `npm run build`, `git diff --check`, disposable PostgreSQL 17 migration/runtime tests, Vercel package inspection, preview-browser QA, and production build pass. The local SQL test exercised synthetic board creation, clip save/edit/submit, admin review, and creator self-review denial. These checks do not prove live InsForge RLS/auth behavior or a real producer pilot.
+- Source sync: this production artifact was deployed from the local checkout. The working tree is still uncommitted and `origin/main` remains at `2d364fa`; GitHub remains private because its history includes `public/search-index.json`. Do not claim the GitHub source matches production.
 
 ## Product in one line
 
@@ -251,7 +250,7 @@ Show the reasons behind the score. Never display a single unexplained “viral s
 - `main` maps to production.
 - feature branches and pull requests map to Vercel previews.
 - Vercel hosts the web app and short server requests.
-- The dedicated InsForge project `FlightStory-Intelligence` stores database records, vectors, auth, and private files.
+- The configured Postgres backend is intended to store database records, vectors, auth, and private files.
 - A background worker handles long media jobs and retries.
 
 The current connected GitHub MCP exposes file and commit operations but no repository-creation operation. Create the private repository through the connected GitHub account or CLI only after confirming the destination, then connect that repository to Vercel.

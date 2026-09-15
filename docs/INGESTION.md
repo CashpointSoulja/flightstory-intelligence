@@ -15,11 +15,9 @@ Every catalogue record must carry one of these states:
 
 YouTube timestamps are valid for opening the public episode. They are not proof that the product owns a renderable video file.
 
-## Existing parser
+## Transcript parser
 
-The current proven parser is `/Users/whtnybiatch/doac-memory/doac.py`.
-
-It handles:
+Transcript normalization is provided by a local tool outside this repository; no parser implementation or workstation-specific path is bundled here. Its output should preserve:
 
 - YouTube rolling-caption duplication
 - inline word timestamps
@@ -29,6 +27,20 @@ It handles:
 - overlapping retrieval chunks
 
 Keep raw captions and normalised transcript output separate. Do not copy any local `.env` file or credential into this repository.
+
+## Local script paths
+
+Run scripts from the repository root. Their defaults use `data/episodes`, `data/raw`, and `public/`; supply arguments when your local dataset lives elsewhere:
+
+```sh
+node scripts/transcribe_catalog.mjs [raw-output-directory] [progress-file]
+node scripts/build_search_index.mjs [episodes-directory] [output-file]
+node scripts/build_archive_graph.mjs [episodes-directory] [output-file]
+node scripts/build_semantic_video_graph.mjs [episodes-directory] [output-file]
+node scripts/build_topic_graph.mjs [episode-json-file] [output-file]
+```
+
+The index, archive-graph, and semantic-graph builders expect the episode directory to have a sibling `raw/` directory containing matching `<id>.info.json` metadata. The topic-graph builder takes one episode JSON file. The semantic graph builder also requires `OPENAI_API_KEY`. The transcription script requires `yt-dlp` on `PATH`.
 
 ## Normal pipeline
 

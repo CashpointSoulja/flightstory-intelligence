@@ -1,0 +1,19 @@
+{
+  "generatedAt": "test-fixture",
+  "sourceCount": 1,
+  "segments": [
+    {
+      "id": "fixture-episode:0",
+      "episodeId": "fixture-episode",
+      "episode": "Synthetic Test Episode",
+      "guest": "Synthetic Guest Vanessa",
+      "videoId": "test-video",
+      "start": 12,
+      "end": 20,
+      "quote": "Synthetic test passage about a divorce expert.",
+      "searchText": "Synthetic test passage with Vanessa about a divorce expert.",
+      "transcriptStatus": "provisional",
+      "speakerStatus": "unknown"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
-const source = process.argv[2] || '/Users/whtnybiatch/doac-memory/data/episodes/q2cg1gEYWJQ.json';
+const source = process.argv[2] || 'data/episodes/q2cg1gEYWJQ.json';
 const output = process.argv[3] || 'public/topic-graph.json';
 const data = JSON.parse(await readFile(source, 'utf8'));
 const stopwords = new Set('a about after all also am an and are as at be because been before being but by can could did do does doing down during each for from get got had has have having he her here hers herself him himself his how i if in into is it its itself just me more most my myself no nor not now of on once only or other our ours ourselves out over own said same she should so some such than that the their theirs them themselves then there these they this those through to too under until up very was we were what when where which while who why will with would you your yours yourself yourselves'.split(/\s+/));

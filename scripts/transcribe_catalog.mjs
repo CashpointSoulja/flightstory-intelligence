@@ -1,9 +1,10 @@
 import { readFile, writeFile, mkdir, access } from 'node:fs/promises';
 import { spawn } from 'node:child_process';
+import { join } from 'node:path';
 
 const catalog = JSON.parse(await readFile('public/catalog.json', 'utf8')).episodes.filter(item => item.eligibleForTranscription);
-const raw = '/Users/whtnybiatch/doac-memory/data/raw';
-const progressPath = '/Users/whtnybiatch/doac-memory/data/catalog-progress.json';
+const raw = process.argv[2] || 'data/raw';
+const progressPath = process.argv[3] || join(raw, 'catalog-progress.json');
 await mkdir(raw, { recursive: true });
 let progress;
 try { progress = JSON.parse(await readFile(progressPath, 'utf8')); } catch { progress = { completed: {}, failed: {} }; }
@@ -22,7 +23,7 @@ async function worker() {
     try {
       const id = await run(['--flat-playlist', '--playlist-end', '1', '--quiet', '--no-warnings', `ytsearch1:${item.title} Diary of a CEO`, '--print', '%(id)s']);
       if (!id || id.includes('\n')) throw new Error('ambiguous YouTube match');
-      await run(['--write-auto-subs', '--sub-langs', 'en.*', '--sub-format', 'vtt', '--skip-download', '--write-info-json', '-o', `${raw}/%(id)s`, `https://www.youtube.com/watch?v=${id}`]);
+      await run(['--write-auto-subs', '--sub-langs', 'en.*', '--sub-format', 'vtt', '--skip-download', '--write-info-json', '-o', join(raw, '%(id)s'), `https://www.youtube.com/watch?v=${id}`]);
       progress.completed[item.id] = { youtubeId: id, title: item.title }; done += 1;
       console.log(`OK ${done}/${catalog.length} ${id} ${item.title.slice(0, 72)}`);
     } catch (error) { progress.failed[item.id] = { title: item.title, error: error.message }; failed += 1; console.log(`FAIL ${failed} ${item.title.slice(0, 60)} :: ${error.message}`); }
