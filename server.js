@@ -26,7 +26,7 @@ function canonicalGuest(value) {
   return words.join(' ');
 }
 const stopwords = new Set(['what', 'did', 'have', 'guests', 'guest', 'say', 'said', 'about', 'the', 'and', 'or', 'who', 'which', 'where', 'has', 'any', 'to', 'of', 'in', 'on', 'for', 'me', 'this', 'that']);
-function queryWords(query) { return [...new Set(normalizedName(query).split(' ').filter(word => word.length > 2 && !stopwords.has(word)))]; }
+function queryWords(query) { return [...new Set(normalizedName(query).replace(/\bice(?:\s+)?breaker\b/g, 'conversation starter').split(' ').filter(word => word.length > 2 && !stopwords.has(word)))]; }
 function guestScopedEvidence(query, items) {
   const queryName = normalizedName(query);
   const queryTokens = new Set(queryName.split(' '));
