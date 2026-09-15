@@ -19,7 +19,8 @@ const requestJson = (url, path, method = 'GET', body, token = 'valid-token') => 
 const workspaceOptions = extra => ({
   mode: 'workspace', workspaceId: '11111111-1111-4111-8111-111111111111',
   insforge: { url: 'https://example.insforge.app', anonKey: 'public-anon' },
-  authorizeWorkspace: async () => 'authorized', ...extra
+  authorizeWorkspace: async () => 'authorized',
+  workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }), ...extra
 });
 
 test('exports a Vercel-compatible default request handler', () => {
@@ -75,6 +76,7 @@ test('limits workspace requests before membership and transcript lookups', async
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', limit: 1,
     insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     authorizeWorkspace: async () => { membershipChecks++; return 'authorized'; },
     workspaceSearch: async () => { transcriptLookups++; return { availableCount: 1, segments: [] }; }
   }, async url => {
@@ -85,6 +87,66 @@ test('limits workspace requests before membership and transcript lookups', async
     assert.equal(membershipChecks, 1);
     assert.equal(transcriptLookups, 1);
   });
+});
+
+test('workspace search consumes a per-user quota after membership and before transcript retrieval', async () => {
+  const order = [];
+  await withServer(workspaceOptions({
+    authorizeWorkspace: async token => { order.push('membership'); assert.equal(token, 'valid-token'); return 'authorized'; },
+    workspaceQuota: async (token, options) => {
+      order.push('quota');
+      assert.equal(token, 'valid-token');
+      assert.equal(options.workspaceId, '11111111-1111-4111-8111-111111111111');
+      return { allowed: true, retryAfterSeconds: 0 };
+    },
+    workspaceSearch: async () => { order.push('transcript'); return { availableCount: 1, segments: [{ id: 'segment-1', guest: 'A guest', quote: 'A source quote', start: 0, end: 1 }] }; },
+    search: async () => { order.push('synthesis'); return { claims: [], refusal: 'I could not verify that in the indexed archive.', citations: [], mode: 'openai' }; }
+  }), async url => {
+    const response = await post(url, JSON.stringify({ query: 'What did the guest say?' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' });
+    assert.equal(response.status, 200);
+    assert.deepEqual(order, ['membership', 'quota', 'transcript', 'synthesis']);
+  });
+});
+
+test('workspace quota denial and quota RPC failures stop before transcript or OpenAI calls', async () => {
+  for (const [workspaceQuota, expectedStatus, retryAfter] of [
+    [async () => ({ allowed: false, retryAfterSeconds: 23 }), 429, '23'],
+    [async () => { throw new Error('database unavailable'); }, 503, null],
+    [async () => ({ allowed: true, retryAfterSeconds: -1 }), 503, null]
+  ]) {
+    let transcriptLookups = 0;
+    let synthesisCalls = 0;
+    await withServer(workspaceOptions({
+      workspaceQuota,
+      workspaceSearch: async () => { transcriptLookups++; throw new Error('must not retrieve transcripts'); },
+      search: async () => { synthesisCalls++; throw new Error('must not call model'); }
+    }), async url => {
+      const response = await post(url, JSON.stringify({ query: 'What did the guest say?' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' });
+      assert.equal(response.status, expectedStatus);
+      if (retryAfter) assert.equal(response.headers.get('retry-after'), retryAfter);
+      else assert.equal(response.headers.get('retry-after'), null);
+      assert.match((await response.json()).error, /quota|limit/i);
+      assert.equal(transcriptLookups, 0);
+      assert.equal(synthesisCalls, 0);
+    });
+  }
+});
+
+test('workspace search quota is not requested for anonymous or non-member searches', async () => {
+  for (const [token, access, expectedStatus] of [
+    [null, 'authorized', 401],
+    ['valid-token', 'forbidden', 403]
+  ]) {
+    let quotaCalls = 0;
+    await withServer(workspaceOptions({
+      authorizeWorkspace: async () => access,
+      workspaceQuota: async () => { quotaCalls++; return { allowed: true, retryAfterSeconds: 0 }; }
+    }), async url => {
+      const response = await post(url, JSON.stringify({ query: 'What did the guest say?' }), { 'content-type': 'application/json', ...(token ? { authorization: `Bearer ${token}` } : {}) });
+      assert.equal(response.status, expectedStatus);
+      assert.equal(quotaCalls, 0);
+    });
+  }
 });
 
 test('uses Vercel forwarded client IP only in Vercel mode', async () => {
@@ -205,6 +267,7 @@ test('scopes named guest questions before ranking and keeps explicit comparisons
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: corpus.length, segments: corpus }),
     search: async () => null
   }, async url => {
@@ -247,6 +310,7 @@ test('sends only meaningful matches to OpenAI while keeping guest-only searches'
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: corpus.length, segments: corpus }),
     openAIKey: 'test-key',
     fetchImpl: async (_url, options) => {
@@ -274,6 +338,7 @@ test('falls back locally when the OpenAI request times out', async () => {
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: 1, segments: [{ id: 'segment-1', guest: 'Vanessa Van Edwards', episode: 'Public interview', quote: 'How do you know you talk too much? First thing is non-verbal cues.', start: 0, end: 18 }] }),
     openAIKey: 'test-key',
     openAITimeoutMs: 20,
@@ -295,6 +360,7 @@ test('workspace search requires a valid session and exact workspace membership',
   const options = {
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async token => token === 'valid-token' ? 'authorized' : token === 'not-a-member' ? 'forbidden' : 'unauthenticated',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: 1, segments: corpus }),
     search: async (_query, { items }) => ({ answer: 'Local evidence.', citations: items, mode: 'local-fallback' })
   };
@@ -316,7 +382,7 @@ test('workspace search requires a valid session and exact workspace membership',
 test('workspace search refuses absent corpus but treats no match as a grounded empty result', async () => {
   const options = {
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
-    authorizeWorkspace: async () => 'authorized', search: async () => null, openAIKey: ''
+    authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }), search: async () => null, openAIKey: ''
   };
   await withServer({ ...options, workspaceSearch: async () => ({ availableCount: 0, segments: [] }) }, async url => {
     assert.equal((await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' })).status, 503);
@@ -349,6 +415,7 @@ test('workspace synthesis requires and verifies one exact supporting quote and s
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: 1, segments: [segment] }),
     openAIKey: 'test-key',
     fetchImpl: async (_url, options) => {
@@ -380,6 +447,7 @@ test('workspace synthesis falls back if a source ID and its supporting quote do 
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
+    workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
     workspaceSearch: async () => ({ availableCount: 1, segments: [segment] }),
     openAIKey: 'test-key',
     fetchImpl: async () => new Response(JSON.stringify({ output_text: JSON.stringify({ claims: [

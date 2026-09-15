@@ -40,3 +40,23 @@
 .map-scope{display:inline-block;margin-left:5px;color:var(--muted)}
 .index-status small,.clip-empty,footer{color:var(--muted)}
 @media(max-width:650px){.rail{display:flex;align-items:center;gap:8px;padding:12px 20px;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);scrollbar-width:none}.rail::-webkit-scrollbar{display:none}.rail>.eyebrow,.rail-rule,.index-status{display:none}.layer{flex:0 0 auto;width:auto;margin:0;padding:10px 12px;border:1px solid var(--line);border-radius:999px;white-space:nowrap}.layer b{display:none}}
+
+@media(max-width:650px){
+  .topbar{gap:10px;padding:0 14px}
+  .brand{gap:8px;font-size:10px;letter-spacing:.08em}
+  .topbar nav{flex:none;gap:12px}
+  .topbar nav a{display:inline-flex;align-items:center;font-size:11px;white-space:nowrap}
+  .topbar nav b{font-size:9px}
+  .topbar .status{display:none}
+  .topbar nav a:focus-visible{outline:2px solid var(--violet);outline-offset:4px}
+  .universe{min-height:900px}
+  .universe-heading{left:12px!important;right:12px!important;top:12px!important;max-width:calc(100% - 24px);font-size:9px!important}
+  .universe-heading span{display:block!important;margin:4px 0 0!important;font-size:8px!important;line-height:1.4!important;white-space:normal!important}
+  .universe-inspector{left:12px!important;right:12px!important;top:58px!important;bottom:auto!important;width:auto!important;max-width:none!important;overflow-wrap:anywhere}
+  .universe-hint{left:12px!important;right:12px!important;top:auto!important;bottom:71px!important;height:auto!important;transform:none!important;line-height:1.3!important;text-align:center!important;white-space:normal!important}
+  .universe-foot{left:12px!important;right:12px!important;bottom:44px!important;font-size:8px!important;text-align:center!important;white-space:nowrap!important}
+  .universe-foot small{display:none!important}
+  .universe-controls{top:auto!important;right:12px!important;bottom:10px!important}
+  .universe-access{left:12px!important;right:12px!important;bottom:98px!important}
+  .universe-access[open]{width:auto!important}
+}

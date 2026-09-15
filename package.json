@@ -10,7 +10,8 @@
     "start": "node --env-file-if-exists=.env.local --env-file-if-exists=.env server.js",
     "check": "node --check server.js && node --check public/app.js && node --check public/auth.js && node --check public/shared-review.js && node --check scripts/import_episode.mjs && node --check scripts/import_catalog.mjs",
     "test": "node --test",
-    "test:ui": "node --test"
+    "test:ui": "node --test",
+    "test:quota:postgres": "node scripts/test_workspace_search_quota_postgres.mjs"
   },
   "dependencies": {
     "@designcodeio/threeui": "^1.2.0",

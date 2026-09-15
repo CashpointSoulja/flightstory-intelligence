@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises';
 
 const insforgePath = new URL('../insforge/migrations/0007_shared_clip_review.sql', import.meta.url);
 const supabasePath = new URL('../supabase/migrations/0007_shared_clip_review.sql', import.meta.url);
+const quotaInsforgePath = new URL('../insforge/migrations/0008_workspace_search_quota.sql', import.meta.url);
+const quotaSupabasePath = new URL('../supabase/migrations/0008_workspace_search_quota.sql', import.meta.url);
 
 test('canonical InsForge migrations match the reviewed InsForge drafts', async () => {
   const pairs = [
@@ -14,11 +16,30 @@ test('canonical InsForge migrations match the reviewed InsForge drafts', async (
     [
       new URL('../migrations/20260915080328_shared-clip-review.sql', import.meta.url),
       new URL('../insforge/migrations/0007_shared_clip_review.sql', import.meta.url)
+    ],
+    [
+      new URL('../migrations/20260915080400_workspace-search-quota.sql', import.meta.url),
+      new URL('../insforge/migrations/0008_workspace_search_quota.sql', import.meta.url)
     ]
   ];
   for (const [canonicalPath, reviewedPath] of pairs) {
     assert.equal(await readFile(canonicalPath, 'utf8'), await readFile(reviewedPath, 'utf8'));
   }
+});
+
+test('workspace search quota is shared, membership-checked, and fixed by the database', async () => {
+  const [insforge, supabase] = await Promise.all([readFile(quotaInsforgePath, 'utf8'), readFile(quotaSupabasePath, 'utf8')]);
+  assert.equal(insforge, supabase);
+  assert.match(insforge, /primary key \(workspace_id, user_id\)/);
+  assert.match(insforge, /wm\.workspace_id = target_workspace_id and wm\.user_id = actor_id/);
+  assert.match(insforge, /security definer[\s\S]*set search_path = pg_catalog, flightstory, auth, pg_temp/);
+  assert.match(insforge, /quota\.request_count < 20/);
+  assert.match(insforge, /extract\(epoch from request_time\) \/ 60/);
+  assert.match(insforge, /interval '60 seconds'/);
+  assert.match(insforge, /revoke all on table flightstory\.workspace_search_quotas from public, anon, authenticated/);
+  assert.match(insforge, /revoke all on function flightstory\.consume_workspace_search_quota\(uuid\) from public, anon, authenticated/);
+  assert.match(insforge, /grant execute on function flightstory\.consume_workspace_search_quota\(uuid\) to authenticated/);
+  assert.doesNotMatch(insforge, /limit_per_window|window_seconds|request_limit/);
 });
 
 test('shared clip review migration stays mirrored and re-runnable', async () => {

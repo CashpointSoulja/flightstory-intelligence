@@ -192,15 +192,33 @@ test('mobile map filters stay visible as a compact horizontal strip and quiet co
 test('clip drafts expose local edit and review state without implying a shared approval', async () => {
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
   assert.match(html, /Drafts <b id="queue-count">0/);
   assert.match(html, /<h2>Clip drafts<\/h2>/);
   assert.match(html, /Drafts are saved on this device only\./);
-  assert.match(app, /Create local clip draft/);
+  assert.match(app, /const saveLabel = saveDisabled \? 'Finish cut edit first' : saved \? '✓ Saved · Remove from drafts' : 'Add to drafts'/);
+  assert.match(app, /<button class="save" id="save-moment" type="button"/);
+  assert.doesNotMatch(app, /id="save-moment"[^>]*aria-pressed=/);
+  assert.match(app, /persistQueue\(isSaved \? 'Draft removed from this device\.' : 'Draft saved on this device · not shared\.'\)/);
+  assert.match(app, /document\.querySelector\('#save-moment'\)\?\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(styles, /\.clip-item a:focus-visible,\.save:focus-visible,\.searchbox button:focus-visible\{outline:2px solid var\(--violet\);outline-offset:3px\}/);
   assert.match(app, /data-edit-cut=/);
   assert.match(app, /REVIEWED LOCALLY/);
   assert.match(app, /Finish the open edit first/);
   assert.match(app, /const saveDisabled = Boolean\(editingClipId\)/);
   assert.match(app, /if \(editingClipId\) return;/);
+});
+
+test('390px layout keeps archive navigation and separates map labels, inspector, and controls', async () => {
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
+  assert.match(styles, /\.topbar nav a\{display:inline-flex;align-items:center;font-size:11px;white-space:nowrap\}/);
+  assert.match(styles, /\.topbar \.status\{display:none\}/);
+  assert.match(styles, /\.universe-heading span\{display:block!important/);
+  assert.match(styles, /\.universe-inspector\{left:12px!important;right:12px!important;top:58px!important;bottom:auto!important;width:auto!important;max-width:none!important/);
+  assert.match(styles, /\.universe-hint\{left:12px!important;right:12px!important;top:auto!important;bottom:71px!important;height:auto!important[^}]*white-space:normal!important/);
+  assert.match(styles, /\.universe-foot\{left:12px!important;right:12px!important;bottom:44px!important/);
+  assert.match(styles, /\.universe-foot small\{display:none!important\}/);
+  assert.match(styles, /\.universe-controls\{top:auto!important;right:12px!important;bottom:10px!important\}/);
 });
 
 test('3D archive inspector and source actions stay hidden until a node is selected', async () => {
