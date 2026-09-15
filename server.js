@@ -178,6 +178,19 @@ async function searchWorkspaceCorpus(token, query, { workspaceId, url, anonKey }
   return data;
 }
 
+async function consumeWorkspaceSearchQuota(token, { workspaceId, url, anonKey }) {
+  if (!workspaceId || !url || !anonKey) throw new Error('Workspace search quota is not configured.');
+  const client = createClient({ baseUrl: url, anonKey, accessToken: token });
+  const { data, error } = await client.database.schema('flightstory').rpc('consume_workspace_search_quota', {
+    target_workspace_id: workspaceId
+  });
+  if (error) throw error;
+  if (!data || typeof data.allowed !== 'boolean' || !Number.isInteger(data.retryAfterSeconds) || data.retryAfterSeconds < 0 || (!data.allowed && data.retryAfterSeconds < 1)) {
+    throw new Error('Workspace search quota returned an invalid response.');
+  }
+  return data;
+}
+
 function workspaceClient(token, { url, anonKey }) {
   if (!url || !anonKey) throw new Error('Workspace operations are not configured.');
   return createClient({ baseUrl: url, anonKey, accessToken: token });
@@ -301,7 +314,7 @@ async function body(request) {
 function send(response, status, data, type = 'application/json') { response.writeHead(status, { 'content-type': `${type}; charset=utf-8`, 'cache-control': 'no-store' }); response.end(type === 'application/json' ? JSON.stringify(data) : data); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png' };
 
-export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
+export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
   const hits = new Map();
   const publicRoot = resolve(root, 'public');
   const server = http.createServer(async (request, response) => {
@@ -445,6 +458,18 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         if (accessStatus === 'unauthenticated') return send(response, 401, { error: 'Your session is invalid or expired. Sign in again.' });
         if (accessStatus === 'forbidden') return send(response, 403, { error: 'Your account does not have access to this workspace.' });
         if (accessStatus !== 'authorized') return send(response, 503, { error: 'Workspace access could not be verified.' });
+        let quota;
+        try { quota = await workspaceQuota(token, { workspaceId, url: insforge.url, anonKey: insforge.anonKey }); }
+        catch {
+          return send(response, 503, { error: 'Workspace search quota could not be verified. Try again shortly.' });
+        }
+        if (!quota || typeof quota.allowed !== 'boolean' || !Number.isInteger(quota.retryAfterSeconds) || quota.retryAfterSeconds < 0 || (!quota.allowed && quota.retryAfterSeconds < 1)) {
+          return send(response, 503, { error: 'Workspace search quota could not be verified. Try again shortly.' });
+        }
+        if (!quota.allowed) {
+          response.setHeader('retry-after', String(quota.retryAfterSeconds));
+          return send(response, 429, { error: 'Workspace search limit reached. Try again shortly.' });
+        }
         let result;
         try { result = await workspaceSearch(token, query.trim(), { workspaceId, url: insforge.url, anonKey: insforge.anonKey }); }
         catch { return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' }); }

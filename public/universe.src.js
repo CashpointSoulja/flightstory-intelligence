@@ -5,6 +5,13 @@ import { formatTime, graphLayerVisibility, graphNodeIsVisible } from './archive-
 const host = document.querySelector('.hero-art');
 if (!host) throw new Error('Evidence Universe host not found');
 
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+let reducedMotion = motionPreference.matches;
+let stageInView = typeof IntersectionObserver !== 'function';
+let pageVisible = document.visibilityState !== 'hidden';
+let rendererReady = false;
+let frameId = null;
+
 const evidence = [
   { id: 'vanessa-talk-too-much', title: 'Talk too much', guest: 'Vanessa Van Edwards', time: '00:00', seconds: 0, videoId: 'q2cg1gEYWJQ', query: 'How do you know you talk too much?', color: 0xc7a7ff },
   { id: 'vanessa-highlight', title: 'Highlight of your day', guest: 'Vanessa Van Edwards', time: '01:06', seconds: 66, videoId: 'q2cg1gEYWJQ', query: 'What is the best conversation starter?', color: 0xb6f3d4 },
@@ -21,6 +28,7 @@ styles.textContent = `
   @media(max-width:700px){.universe-node-label,.universe-map-key{display:none}.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
 `;
 styles.textContent += '.universe-hint{top:42px;bottom:auto}';
+styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
 document.head.appendChild(styles);
 host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
@@ -62,8 +70,8 @@ controls.maxDistance = 34;
 controls.enablePan = false;
 controls.minPolarAngle = .45;
 controls.maxPolarAngle = Math.PI - .45;
-stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); });
-stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); });
+stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
+stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
 
 const root = new THREE.Group();
 scene.add(root);
@@ -226,6 +234,7 @@ applyGraphLayer = layer => {
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
+  requestRender();
 };
 setGraphLayer(requestedGraphLayer);
 
@@ -245,6 +254,7 @@ function selectNode(node) {
   inspector.hidden = false;
   inspector.classList.add('visible');
   root.add(node);
+  requestRender();
 }
 
 openButton.addEventListener('click', () => {
@@ -265,11 +275,64 @@ function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x =
 canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
 canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
 
-function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); }
+function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); requestRender(); }
 new ResizeObserver(resize).observe(host);
 resize();
 
-const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
-function animate() { requestAnimationFrame(animate); const now = performance.now() / 1000; if (!reducedMotion) { root.rotation.y += .00045; stars.rotation.y -= .00012; } videoLines.material.opacity = (activeIds.size ? .25 : .08) + (Math.sin(now * 1.6) + 1) * .05; for (const node of topicNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72; for (const node of videoNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? 1 : .18) : .75; for (let index = 0; index < videoEdgePairs.length; index += 1) { const [from, to] = videoEdgePairs[index]; const phase = (now * (.08 + (index % 7) * .012) + index / videoEdgePairs.length) % 1; sparkPositions[index * 3] = from.x + (to.x - from.x) * phase; sparkPositions[index * 3 + 1] = from.y + (to.y - from.y) * phase; sparkPositions[index * 3 + 2] = from.z + (to.z - from.z) * phase; } sparks.geometry.attributes.position.needsUpdate = true; controls.update(); updateTopicLabels(); renderer.render(scene, camera); }
-animate();
+function canRender({ ready, inView, visible }) { return ready && inView && visible; }
+function shouldAnimate({ reduced, inView, visible }) { return !reduced && inView && visible; }
+function requestRender() {
+  if (!canRender({ ready: rendererReady, inView: stageInView, visible: pageVisible }) || frameId !== null) return;
+  frameId = requestAnimationFrame(renderFrame);
+}
+function stopRendering() {
+  if (frameId !== null) cancelAnimationFrame(frameId);
+  frameId = null;
+}
+function renderFrame(timestamp) {
+  frameId = null;
+  if (!canRender({ ready: rendererReady, inView: stageInView, visible: pageVisible })) return;
+  const now = timestamp / 1000;
+  if (!reducedMotion) {
+    root.rotation.y += .00045;
+    stars.rotation.y -= .00012;
+    videoLines.material.opacity = (activeIds.size ? .25 : .08) + (Math.sin(now * 1.6) + 1) * .05;
+  } else {
+    videoLines.material.opacity = activeIds.size ? .25 : .16;
+  }
+  for (const node of topicNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;
+  for (const node of videoNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? 1 : .18) : .75;
+  for (let index = 0; index < videoEdgePairs.length; index += 1) {
+    const [from, to] = videoEdgePairs[index];
+    const phase = reducedMotion ? .5 : (now * (.08 + (index % 7) * .012) + index / videoEdgePairs.length) % 1;
+    sparkPositions[index * 3] = from.x + (to.x - from.x) * phase;
+    sparkPositions[index * 3 + 1] = from.y + (to.y - from.y) * phase;
+    sparkPositions[index * 3 + 2] = from.z + (to.z - from.z) * phase;
+  }
+  sparks.geometry.attributes.position.needsUpdate = true;
+  controls.update();
+  updateTopicLabels();
+  renderer.render(scene, camera);
+  if (shouldAnimate({ reduced: reducedMotion, inView: stageInView, visible: pageVisible })) requestRender();
+}
+
+controls.addEventListener('change', requestRender);
+document.addEventListener('visibilitychange', () => {
+  pageVisible = document.visibilityState !== 'hidden';
+  if (pageVisible) requestRender(); else stopRendering();
+});
+motionPreference.addEventListener('change', event => {
+  reducedMotion = event.matches;
+  controls.enableDamping = !reducedMotion;
+  requestRender();
+});
+controls.enableDamping = !reducedMotion;
+if (typeof IntersectionObserver === 'function') {
+  new IntersectionObserver(([entry]) => {
+    stageInView = entry.isIntersecting && entry.intersectionRatio > 0;
+    if (stageInView) requestRender(); else stopRendering();
+  }).observe(host);
+}
+rendererReady = true;
+requestRender();

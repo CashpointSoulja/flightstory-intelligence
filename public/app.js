@@ -35,10 +35,10 @@ function renderQueue() {
   }).join('') : '<div class="clip-empty">No clip drafts yet. Search, then create a local draft.</div>';
 }
 
-function persistQueue() {
+function persistQueue(message = 'Saved on this device · not shared.') {
   const queueStatus = document.querySelector('#queue-status');
   const saved = persistSavedItems(() => window.localStorage, queue);
-  if (queueStatus) queueStatus.textContent = saved ? 'Saved on this device · not shared.' : 'Browser storage unavailable · this draft will not survive reload.';
+  if (queueStatus) queueStatus.textContent = saved ? message : 'Browser storage unavailable · changes will not survive reload.';
 }
 
 function selectEvidence(item) {
@@ -57,8 +57,8 @@ function selectEvidence(item) {
   const saveDisabled = Boolean(editingClipId);
   const url = watchUrl(item);
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(item.start)}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
-  const saveLabel = saveDisabled ? 'Finish cut edit first' : saved ? '✓ Draft saved · Remove' : '＋ Create local clip draft';
-  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span><h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<button class="save" id="save-moment" type="button" aria-pressed="${saved}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${saveLabel}</button><p class="clip-note">Source window ${formatTime(item.start)}–${formatTime(item.end)} · provisional transcript excerpt; verify in the source before review.</p>`;
+  const saveLabel = saveDisabled ? 'Finish cut edit first' : saved ? '✓ Saved · Remove from drafts' : 'Add to drafts';
+  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span><h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<button class="save" id="save-moment" type="button"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${saveLabel}</button><p class="clip-note">Source window ${formatTime(item.start)}–${formatTime(item.end)} · provisional transcript excerpt; verify in the source before review.</p>`;
   document.querySelector('#save-moment').onclick = () => toggleSaved(item);
 }
 
@@ -66,9 +66,10 @@ function toggleSaved(item) {
   if (editingClipId) return;
   const isSaved = queue.some(savedItem => String(savedItem.id) === String(item.id));
   queue = isSaved ? removeSavedItem(queue, item.id) : [...queue, { ...item, reviewStatus: 'draft' }];
-  persistQueue();
+  persistQueue(isSaved ? 'Draft removed from this device.' : 'Draft saved on this device · not shared.');
   renderQueue();
   selectEvidence(item);
+  document.querySelector('#save-moment')?.focus({ preventScroll: true });
 }
 
 function renderResults(result) {
@@ -174,7 +175,7 @@ clipList.addEventListener('click', event => {
   if (!button) return;
   if (editingClipId) return;
   queue = removeSavedItem(queue, button.dataset.removeSaved);
-  persistQueue();
+  persistQueue('Draft removed from this device.');
   renderQueue();
   if (selectedEvidence) selectEvidence(selectedEvidence);
 });
