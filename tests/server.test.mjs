@@ -175,9 +175,14 @@ test('local fallback keeps intentional one-word searches and refuses weak multi-
   });
 });
 
-test('public demo finds the best conversation starter for both icebreaker spellings', async () => {
+test('public demo finds the best conversation starter for singular and plural icebreaker spellings', async () => {
   await withServer({}, async url => {
-    for (const query of ['What is a good icebreaker?', 'What is a good ice breaker?']) {
+    for (const query of [
+      'What is a good icebreaker?',
+      'What is a good ice breaker?',
+      'What are good icebreakers?',
+      'What are good ice breakers?'
+    ]) {
       const response = await post(url, JSON.stringify({ query }));
       assert.equal(response.status, 200);
       const result = await response.json();
@@ -185,6 +190,10 @@ test('public demo finds the best conversation starter for both icebreaker spelli
       assert.deepEqual(result.citations.map(item => item.id), ['vanessa-highlight']);
       assert.deepEqual([result.citations[0].start, result.citations[0].end], [66, 81]);
     }
+    const unrelated = await post(url, JSON.stringify({ query: 'What are good Mars mining stocks?' }));
+    const result = await unrelated.json();
+    assert.deepEqual(result.citations, []);
+    assert.match(result.answer, /could not verify/i);
   });
 });
 
