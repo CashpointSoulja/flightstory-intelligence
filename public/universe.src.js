@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { formatTime, graphLayerVisibility, graphNodeIsVisible } from './archive-ui.js';
+import { formatTime, graphLayerVisibility, graphNodeIsVisible, nearestNodeWithinRadius } from './archive-ui.js';
 
 const host = document.querySelector('.hero-art');
 if (!host) throw new Error('Evidence Universe host not found');
@@ -241,12 +241,6 @@ setGraphLayer(requestedGraphLayer);
 function selectNode(node) {
   selected = node;
   const data = node.userData;
-  const position = node.getWorldPosition(new THREE.Vector3());
-  const offset = camera.position.clone().sub(controls.target);
-  offset.setLength(Math.max(8, offset.length()));
-  controls.target.copy(position);
-  camera.position.copy(position).add(offset);
-  controls.update();
   for (const [key, button] of graphSelectionButtons) button.setAttribute('aria-pressed', String(key === `${data.kind}:${data.id}`));
   activeIds.clear(); if (data.id) activeIds.add(data.id);
   if (data.kind === 'topic') for (const edge of graph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
@@ -278,9 +272,24 @@ tooltip.className = 'universe-tooltip';
 tooltip.style.cssText = 'position:absolute;display:none;padding:7px 9px;border:1px solid rgba(199,167,255,.35);background:rgba(8,8,13,.9);color:#f3f0ed;font:9px DM Mono,monospace;pointer-events:none;z-index:5;max-width:190px';
 stage.appendChild(tooltip);
 
-function hit(event) { const bounds = canvas.getBoundingClientRect(); pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1; pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1; raycaster.setFromCamera(pointer, camera); return raycaster.intersectObjects(visibleNodes); }
+function hit(event, pointerDown = false) {
+  const bounds = canvas.getBoundingClientRect();
+  pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+  pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+  raycaster.setFromCamera(pointer, camera);
+  const intersections = raycaster.intersectObjects(visibleNodes);
+  if (intersections.length || !pointerDown) return intersections;
+  const projected = [];
+  const position = new THREE.Vector3();
+  for (const node of visibleNodes) {
+    node.getWorldPosition(position).project(camera);
+    if (position.z >= -1 && position.z <= 1) projected.push({ node, x: bounds.left + (position.x * .5 + .5) * bounds.width, y: bounds.top + (-position.y * .5 + .5) * bounds.height });
+  }
+  const nearest = nearestNodeWithinRadius(projected, event.clientX, event.clientY);
+  return nearest ? [{ object: nearest }] : [];
+}
 canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
-canvas.addEventListener('pointerdown', event => { const hitNode = hit(event)[0]?.object; if (hitNode) selectNode(hitNode); });
+canvas.addEventListener('pointerdown', event => { const hitNode = hit(event, true)[0]?.object; if (hitNode) selectNode(hitNode); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); requestRender(); }
 new ResizeObserver(resize).observe(host);

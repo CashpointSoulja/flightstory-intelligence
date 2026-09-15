@@ -38,7 +38,20 @@ export function graphLayerVisibility(layer) {
 }
 
 export function graphNodeIsVisible(layer, kind) {
-  return kind === 'core' || kind === 'connection' && layer === 'videos' || graphLayerVisibility(layer)[kind] === true;
+  return kind === 'core' || kind === 'connection' && layer === 'videos' || kind === 'topic' && layer === 'topics' || kind === 'video' && layer === 'videos' || kind === 'evidence' && layer === 'evidence';
+}
+
+export function nearestNodeWithinRadius(points, x, y, radius = 8) {
+  let nearest = null;
+  let nearestDistance = radius * radius;
+  for (const point of points) {
+    const distance = (point.x - x) ** 2 + (point.y - y) ** 2;
+    if (distance <= nearestDistance) {
+      nearest = point.node;
+      nearestDistance = distance;
+    }
+  }
+  return nearest;
 }
 
 export function loadSavedItems(storageProvider) {

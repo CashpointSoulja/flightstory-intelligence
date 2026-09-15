@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
+import { formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, loadSavedItems, nearestNodeWithinRadius, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
 import { boardClipsPageUrl, canSaveSharedDraft, citationClipInput, isValidClipPage, mergeClipPage, rangeEditInput, setReviewButtonsDisabled, sourceHeading } from '../public/shared-review.js';
 
 test('formats whole and fractional seconds as readable timestamps', () => {
@@ -14,15 +14,23 @@ test('formats whole and fractional seconds as readable timestamps', () => {
 });
 
 test('graph layer state shows exactly its selected node family', () => {
+  const nodeKindByLayer = { topics: 'topic', videos: 'video', evidence: 'evidence' };
   assert.deepEqual(graphLayerVisibility('topics'), { topics: true, videos: false, evidence: false });
   assert.deepEqual(graphLayerVisibility('videos'), { topics: false, videos: true, evidence: false });
   assert.deepEqual(graphLayerVisibility('evidence'), { topics: false, videos: false, evidence: true });
   for (const layer of ['topics', 'videos', 'evidence']) {
     assert.equal(graphNodeIsVisible(layer, 'core'), true);
-    assert.equal(graphNodeIsVisible(layer, layer), true);
-    for (const other of ['topics', 'videos', 'evidence'].filter(kind => kind !== layer)) assert.equal(graphNodeIsVisible(layer, other), false);
+    for (const kind of ['topic', 'video', 'evidence']) assert.equal(graphNodeIsVisible(layer, kind), kind === nodeKindByLayer[layer]);
     assert.equal(graphNodeIsVisible(layer, 'connection'), layer === 'videos');
   }
+});
+
+test('nearby graph dots get a small pointer target without selecting empty map space', () => {
+  const topic = { kind: 'topic' };
+  const closer = { node: topic, x: 12, y: 13 };
+  const farther = { node: { kind: 'video' }, x: 17, y: 12 };
+  assert.equal(nearestNodeWithinRadius([farther, closer], 10, 10), topic);
+  assert.equal(nearestNodeWithinRadius([closer], 21, 10), null);
 });
 
 test('only creates YouTube links when a source has a video id', () => {
