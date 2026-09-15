@@ -33,6 +33,32 @@ The script expects episode JSON files containing `id`, `url`, `title`, and `segm
 
 The catalogue source is `catalog/episodes.json`; the browser-facing metadata and graph snapshots are under `public/`.
 
+### Approved caption ingestion
+
+`scripts/transcribe_catalog.mjs` requires a separately prepared rights-approved source manifest as its first argument. It accepts only catalogue episodes marked eligible for transcription, checks the exact YouTube video and expected channel with `yt-dlp` metadata, and only then requests English auto-captions. It does not download video. No approvals or real video IDs are stored in this repository.
+
+Manifest shape:
+
+```ts
+{
+  sources: Array<{
+    episodeId: string;          // catalogue episode ID; must be transcription-eligible
+    videoId: string;            // exact YouTube video ID
+    channelId: string;          // expected YouTube channel ID
+    rightsStatus: "approved";
+    approvalReference: string;  // non-empty reference to the approval record
+  }>;
+}
+```
+
+Run it from the repository root:
+
+```sh
+node scripts/transcribe_catalog.mjs /path/to/approved-source-manifest.json [raw-output-directory] [progress-file]
+```
+
+The raw-output directory defaults to `data/raw`; the progress file defaults to `data/raw/catalog-progress.json` (or `<raw-output-directory>/catalog-progress.json` when a custom raw directory is supplied). Progress resumes only when the video ID, channel ID, and approval reference still match the manifest.
+
 ## Run locally
 
 Requires Node.js 24 and npm.
