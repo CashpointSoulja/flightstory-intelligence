@@ -33,14 +33,16 @@ Keep raw captions and normalised transcript output separate. Do not copy any loc
 Run scripts from the repository root. Their defaults use `data/episodes`, `data/raw`, and `public/`; supply arguments when your local dataset lives elsewhere:
 
 ```sh
-node scripts/transcribe_catalog.mjs [raw-output-directory] [progress-file]
+node scripts/transcribe_catalog.mjs <approved-source-manifest.json> [raw-output-directory] [progress-file]
 node scripts/build_search_index.mjs [episodes-directory] [output-file]
 node scripts/build_archive_graph.mjs [episodes-directory] [output-file]
 node scripts/build_semantic_video_graph.mjs [episodes-directory] [output-file]
 node scripts/build_topic_graph.mjs [episode-json-file] [output-file]
 ```
 
-The index, archive-graph, and semantic-graph builders expect the episode directory to have a sibling `raw/` directory containing matching `<id>.info.json` metadata. The topic-graph builder takes one episode JSON file. The semantic graph builder also requires `OPENAI_API_KEY`. The transcription script requires `yt-dlp` on `PATH`.
+The transcription script requires `yt-dlp` on `PATH` and an explicit manifest as its first argument. Each `sources` entry has `episodeId`, `videoId`, `channelId`, `rightsStatus: "approved"`, and a non-empty `approvalReference`. The episode must be marked `eligibleForTranscription` in `public/catalog.json`; the script verifies yt-dlp's video and channel IDs before requesting captions. Raw output defaults to `data/raw`; progress defaults to `<raw-output-directory>/catalog-progress.json`.
+
+The index, archive-graph, and semantic-graph builders expect the episode directory to have a sibling `raw/` directory containing matching `<id>.info.json` metadata. The topic-graph builder takes one episode JSON file. The semantic graph builder also requires `OPENAI_API_KEY`.
 
 ## Normal pipeline
 

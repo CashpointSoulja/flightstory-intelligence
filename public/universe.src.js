@@ -14,20 +14,20 @@ const evidence = [
 const styles = document.createElement('style');
 styles.textContent = `
   .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d;z-index:1}.universe-node-label{position:absolute;z-index:4;transform:translate(9px,-50%);white-space:nowrap;color:rgba(243,240,237,.78);font:9px 'DM Mono';letter-spacing:.08em;pointer-events:none;text-shadow:0 1px 9px #08080d}
-  .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}.universe-stage canvas:focus-visible{outline:1px solid var(--lilac);outline-offset:-4px}
+  .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'DM Mono',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
+  .universe-access[open]{width:min(440px,calc(100vw - 32px))}.universe-access-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(241,240,237,.06)}.universe-access-row button,.universe-access-row a{padding:7px 6px;color:var(--muted);background:none;border:0;text-align:left;text-decoration:none;font:9px 'DM Mono',monospace;cursor:pointer}.universe-access-row button{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:var(--paper);background:rgba(187,164,255,.1);outline-color:var(--lilac)}
   .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:230px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'DM Mono';padding:8px 0 0;cursor:pointer}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'DM Mono';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}.universe-map-key{position:absolute;left:50%;top:25%;transform:translateX(-50%);display:flex;gap:25px;color:rgba(243,240,237,.78);font:10px 'DM Mono';letter-spacing:.16em}.universe-map-key span{position:relative}.universe-map-key span+span:before{content:'→';position:absolute;left:-18px;color:var(--lilac)}
   @media(max-width:700px){.universe-node-label,.universe-map-key{display:none}.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
 `;
 styles.textContent += '.universe-hint{top:42px;bottom:auto}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">ARCHIVE MAP <span>LOADING</span></div><div class="universe-map-key" aria-label="Archive hierarchy"><span>TOPICS</span><span>GUESTS</span><span>CITATIONS</span></div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-foot">COLOURED NODES ARE CITATIONS<small>CLICK A NODE TO INSPECT ITS SOURCE</small></div><div class="universe-inspector" hidden role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
 const canvas = document.createElement('canvas');
 canvas.setAttribute('role', 'img');
-canvas.setAttribute('aria-label', 'Interactive 3D archive map. Drag to orbit, scroll to zoom, and click a node to inspect an episode or citation.');
-canvas.tabIndex = 0;
+canvas.setAttribute('aria-label', '3D archive map. Use Browse featured archive nodes to select a topic, video, or citation; use its separate source link to open the original.');
 stage.prepend(canvas);
 
 const graphLayerButtons = [...document.querySelectorAll('.layer[data-graph-layer]')];
@@ -123,11 +123,32 @@ const videoNodes = videoGraph.nodes.map((video, index) => {
   videoPositions.set(video.id, position);
   return addNode({ id: video.id, kind: 'video', title: video.title, source: video.source, seconds: video.seconds, query: video.title, color: topicColor(video.title) }, position, nodeGeometry, 1.5);
 });
-const graphAccess = document.createElement('details'); graphAccess.className = 'universe-access'; const graphSummary = document.createElement('summary'); graphSummary.textContent = 'Browse all archive nodes as links'; graphAccess.appendChild(graphSummary); const graphList = document.createElement('div'); graphList.className = 'universe-access-list'; for (const node of [...topicNodes.slice(0, 30), ...videoNodes.slice(0, 30)]) { const data = node.userData; const link = document.createElement('a'); link.textContent = data.kind === 'video' ? `VIDEO · ${data.title}` : `TOPIC · ${data.title}`; link.href = `${data.source}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); } graphAccess.appendChild(graphList); stage.appendChild(graphAccess);
-
 const evidencePositions = [new THREE.Vector3(-2.5, -.9, .8), new THREE.Vector3(2.2, 1.55, .4), new THREE.Vector3(2.8, -.95, -.5)];
 const evidenceNodes = evidence.map((item, index) => addNode({ ...item, kind: 'evidence' }, evidencePositions[index], evidenceGeometry));
-for (const node of evidenceNodes) { const data = node.userData; const link = document.createElement('a'); link.textContent = `CITATION · ${data.guest} · ${data.title}`; link.href = `https://www.youtube.com/watch?v=${encodeURIComponent(data.videoId)}&t=${data.seconds}s`; link.target = '_blank'; link.rel = 'noreferrer'; graphList.appendChild(link); }
+const graphAccess = document.createElement('details'); graphAccess.className = 'universe-access'; const graphSummary = document.createElement('summary'); graphSummary.textContent = 'Browse featured archive nodes'; graphAccess.appendChild(graphSummary); const graphList = document.createElement('div'); graphList.className = 'universe-access-list'; const graphSelectionButtons = new Map();
+function nodeSourceUrl(data) {
+  const source = data.source || (data.videoId ? `https://www.youtube.com/watch?v=${encodeURIComponent(data.videoId)}` : '');
+  if (!source) return null;
+  try {
+    const url = new URL(source);
+    if (!['http:', 'https:'].includes(url.protocol)) return null;
+    url.searchParams.set('t', `${Math.max(0, Number(data.seconds) || 0)}s`);
+    return url.href;
+  } catch { return null; }
+}
+for (const node of [...topicNodes.slice(0, 30), ...videoNodes.slice(0, 30), ...evidenceNodes]) {
+  const data = node.userData;
+  const key = `${data.kind}:${data.id}`;
+  const row = document.createElement('div'); row.className = 'universe-access-row';
+  const select = document.createElement('button'); select.type = 'button'; select.className = 'universe-select-node'; select.setAttribute('aria-pressed', 'false');
+  select.textContent = data.kind === 'evidence' ? `CITATION · ${data.guest} · ${data.title}` : `${data.kind === 'video' ? 'VIDEO' : 'TOPIC'} · ${data.title}`;
+  select.addEventListener('click', () => { const layer = data.kind === 'evidence' ? 'evidence' : data.kind === 'video' ? 'videos' : 'topics'; if (activeGraphLayer !== layer) setGraphLayer(layer); selectNode(node); });
+  graphSelectionButtons.set(key, select); row.appendChild(select);
+  const href = nodeSourceUrl(data);
+  if (href) { const sourceLink = document.createElement('a'); sourceLink.className = 'universe-node-source'; sourceLink.textContent = 'OPEN SOURCE ↗'; sourceLink.href = href; sourceLink.target = '_blank'; sourceLink.rel = 'noopener noreferrer'; sourceLink.setAttribute('aria-label', `Open source for ${data.title} at ${formatTime(data.seconds)}`); row.appendChild(sourceLink); }
+  graphList.appendChild(row);
+}
+graphAccess.appendChild(graphList); stage.appendChild(graphAccess);
 const core = addNode({ kind: 'core', title: 'Conversation', query: 'What have guests said about conversation?' }, new THREE.Vector3(0, 0, 0), new THREE.SphereGeometry(.23, 20, 20), 1);
 core.material.color.set(0xf3f0ed);
 
@@ -194,6 +215,7 @@ applyGraphLayer = layer => {
     activeIds.clear();
     if (selected && selected.userData.kind !== 'core' && !visible[selected.userData.kind]) {
       selected = null;
+      for (const button of graphSelectionButtons.values()) button.setAttribute('aria-pressed', 'false');
       inspector.hidden = true;
       inspector.classList.remove('visible');
     }
@@ -210,6 +232,7 @@ setGraphLayer(requestedGraphLayer);
 function selectNode(node) {
   selected = node;
   const data = node.userData;
+  for (const [key, button] of graphSelectionButtons) button.setAttribute('aria-pressed', String(key === `${data.kind}:${data.id}`));
   activeIds.clear(); if (data.id) activeIds.add(data.id);
   if (data.kind === 'topic') for (const edge of graph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
   if (data.kind === 'video') for (const edge of videoGraph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }

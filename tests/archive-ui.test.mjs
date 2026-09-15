@@ -117,7 +117,8 @@ test('starts with no prefilled or automatic search', async () => {
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   assert.match(html, /id="query"[^>]*value=""[^>]*minlength="2"[^>]*maxlength="500"/);
-  assert.match(html, /Public demo · 3 searchable excerpts\. Matches are local; no AI call\./);
+  assert.match(html, /Public demo · 3 searchable transcript excerpts\. Local search · no AI\./);
+  assert.match(html, /Map totals are metadata, not search coverage\./);
   assert.doesNotMatch(app, /if\s*\(query\.value\)\s*form\.requestSubmit\(\)/);
 });
 
@@ -160,7 +161,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.match(html, /Drafts are saved on this device only/);
   assert.match(html, /Graph videos/);
   assert.match(html, /SEARCHABLE DEMO/);
-  assert.match(html, /Graph metadata/);
+  assert.match(html, /Graph metadata only/);
   assert.match(html, /transcript links/);
   assert.match(html, /eligible for transcription · <span data-archive-count="catalogueRecords">—<\/span> catalogued episodes/);
   assert.match(app, /SAMPLE THREAD/);
@@ -177,7 +178,15 @@ test('describes AI results, local saves, and the distinct archive count scopes h
 
 test('separates the source time window from its provisional label', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
-  assert.match(app, /class="source-window"[^>]*>\$\{formatTime\(item\.start\)\}–\$\{formatTime\(item\.end\)\}<\/span> · <span class="provenance-tag">PROVISIONAL/);
+  assert.match(app, /class="source-window"[^>]*>\$\{formatTime\(item\.start\)\}–\$\{formatTime\(item\.end\)\}<\/span> · <span class="provenance-tag">PROVISIONAL<\/span> · \$\{escapeHtml\(item\.guest\)\}/);
+});
+
+test('mobile map filters stay visible as a compact horizontal strip and quiet copy remains readable', async () => {
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
+  assert.match(styles, /@media\(max-width:650px\)\{\.rail\{display:flex;[^}]*overflow-x:auto/);
+  assert.match(styles, /\.rail>\.eyebrow,\.rail-rule,\.index-status\{display:none\}/);
+  assert.match(styles, /\.layer\{flex:0 0 auto;width:auto[^}]*white-space:nowrap\}/);
+  assert.match(styles, /\.index-status small,\.clip-empty,footer\{color:var\(--muted\)\}/);
 });
 
 test('clip drafts expose local edit and review state without implying a shared approval', async () => {
@@ -210,7 +219,7 @@ test('mobile archive map reduces label clutter but keeps controls and accessible
   assert.match(graph, /@media\(max-width:700px\)\{\.universe-node-label,\.universe-map-key\{display:none\}/);
   assert.match(styles, /@media\(max-width:700px\)\{\.universe-node-label,\.universe-map-key\{display:none!important\}\}/);
   assert.match(graph, /\.universe-controls\{top:auto;right:12px;bottom:12px\}/);
-  assert.match(graph, /graphSummary\.textContent = 'Browse all archive nodes as links'/);
+  assert.match(graph, /graphSummary\.textContent = 'Browse featured archive nodes'/);
   assert.doesNotMatch(graph, /\.universe-access(?:\s|,|\{)[^}]*display\s*:\s*none/);
 });
 
@@ -234,7 +243,7 @@ test('map layer controls sync button state and visibility while the accessible l
   assert.match(graph, /setGraphLayer\(requestedGraphLayer\)/);
   assert.match(graph, /setGraphLayer\('evidence'\); camera\.position\.set/);
   assert.match(graph, /CITATION · \$\{data\.guest\} · \$\{data\.title\}/);
-  assert.match(graph, /Browse all archive nodes as links/);
+  assert.match(graph, /Browse featured archive nodes/);
 });
 
 test('map controls queue the latest layer choice while graph data loads', async () => {
