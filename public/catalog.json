@@ -1,9 +1,19 @@
 {
   "source": "https://audioboom.com/channels/5019925.rss",
-  "cutoff": "2023-03-01T00:00:00.000Z",
-  "generatedAt": "2026-09-12T19:11:59.540Z",
-  "count": 560,
+  "cutoff": "2023-01-01T00:00:00.000Z",
+  "generatedAt": "2026-09-16T17:18:08.744Z",
+  "count": 586,
   "episodes": [
+    {
+      "id": "flightcast:01M243XAN33DBKT1N5844WSMAV",
+      "title": "Professor Jiang: Three Predictions On the Collapse of the World Order",
+      "publishedAt": "2026-09-14T05:00:00.000Z",
+      "durationSeconds": 6499,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/01M243XAN33DBKT1N5844WSMAV.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
     {
       "id": "flightcast:01M0BDP5KGRFPV398M820XBKQF",
       "title": "Most Replayed Moment: Brain Rot Experts - How To Use AI In A Healthy Way!",
@@ -16,10 +26,10 @@
     },
     {
       "id": "flightcast:01M23VE3XS205C0HMNRE4ENR58",
-      "title": "Vanessa Van Edwards: The Conversation Habit That Makes Smart People Unlikable",
+      "title": "Likability Expert: The Toxic Conversation Habit You Don't Realize You Have! | Vanessa Van Edwards",
       "publishedAt": "2026-09-10T05:00:00.000Z",
       "durationSeconds": 8798,
-      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/01M23VE3XS205C0HMNRE4ENR58.mp3?fcv=w85o8u86fodbxb2n7rdfkj2q",
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/01M23VE3XS205C0HMNRE4ENR58.mp3?fcv=lfldkshqegx38266ljbzoxhv",
       "link": "",
       "contentType": "long_form_episode",
       "eligibleForTranscription": true
@@ -49,7 +59,7 @@
       "title": "Andrew Huberman: The Real Reason You Can't Get Deep Sleep & Wake Up Exhausted",
       "publishedAt": "2026-09-03T05:00:00.000Z",
       "durationSeconds": 8177,
-      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/01M0ZPY4TQJ3P79EJ838S4NJAD.mp3?fcv=avwdogbcug45mk4wt6tpol30",
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/01M0ZPY4TQJ3P79EJ838S4NJAD.mp3",
       "link": "",
       "contentType": "long_form_episode",
       "eligibleForTranscription": true
@@ -5600,6 +5610,256 @@
       "publishedAt": "2023-03-02T06:00:00.000Z",
       "durationSeconds": 3891,
       "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/njo24anf4o9h2kdtpngv2hiq.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "e6958494-c9ba-479b-88c7-06664a0afc39",
+      "title": "The Man Who Predicts How Long You Have Left To Live (To The Nearest Month): Gary Brecka",
+      "publishedAt": "2023-02-27T06:03:00.000Z",
+      "durationSeconds": 5506,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/yxbsz4bkiid1ygq1ij1b91ly.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "36cd8ea9-1b1d-4d37-b35d-194180fd7f02",
+      "title": "Moment 98 - The One Thing All Successful Leaders Have (And You Can Too!): Whitney Wolf Herd",
+      "publishedAt": "2023-02-24T06:00:00.000Z",
+      "durationSeconds": 464,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/a2ydbw5kp7hy1bbvotmhvui1.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "272ad739-4afb-487d-b4cc-29f1b62f12e8",
+      "title": "Lucy Hale Opens Up For The First Time About Eating Disorders, Relationships & Addiction",
+      "publishedAt": "2023-02-23T06:16:00.000Z",
+      "durationSeconds": 5240,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/k5yddib9jbr5ckn881t067py.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "942a82b9-5ba4-45a2-8651-0bc8df866e34",
+      "title": "The No.1 Health Expert: The One Food (WE ALL EAT) That's Slowly Hurting Us!: Max Lugavere",
+      "publishedAt": "2023-02-20T06:25:00.000Z",
+      "durationSeconds": 6618,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/tkmn5zdz2cu20zp4kl874hup.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "f7f14e60-d7c2-43d6-9936-33d4c4d067c9",
+      "title": "Moment 97 - The SECRET Hack Behind The Perfect First Date: Paul Brunson",
+      "publishedAt": "2023-02-17T06:00:00.000Z",
+      "durationSeconds": 455,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/mngo0wis2mznvzegs5n1y5pq.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "8ba0de94-7d6e-439a-b22a-7cba1738d6cc",
+      "title": "Behaviour Change Scientist: How I Lost 120lbs With Kindness: Shahroo Izadi",
+      "publishedAt": "2023-02-16T06:00:00.000Z",
+      "durationSeconds": 3467,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/rb07hxoekgzn8po66x83msa3.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "0d43156a-b01c-4e1a-8404-8e56013cb182",
+      "title": "Richard Hammond: The heartbreaking conversation that I am STILL avoiding!",
+      "publishedAt": "2023-02-13T07:16:00.000Z",
+      "durationSeconds": 4984,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/mt73mx2ntebbfnl2jg135y6u.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "5044f2b5-d2c5-45bb-9086-1eabfb659e28",
+      "title": "Moment 96 - Without This You WON'T Find Fulfilment In Life: Stephen Fry",
+      "publishedAt": "2023-02-10T06:00:00.000Z",
+      "durationSeconds": 498,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/n9irxx3drhukny0oydl9x1pp.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "b231be2d-df01-4039-ae43-e43bdf54864b",
+      "title": "Romesh Ranganathan: There's A Dark Voice In My Head That I've Learnt To Control",
+      "publishedAt": "2023-02-09T06:01:00.000Z",
+      "durationSeconds": 4929,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/gknv14mz1h6xb5hytabpxehf.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "7cab25d7-9337-4a35-8825-184dd61ddf27",
+      "title": "The &#34;Happy Life&#34; Scientist: How To FINALLY Beat Stress, Worry & Uncertainty! Dacher Keltner",
+      "publishedAt": "2023-02-06T06:00:00.000Z",
+      "durationSeconds": 5645,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/lay31c4fzjhtjfq5paupuu5m.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "42957b8b-eb0c-417e-a230-6b72b13e37b4",
+      "title": "Moment 95 - A Simple Hack To Achieve Maximum Happiness: Mo Gowdat",
+      "publishedAt": "2023-02-03T06:00:00.000Z",
+      "durationSeconds": 813,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/bf4lxrfz5f34k56b7xmikabu.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "a6e1616d-ef1a-4c11-acd0-199dea5913c2",
+      "title": "The Weight Loss Scientist: You've Been LIED To About Calories, Dieting & Losing Weight: Giles Yeo",
+      "publishedAt": "2023-02-02T06:00:00.000Z",
+      "durationSeconds": 6500,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/q4k8th6ktv0fs2lfovipo674.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "4c999bd5-c158-44b6-bbb8-b902d0c4b794",
+      "title": "Jay Shetty: 8 Rules For Perfect Love & Amazing Sex!",
+      "publishedAt": "2023-01-30T06:00:00.000Z",
+      "durationSeconds": 7393,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/zcb24y1hps5bir52sd0jimlg.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "4d2b8a4d-6de6-4d70-b061-e4af616cc72f",
+      "title": "Moment 94 - Doctor Julie: The ONE Simplifying Thing That Will Transform Your Life",
+      "publishedAt": "2023-01-27T06:00:00.000Z",
+      "durationSeconds": 477,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/d59tryarnopl7hrqvgkjqnmm.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "9195047a-3b6a-4032-8d91-dd6ac2bc6418",
+      "title": "Sadiq Khan: Why Are Police Officers Attacking Women? How Safe Are We REALLY?",
+      "publishedAt": "2023-01-26T06:00:00.000Z",
+      "durationSeconds": 5199,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/i12n99enqnqg4clt0byjg1cr.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "3eec7dce-9129-424a-b36b-82a0bbfa0b5c",
+      "title": "The Mindset Doctor: The Secret Man Behind The World's Top Performers: Steve Peters",
+      "publishedAt": "2023-01-23T06:00:00.000Z",
+      "durationSeconds": 7300,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/vvxfvxv7l9ymlojqyfmu6tvm.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "a1e18ec7-697b-4073-827e-619d51c98089",
+      "title": "Moment 93 - A Happiness Secret You Need To Know: Scott Galloway",
+      "publishedAt": "2023-01-20T06:00:00.000Z",
+      "durationSeconds": 666,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/yercla133awv44eyz0xsndxm.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "1c0db447-9d9f-4247-aa13-c15875dbbab8",
+      "title": "Jesse Lingard Reveals The Dark Reality Of Being A World Class Football Player",
+      "publishedAt": "2023-01-19T06:00:00.000Z",
+      "durationSeconds": 4316,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/rujavcbo4pk0nzcdbcl4h6lb.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "7d5fb6c8-a479-449c-9715-6f7ee61d6032",
+      "title": "David Moyes Reveals The Truth About Managing The Worlds Greatest Teams",
+      "publishedAt": "2023-01-16T06:00:00.000Z",
+      "durationSeconds": 5174,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/wwt1eo559c4ukm6gh8y7w1wp.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "e223d4ef-6a8c-4e55-aeea-d49b209f34b7",
+      "title": "Moment 92 - How To Find Out EXACTLY What You Want To Do In Life: Mark Manson",
+      "publishedAt": "2023-01-13T06:00:00.000Z",
+      "durationSeconds": 502,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/x0e8oumm3zx6cc45ryr8ucvl.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "c57a1270-bc4a-4e1a-89bb-88717de0d60a",
+      "title": "Derren Brown: UNLOCK The Secret Power Of Your Mind!",
+      "publishedAt": "2023-01-12T06:00:00.000Z",
+      "durationSeconds": 5608,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/qtuekuw84lalohmumba1ik2y.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "9b73a7d2-058f-4212-9e58-38110b62d052",
+      "title": "No.1 Neuroscientist: Age 30 to 50 Will Be Your Unhappiest, Here's How To FIX IT! - Dr. Tali Sharot",
+      "publishedAt": "2023-01-09T06:00:00.000Z",
+      "durationSeconds": 5685,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/rozsrm638pc7g4yedlzukeo6.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "fe7f53f1-1f9c-4ae2-8e36-3d888d091a8a",
+      "title": "Moment 91 - The &#34;Harmless&#34; Thing You Do That Hurts So Many People! - Richard Osmond",
+      "publishedAt": "2023-01-06T06:00:00.000Z",
+      "durationSeconds": 416,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/wd5x0f0tu2fcxp0eljd6pjqx.mp3",
+      "link": "",
+      "contentType": "short_form_or_moment",
+      "eligibleForTranscription": false
+    },
+    {
+      "id": "c931a5e2-9415-4352-b547-df0beaeaf332",
+      "title": "Davina McCall: “I was doing cocaine with my mum at 15!”",
+      "publishedAt": "2023-01-05T05:57:00.000Z",
+      "durationSeconds": 6699,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/vkaryxzx35k4vb5ywa07gdkd.mp3",
+      "link": "",
+      "contentType": "long_form_episode",
+      "eligibleForTranscription": true
+    },
+    {
+      "id": "ff42145f-acd7-4d74-86cd-7debb9a23630",
+      "title": "Doctor Tim Spector: The Shocking New Truth About Weight Loss, Calories & Diets!",
+      "publishedAt": "2023-01-02T06:00:00.000Z",
+      "durationSeconds": 5546,
+      "audioUrl": "https://pdst.fm/e/pscrb.fm/rss/p/mgln.ai/e/1390/claritaspod.com/measure/p.podderapp.com/2544644999/mgln.ai/e/1651/episode.flightcast.com/mg3urtrlhwm5omdfmdqnjk5k.mp3",
       "link": "",
       "contentType": "long_form_episode",
       "eligibleForTranscription": true

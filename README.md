@@ -31,7 +31,7 @@ The script expects episode JSON files containing `id`, `url`, `title`, and `segm
 
 **Public-release blocker:** an earlier Git commit contains `public/search-index.json`. Deleting or ignoring the current file does not remove it from Git history. Before changing this repository's visibility, either establish rights to every excerpt in that historical index or prepare a clean history/repository without it.
 
-The catalogue source is `catalog/episodes.json`; the browser-facing metadata and graph snapshots are under `public/`.
+The catalogue source is `catalog/episodes.json`; it is refreshed from the official public Audioboom RSS feed and currently covers January 2023 onward. The browser-facing metadata and graph snapshots are under `public/`.
 
 ### Approved caption ingestion
 

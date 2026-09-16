@@ -84,7 +84,7 @@ function renderResults(result) {
       ? `<div class="claim-list">${result.claims.map(claim => `<p class="answer-claim">${escapeHtml(claim.text)} <span class="claim-sources">${claim.citationIds.map(id => { const number = citationNumbers.get(String(id)); return number ? `<button class="claim-source" type="button" data-claim-source="${escapeHtml(id)}" aria-label="Open source ${number}">[${number}]</button>` : ''; }).join(' ')}</span></p>`).join('')}</div>`
       : `<div class="answer">${escapeHtml(result.refusal || result.answer || 'I could not verify that in the indexed archive.')}</div>`
     : `<div class="answer">${escapeHtml(result.answer || '')}</div>`;
-  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${answer}${current.map((item, index) => `<article class="citation" data-id="${escapeHtml(item.id)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">0${index + 1}</span><div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">PROVISIONAL</span> · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><span class="citation-arrow">↗</span></article>`).join('')}`;
+  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${answer}${current.map((item, index) => { const saved = queue.some(savedItem => String(savedItem.id) === String(item.id)); return `<article class="citation" data-id="${escapeHtml(item.id)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">0${index + 1}</span><div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">PROVISIONAL</span> · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><button class="citation-save" type="button" data-save-citation="${escapeHtml(item.id)}">${saved ? 'SAVED' : 'DRAFT'}</button><span class="citation-arrow">↗</span></article>`; }).join('')}`;
   current.forEach(item => {
     const card = document.querySelector(`[data-id="${item.id}"]`);
     card.addEventListener('click', () => selectEvidence(item));
@@ -92,6 +92,11 @@ function renderResults(result) {
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectEvidence(item); }
     });
   });
+  content.querySelectorAll('[data-save-citation]').forEach(button => button.addEventListener('click', event => {
+    event.stopPropagation();
+    const item = current.find(candidate => String(candidate.id) === button.dataset.saveCitation);
+    if (item) toggleSaved(item);
+  }));
   content.querySelectorAll('[data-claim-source]').forEach(button => button.addEventListener('click', () => {
     const item = current.find(candidate => String(candidate.id) === button.dataset.claimSource);
     if (!item) return;

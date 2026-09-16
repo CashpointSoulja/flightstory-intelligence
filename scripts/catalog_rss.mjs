@@ -2,7 +2,7 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 
 const feedUrl = 'https://audioboom.com/channels/5019925.rss';
-const cutoff = new Date(process.argv[2] || '2023-03-01T00:00:00Z');
+const cutoff = new Date(process.argv[2] || '2023-01-01T00:00:00Z');
 const output = process.argv[3] || 'catalog/episodes.json';
 
 const xml = await fetch(feedUrl).then(response => {
