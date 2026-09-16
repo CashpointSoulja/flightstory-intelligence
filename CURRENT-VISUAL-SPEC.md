@@ -1,0 +1,35 @@
+# Current visual spec — FlightStory Archive
+
+Captured before the Steven.com inspired redesign on 16 September 2026.
+
+## Current interface
+
+- **Canvas:** near-black `#0d0e10` throughout, with a soft violet radial wash behind the archive hero.
+- **Surfaces:** translucent dark panels (`#111216`) with thin white borders at low opacity.
+- **Type:** Manrope for UI and display copy; DM Mono for labels, counts, status, and navigation; Georgia for transcript excerpts.
+- **Accent system:** violet `#bba4ff` for selected states and links, mint `#a6e8c3` for ready/healthy states, gold `#e5bd77` for evidence, blue `#94bfff` for graph videos.
+- **Header:** 70px glassy top bar with a circular F mark, centre status line, archive/drafts navigation, and public-source status pill.
+- **Hero:** a two-column composition. Copy is anchored left with “Everything connected.”, search beneath it, and the nebula/knowledge graph visual occupying the right half.
+- **Workspace:** three columns on desktop: map layers rail, research results, and selected evidence inspector. It collapses to a single column on small screens.
+- **Results:** restrained citation rows, a source drawer/inspector, searchable answer, and local clip drafts below the workspace.
+- **Motion:** smooth scrolling, glass blur, static hero art, and motion handled primarily by the interactive graph. Reduced-motion rules exist for the graph.
+
+## Design problems observed
+
+The current system reads as a dark research dashboard. It is legible and functional, but its hierarchy is quiet, surfaces are too similar, and the UI does not carry the expressive editorial energy of Steven.com. Violet dominates the interface, while the important actions and research states do not have enough visual separation.
+
+## New direction
+
+Keep the evidence-first behaviour and the interactive archive, but move the visual language toward an editorial studio:
+
+- warm paper and ink as the base; deep black for moments of focus;
+- one confident red/coral action colour, with cobalt reserved for active archive signals;
+- oversized, tight display type and small mono metadata;
+- asymmetry, hard rules, and generous breathing room;
+- tactile buttons, visible focus rings, and clear source hierarchy;
+- restrained entrance motion and hover response that make the tool feel alive without distracting from research;
+- a dark graph field retained as a “window into the archive”, framed by the paper interface.
+
+## Interaction intent
+
+The first decision should always be obvious: ask a question or follow a node. The second should be evidence inspection. Clip saving stays available at the source inspector and drafts remain a distinct review area. All existing IDs, data attributes, keyboard behaviour, external source links, local storage, shared review hooks, and reduced-motion support remain unchanged.
