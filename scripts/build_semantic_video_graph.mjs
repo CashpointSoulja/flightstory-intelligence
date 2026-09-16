@@ -7,7 +7,7 @@ const model = process.env.OPENAI_EMBED_MODEL || 'text-embedding-3-small';
 const key = process.env.OPENAI_API_KEY;
 const files = (await readdir(episodeDir)).filter(file => file.endsWith('.json'));
 const episodes = (await Promise.all(files.map(file => readFile(join(episodeDir, file), 'utf8').then(JSON.parse)))).filter(Boolean);
-const enrichedEpisodes = await Promise.all(episodes.map(async episode => { try { const info = JSON.parse(await readFile(join(episodeDir, '..', 'raw', `${episode.id}.info.json`), 'utf8')); return { ...episode, channelId: info.channel_id }; } catch { return { ...episode, channelId: null }; } }));
+const enrichedEpisodes = await Promise.all(episodes.map(async episode => { try { const info = JSON.parse(await readFile(join(episodeDir, '..', 'raw', `${episode.id}.info.json`), 'utf8')); return { ...episode, channelId: info.channel_id }; } catch { return { ...episode, channelId: episode.source?.channelId || null }; } }));
 const trustedEpisodes = enrichedEpisodes.filter(episode => episode.channelId === 'UCGq-a57w-aPwyi3pW7XLiHw');
 const compact = episode => {
   const segments = episode.segments || []; const sampleCount = Math.min(16, segments.length);
