@@ -257,7 +257,7 @@ test('3D archive inspector and source actions stay hidden until a node is select
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
   assert.match(graph, /class="universe-inspector" hidden/);
   assert.match(graph, /data-open hidden/);
-  assert.match(graph, /secondSource\.hidden = true/);
+  assert.doesNotMatch(graph, /Open second source/);
   assert.match(graph, /let selected = null/);
   assert.match(graph, /inspector\.hidden = false/);
   assert.doesNotMatch(graph, /selectNode\(evidenceNodes\[0\]\)/);
