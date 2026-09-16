@@ -33,3 +33,9 @@ Keep the evidence-first behaviour and the interactive archive, but move the visu
 ## Interaction intent
 
 The first decision should always be obvious: ask a question or follow a node. The second should be evidence inspection. Clip saving stays available at the source inspector and drafts remain a distinct review area. All existing IDs, data attributes, keyboard behaviour, external source links, local storage, shared review hooks, and reduced-motion support remain unchanged.
+
+## 16 September 2026 — light deslop pass
+
+The interface now uses a white, paper-like base for the product shell, with black ink, quiet grey rules, and a single coral signal. The graph remains a contained soft-grey/light canvas so the archive can feel alive without turning the whole product into a dark AI dashboard. Archivo is the display face; IBM Plex Mono is reserved for metadata and controls; Georgia is reserved for quoted evidence.
+
+The design commitment is **human, exact, alive, provocative, cinematic** — an **instrument for a living archive of thought**. The main action is asking a question or selecting a node. Repeated prototype explanations, pill-shaped controls, and competing accent colours were reduced. Existing IDs, data attributes, search, graph, evidence, clips, shared review, keyboard behaviour, external links, local storage, and reduced-motion behaviour are preserved.
