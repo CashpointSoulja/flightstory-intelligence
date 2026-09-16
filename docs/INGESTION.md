@@ -42,6 +42,19 @@ node scripts/build_topic_graph.mjs [episode-json-file] [output-file]
 
 The transcription script requires `yt-dlp` on `PATH` and an explicit manifest as its first argument. Each `sources` entry has `episodeId`, `videoId`, `channelId`, `rightsStatus: "approved"`, and a non-empty `approvalReference`. The episode must be marked `eligibleForTranscription` in `public/catalog.json`; the script verifies yt-dlp's video and channel IDs before requesting captions. Raw output defaults to `data/raw`; progress defaults to `<raw-output-directory>/catalog-progress.json`.
 
+### YouTube caption method (verified 2026-09-17)
+
+For an approved, identity-checked video, use yt-dlp to fetch metadata and English captions without downloading the video:
+
+```sh
+yt-dlp --no-playlist --skip-download --dump-single-json --no-warnings "https://www.youtube.com/watch?v=<VIDEO_ID>"
+yt-dlp --no-playlist --skip-download --write-auto-subs --sub-langs 'en.*' --sub-format vtt --write-info-json -o 'data/raw/%(id)s' "https://www.youtube.com/watch?v=<VIDEO_ID>"
+```
+
+This was tested against `q2cg1gEYWJQ`: yt-dlp returned the expected channel ID, 8,785-second duration, 30 chapters, and both `en-orig` and `en` VTT captions. Chapter titles and descriptions are useful metadata for discovery and editorial context; they are not a transcript and must not be used as evidence for spoken claims. VTT captions are rolling, pause-based captions and may contain duplicates or recognition errors. Preserve both raw variants, then choose and normalise one explicitly; never treat a caption as a verified quote without checking the source recording.
+
+The YouTube timed-text URLs exposed by player metadata are provider internals and can expire or require session context. Do not build a direct timed-text scraper as the primary ingestion path. yt-dlp remains the adapter boundary, with the exact video and channel checks above. A missing, blocked, or changed caption track is a partial source failure, not permission to download or infer a replacement transcript.
+
 The index, archive-graph, and semantic-graph builders expect the episode directory to have a sibling `raw/` directory containing matching `<id>.info.json` metadata. The topic-graph builder takes one episode JSON file. The semantic graph builder also requires `OPENAI_API_KEY`.
 
 ## Normal pipeline
