@@ -7,9 +7,9 @@ The product is a private, citation-first knowledge system for the Diary of a CEO
 Current graph inventory:
 
 ```text
-1,000 topic nodes
+90 concept nodes (recurring phrase-level concepts and an audited single-word concept vocabulary)
 241 video nodes
-12,000 transcript-topic connections
+1,696 transcript-concept connections
 1,428 OpenAI semantic video links
 235 distinct trusted source videos represented by selected node links
 ```
@@ -34,7 +34,7 @@ Three.js visual edge
 
 Each video is represented by its title plus evenly sampled timestamped transcript segments. OpenAI `text-embedding-3-small` turns that representation into a vector. Similar vectors create stronger links. The application stores the resulting graph as `public/video-links.json`.
 
-Topic connections are generated separately from transcript co-occurrence. A topic is a repeated meaningful word found in transcript segments. A topic edge exists when two topics appear in the same transcript segment. Every source record retains the originating episode URL and timestamp.
+Topic connections are generated separately from transcript co-occurrence. A concept is a recurring phrase or audited single-word idea found across transcript segments and at least two episodes; grammatical fragments and filler are excluded. A concept edge exists when two concepts appear in the same transcript segment or conversation archive. Every source record retains the originating episode URL and timestamp.
 
 ## Visual language
 
