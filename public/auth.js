@@ -36,5 +36,5 @@ if (config.searchAccessMode === 'workspace') {
   }
   }
 } else if (hint) {
-  hint.firstChild.textContent = 'Public demo · 3 searchable excerpts. Matches are local; no AI call. ';
+  hint.firstChild.textContent = 'Search indexed conversations for moments to publish. OpenAI synthesis when configured. ';
 }

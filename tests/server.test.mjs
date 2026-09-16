@@ -284,20 +284,24 @@ test('scopes named guest questions before ranking and keeps explicit comparisons
   });
 });
 
-test('public demo stays local even when an OpenAI key is configured', async () => {
+test('public demo uses OpenAI when configured and labels local fallback honestly', async () => {
   let openAICalls = 0;
   await withServer({
     openAIKey: 'test-key',
-    fetchImpl: async () => { openAICalls++; throw new Error('public demo must not call OpenAI'); }
+    fetchImpl: async (_url, options) => {
+      openAICalls++;
+      const request = JSON.parse(options.body);
+      const evidence = request.input[1].content.split('\n\nEvidence:\n')[1].split('\n').map(JSON.parse);
+      return new Response(JSON.stringify({ output_text: JSON.stringify({ answer: 'A sourced answer.', citationIds: [evidence[0].id] }) }), { status: 200 });
+    }
   }, async url => {
     const response = await post(url, JSON.stringify({ query: 'What did Vanessa Van Edwards say about talking too much?' }));
     assert.equal(response.status, 200);
     const result = await response.json();
-    assert.equal(result.mode, 'local-demo');
-    assert.match(result.answer, /matched/i);
-    assert.equal(result.citations.length, 1);
+    assert.equal(result.mode, 'openai');
+    assert.equal(result.answer, 'A sourced answer.');
     assert.equal(result.citations[0].id, 'vanessa-talk-too-much');
-    assert.equal(openAICalls, 0);
+    assert.equal(openAICalls, 1);
   });
 });
 

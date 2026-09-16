@@ -502,13 +502,11 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       try {
         result = search
           ? await search(query.trim(), { items, mode })
-          : mode === 'workspace'
-            ? await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: openAITimeoutMs, items, workspace: true })
-            : null;
+          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: openAITimeoutMs, items, workspace: mode === 'workspace' });
       } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; }
-      if (mode === 'demo' && result?.mode === 'openai') result = null;
       const finalResult = result || searchLocal(query.trim(), items);
-      send(response, 200, mode === 'demo' ? { ...finalResult, mode: 'local-demo' } : finalResult);
+      const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
+      send(response, 200, publicResult);
       return;
     }
     let path;

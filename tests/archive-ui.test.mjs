@@ -149,8 +149,8 @@ test('starts with no prefilled or automatic search', async () => {
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   assert.match(html, /id="query"[^>]*value=""[^>]*minlength="2"[^>]*maxlength="500"/);
-  assert.match(html, /Public demo · 3 searchable transcript excerpts\. Local search · no AI\./);
-  assert.match(html, /Map totals are metadata, not search coverage\./);
+  assert.match(html, /Choose a topic\.<br><em>Find a clip\.<\/em>/);
+  assert.match(html, /Choose a topic…/);
   assert.doesNotMatch(app, /if\s*\(query\.value\)\s*form\.requestSubmit\(\)/);
 });
 
@@ -200,7 +200,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.doesNotMatch(app, /LIVE CONNECTION/);
   assert.match(graph, /ARCHIVE MAP/);
   assert.doesNotMatch(graph, /EVIDENCE UNIVERSE/);
-  assert.doesNotMatch(html, /matched excerpts are sent to OpenAI/);
+  assert.match(html, /Search indexed conversations for moments to publish/);
   assert.match(auth, /Workspace search requires sign-in and FlightStory membership\. AI synthesis sends your question and matched excerpts to OpenAI/);
   assert.match(auth, /data-demo-search-count/);
   assert.match(auth, /demoSearchCount\.hidden = true/);
@@ -324,4 +324,10 @@ test('archive graph exposes concepts rather than generic transcript fragments', 
   }
   const nodeIds = new Set(graph.nodes.map(node => node.id));
   assert.ok(graph.edges.every(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target)));
+});
+
+test('transcript result cards expose a direct local draft action', async () => {
+  const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
+  assert.match(app, /data-save-citation=/);
+  assert.match(app, /event\.stopPropagation\(\);[\s\S]*?toggleSaved\(item\)/);
 });
