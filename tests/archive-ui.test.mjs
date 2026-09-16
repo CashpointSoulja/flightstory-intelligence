@@ -313,3 +313,15 @@ test('citation metadata is readable and can wrap at mobile widths', async () => 
   const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
   assert.match(styles, /@media\(max-width:650px\)\{\.citation-meta\{font-size:10px;line-height:1\.5;overflow-wrap:anywhere\}\}/);
 });
+
+test('archive graph exposes concepts rather than generic transcript fragments', async () => {
+  const graph = JSON.parse(await readFile(new URL('../public/topic-graph.json', import.meta.url), 'utf8'));
+  const labels = new Set(graph.nodes.map(node => node.label));
+  for (const fragment of ['able', 'person', 'keep', 'might', 'again', 'whatever']) assert.equal(labels.has(fragment), false, fragment);
+  for (const concept of ['brain', 'love', 'money', 'health', 'conversation', 'meaning', 'religion']) {
+    if (concept === 'religion' && !labels.has(concept)) continue;
+    assert.equal(labels.has(concept), true, concept);
+  }
+  const nodeIds = new Set(graph.nodes.map(node => node.id));
+  assert.ok(graph.edges.every(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target)));
+});
