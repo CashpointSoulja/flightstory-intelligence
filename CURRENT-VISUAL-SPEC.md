@@ -36,6 +36,6 @@ The first decision should always be obvious: ask a question or follow a node. Th
 
 ## 16 September 2026 — light deslop pass
 
-The interface now uses a white, paper-like base for the product shell, with black ink, quiet grey rules, and a single coral signal. The graph remains a contained soft-grey/light canvas so the archive can feel alive without turning the whole product into a dark AI dashboard. Archivo is the display face; IBM Plex Mono is reserved for metadata and controls; Georgia is reserved for quoted evidence.
+The interface now uses a white, paper-like base for the product shell, with black ink, quiet grey rules, and a single coral signal. The graph remains a contained soft-grey/light canvas so the archive can feel alive without turning the whole product into a dark AI dashboard. FlightStory’s Neue Haas Grotesk Display reference is used across the interface, with size and weight—not a second font family—creating hierarchy.
 
 The design commitment is **human, exact, alive, provocative, cinematic** — an **instrument for a living archive of thought**. The main action is asking a question or selecting a node. Repeated prototype explanations, pill-shaped controls, and competing accent colours were reduced. Existing IDs, data attributes, search, graph, evidence, clips, shared review, keyboard behaviour, external links, local storage, and reduced-motion behaviour are preserved.
