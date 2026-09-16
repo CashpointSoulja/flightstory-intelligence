@@ -318,8 +318,7 @@ test('archive graph exposes concepts rather than generic transcript fragments', 
   const graph = JSON.parse(await readFile(new URL('../public/topic-graph.json', import.meta.url), 'utf8'));
   const labels = new Set(graph.nodes.map(node => node.label));
   for (const fragment of ['able', 'person', 'keep', 'might', 'again', 'whatever']) assert.equal(labels.has(fragment), false, fragment);
-  for (const concept of ['brain', 'love', 'money', 'health', 'conversation', 'meaning', 'religion']) {
-    if (concept === 'religion' && !labels.has(concept)) continue;
+  for (const concept of ['brain', 'love', 'money', 'health', 'conversation', 'meaning', 'truth']) {
     assert.equal(labels.has(concept), true, concept);
   }
   const nodeIds = new Set(graph.nodes.map(node => node.id));
