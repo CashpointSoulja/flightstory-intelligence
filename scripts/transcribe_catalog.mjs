@@ -3,7 +3,7 @@ import { spawn } from 'node:child_process';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-export function selectApprovedSources(manifest, catalogEpisodes) {
+export function selectApprovedSources(manifest, catalogEpisodes, { includeIneligible = false } = {}) {
   if (!manifest || !Array.isArray(manifest.sources) || manifest.sources.length === 0) {
     throw new Error('Approved-source manifest must contain a non-empty sources array');
   }
@@ -18,7 +18,7 @@ export function selectApprovedSources(manifest, catalogEpisodes) {
     }
     const episode = episodes.get(source.episodeId);
     if (!episode) throw new Error(`Unknown catalogue episode: ${source.episodeId}`);
-    if (episode.eligibleForTranscription !== true) throw new Error(`Episode is not eligible for transcription: ${source.episodeId}`);
+    if (!includeIneligible && episode.eligibleForTranscription !== true) throw new Error(`Episode is not eligible for transcription: ${source.episodeId}`);
     if (seenEpisodes.has(source.episodeId)) throw new Error(`Duplicate manifest episode: ${source.episodeId}`);
     seenEpisodes.add(source.episodeId);
     if (source.rightsStatus !== 'approved') throw new Error(`Rights are not approved for ${source.episodeId}`);
@@ -58,13 +58,15 @@ export async function transcribeApprovedSource({ source, episode, raw, run = run
 }
 
 async function main() {
-  const [manifestPath, rawArg, progressArg] = process.argv.slice(2);
-  if (!manifestPath) throw new Error('Usage: node scripts/transcribe_catalog.mjs <approved-source-manifest.json> [raw-output-directory] [progress-file]');
+  const [manifestPath, rawArg, progressArg, ...flags] = process.argv.slice(2);
+  if (!manifestPath) throw new Error('Usage: node scripts/transcribe_catalog.mjs <approved-source-manifest.json> [raw-output-directory] [progress-file] [--include-ineligible]');
+  const includeIneligible = flags.includes('--include-ineligible');
+  if (flags.some(flag => flag !== '--include-ineligible')) throw new Error('Unknown option. Supported option: --include-ineligible');
   const raw = rawArg || 'data/raw';
   const progressPath = progressArg || join(raw, 'catalog-progress.json');
   const catalog = JSON.parse(await readFile('public/catalog.json', 'utf8')).episodes;
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-  const sources = selectApprovedSources(manifest, catalog);
+  const sources = selectApprovedSources(manifest, catalog, { includeIneligible });
   await mkdir(raw, { recursive: true });
 
   let progress;
@@ -101,7 +103,7 @@ async function main() {
     }
   }
   await Promise.all(Array.from({ length: 3 }, worker));
-  console.log(JSON.stringify({ total: sources.length, completed: done, failed, pending: sources.length - done - failed, progressPath }));
+  console.log(JSON.stringify({ total: sources.length, completed: done, failed, pending: sources.length - done - failed, includeIneligible, progressPath }));
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

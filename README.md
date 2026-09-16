@@ -33,6 +33,17 @@ The script expects episode JSON files containing `id`, `url`, `title`, and `segm
 
 The catalogue source is `catalog/episodes.json`; it is refreshed from the official public Audioboom RSS feed and currently covers January 2023 onward. The browser-facing metadata and graph snapshots are under `public/`.
 
+### Preparing a bulk manifest
+
+The RSS feed supplies episode metadata, not an exact YouTube video or rights record. Create a complete review template, then fill each row from the approved source register before running transcription:
+
+```sh
+node scripts/create_transcript_manifest.mjs
+node scripts/transcribe_catalog.mjs data/approved-source-manifest.json data/raw data/raw/catalog-progress.json --include-ineligible
+```
+
+The template deliberately uses `pending` rights and empty IDs, so it cannot fetch anything until an operator supplies and reviews the exact video ID, expected channel ID, and approval reference for every source.
+
 ### Approved caption ingestion
 
 `scripts/transcribe_catalog.mjs` requires a separately prepared rights-approved source manifest as its first argument. It accepts only catalogue episodes marked eligible for transcription, checks the exact YouTube video and expected channel with `yt-dlp` metadata, and only then requests English auto-captions. It does not download video. No approvals or real video IDs are stored in this repository.
@@ -54,10 +65,10 @@ Manifest shape:
 Run it from the repository root:
 
 ```sh
-node scripts/transcribe_catalog.mjs /path/to/approved-source-manifest.json [raw-output-directory] [progress-file]
+node scripts/transcribe_catalog.mjs /path/to/approved-source-manifest.json [raw-output-directory] [progress-file] [--include-ineligible]
 ```
 
-The raw-output directory defaults to `data/raw`; the progress file defaults to `data/raw/catalog-progress.json` (or `<raw-output-directory>/catalog-progress.json` when a custom raw directory is supplied). Progress resumes only when the video ID, channel ID, and approval reference still match the manifest.
+The raw-output directory defaults to `data/raw`; the progress file defaults to `data/raw/catalog-progress.json` (or `<raw-output-directory>/catalog-progress.json` when a custom raw directory is supplied). Progress resumes only when the video ID, channel ID, and approval reference still match the manifest. The importer runs three sources concurrently, writes progress atomically after each source, and can resume after interruption. The standard mode accepts the 385 long-form entries; use `--include-ineligible` only when the approved manifest intentionally includes short moments, allowing the full 586-entry RSS catalogue to be processed. Every entry still requires an exact 11-character YouTube ID, expected channel ID, `rightsStatus: "approved"`, and an approval reference; RSS metadata alone cannot create those approvals or safely map its audio GUIDs to videos.
 
 ## Run locally
 

@@ -50,6 +50,13 @@ test('CLI without a manifest exits before creating output or invoking yt-dlp', a
   assert.equal(existsSync(marker), false);
 });
 
+test('short-form catalogue entries require an explicit bulk opt-in', () => {
+  const short = { id: 'ep-short', title: 'Short moment', eligibleForTranscription: false };
+  const source = { ...approved, episodeId: short.id };
+  assert.throws(() => selectApprovedSources(manifest([source]), [short]), /not eligible/);
+  assert.deepEqual(selectApprovedSources(manifest([source]), [short], { includeIneligible: true }).map(({ episode }) => episode.id), ['ep-short']);
+});
+
 test('manifest requires approved rights, an approval reference, an exact video ID, and an expected channel', () => {
   for (const source of [
     { ...approved, rightsStatus: 'unknown' },
