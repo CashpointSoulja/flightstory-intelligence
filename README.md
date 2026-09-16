@@ -33,6 +33,16 @@ The script expects episode JSON files containing `id`, `url`, `title`, and `segm
 
 The catalogue source is `catalog/episodes.json`; it is refreshed from the official public Audioboom RSS feed and currently covers January 2023 onward. The browser-facing metadata and graph snapshots are under `public/`.
 
+### Resolving catalogue videos
+
+When an approved source register does not already contain YouTube IDs, resolve candidate IDs against the expected official channel with `yt-dlp` search:
+
+```sh
+node scripts/resolve_catalog_videos.mjs public/catalog.json data/catalog-video-candidates.json <expected-channel-id> --include-ineligible
+```
+
+This searches the title of each of the 586 catalogue entries, keeps only candidates from the exact channel ID, and applies a conservative title-overlap check. The output is a review queue: candidates remain `rightsStatus: "pending"`, and no source is auto-approved. Review the matched title and exact video manually, then add the approval reference before passing the entries to the transcription importer. Unresolved titles are retained with a reason.
+
 ### Preparing a bulk manifest
 
 The RSS feed supplies episode metadata, not an exact YouTube video or rights record. Create a complete review template, then fill each row from the approved source register before running transcription:

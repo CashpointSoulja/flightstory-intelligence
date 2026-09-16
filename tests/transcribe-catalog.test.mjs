@@ -7,6 +7,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { selectApprovedSources, transcribeApprovedSource } from '../scripts/transcribe_catalog.mjs';
+import { chooseCandidate, titleSimilarity } from '../scripts/resolve_catalog_videos.mjs';
 
 const eligible = { id: 'ep-1', title: 'Long interview', eligibleForTranscription: true };
 const notEligible = { id: 'ep-2', title: 'Short clip', eligibleForTranscription: false };
@@ -15,6 +16,12 @@ const approved = {
   rightsStatus: 'approved', approvalReference: 'rights-ticket-42'
 };
 const manifest = sources => ({ sources });
+
+test('catalogue resolver keeps only exact channel matches and meaningful title matches', () => {
+  assert.ok(titleSimilarity('The Money Habit and Financial Freedom', 'The Money Habit and Financial Freedom | DOAC'), 0.8);
+  assert.equal(chooseCandidate({ title: 'The Money Habit' }, [{ id: 'wrongwrong01', channel_id: 'other', title: 'The Money Habit' }, { id: 'rightvideo01', channel_id: approved.channelId, title: 'The Money Habit | Steven Bartlett' }], approved.channelId).id, 'rightvideo01');
+  assert.equal(chooseCandidate({ title: 'A Completely Different Conversation' }, [{ id: 'rightvideo01', channel_id: approved.channelId, title: 'The Money Habit' }], approved.channelId), null);
+});
 
 test('missing or malformed manifests are rejected before selection', () => {
   assert.throws(() => selectApprovedSources(undefined, [eligible]), /manifest/);
@@ -95,4 +102,14 @@ test('captions are requested only after exact metadata verification', async () =
   assert.ok(calls[1].includes('--write-auto-subs'));
   assert.ok(calls[0].at(-1).endsWith(approved.videoId));
   assert.equal(calls[0].at(-1), calls[1].at(-1));
+});
+
+import { parseTimestamp, parseVtt } from '../scripts/normalize_vtt.mjs';
+test('VTT normalizer preserves cue boundaries and readable text', () => {
+  assert.equal(parseTimestamp('00:01:02.500'), 62.5);
+  assert.equal(parseTimestamp('01:02.500'), 62.5);
+  assert.deepEqual(parseVtt('WEBVTT\n\n00:00:01.000 --> 00:00:03.500\n<c.green>Hello &amp; world</c>\n\n2\n00:00:04,000 --> 00:00:05,000\nSecond cue'), [
+    { start: 1, end: 3.5, text: 'Hello & world' },
+    { start: 4, end: 5, text: 'Second cue' },
+  ]);
 });
