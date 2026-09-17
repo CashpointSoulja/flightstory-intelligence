@@ -10,3 +10,4 @@ raw/
 /insforge/migrations/
 /supabase/migrations/
 /tests/
+data/audio/
