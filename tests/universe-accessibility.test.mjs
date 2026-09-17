@@ -30,3 +30,12 @@ test('3D clicks fall back to nearby visible nodes only after an exact raycast mi
   assert.match(graph, /const intersections = raycaster\.intersectObjects\(visibleNodes\);\s*if \(intersections\.length \|\| !pointerDown\) return intersections;/);
   assert.match(graph, /nearestNodeWithinRadius\(projected, event\.clientX, event\.clientY\)/);
 });
+
+test('topic inspectors expose linked transcript moments with timestamped source links', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+
+  assert.match(graph, /data\.kind === 'topic' \? \(data\.sources \|\| \[\]\) : \[\]/);
+  assert.match(graph, /link\.textContent = `\$\{moment\.title\} · \$\{formatTime\(moment\.seconds\)\} ↗`/);
+  assert.match(graph, /nodeSourceUrl\(\{ source: moment\.url, seconds: moment\.seconds \}\)/);
+  assert.match(graph, /setAttribute\('aria-label', 'Linked transcript moments'\)/);
+});
