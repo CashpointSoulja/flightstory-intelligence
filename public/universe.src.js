@@ -88,7 +88,7 @@ function addNode(data, position, geometry, scale = 1) {
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.copy(position);
   mesh.scale.setScalar(scale);
-  mesh.userData = data;
+  mesh.userData = { ...data, baseScale: scale };
   root.add(mesh);
   nodes.push(mesh);
   return mesh;
@@ -175,6 +175,18 @@ for (const edge of graph.edges) { const from = topicPositions.get(edge.source); 
 const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x665b78, transparent: true, opacity: .16 }));
 graphLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
 root.add(graphLines);
+// A small neural signal layer gives the concept field a living rhythm without adding hit targets.
+const neuralLinks = [];
+for (const [index, edge] of graph.edges.slice(0, 18).entries()) {
+  const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target);
+  if (!from || !to) continue;
+  const line = new THREE.Line(
+    new THREE.BufferGeometry().setFromPoints([from, to]),
+    new THREE.LineBasicMaterial({ color: topicColor(graph.nodes.find(node => node.id === edge.source)?.label || ''), transparent: true, opacity: 0, depthWrite: false })
+  );
+  line.userData.signalPhase = index / 18;
+  root.add(line); neuralLinks.push(line);
+}
 const videoEdgePositions = [];
 const videoEdgePairs = [];
 for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) { videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); if (videoEdgePairs.length < 220) videoEdgePairs.push([from, to]); } }
@@ -215,6 +227,7 @@ applyGraphLayer = layer => {
   topicCoreLines.forEach(line => { line.visible = visible.topics; });
   evidenceCoreLines.forEach(line => { line.visible = visible.evidence; });
   graphLines.visible = visible.topics;
+  neuralLinks.forEach(line => { line.visible = visible.topics; });
   videoLines.visible = visible.videos;
   connectionMarkers.forEach(marker => { marker.visible = visible.videos; });
   sparks.visible = visible.videos;
@@ -323,7 +336,16 @@ function renderFrame(timestamp) {
   } else {
     videoLines.material.opacity = activeIds.size ? .25 : .16;
   }
-  for (const node of topicNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;
+  for (const node of topicNodes) {
+    node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;
+    const pulse = reducedMotion ? 1 : 1 + Math.max(0, Math.sin(now * 1.7 + node.userData.id.length * .41)) * .045;
+    node.scale.setScalar(node.userData.baseScale * pulse);
+  }
+  for (const line of neuralLinks) {
+    const phase = (now * .16 + line.userData.signalPhase) % 1;
+    const envelope = Math.sin(phase * Math.PI);
+    line.material.opacity = reducedMotion ? 0 : .05 + envelope * .19;
+  }
   for (const node of videoNodes) node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? 1 : .18) : .75;
   for (let index = 0; index < videoEdgePairs.length; index += 1) {
     const [from, to] = videoEdgePairs[index];
