@@ -185,7 +185,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.match(app, /result\.mode === 'local-demo' \? 'LOCAL MATCH · DEMO EXCERPTS'/);
   assert.match(app, /const answer = result\.mode === 'local-demo' \? '' : Array\.isArray\(result\.claims\)/);
   assert.match(app, /\['ai_match', 'ai-match'\]\.includes\(result\.mode\) \? 'AI MATCH · EXCERPTS ONLY'/);
-  assert.match(app, /result\.mode === 'openai' \? 'AI SYNTHESIS'/);
+  assert.match(app, /result\.mode === 'openai' \? 'GPT SPARK · FAST AI PASS'/);
   assert.match(app, /claim\.citationIds\.map\(id =>/);
   assert.match(app, /data-claim-source=/);
   assert.match(app, /content\.querySelectorAll\('\[data-claim-source\]'\)/);
@@ -200,8 +200,8 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.doesNotMatch(app, /LIVE CONNECTION/);
   assert.match(graph, /ARCHIVE MAP/);
   assert.doesNotMatch(graph, /EVIDENCE UNIVERSE/);
-  assert.match(html, /Search indexed conversations for moments to publish/);
-  assert.match(auth, /Workspace search requires sign-in and FlightStory membership\. AI synthesis sends your question and matched excerpts to OpenAI/);
+  assert.match(html, /GPT Spark finds moments to publish/);
+  assert.match(auth, /Workspace search requires sign-in and FlightStory membership\. GPT Spark sends your question and matched excerpts to OpenAI/);
   assert.match(auth, /data-demo-search-count/);
   assert.match(auth, /demoSearchCount\.hidden = true/);
   assert.match(app, /Private source · public video link unavailable/);

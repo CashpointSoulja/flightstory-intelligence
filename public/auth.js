@@ -1,7 +1,7 @@
 const config = await fetch('/api/config').then(response => response.json()).catch(() => ({}));
 const hint = document.querySelector('#hint');
 if (config.searchAccessMode === 'workspace') {
-  if (hint) hint.firstChild.textContent = 'Workspace search requires sign-in and FlightStory membership. AI synthesis sends your question and matched excerpts to OpenAI. ';
+  if (hint) hint.firstChild.textContent = 'Workspace search requires sign-in and FlightStory membership. GPT Spark sends your question and matched excerpts to OpenAI. ';
   const coverageLabel = document.querySelector('[data-coverage-label]');
   if (coverageLabel) coverageLabel.textContent = 'WORKSPACE SEARCH';
   const demoSearchCount = document.querySelector('[data-demo-search-count]');
@@ -36,5 +36,5 @@ if (config.searchAccessMode === 'workspace') {
   }
   }
 } else if (hint) {
-  hint.firstChild.textContent = 'Search indexed conversations for moments to publish. OpenAI synthesis when configured. ';
+  hint.firstChild.textContent = 'Search indexed conversations for moments to publish. GPT Spark · fast OpenAI pass when configured. ';
 }
