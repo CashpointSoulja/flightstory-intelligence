@@ -9,6 +9,15 @@ const count = document.querySelector('#result-count');
 const heading = document.querySelector('#question-heading');
 const queueCount = document.querySelector('#queue-count');
 const clipList = document.querySelector('#clip-list');
+const workspaceTitle = document.querySelector('#workspace-title');
+const workspaceIntro = document.querySelector('#workspace-intro');
+document.querySelectorAll('[data-workspace]').forEach(button => button.addEventListener('click', () => {
+  const clips = button.dataset.workspace === 'clips';
+  document.querySelectorAll('[data-workspace]').forEach(tab => tab.setAttribute('aria-selected', String(tab === button)));
+  workspaceTitle.innerHTML = clips ? 'Choose a topic.<br><em>Make a clip.</em>' : 'Choose a topic.<br><em>Find a clip.</em>';
+  workspaceIntro.textContent = clips ? 'Find a transcript moment, then choose a cut length.' : 'Search the archive for a sourced moment.';
+  query.placeholder = clips ? 'Find a clip about…' : 'Search the archive…';
+}));
 let current = [];
 let queue = loadSavedItems(() => window.localStorage);
 let searchRequest = 0;
