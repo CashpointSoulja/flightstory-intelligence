@@ -1,0 +1,5020 @@
+{
+ "id": "UclrVWafRAI",
+ "title": "The AI Safety Expert: These Are The Only 5 Jobs That Will Remain In 2030! - Dr. Roman Yampolskiy",
+ "upload_date": "20250904",
+ "duration": 5258,
+ "url": "https://www.youtube.com/watch?v=UclrVWafRAI",
+ "words": 15152,
+ "segments": [
+  {
+   "start": 0.0,
+   "end": 15.2,
+   "text": "You've been working on AI safety for two decades at least. >> Yeah. I was convinced we can make safe AI, but the more I looked at it, the more I realized is not something we can actually do. You have made a series of predictions about variety of different dates. So, what is your prediction for 2027?"
+  },
+  {
+   "start": 19.36,
+   "end": 31.28,
+   "text": "Dr. Roman Yampolskiy is a globally recognized voice on AI safety and associate professor of computer science. He educates people on the terrifying truth of AI >> and what we need to do to save humanity. In 2 years, the capability"
+  },
+  {
+   "start": 32.24,
+   "end": 43.24,
+   "text": "to replace most humans in most occupations will come very quickly. And then in 5 years, we're looking at a world where we have levels of unemployment we've never seen before. Not talking about 10% but 99%."
+  },
+  {
+   "start": 45.08,
+   "end": 46.12,
+   "text": "And that's without super intelligence,"
+  },
+  {
+   "start": 47.16,
+   "end": 60.16,
+   "text": "a system smarter than all humans in all domains. So, it would be better than us at making new AI. But it's worse than that. We don't know how to make them safe. And yet we still have the smartest people in the world competing to win the race to super intelligence."
+  },
+  {
+   "start": 61.08,
+   "end": 77.64,
+   "text": "But what do you make of people like Sam Altman's journey with AI? So, a decade ago, we published guardrails for how to do AI right. They violated every single one. And he's gambling 8 billion lives on getting richer and more powerful. So, I guess some people want to go to Mars. Others want to control the universe."
+  },
+  {
+   "start": 78.72,
+   "end": 86.0,
+   "text": "But it doesn't matter who builds it. The moment you switch to super intelligence, we will most likely regret it terribly. And then by 2045?"
+  },
+  {
+   "start": 87.92,
+   "end": 89.04,
+   "text": "Now, this is where it gets interesting."
+  },
+  {
+   "start": 90.24,
+   "end": 99.2,
+   "text": "Dr. Roman Yampolskiy, let's talk about simulation theory. I think we are in one. And there is a lot of agreement on this. And this is what you should be doing in it so they don't shut it down."
+  },
+  {
+   "start": 100.16,
+   "end": 100.16,
+   "text": "First,"
+  },
+  {
+   "start": 102.76,
+   "end": 116.28,
+   "text": "I see messages all the time in the comment section that some of you didn't realize you didn't subscribe. So, if you could do me a favor and double-check if you're a subscriber to this channel, that would be tremendously appreciated. It's the simple, it's the free thing that anybody that watches this show frequently can do to help us"
+  },
+  {
+   "start": 116.44,
+   "end": 125.52,
+   "text": "here to keep everything going in this show in the trajectory it's on. So, please do double-check if you subscribed and uh thank you so much because in a strange way you are you're part of our history"
+  },
+  {
+   "start": 126.52,
+   "end": 129.6,
+   "text": "and you're on this journey with us and I appreciate you for that. So, yeah, thank you."
+  },
+  {
+   "start": 133.68,
+   "end": 135.04,
+   "text": "Dr. Roman Yampolskiy."
+  },
+  {
+   "start": 137.24,
+   "end": 144.84,
+   "text": "What is the mission that you're currently on? Cuz it's quite clear to me that you are on a bit of a mission and you've been on this mission for, I think, the best part of two decades at least."
+  },
+  {
+   "start": 146.28,
+   "end": 152.32,
+   "text": "I'm hoping to make sure that super intelligence we are creating right now does not kill everyone."
+  },
+  {
+   "start": 157.32,
+   "end": 160.64,
+   "text": "Give me some Give me some context on that statement cuz it's quite a shocking statement."
+  },
+  {
+   "start": 161.92,
+   "end": 163.12,
+   "text": "Sure. So, the last decade,"
+  },
+  {
+   "start": 164.12,
+   "end": 167.52,
+   "text": "we actually figured out how to make artificial intelligence better."
+  },
+  {
+   "start": 168.68,
+   "end": 169.88,
+   "text": "Turns out if you add more compute,"
+  },
+  {
+   "start": 170.84,
+   "end": 171.04,
+   "text": "more data,"
+  },
+  {
+   "start": 172.16,
+   "end": 173.68,
+   "text": "it just kind of becomes smarter."
+  },
+  {
+   "start": 175.04,
+   "end": 177.12,
+   "text": "And so now, smartest people in the world,"
+  },
+  {
+   "start": 178.08,
+   "end": 178.68,
+   "text": "billions of dollars,"
+  },
+  {
+   "start": 179.64,
+   "end": 183.56,
+   "text": "all going to create the best possible super intelligence we can."
+  },
+  {
+   "start": 184.72,
+   "end": 188.0,
+   "text": "Unfortunately, while we know how to make the systems much more capable,"
+  },
+  {
+   "start": 189.44,
+   "end": 190.4,
+   "text": "we don't know how to make them safe."
+  },
+  {
+   "start": 191.96,
+   "end": 192.12,
+   "text": "How to"
+  },
+  {
+   "start": 193.04,
+   "end": 195.04,
+   "text": "make sure they don't do something we will regret."
+  },
+  {
+   "start": 196.96,
+   "end": 199.56,
+   "text": "And that's the state of the art right now. When we look at"
+  },
+  {
+   "start": 200.6,
+   "end": 203.92,
+   "text": "just prediction markets, how soon will we get to advanced AI?"
+  },
+  {
+   "start": 205.4,
+   "end": 206.92,
+   "text": "The timelines are very short, couple years."
+  },
+  {
+   "start": 208.24,
+   "end": 212.64,
+   "text": "Two, three years according to prediction markets, according to CEOs of top labs."
+  },
+  {
+   "start": 214.36,
+   "end": 215.28,
+   "text": "And at the same time,"
+  },
+  {
+   "start": 216.8,
+   "end": 221.36,
+   "text": "we don't know how to make sure that the systems are aligned with our preferences."
+  },
+  {
+   "start": 223.24,
+   "end": 225.24,
+   "text": "So, we are creating this alien intelligence."
+  },
+  {
+   "start": 226.84,
+   "end": 231.32,
+   "text": "If aliens were coming to Earth and you had 3 years to prepare,"
+  },
+  {
+   "start": 233.0,
+   "end": 233.96,
+   "text": "you would be panicking right now."
+  },
+  {
+   "start": 235.16,
+   "end": 237.56,
+   "text": "But most people don't don't even realize this is happening."
+  },
+  {
+   "start": 240.0,
+   "end": 241.56,
+   "text": "So, some of the counterarguments might be,"
+  },
+  {
+   "start": 242.48,
+   "end": 246.72,
+   "text": "well, these are very, very smart people. These are very big companies with lots of money. They have a obligation"
+  },
+  {
+   "start": 248.12,
+   "end": 249.72,
+   "text": "and a moral obligation but also just"
+  },
+  {
+   "start": 250.64,
+   "end": 261.08,
+   "text": "a legal obligation to make sure they do no harm. So, I'm sure it'll be fine. The only obligation they have is to make money for their investors. That's the legal obligation they have. They have no moral or ethical obligations."
+  },
+  {
+   "start": 262.24,
+   "end": 271.52,
+   "text": "Also, according to them, they don't know how to do it yet. The state-of-the-art answers are, we'll figure it out when we get there or AI will help us control more advanced AI."
+  },
+  {
+   "start": 273.04,
+   "end": 273.2,
+   "text": "That's insane."
+  },
+  {
+   "start": 274.72,
+   "end": 278.96,
+   "text": "In terms of probability, what do you think is the probability that something goes catastrophically wrong?"
+  },
+  {
+   "start": 280.68,
+   "end": 288.0,
+   "text": "So, nobody can tell you for sure what's going to happen. But if you're not in charge, you're not controlling it, you will not get outcomes you want."
+  },
+  {
+   "start": 288.92,
+   "end": 290.96,
+   "text": "The space of possibilities is almost infinite."
+  },
+  {
+   "start": 291.96,
+   "end": 294.16,
+   "text": "The space of outcomes we will like is tiny."
+  },
+  {
+   "start": 296.12,
+   "end": 296.12,
+   "text": "And"
+  },
+  {
+   "start": 297.36,
+   "end": 300.32,
+   "text": "who are you and how long have you been working on this?"
+  },
+  {
+   "start": 301.84,
+   "end": 305.56,
+   "text": "I'm a computer scientist by training. I have a PhD in computer science and engineering."
+  },
+  {
+   "start": 306.96,
+   "end": 309.16,
+   "text": "I probably started work in AI safety,"
+  },
+  {
+   "start": 310.6,
+   "end": 313.96,
+   "text": "mildly defined as control of bots at the time,"
+  },
+  {
+   "start": 315.12,
+   "end": 315.68,
+   "text": "15 years ago."
+  },
+  {
+   "start": 317.24,
+   "end": 330.4,
+   "text": "15 years ago. So, you've been working on AI safety before it was cool. Before the term existed. I coined the term AI safety. So, you're the founder of the term AI safety? The term, yes, not the field. There are other people who did brilliant work before I got there."
+  },
+  {
+   "start": 331.48,
+   "end": 343.0,
+   "text": "Why were you thinking about this 15 years ago? Because most people have only been talking about the term AI safety for the last two or three years. Yeah, it started very mildly just as a security project. I was looking at poker bots."
+  },
+  {
+   "start": 344.08,
+   "end": 346.6,
+   "text": "And I realized that the bots are getting better and better."
+  },
+  {
+   "start": 348.04,
+   "end": 350.2,
+   "text": "And if you just project this forward enough,"
+  },
+  {
+   "start": 351.8,
+   "end": 354.2,
+   "text": "they're going to get better than us, smarter, more capable."
+  },
+  {
+   "start": 355.2,
+   "end": 358.0,
+   "text": "And it happened. They are playing poker way better than average players."
+  },
+  {
+   "start": 359.04,
+   "end": 359.04,
+   "text": "But"
+  },
+  {
+   "start": 360.04,
+   "end": 363.88,
+   "text": "more generally, it will happen with all other domains, all the other cyber resources."
+  },
+  {
+   "start": 365.52,
+   "end": 371.96,
+   "text": "I wanted to make sure AI is a technology which is beneficial for everyone. So, I started work on making AI safer."
+  },
+  {
+   "start": 374.08,
+   "end": 376.4,
+   "text": "Was there a particular moment in your career where you thought,"
+  },
+  {
+   "start": 377.52,
+   "end": 377.76,
+   "text": "\"Oh my god.\"?"
+  },
+  {
+   "start": 379.44,
+   "end": 394.76,
+   "text": "First 5 years at least, I was working on solving this problem. I was convinced we can make happen, we can make safe AI. That was the goal. But the more I looked at it, the more I realized every single component of that equation is not something we can actually do."
+  },
+  {
+   "start": 395.76,
+   "end": 399.4,
+   "text": "And the more you zoom in, it's like a fractal. You go in and you find 10 more problems"
+  },
+  {
+   "start": 400.36,
+   "end": 401.64,
+   "text": "and then 100 more problems."
+  },
+  {
+   "start": 402.64,
+   "end": 404.76,
+   "text": "And all of them are not just difficult,"
+  },
+  {
+   "start": 405.68,
+   "end": 406.68,
+   "text": "they're impossible to solve."
+  },
+  {
+   "start": 407.6,
+   "end": 407.92,
+   "text": "There is no"
+  },
+  {
+   "start": 408.92,
+   "end": 414.0,
+   "text": "seminal work in this field where like, we solved this. We don't have to worry about this. There are patches."
+  },
+  {
+   "start": 415.0,
+   "end": 420.4,
+   "text": "There are little fixes we put in place and quickly people find ways to work around them. They jailbreak"
+  },
+  {
+   "start": 421.52,
+   "end": 423.72,
+   "text": "whatever safety mechanisms we have. So,"
+  },
+  {
+   "start": 424.64,
+   "end": 425.84,
+   "text": "while progress in"
+  },
+  {
+   "start": 426.8,
+   "end": 427.12,
+   "text": "AI capabilities"
+  },
+  {
+   "start": 428.08,
+   "end": 430.12,
+   "text": "is exponential or maybe even hyper exponential,"
+  },
+  {
+   "start": 431.6,
+   "end": 433.64,
+   "text": "progress in AI safety is linear or constant."
+  },
+  {
+   "start": 434.92,
+   "end": 435.52,
+   "text": "The gap is increasing."
+  },
+  {
+   "start": 436.88,
+   "end": 437.2,
+   "text": "The gap between"
+  },
+  {
+   "start": 438.6,
+   "end": 445.2,
+   "text": "the the how capable the systems are and how well we can control them, predict what they're going to do, explain their decision-making."
+  },
+  {
+   "start": 446.96,
+   "end": 451.8,
+   "text": "I think this is quite an important point because you said that we're basically patching over the issues that we find."
+  },
+  {
+   "start": 452.84,
+   "end": 454.16,
+   "text": "So, we're developing this this core intelligence"
+  },
+  {
+   "start": 455.08,
+   "end": 456.28,
+   "text": "and then to stop it doing things"
+  },
+  {
+   "start": 458.44,
+   "end": 460.68,
+   "text": "or to stop it showing some of its unpredictability"
+  },
+  {
+   "start": 461.72,
+   "end": 462.36,
+   "text": "or its threats,"
+  },
+  {
+   "start": 463.88,
+   "end": 480.32,
+   "text": "the companies that are developing this AI are programming in code over the top to say, \"Okay, don't swear. Don't say that rude word. Don't do that bad thing.\" Exactly. And you can look at other examples of that. So, HR manuals, right? We have those humans, they're general intelligences, but you want them to behave in a company. So,"
+  },
+  {
+   "start": 480.48,
+   "end": 486.92,
+   "text": "they have a policy. No sexual harassment. No this, no that. But if you're smart enough, you always find a workaround."
+  },
+  {
+   "start": 488.16,
+   "end": 492.12,
+   "text": "So, you're just pushing behavior into a different, not yet restricted subdomain."
+  },
+  {
+   "start": 494.84,
+   "end": 496.76,
+   "text": "We We should probably define some terms here."
+  },
+  {
+   "start": 497.88,
+   "end": 500.12,
+   "text": "So, there's narrow intelligence which can play chess or whatever. There's"
+  },
+  {
+   "start": 501.08,
+   "end": 501.76,
+   "text": "artificial general intelligence"
+  },
+  {
+   "start": 502.72,
+   "end": 506.76,
+   "text": "which can operate across domains. And then super intelligence which is smarter than all humans in all domains."
+  },
+  {
+   "start": 507.88,
+   "end": 508.36,
+   "text": "And where are we?"
+  },
+  {
+   "start": 509.56,
+   "end": 510.72,
+   "text": "So, that's a very fuzzy"
+  },
+  {
+   "start": 512.12,
+   "end": 525.88,
+   "text": "boundary, right? We definitely have many excellent narrow systems, no question about it. And they are super intelligent in that narrow domain. So, protein folding is a problem which was solved using narrow AI and it's superior to all humans in that domain."
+  },
+  {
+   "start": 526.88,
+   "end": 542.28,
+   "text": "In terms of AGI, again I said, if we showed what we have today to a scientist from 20 years ago, they would be convinced we have full-blown AGI. We have systems which can learn. They can perform in hundreds of domains and they're better than human in many of them."
+  },
+  {
+   "start": 543.36,
+   "end": 546.12,
+   "text": "So, you can argue we have a weak version of AGI."
+  },
+  {
+   "start": 548.12,
+   "end": 555.4,
+   "text": "Now, we don't have super intelligence yet. We still have brilliant humans who are completely dominating AI, especially in science and engineering."
+  },
+  {
+   "start": 556.84,
+   "end": 561.8,
+   "text": "But that gap is closing so fast. You can see especially in the domain of mathematics."
+  },
+  {
+   "start": 563.4,
+   "end": 563.92,
+   "text": "3 years ago,"
+  },
+  {
+   "start": 565.12,
+   "end": 567.12,
+   "text": "large language models couldn't do basic algebra."
+  },
+  {
+   "start": 568.48,
+   "end": 570.28,
+   "text": "Multiplying three-digit numbers was a challenge."
+  },
+  {
+   "start": 571.24,
+   "end": 574.48,
+   "text": "Now, they're helping with mathematical proofs. They're winning mathematics"
+  },
+  {
+   "start": 575.44,
+   "end": 576.2,
+   "text": "Olympiads, competitions."
+  },
+  {
+   "start": 577.4,
+   "end": 581.36,
+   "text": "They're working on solving millennial problems, hardest problems in mathematics."
+  },
+  {
+   "start": 582.32,
+   "end": 592.68,
+   "text": "So, in 3 years, we closed the gap from subhuman performance to better than most mathematicians in the world. And we see the same process happening in science and engineering."
+  },
+  {
+   "start": 594.0,
+   "end": 600.6,
+   "text": "You have made a series of predictions and they correspond to a variety of different dates and I have those dates in front of me here."
+  },
+  {
+   "start": 602.6,
+   "end": 604.52,
+   "text": "What is your prediction for the year 2027?"
+  },
+  {
+   "start": 607.64,
+   "end": 609.2,
+   "text": "We're probably looking at AGI"
+  },
+  {
+   "start": 610.44,
+   "end": 613.4,
+   "text": "as predicted by prediction markets and tops of the labs."
+  },
+  {
+   "start": 614.48,
+   "end": 616.08,
+   "text": "So we'd have artificial general intelligence by 2027."
+  },
+  {
+   "start": 618.0,
+   "end": 619.56,
+   "text": "And how would that make the world different"
+  },
+  {
+   "start": 621.04,
+   "end": 621.52,
+   "text": "to how it is now?"
+  },
+  {
+   "start": 622.72,
+   "end": 624.92,
+   "text": "So if you have this concept of a drop-in"
+  },
+  {
+   "start": 626.4,
+   "end": 633.04,
+   "text": "you have free labor, physical and cognitive, trillions of dollars of it. It makes no sense to hire humans for most jobs."
+  },
+  {
+   "start": 634.32,
+   "end": 639.2,
+   "text": "If I can just get, you know, a $20 subscription or free model to do what an employee does,"
+  },
+  {
+   "start": 640.24,
+   "end": 641.96,
+   "text": "first, anything on a computer will be automated."
+  },
+  {
+   "start": 643.68,
+   "end": 649.84,
+   "text": "And next thing, humanoid robots are maybe 5 years behind, so in 5 years all the physical labor can also be automated."
+  },
+  {
+   "start": 651.32,
+   "end": 658.52,
+   "text": "So we're looking at a world where we have levels of unemployment we've never seen before. Not talking about 10% unemployment, which is scary,"
+  },
+  {
+   "start": 659.48,
+   "end": 660.16,
+   "text": "but 99%."
+  },
+  {
+   "start": 661.44,
+   "end": 664.28,
+   "text": "All you have left is jobs where, for whatever reason,"
+  },
+  {
+   "start": 665.24,
+   "end": 667.04,
+   "text": "you prefer another human would do it for you."
+  },
+  {
+   "start": 668.68,
+   "end": 669.4,
+   "text": "But anything else"
+  },
+  {
+   "start": 670.44,
+   "end": 674.64,
+   "text": "can be fully automated. It doesn't mean it will be automated in practice. A lot of times"
+  },
+  {
+   "start": 675.72,
+   "end": 677.44,
+   "text": "technology exists, but it's not deployed."
+  },
+  {
+   "start": 678.56,
+   "end": 680.32,
+   "text": "Video phones were invented in the '70s."
+  },
+  {
+   "start": 681.4,
+   "end": 683.12,
+   "text": "Nobody had them until iPhones came around."
+  },
+  {
+   "start": 685.32,
+   "end": 691.2,
+   "text": "So we may have a lot more time with jobs and with world which looks like this. But capability"
+  },
+  {
+   "start": 692.92,
+   "end": 696.0,
+   "text": "to replace most humans in most occupations will come very quickly."
+  },
+  {
+   "start": 698.08,
+   "end": 702.08,
+   "text": "Okay, so let's try and drill down into that and and stress test it."
+  },
+  {
+   "start": 703.04,
+   "end": 703.04,
+   "text": "So"
+  },
+  {
+   "start": 706.32,
+   "end": 707.36,
+   "text": "a podcaster like me,"
+  },
+  {
+   "start": 708.8,
+   "end": 710.44,
+   "text": "would you need a podcaster like me?"
+  },
+  {
+   "start": 712.76,
+   "end": 714.6,
+   "text": "So let's look at what you do. You prepare,"
+  },
+  {
+   "start": 715.68,
+   "end": 715.68,
+   "text": "you"
+  },
+  {
+   "start": 717.48,
+   "end": 717.76,
+   "text": "ask questions,"
+  },
+  {
+   "start": 718.8,
+   "end": 728.48,
+   "text": "you ask follow-up questions, and you look good on camera. Thank you so much. Let's see what we can do. Large language model today can easily read everything I wrote Yeah. and have very solid understanding."
+  },
+  {
+   "start": 729.52,
+   "end": 741.2,
+   "text": "Better, I assume you haven't read every single one of my books. I haven't. Yeah. That thing would do it. It can train on every podcast you ever did, so it knows exactly your style, the types of questions you ask. It can also"
+  },
+  {
+   "start": 742.96,
+   "end": 748.88,
+   "text": "find correspondence between what worked really well, like this type of question really increased viewers, this type of"
+  },
+  {
+   "start": 749.96,
+   "end": 751.76,
+   "text": "topic was very promising, so it can optimize,"
+  },
+  {
+   "start": 752.76,
+   "end": 758.88,
+   "text": "I think, better than you can because you don't have a data set. Of course, visual simulation is trivial at this point."
+  },
+  {
+   "start": 759.8,
+   "end": 770.4,
+   "text": "So it can you can make a video within seconds of me sat here and So we can generate videos of you interviewing anyone on any topic very efficiently and you just have to get"
+  },
+  {
+   "start": 771.48,
+   "end": 772.76,
+   "text": "likeness approval, whatever."
+  },
+  {
+   "start": 773.92,
+   "end": 780.76,
+   "text": "Are there many jobs that you think would remain in a world of AGI? If you're saying AGI is potentially going to be here, whether it's deployed or not, by 2027,"
+  },
+  {
+   "start": 782.4,
+   "end": 787.48,
+   "text": "what kind and then okay, so let's take out of this any physical labor jobs for a second."
+  },
+  {
+   "start": 788.56,
+   "end": 792.24,
+   "text": "Are there any jobs that you think a human would be able to do better in a world of AGI"
+  },
+  {
+   "start": 793.44,
+   "end": 800.0,
+   "text": "still? So that's the question I often ask people. In the world with AGI, and I think almost immediately we'll get superintelligence"
+  },
+  {
+   "start": 800.96,
+   "end": 804.2,
+   "text": "as a side effect. So the question really is, in a world of superintelligence,"
+  },
+  {
+   "start": 805.28,
+   "end": 809.48,
+   "text": "which is defined as better than all humans in all domains, what can you contribute?"
+  },
+  {
+   "start": 811.44,
+   "end": 814.16,
+   "text": "And so you know better than anyone what it's like to be you."
+  },
+  {
+   "start": 815.6,
+   "end": 821.52,
+   "text": "You know what ice cream tastes to you. Can you get paid for that knowledge? Is someone interested in that?"
+  },
+  {
+   "start": 823.28,
+   "end": 824.48,
+   "text": "Maybe not, not a big market."
+  },
+  {
+   "start": 825.52,
+   "end": 831.24,
+   "text": "There are jobs where you want a human. Maybe you're rich and you want a human accountant for whatever historic reasons."
+  },
+  {
+   "start": 833.72,
+   "end": 834.6,
+   "text": "Old people like"
+  },
+  {
+   "start": 835.76,
+   "end": 841.12,
+   "text": "traditional ways of doing things. Warren Buffett would not switch to AI. He would use his human accountant."
+  },
+  {
+   "start": 842.72,
+   "end": 844.44,
+   "text": "But it's a tiny subset of a market."
+  },
+  {
+   "start": 845.4,
+   "end": 847.32,
+   "text": "Today we have products which are man-made"
+  },
+  {
+   "start": 848.92,
+   "end": 853.2,
+   "text": "in US as opposed to mass-produced in China, and some people pay more to have those."
+  },
+  {
+   "start": 854.16,
+   "end": 856.84,
+   "text": "But it's a small subset. It's a almost a fetish."
+  },
+  {
+   "start": 858.24,
+   "end": 863.24,
+   "text": "There is no practical reason for it. And I think anything you can do on a computer could be automated"
+  },
+  {
+   "start": 864.6,
+   "end": 865.0,
+   "text": "using that technology."
+  },
+  {
+   "start": 867.68,
+   "end": 874.08,
+   "text": "You must hear a lot of rebuttals to when this when you say it because people experience a huge amount of mental discomfort when they hear"
+  },
+  {
+   "start": 875.16,
+   "end": 885.56,
+   "text": "that their job, their career, the thing they got a degree in, the thing they invested $100,000 into is going to be taken away from them. So their natural reaction, some for some people is that cognitive dissonance that no, you're wrong."
+  },
+  {
+   "start": 886.48,
+   "end": 892.44,
+   "text": "AI can't be creative. It's not this, it's not that. It will never be interested in my job. I'll be fine because"
+  },
+  {
+   "start": 893.88,
+   "end": 897.64,
+   "text": "you hear these arguments all the time, right? >> It's really funny. I ask people and I ask"
+  },
+  {
+   "start": 898.64,
+   "end": 908.96,
+   "text": "people in different occupations. I'll ask my Uber driver, are you worried about self-driving cars? And they go, \"No. No one can do what I do. I know the streets of New York. I can navigate like no AI."
+  },
+  {
+   "start": 910.16,
+   "end": 910.32,
+   "text": "I'm safe.\""
+  },
+  {
+   "start": 911.24,
+   "end": 916.6,
+   "text": "And it's true for any job. Professors are saying this to me. Oh, nobody can lecture like I do. Like this is so special."
+  },
+  {
+   "start": 917.8,
+   "end": 921.52,
+   "text": "But you understand it's ridiculous. We already have self-driving cars replacing drivers."
+  },
+  {
+   "start": 923.12,
+   "end": 924.04,
+   "text": "That is not even a question"
+  },
+  {
+   "start": 925.76,
+   "end": 927.96,
+   "text": "if it's possible. It's like how soon before you're fired."
+  },
+  {
+   "start": 930.2,
+   "end": 944.16,
+   "text": "Yeah, I mean, I've just been in LA yesterday and my car drives itself. So I get in the car, I set I put in where I want to go, and then I don't touch the steering wheel or the brake pedals, and it takes me from A to B, even if it's an hour-long drive without any intervention at"
+  },
+  {
+   "start": 944.28,
+   "end": 951.76,
+   "text": "all. I actually still park it, but other than that, I'm not I'm not driving the car at all. And then obviously in LA we also have Waymo now, which means"
+  },
+  {
+   "start": 952.92,
+   "end": 966.44,
+   "text": "you order it on your phone and it shows up with no driver in it and takes you to where you want to go. Oh, yeah. So it's quite clear to see how that is potentially a matter of time. For those people, cuz we do have some of those people listening to this conversation right now, that their occupation"
+  },
+  {
+   "start": 966.92,
+   "end": 967.04,
+   "text": "is driving,"
+  },
+  {
+   "start": 968.64,
+   "end": 971.76,
+   "text": "to offer them a I think driving is the biggest oc- occupation"
+  },
+  {
+   "start": 972.88,
+   "end": 973.84,
+   "text": "in the world, if I'm correct."
+  },
+  {
+   "start": 975.0,
+   "end": 978.0,
+   "text": "I I'm pretty sure it is the biggest occupation in the world. >> of the top ones, yeah."
+  },
+  {
+   "start": 979.76,
+   "end": 980.76,
+   "text": "What would you say to those people?"
+  },
+  {
+   "start": 981.96,
+   "end": 994.68,
+   "text": "What what should they be doing with their lives? What should they should they be retraining in something or what time frame? So that's the paradigm shift here. Before we always said this job is going to be automated, retrain to do this other job. But if I'm telling you that all jobs will be automated,"
+  },
+  {
+   "start": 996.08,
+   "end": 997.16,
+   "text": "then there is no plan B."
+  },
+  {
+   "start": 998.2,
+   "end": 998.68,
+   "text": "You cannot retrain."
+  },
+  {
+   "start": 1001.72,
+   "end": 1002.4,
+   "text": "Look at computer science."
+  },
+  {
+   "start": 1004.04,
+   "end": 1006.48,
+   "text": "2 years ago, we told people, learn to code."
+  },
+  {
+   "start": 1007.4,
+   "end": 1010.4,
+   "text": "Mhm. You are an artist, you cannot make money, learn to code."
+  },
+  {
+   "start": 1011.32,
+   "end": 1016.6,
+   "text": "Then we realized, oh, AI kind of knows how to code and getting better. Become a prompt engineer."
+  },
+  {
+   "start": 1018.8,
+   "end": 1020.08,
+   "text": "You can engineer prompts for AIs."
+  },
+  {
+   "start": 1021.12,
+   "end": 1027.56,
+   "text": "It's going to be a great job. Get a 4-year degree in it. But then we're like, AI is way better at designing prompts for other AIs than any human."
+  },
+  {
+   "start": 1028.52,
+   "end": 1034.88,
+   "text": "So that's gone. So I can't really tell you right now, the hottest thing is design AI agents for practical applications."
+  },
+  {
+   "start": 1036.08,
+   "end": 1038.56,
+   "text": "I guarantee you in a year or two it's going to be gone just as well."
+  },
+  {
+   "start": 1040.28,
+   "end": 1041.36,
+   "text": "So I don't think there is a"
+  },
+  {
+   "start": 1042.56,
+   "end": 1046.4,
+   "text": "this occupation needs to learn to do this instead. I think it's more like, where's the humanity"
+  },
+  {
+   "start": 1047.44,
+   "end": 1051.44,
+   "text": "when we all lose our jobs? What do we do? What do we do financially?"
+  },
+  {
+   "start": 1052.88,
+   "end": 1056.48,
+   "text": "Who's paying for us? And what do we do in terms of meaning?"
+  },
+  {
+   "start": 1057.4,
+   "end": 1058.8,
+   "text": "What do I do with my extra"
+  },
+  {
+   "start": 1059.84,
+   "end": 1061.16,
+   "text": "60, 80 hours a week?"
+  },
+  {
+   "start": 1062.28,
+   "end": 1065.4,
+   "text": "You've thought around this corner, haven't you? A little bit."
+  },
+  {
+   "start": 1066.72,
+   "end": 1067.96,
+   "text": "What is around that corner in your view?"
+  },
+  {
+   "start": 1069.08,
+   "end": 1074.68,
+   "text": "So the economic part seems easy. If you create a lot of free labor, you have a lot of free wealth, abundance,"
+  },
+  {
+   "start": 1075.96,
+   "end": 1076.84,
+   "text": "things which are right now"
+  },
+  {
+   "start": 1077.88,
+   "end": 1083.88,
+   "text": "not very affordable become dirt cheap, and so you can provide for everyone's basic needs. Some people say you can provide"
+  },
+  {
+   "start": 1086.8,
+   "end": 1091.44,
+   "text": "beyond basic needs. You can provide very good existence for everyone. The hard problem"
+  },
+  {
+   "start": 1092.44,
+   "end": 1093.76,
+   "text": "what do you do with all that free time?"
+  },
+  {
+   "start": 1094.92,
+   "end": 1102.56,
+   "text": "For a lot of people, their jobs are what gives them meaning in their lives, so they would retire or do early retirement."
+  },
+  {
+   "start": 1103.8,
+   "end": 1110.48,
+   "text": "And for so many people who hate their jobs, they'll be very happy not working. But now you have people who are chilling all day."
+  },
+  {
+   "start": 1111.56,
+   "end": 1113.32,
+   "text": "What happens to society? How does that impact"
+  },
+  {
+   "start": 1114.48,
+   "end": 1116.68,
+   "text": "crime rate, pregnancy rate, all sorts of issues?"
+  },
+  {
+   "start": 1117.72,
+   "end": 1122.2,
+   "text": "Nobody thinks about. Governments don't have programs prepared to deal with 99%"
+  },
+  {
+   "start": 1123.8,
+   "end": 1123.8,
+   "text": "unemployment."
+  },
+  {
+   "start": 1127.68,
+   "end": 1128.64,
+   "text": "What do you think that world looks like?"
+  },
+  {
+   "start": 1130.96,
+   "end": 1132.76,
+   "text": "Again, I I think >> you going to be doing? very important"
+  },
+  {
+   "start": 1133.96,
+   "end": 1133.96,
+   "text": "part"
+  },
+  {
+   "start": 1134.92,
+   "end": 1136.36,
+   "text": "to understand here is the unpredictability"
+  },
+  {
+   "start": 1137.68,
+   "end": 1141.16,
+   "text": "of it. We cannot predict what a smarter than us system will do."
+  },
+  {
+   "start": 1142.12,
+   "end": 1142.56,
+   "text": "And the point"
+  },
+  {
+   "start": 1143.6,
+   "end": 1145.2,
+   "text": "when we get to that is often called singularity,"
+  },
+  {
+   "start": 1146.28,
+   "end": 1147.48,
+   "text": "by analogy with physical singularity."
+  },
+  {
+   "start": 1148.56,
+   "end": 1150.16,
+   "text": "You cannot see beyond the event horizon."
+  },
+  {
+   "start": 1151.08,
+   "end": 1160.96,
+   "text": "I can tell you what I think might happen, but that's my prediction. It is not what actually is going to happen because I just don't have cognitive ability to predict a much smarter"
+  },
+  {
+   "start": 1161.96,
+   "end": 1161.96,
+   "text": "agent"
+  },
+  {
+   "start": 1163.12,
+   "end": 1163.8,
+   "text": "impacting this world."
+  },
+  {
+   "start": 1165.56,
+   "end": 1166.32,
+   "text": "When you read science fiction,"
+  },
+  {
+   "start": 1167.56,
+   "end": 1168.2,
+   "text": "there is never a superintelligence"
+  },
+  {
+   "start": 1169.32,
+   "end": 1176.44,
+   "text": "in it actually doing anything because nobody can write believable science fiction at that level. They either banned AI, like Dune,"
+  },
+  {
+   "start": 1177.36,
+   "end": 1183.92,
+   "text": "because this way you can avoid writing about it, or it's like Star Wars. You have this really dumb bots, but not nothing superintelligent"
+  },
+  {
+   "start": 1184.84,
+   "end": 1184.84,
+   "text": "ever."
+  },
+  {
+   "start": 1185.96,
+   "end": 1188.72,
+   "text": "Cuz by definition, you cannot predict at that level."
+  },
+  {
+   "start": 1190.24,
+   "end": 1201.48,
+   "text": "Because by definition of it being superintelligent, it will make its own mind up. By definition, if it was something you could predict, you would be operating at the same level of intelligence, violating our assumption that it is smarter than you."
+  },
+  {
+   "start": 1202.52,
+   "end": 1208.88,
+   "text": "If I'm playing chess with super intelligence and I can predict every move, I'm playing at that level. It's kind of like my French bulldog trying to predict"
+  },
+  {
+   "start": 1210.2,
+   "end": 1218.6,
+   "text": "exactly what I'm thinking and what I'm going to do. That's a good cognitive gap. And it's not just he can predict you going to work, you coming back, but he cannot understand why you doing a podcast."
+  },
+  {
+   "start": 1219.64,
+   "end": 1222.64,
+   "text": "That is something completely outside of his model of the world."
+  },
+  {
+   "start": 1225.2,
+   "end": 1228.6,
+   "text": "Yeah, he doesn't even know that I go to work. He just sees that I leave the house and doesn't know where I go."
+  },
+  {
+   "start": 1230.16,
+   "end": 1233.4,
+   "text": "By food for him. What's the most persuasive argument against"
+  },
+  {
+   "start": 1234.8,
+   "end": 1239.76,
+   "text": "your own perspective here? That we will not have unemployment due to advanced technology?"
+  },
+  {
+   "start": 1241.12,
+   "end": 1242.2,
+   "text": "That there won't be this"
+  },
+  {
+   "start": 1243.16,
+   "end": 1244.84,
+   "text": "French bulldog human gap"
+  },
+  {
+   "start": 1245.92,
+   "end": 1246.2,
+   "text": "in understanding"
+  },
+  {
+   "start": 1247.4,
+   "end": 1247.4,
+   "text": "and"
+  },
+  {
+   "start": 1249.72,
+   "end": 1251.0,
+   "text": "I guess like power and control."
+  },
+  {
+   "start": 1253.04,
+   "end": 1259.96,
+   "text": "So, some people think that we can enhance human minds either through combination with hardware, so something like Neuralink,"
+  },
+  {
+   "start": 1261.12,
+   "end": 1262.44,
+   "text": "or through genetic engineering"
+  },
+  {
+   "start": 1263.68,
+   "end": 1264.76,
+   "text": "to where we make smarter humans."
+  },
+  {
+   "start": 1266.28,
+   "end": 1273.84,
+   "text": "Yeah. It may give us a little more intelligence. I don't think we are still competitive in biological form with silicon form."
+  },
+  {
+   "start": 1274.84,
+   "end": 1278.44,
+   "text": "Silicon substrate is much more capable for intelligence. It's faster."
+  },
+  {
+   "start": 1279.4,
+   "end": 1279.76,
+   "text": "It's more resilient,"
+  },
+  {
+   "start": 1280.68,
+   "end": 1285.48,
+   "text": "more energy efficient in many ways. Which is what computers are made out of the brain. Yeah."
+  },
+  {
+   "start": 1286.4,
+   "end": 1292.8,
+   "text": "So, I don't think we can keep up just with improving our biology. Some people think maybe, and this is very speculative,"
+  },
+  {
+   "start": 1293.8,
+   "end": 1295.4,
+   "text": "we can upload our minds into computers."
+  },
+  {
+   "start": 1296.72,
+   "end": 1304.6,
+   "text": "So, scan your brain, connectome of your brain, and have a simulation running on a computer and you can speed it up, give it more capabilities."
+  },
+  {
+   "start": 1305.8,
+   "end": 1315.0,
+   "text": "But to me, that feels like you no longer exist. We just created software by different means and now you have AI based on biology and AI based on"
+  },
+  {
+   "start": 1315.92,
+   "end": 1320.68,
+   "text": "some other forms of training. You can have evolutionary algorithms. You can have many paths to reach AGI."
+  },
+  {
+   "start": 1321.68,
+   "end": 1323.0,
+   "text": "But at the end, none of them are humans."
+  },
+  {
+   "start": 1324.2,
+   "end": 1325.16,
+   "text": "I have a another"
+  },
+  {
+   "start": 1326.12,
+   "end": 1327.44,
+   "text": "date here, which is"
+  },
+  {
+   "start": 1329.8,
+   "end": 1329.8,
+   "text": "2030."
+  },
+  {
+   "start": 1331.36,
+   "end": 1333.72,
+   "text": "What's your prediction for 2030? What will the world look like?"
+  },
+  {
+   "start": 1335.44,
+   "end": 1336.4,
+   "text": "So, we probably will have"
+  },
+  {
+   "start": 1337.48,
+   "end": 1338.0,
+   "text": "humanoid robots"
+  },
+  {
+   "start": 1339.0,
+   "end": 1342.6,
+   "text": "with enough flexibility, dexterity to compete with humans"
+  },
+  {
+   "start": 1343.52,
+   "end": 1344.76,
+   "text": "in all domains, including plumbers."
+  },
+  {
+   "start": 1345.84,
+   "end": 1346.84,
+   "text": "We can make artificial plumbers."
+  },
+  {
+   "start": 1348.32,
+   "end": 1350.84,
+   "text": "Not the plumbers. We That was That felt like the last"
+  },
+  {
+   "start": 1352.28,
+   "end": 1361.44,
+   "text": "bastion of human employment. So, 2030, 5 years from now, humanoid robots So, many of the companies, the leading companies, including Tesla, are developing humanoid robots"
+  },
+  {
+   "start": 1362.6,
+   "end": 1364.72,
+   "text": "at light speed and they're getting increasingly more effective."
+  },
+  {
+   "start": 1365.96,
+   "end": 1368.08,
+   "text": "And these humanoid robots will be able to move through physical space,"
+  },
+  {
+   "start": 1369.56,
+   "end": 1371.32,
+   "text": "for you know, make an omelet,"
+  },
+  {
+   "start": 1372.44,
+   "end": 1374.76,
+   "text": "do anything humans can do, but obviously have"
+  },
+  {
+   "start": 1376.0,
+   "end": 1377.24,
+   "text": "be connected to AI as well."
+  },
+  {
+   "start": 1378.56,
+   "end": 1379.4,
+   "text": "So, they can think, talk,"
+  },
+  {
+   "start": 1380.48,
+   "end": 1385.64,
+   "text": "Like they're controlled by AI. They're always connected to the network, so they are already"
+  },
+  {
+   "start": 1386.56,
+   "end": 1387.56,
+   "text": "dominating in many ways."
+  },
+  {
+   "start": 1388.8,
+   "end": 1390.36,
+   "text": "Our world will look remarkably different"
+  },
+  {
+   "start": 1391.28,
+   "end": 1393.84,
+   "text": "when humanoid robots are functional and effective."
+  },
+  {
+   "start": 1395.0,
+   "end": 1397.4,
+   "text": "Because that's really when, you know, I start to think, \"Crap.\" Like"
+  },
+  {
+   "start": 1398.56,
+   "end": 1400.4,
+   "text": "the combination of intelligence and"
+  },
+  {
+   "start": 1401.52,
+   "end": 1402.0,
+   "text": "physical ability"
+  },
+  {
+   "start": 1403.6,
+   "end": 1403.6,
+   "text": "is"
+  },
+  {
+   "start": 1404.56,
+   "end": 1406.32,
+   "text": "really really doesn't leave much, does it, for"
+  },
+  {
+   "start": 1407.48,
+   "end": 1407.96,
+   "text": "us um"
+  },
+  {
+   "start": 1409.68,
+   "end": 1410.16,
+   "text": "human beings."
+  },
+  {
+   "start": 1411.44,
+   "end": 1430.6,
+   "text": "Not much. So, today, if you have intelligence through internet, you can hire humans to do your bidding for you. You can pay them in Bitcoin, so you can have bodies, just not directly controlling them. So, it's not a huge game changer to add direct control of physical bodies. Intelligence is where it's at. The important component is definitely"
+  },
+  {
+   "start": 1431.76,
+   "end": 1436.44,
+   "text": "higher ability to optimize, to solve problems, to find patterns people cannot see."
+  },
+  {
+   "start": 1437.76,
+   "end": 1438.92,
+   "text": "And then by 2045,"
+  },
+  {
+   "start": 1441.52,
+   "end": 1443.84,
+   "text": "I guess the world looks even even more um"
+  },
+  {
+   "start": 1445.16,
+   "end": 1447.44,
+   "text": "which is 20 years from now. So, if it's still around,"
+  },
+  {
+   "start": 1448.36,
+   "end": 1449.6,
+   "text": "If it's still around, >> Ray Kurzweil"
+  },
+  {
+   "start": 1450.76,
+   "end": 1452.36,
+   "text": "predicts that that's the year for the singularity."
+  },
+  {
+   "start": 1453.48,
+   "end": 1462.6,
+   "text": "That's the year where progress becomes so fast, so this AI doing science and engineering work makes improvements so quickly we cannot keep up anymore."
+  },
+  {
+   "start": 1463.52,
+   "end": 1468.04,
+   "text": "That's the definition of singularity, point beyond which we cannot see, understand, predict."
+  },
+  {
+   "start": 1469.36,
+   "end": 1472.28,
+   "text": "See, understand, predict the intelligence itself or"
+  },
+  {
+   "start": 1473.48,
+   "end": 1483.16,
+   "text": "What is happening in the world? The technology is being developed. So, right now, if I have an iPhone, I can look forward to a new one coming out next year and I'll understand it has slightly better camera."
+  },
+  {
+   "start": 1484.12,
+   "end": 1487.96,
+   "text": "Imagine now this process of researching and developing this phone is automated."
+  },
+  {
+   "start": 1489.08,
+   "end": 1493.48,
+   "text": "It happens every 6 months, every 3 every month, week, day, hour, minute, second."
+  },
+  {
+   "start": 1494.96,
+   "end": 1495.92,
+   "text": "You cannot keep up with"
+  },
+  {
+   "start": 1496.88,
+   "end": 1502.16,
+   "text": "30 iterations of iPhone in 1 day. You don't understand what capabilities it has, what"
+  },
+  {
+   "start": 1504.0,
+   "end": 1517.68,
+   "text": "proper controls are. It just escapes you. Right now, it's hard for any researcher in AI to keep up with the state of the art. While I was doing this interview with you, a new model came out and I will no longer know what the state of the art is."
+  },
+  {
+   "start": 1518.76,
+   "end": 1521.16,
+   "text": "Every day, as a percentage of total knowledge, I get dumber."
+  },
+  {
+   "start": 1522.16,
+   "end": 1527.8,
+   "text": "I may still know more because I keep reading, but as a percentage of overall knowledge, we all getting dumber."
+  },
+  {
+   "start": 1529.68,
+   "end": 1535.84,
+   "text": "And when you take it to extreme values, you have zero knowledge, zero understanding of the world around you."
+  },
+  {
+   "start": 1537.0,
+   "end": 1544.92,
+   "text": "Some of the arguments against this eventuality are that when you look at other technologies like the Industrial Revolution, people just found new ways"
+  },
+  {
+   "start": 1546.16,
+   "end": 1546.16,
+   "text": "to"
+  },
+  {
+   "start": 1547.44,
+   "end": 1547.72,
+   "text": "to work"
+  },
+  {
+   "start": 1548.84,
+   "end": 1551.48,
+   "text": "and new careers that we could never have imagined at the time were created."
+  },
+  {
+   "start": 1552.96,
+   "end": 1555.0,
+   "text": "How do you respond to that in a world of super intelligence?"
+  },
+  {
+   "start": 1556.52,
+   "end": 1575.0,
+   "text": "It's a paradigm shift. We always had tools, new tools which allowed some job to be done more efficiently. So, instead of having 10 workers, you could have two workers and eight workers had to find a new job. And there was another job. Now you can supervise these workers or do something cool. If you creating a meta invention,"
+  },
+  {
+   "start": 1575.72,
+   "end": 1579.0,
+   "text": "you inventing intelligence, you inventing a worker, an agent,"
+  },
+  {
+   "start": 1580.12,
+   "end": 1582.0,
+   "text": "then you can apply that agent to the new job."
+  },
+  {
+   "start": 1583.32,
+   "end": 1586.68,
+   "text": "There is not a job which cannot be automated. That never happened before."
+  },
+  {
+   "start": 1588.28,
+   "end": 1595.8,
+   "text": "All the inventions we previously had were kind of a tool for doing something. So, we invented fire. Huge game changer."
+  },
+  {
+   "start": 1596.8,
+   "end": 1606.04,
+   "text": "But that's it. It stops with fire. We invent a wheel. Same idea. Huge implications, but wheel itself is not an inventor. Here we are inventing"
+  },
+  {
+   "start": 1607.68,
+   "end": 1619.36,
+   "text": "a replacement for human mind, a new inventor capable of doing new inventions. It's the last invention we ever have to make. At that point, it takes over and the process of doing science, research,"
+  },
+  {
+   "start": 1620.4,
+   "end": 1621.12,
+   "text": "even ethics research,"
+  },
+  {
+   "start": 1622.08,
+   "end": 1624.68,
+   "text": "morals, all that is automated at that point."
+  },
+  {
+   "start": 1626.24,
+   "end": 1627.88,
+   "text": "Do you sleep well at night? Really well."
+  },
+  {
+   "start": 1629.4,
+   "end": 1629.84,
+   "text": "Even though you"
+  },
+  {
+   "start": 1630.8,
+   "end": 1635.44,
+   "text": "you spent the last 15, 20 years of your life working on AI safety and it's suddenly"
+  },
+  {
+   "start": 1636.88,
+   "end": 1643.28,
+   "text": "among us in a in a way that I don't think anyone could have predicted 5 years ago. When I say among us, I really mean that the amount of funding and talent"
+  },
+  {
+   "start": 1644.24,
+   "end": 1646.96,
+   "text": "that is now focused on reaching super intelligence faster"
+  },
+  {
+   "start": 1648.0,
+   "end": 1649.64,
+   "text": "has made it feel more inevitable and more"
+  },
+  {
+   "start": 1650.8,
+   "end": 1650.8,
+   "text": "soon"
+  },
+  {
+   "start": 1652.68,
+   "end": 1654.08,
+   "text": "than any of us could have possibly imagined."
+  },
+  {
+   "start": 1655.28,
+   "end": 1662.8,
+   "text": "We as humans have this built-in bias about not thinking about really bad outcomes and things we cannot prevent. So, all of us are dying."
+  },
+  {
+   "start": 1664.6,
+   "end": 1670.8,
+   "text": "Your kids are dying, your parents are dying, everyone's dying, but you still sleep well, you still go on with your day. Even 95-year-olds"
+  },
+  {
+   "start": 1671.96,
+   "end": 1672.36,
+   "text": "are still doing"
+  },
+  {
+   "start": 1673.52,
+   "end": 1678.28,
+   "text": "games and playing golf and whatnot, cuz we have this ability to not think about"
+  },
+  {
+   "start": 1679.2,
+   "end": 1684.44,
+   "text": "the worst outcomes, especially if we cannot actually modify the outcome. So, that's the same"
+  },
+  {
+   "start": 1685.8,
+   "end": 1688.28,
+   "text": "infrastructure being used for this. Yeah, there is"
+  },
+  {
+   "start": 1689.28,
+   "end": 1690.12,
+   "text": "humanity level"
+  },
+  {
+   "start": 1691.36,
+   "end": 1692.2,
+   "text": "death-like event."
+  },
+  {
+   "start": 1693.12,
+   "end": 1695.4,
+   "text": "We happening to be close to it probably,"
+  },
+  {
+   "start": 1696.48,
+   "end": 1696.48,
+   "text": "but"
+  },
+  {
+   "start": 1697.44,
+   "end": 1700.0,
+   "text": "unless I can do something about it, I I can just keep"
+  },
+  {
+   "start": 1701.0,
+   "end": 1709.44,
+   "text": "enjoying my life. In fact, maybe knowing that you have limited amount of time left gives you more reason to have a better life. You cannot waste any."
+  },
+  {
+   "start": 1710.6,
+   "end": 1715.44,
+   "text": "And that's the survival trait of evolution, I guess, because those of my ancestors that spent all their time worrying"
+  },
+  {
+   "start": 1716.6,
+   "end": 1726.96,
+   "text": "wouldn't have spent enough time having babies and hunting to survive. >> Suicidal ideation. People who really start thinking about how horrible the world is usually escape pretty soon. Mhm."
+  },
+  {
+   "start": 1731.8,
+   "end": 1733.32,
+   "text": "One of the You co-authored this paper"
+  },
+  {
+   "start": 1734.48,
+   "end": 1737.44,
+   "text": "um analyzing the key arguments people make against the importance of AI safety."
+  },
+  {
+   "start": 1738.64,
+   "end": 1751.64,
+   "text": "And one of the arguments in there is that there's other things that are of bigger importance right now. It might be world wars, it could be nuclear containment, it could be other things. There's other things that the governments and podcasters like me should be talking about that are more important."
+  },
+  {
+   "start": 1752.68,
+   "end": 1757.52,
+   "text": "What's your rebuttal to that argument? >> So, super intelligence is a meta solution."
+  },
+  {
+   "start": 1758.64,
+   "end": 1766.68,
+   "text": "If we get super intelligence right, it will help us with climate change, it will help us with wars, it can solve all the other existential risks."
+  },
+  {
+   "start": 1767.64,
+   "end": 1768.76,
+   "text": "If we don't get it right,"
+  },
+  {
+   "start": 1769.68,
+   "end": 1783.24,
+   "text": "it dominates. If climate change will take 100 years to boil us alive and super intelligence kills everyone in five, I don't have to worry about climate change. So, either way, either it solves it for me or it's not an issue."
+  },
+  {
+   "start": 1784.36,
+   "end": 1790.48,
+   "text": "So, you think it's the most important thing to be working on? Without question, there is nothing more important than getting this right."
+  },
+  {
+   "start": 1794.48,
+   "end": 1801.44,
+   "text": "And I know everyone says it. You take any class but you take English professor's class and he tells you this is the most important class you'll ever take. But"
+  },
+  {
+   "start": 1802.64,
+   "end": 1805.96,
+   "text": "you can see the meta level differences with this one."
+  },
+  {
+   "start": 1807.28,
+   "end": 1811.88,
+   "text": "Another argument in that paper is that we will be in control and that the danger is not AI."
+  },
+  {
+   "start": 1813.0,
+   "end": 1817.76,
+   "text": "This particular argument asserts that AI is just a tool. Humans are the real actors that present danger"
+  },
+  {
+   "start": 1818.8,
+   "end": 1832.36,
+   "text": "and we can always maintain control by simply turning it off. Can't we just pull the plug out? I see that every time we have a conversation on the show about AI, someone says can't we just unplug it? Yeah, I get those comments on every podcast I make and I always want to like get in touch with the"
+  },
+  {
+   "start": 1832.44,
+   "end": 1839.04,
+   "text": "guy and say this is brilliant. I never thought of it. We're going to write a paper together and get a Nobel Prize for it. This is like let's do it."
+  },
+  {
+   "start": 1840.0,
+   "end": 1844.76,
+   "text": "Because it's so silly. Like can you turn off a virus? You have a computer virus you don't like. You turn it off."
+  },
+  {
+   "start": 1846.12,
+   "end": 1847.88,
+   "text": "How about Bitcoin? Turn off Bitcoin network."
+  },
+  {
+   "start": 1848.92,
+   "end": 1849.52,
+   "text": "Go ahead. I'll wait."
+  },
+  {
+   "start": 1850.56,
+   "end": 1851.92,
+   "text": "This is silly. Those are distributed systems."
+  },
+  {
+   "start": 1852.84,
+   "end": 1861.52,
+   "text": "You cannot turn them off and on top of it they're smarter than you. They made multiple backups. They predicted what you're going to do. They will turn you off before you can turn them off."
+  },
+  {
+   "start": 1862.52,
+   "end": 1863.84,
+   "text": "The idea that we will be in control"
+  },
+  {
+   "start": 1865.04,
+   "end": 1875.12,
+   "text": "applies only to pre super intelligence levels. Basically what we have today. Today humans with AI tools are dangerous. They can be hackers, malevolent actors. Absolutely."
+  },
+  {
+   "start": 1876.08,
+   "end": 1877.12,
+   "text": "But the moment super intelligence"
+  },
+  {
+   "start": 1878.2,
+   "end": 1885.88,
+   "text": "becomes smarter, dominates, they no longer be important part of that equation. It is the higher intelligence I'm concerned about, not the human who"
+  },
+  {
+   "start": 1887.0,
+   "end": 1890.88,
+   "text": "may add additional malevolent payload but at the end still doesn't control it."
+  },
+  {
+   "start": 1892.48,
+   "end": 1892.8,
+   "text": "It is tempting"
+  },
+  {
+   "start": 1895.12,
+   "end": 1895.12,
+   "text": "to"
+  },
+  {
+   "start": 1896.28,
+   "end": 1899.32,
+   "text": "follow your the next argument that I saw in that paper which basically says listen"
+  },
+  {
+   "start": 1900.36,
+   "end": 1900.64,
+   "text": "this is inevitable."
+  },
+  {
+   "start": 1902.08,
+   "end": 1906.52,
+   "text": "So there's no point fighting against it because there's really no hope here. So we should probably"
+  },
+  {
+   "start": 1907.6,
+   "end": 1910.76,
+   "text": "give up even trying and be faithful that it will work itself out."
+  },
+  {
+   "start": 1911.88,
+   "end": 1913.28,
+   "text": "Because everything you've said sounds really inevitable."
+  },
+  {
+   "start": 1914.52,
+   "end": 1924.52,
+   "text": "And if with China working on it, I'm sure Putin's got some secret division. I'm sure Iran are doing some bits and pieces. Every European country is trying to get ahead of AI. The United States is leading the way."
+  },
+  {
+   "start": 1925.84,
+   "end": 1927.12,
+   "text": "So it's it's inevitable. So we probably"
+  },
+  {
+   "start": 1928.52,
+   "end": 1929.52,
+   "text": "should just have faith and pray."
+  },
+  {
+   "start": 1931.0,
+   "end": 1933.08,
+   "text": "Praying is always good but incentives matter."
+  },
+  {
+   "start": 1934.24,
+   "end": 1934.64,
+   "text": "If you"
+  },
+  {
+   "start": 1935.88,
+   "end": 1936.64,
+   "text": "looking at what"
+  },
+  {
+   "start": 1937.64,
+   "end": 1945.16,
+   "text": "drives these people. So yes, money is important. So there is a lot of money in that space and so everyone's trying to be there and develop this technology."
+  },
+  {
+   "start": 1946.12,
+   "end": 1949.68,
+   "text": "But if they truly understand the argument, they understand that you will be dead."
+  },
+  {
+   "start": 1951.0,
+   "end": 1964.12,
+   "text": "No amount of money will be useful to you. Then incentives switch. They would want to not be dead. A lot of them are young people, rich people. They have their whole lives ahead of them. I think they would be better off not building advanced super intelligence,"
+  },
+  {
+   "start": 1965.2,
+   "end": 1972.12,
+   "text": "concentrating on narrow AI tools for solving specific problems. Okay, my company cures breast cancer. That's all."
+  },
+  {
+   "start": 1973.08,
+   "end": 1976.0,
+   "text": "We make billions of dollars. Everyone's happy. Everyone benefits."
+  },
+  {
+   "start": 1977.92,
+   "end": 1978.12,
+   "text": "It's a win."
+  },
+  {
+   "start": 1979.04,
+   "end": 1982.88,
+   "text": "We are still in control today. It's not over until it's over. We can decide"
+  },
+  {
+   "start": 1983.8,
+   "end": 1985.36,
+   "text": "not to build general super intelligences."
+  },
+  {
+   "start": 1987.56,
+   "end": 1990.88,
+   "text": "I mean the United States might be able to conjure up enough enthusiasm"
+  },
+  {
+   "start": 1992.04,
+   "end": 1997.88,
+   "text": "for that. But if the United States doesn't build general super intelligences, then China are going to have the big advantage, right?"
+  },
+  {
+   "start": 1998.92,
+   "end": 2005.96,
+   "text": "So right now at those levels, whoever has more advanced AI has more advanced military. No question. We see it with existing conflicts."
+  },
+  {
+   "start": 2006.96,
+   "end": 2018.96,
+   "text": "But the moment you switch to super intelligence and control super intelligence, it doesn't matter who builds it, us or them. And if they understand this argument, they also would not build it. It's a mutually assured destruction"
+  },
+  {
+   "start": 2020.08,
+   "end": 2020.52,
+   "text": "on both ends."
+  },
+  {
+   "start": 2021.96,
+   "end": 2026.16,
+   "text": "Is this technology different than say nuclear weapons which require a huge amount of investment"
+  },
+  {
+   "start": 2027.08,
+   "end": 2029.32,
+   "text": "and you have to like enrich the uranium and you need"
+  },
+  {
+   "start": 2031.28,
+   "end": 2033.12,
+   "text": "billions of dollars potentially to even"
+  },
+  {
+   "start": 2034.36,
+   "end": 2035.04,
+   "text": "build a nuclear weapon."
+  },
+  {
+   "start": 2036.88,
+   "end": 2038.8,
+   "text": "But it feels like this technology is much cheaper"
+  },
+  {
+   "start": 2039.76,
+   "end": 2042.88,
+   "text": "to get to super intelligence potentially or at least it will become cheaper."
+  },
+  {
+   "start": 2043.92,
+   "end": 2049.12,
+   "text": "I wonder if it's possible that some some guy, some startup is going to be able to build super intelligence in"
+  },
+  {
+   "start": 2050.36,
+   "end": 2051.76,
+   "text": "you know, a couple of years without the need of"
+  },
+  {
+   "start": 2052.68,
+   "end": 2069.16,
+   "text": "you know, billions of dollars of compute or or electricity power. That's a great point. So every year it becomes cheaper and cheaper to train sufficiently large model. If today it would take a trillion dollars to build super intelligence, next year it could be 100 billion and so on. At some point a guy in a laptop could do"
+  },
+  {
+   "start": 2069.32,
+   "end": 2069.32,
+   "text": "it."
+  },
+  {
+   "start": 2071.32,
+   "end": 2080.4,
+   "text": "But you don't want to wait four years to make it affordable. So that's why so much money is pouring in. Somebody wants to get there this year and lock in all the winnings. Litecoin"
+  },
+  {
+   "start": 2081.48,
+   "end": 2081.48,
+   "text": "level"
+  },
+  {
+   "start": 2082.4,
+   "end": 2082.4,
+   "text": "award."
+  },
+  {
+   "start": 2083.52,
+   "end": 2084.16,
+   "text": "So in that regard"
+  },
+  {
+   "start": 2085.08,
+   "end": 2087.12,
+   "text": "they're both very expensive projects like Manhattan"
+  },
+  {
+   "start": 2088.24,
+   "end": 2095.8,
+   "text": "level projects. Which is the nuclear bomb project. >> Right. The difference between the two technologies is that nuclear weapons are still tools."
+  },
+  {
+   "start": 2097.24,
+   "end": 2105.92,
+   "text": "Some dictator, some country, someone has to decide to use them, deploy them. Whereas super intelligence is not a is not a tool. It's an agent."
+  },
+  {
+   "start": 2107.16,
+   "end": 2112.8,
+   "text": "It makes its own decisions and no one is controlling it. I cannot take out this dictator and now super intelligence is safe."
+  },
+  {
+   "start": 2114.0,
+   "end": 2115.64,
+   "text": "So that's a fundamental difference to me."
+  },
+  {
+   "start": 2117.8,
+   "end": 2123.6,
+   "text": "But if you're saying that it is going to get incrementally cheaper like I think it's Moore's law, isn't it? The technology gets cheaper. It does."
+  },
+  {
+   "start": 2124.56,
+   "end": 2129.12,
+   "text": "Then there is a future where some guy on his laptop is going to be able to create super intelligence without"
+  },
+  {
+   "start": 2130.32,
+   "end": 2136.32,
+   "text": "oversight or regulation or employees, etc. Yeah, that's why a lot of people suggesting we need to build something like"
+  },
+  {
+   "start": 2137.28,
+   "end": 2137.28,
+   "text": "um"
+  },
+  {
+   "start": 2138.88,
+   "end": 2138.88,
+   "text": "surveillance"
+  },
+  {
+   "start": 2140.12,
+   "end": 2140.12,
+   "text": "planet"
+  },
+  {
+   "start": 2141.16,
+   "end": 2151.84,
+   "text": "where you are monitoring who's doing what and you're trying to prevent people from doing it. Do I think it's feasible? No. At some point it becomes so affordable and so trivial that it just will happen."
+  },
+  {
+   "start": 2152.84,
+   "end": 2158.44,
+   "text": "But at this point we're trying to get more time. We don't want it to happen in five years. We want it to happen in 50 years."
+  },
+  {
+   "start": 2161.28,
+   "end": 2166.12,
+   "text": "I mean that's not very hopeful. Depends on how old you are. Depends on how old you are."
+  },
+  {
+   "start": 2168.08,
+   "end": 2168.12,
+   "text": "I mean"
+  },
+  {
+   "start": 2169.08,
+   "end": 2169.6,
+   "text": "if you're saying that"
+  },
+  {
+   "start": 2170.52,
+   "end": 2172.64,
+   "text": "you believe in the future people will be able to make super intelligence"
+  },
+  {
+   "start": 2174.6,
+   "end": 2183.52,
+   "text": "without the resources that are required today, then it is just a matter of time. Yeah, but so will be true for many other technologies. We're getting much better in synthetic biology"
+  },
+  {
+   "start": 2184.44,
+   "end": 2188.24,
+   "text": "where today someone with a bachelor's degree in biology can probably create a new virus."
+  },
+  {
+   "start": 2189.32,
+   "end": 2195.32,
+   "text": "This will also become cheaper. Other technologies like that. So we are approaching a point where"
+  },
+  {
+   "start": 2196.24,
+   "end": 2198.0,
+   "text": "it's very difficult to make sure no technological"
+  },
+  {
+   "start": 2199.6,
+   "end": 2199.6,
+   "text": "breakthrough"
+  },
+  {
+   "start": 2200.6,
+   "end": 2202.28,
+   "text": "is the last one. So essentially"
+  },
+  {
+   "start": 2203.32,
+   "end": 2205.4,
+   "text": "in many directions we have this"
+  },
+  {
+   "start": 2206.52,
+   "end": 2211.6,
+   "text": "pattern of making it easier in terms of resources, in terms of intelligence to destroy the world."
+  },
+  {
+   "start": 2212.76,
+   "end": 2217.28,
+   "text": "If you look at I don't know, 500 years ago, the worst dictator with all the resources"
+  },
+  {
+   "start": 2218.24,
+   "end": 2227.68,
+   "text": "could kill couple million people. He couldn't destroy the world. Now we know nuclear weapons we can blow up the whole planet multiple times over. Synthetic biology we saw with COVID,"
+  },
+  {
+   "start": 2228.64,
+   "end": 2229.76,
+   "text": "you can very easily"
+  },
+  {
+   "start": 2230.76,
+   "end": 2237.16,
+   "text": "create a combination virus which impacts billions of people. And all those things becoming easier to do."
+  },
+  {
+   "start": 2238.88,
+   "end": 2246.24,
+   "text": "In the near term you talk about extinction being a real risk, human extinction being a real risk. Of all the the pathways to human extinction that you think are"
+  },
+  {
+   "start": 2247.24,
+   "end": 2250.2,
+   "text": "most likely, what what is the leading pathway? Because I know you talk about"
+  },
+  {
+   "start": 2251.24,
+   "end": 2255.8,
+   "text": "there being some issue pre-deployment of these AI tools like you know, someone makes a mistake"
+  },
+  {
+   "start": 2257.04,
+   "end": 2257.2,
+   "text": "when they're"
+  },
+  {
+   "start": 2258.56,
+   "end": 2269.6,
+   "text": "designing a model or other issues post-deployment. When I say post-deployment, I mean once the chat GPT or something, an agent is released into the world and someone hacking into it and changing it and reprogram"
+  },
+  {
+   "start": 2270.64,
+   "end": 2272.64,
+   "text": "reprogramming it to be malicious. Of all these potential"
+  },
+  {
+   "start": 2273.68,
+   "end": 2274.8,
+   "text": "paths to human extinction,"
+  },
+  {
+   "start": 2275.8,
+   "end": 2277.96,
+   "text": "which one do you think is the highest probability?"
+  },
+  {
+   "start": 2279.24,
+   "end": 2291.12,
+   "text": "So I can only talk about the ones I can predict myself. So I can predict even before we get a super intelligence, someone will create a very advanced biological tool, create a novel virus and that virus gets everyone or most everyone."
+  },
+  {
+   "start": 2292.68,
+   "end": 2292.8,
+   "text": "I can"
+  },
+  {
+   "start": 2293.88,
+   "end": 2303.28,
+   "text": "envision it. I can understand the pathway. I can say that. So just assuming on that then, that would be using an AI to make a virus and then releasing it. Yeah. And would that be"
+  },
+  {
+   "start": 2304.64,
+   "end": 2305.4,
+   "text": "intentional or"
+  },
+  {
+   "start": 2306.44,
+   "end": 2310.76,
+   "text": "There is a lot of psychopaths, a lot of terrorists, a lot of doomsday cults."
+  },
+  {
+   "start": 2311.84,
+   "end": 2317.24,
+   "text": "We've seen historically again, they tried to kill as many people as they can. They usually fail. They kill hundreds of thousands."
+  },
+  {
+   "start": 2318.36,
+   "end": 2321.6,
+   "text": "But if they get technology to kill millions or billions, they would do that gladly."
+  },
+  {
+   "start": 2324.92,
+   "end": 2339.32,
+   "text": "The point I'm trying to emphasize is that it doesn't matter what I can come up with. I am not a malevolent actor you're trying to defeat here. It's the super intelligence which can come up with completely novel ways of doing it. Again, you brought up example of your dog."
+  },
+  {
+   "start": 2341.0,
+   "end": 2341.68,
+   "text": "Your dog cannot understand"
+  },
+  {
+   "start": 2342.6,
+   "end": 2343.96,
+   "text": "all the ways you can take it out."
+  },
+  {
+   "start": 2346.12,
+   "end": 2348.84,
+   "text": "It can maybe think you'll bite it to death or something."
+  },
+  {
+   "start": 2349.84,
+   "end": 2351.32,
+   "text": "But that's all. Whereas you have"
+  },
+  {
+   "start": 2352.6,
+   "end": 2353.64,
+   "text": "infinite supply of resources."
+  },
+  {
+   "start": 2355.8,
+   "end": 2362.32,
+   "text": "So if I asked your dog exactly how you're going to take it out, it would not give you a meaningful answer. It can talk about biting."
+  },
+  {
+   "start": 2363.6,
+   "end": 2369.44,
+   "text": "And this is what we know. We know viruses. We experienced viruses. We can talk about them. But what"
+  },
+  {
+   "start": 2371.44,
+   "end": 2376.2,
+   "text": "an AI system capable of doing novel physics research can come up with is beyond me."
+  },
+  {
+   "start": 2377.48,
+   "end": 2380.48,
+   "text": "One of the things that I think most people don't understand is how little we understand"
+  },
+  {
+   "start": 2381.6,
+   "end": 2383.56,
+   "text": "about how these AIs are actually working."
+  },
+  {
+   "start": 2384.56,
+   "end": 2390.32,
+   "text": "Cuz one would assume, you know, with computers, we kind of understand how a computer works. We we know that it's doing this and then this and it's running on code."
+  },
+  {
+   "start": 2391.44,
+   "end": 2391.44,
+   "text": "But,"
+  },
+  {
+   "start": 2392.56,
+   "end": 2403.2,
+   "text": "from reading your work, you describe it as being a black box. We actually So, in the context of something like ChatGPT or an AI we know, you're telling me that the people that have built that tool don't actually know"
+  },
+  {
+   "start": 2404.6,
+   "end": 2405.68,
+   "text": "what's going on inside there."
+  },
+  {
+   "start": 2407.08,
+   "end": 2409.6,
+   "text": "That's exactly right. So, even people making those systems"
+  },
+  {
+   "start": 2410.76,
+   "end": 2419.32,
+   "text": "have to run experiments on their product to learn what it's capable of. So, they train it by giving it all of data, let's say all of internet text."
+  },
+  {
+   "start": 2420.6,
+   "end": 2424.16,
+   "text": "They run it on a lot of computers to learn patterns in that text."
+  },
+  {
+   "start": 2425.12,
+   "end": 2429.8,
+   "text": "And then we start experimenting with that model. Oh, do you speak French? Or, can you do mathematics?"
+  },
+  {
+   "start": 2430.88,
+   "end": 2433.32,
+   "text": "Or, are you lying to me now? And so, maybe it takes"
+  },
+  {
+   "start": 2434.28,
+   "end": 2439.48,
+   "text": "a year to train it and then 6 months to get some fundamentals about what it's capable of."
+  },
+  {
+   "start": 2440.52,
+   "end": 2442.2,
+   "text": "Some safety overhead."
+  },
+  {
+   "start": 2443.56,
+   "end": 2449.08,
+   "text": "But, we still discover new capabilities in old models. If you ask a question in a different way, it becomes smarter."
+  },
+  {
+   "start": 2451.0,
+   "end": 2451.28,
+   "text": "So, it's"
+  },
+  {
+   "start": 2452.4,
+   "end": 2452.72,
+   "text": "no longer"
+  },
+  {
+   "start": 2454.32,
+   "end": 2454.32,
+   "text": "engineering"
+  },
+  {
+   "start": 2455.32,
+   "end": 2464.44,
+   "text": "how it was the first 50 years where someone was a knowledge engineer programming an expert system AI to do specific things. It's a science. We are creating this artifact,"
+  },
+  {
+   "start": 2465.56,
+   "end": 2467.64,
+   "text": "growing it. It's like a alien plant."
+  },
+  {
+   "start": 2468.72,
+   "end": 2470.24,
+   "text": "And then we study it to see what it's doing."
+  },
+  {
+   "start": 2471.36,
+   "end": 2473.2,
+   "text": "And just like with plants, we don't have 100%"
+  },
+  {
+   "start": 2474.36,
+   "end": 2475.16,
+   "text": "accurate knowledge of biology."
+  },
+  {
+   "start": 2476.4,
+   "end": 2485.4,
+   "text": "We don't have full knowledge here. We kind of know some patterns. We know, okay, if we add more compute, it gets smarter most of the time. But, nobody can tell you precisely"
+  },
+  {
+   "start": 2486.52,
+   "end": 2489.12,
+   "text": "what the outcome is going to be given a set of inputs."
+  },
+  {
+   "start": 2491.04,
+   "end": 2495.68,
+   "text": "I've watched so many entrepreneurs treat sales like a performance problem. When it's often down to visibility."
+  },
+  {
+   "start": 2496.64,
+   "end": 2510.44,
+   "text": "Because when you can't see what's happening in your pipeline, what stage each conversation is at, what's stalled, what's moving, you can't improve anything. And you can't close the deal. Our sponsor, Pipedrive, is the number one CRM tool for small to medium businesses."
+  },
+  {
+   "start": 2511.36,
+   "end": 2516.4,
+   "text": "Not just a contact list, but an actual system that shows your entire sales process end-to-end."
+  },
+  {
+   "start": 2517.48,
+   "end": 2522.96,
+   "text": "Everything that's live, what's lagging, and the steps you need to take next. All of your teams can move smarter and faster."
+  },
+  {
+   "start": 2523.92,
+   "end": 2533.76,
+   "text": "Teams using Pipedrive are on average closing three times more deals than those that aren't. It's the first CRM made by sales people for sales people that over 100,000"
+  },
+  {
+   "start": 2534.8,
+   "end": 2541.52,
+   "text": "companies around the world rely on, including my team who absolutely love it. Give Pipedrive a try today by visiting pipedrive.com/ceo."
+  },
+  {
+   "start": 2544.44,
+   "end": 2550.12,
+   "text": "And you can get up and running in a couple of minutes with no payment needed. And if you use this link, you'll get a 30-day"
+  },
+  {
+   "start": 2551.04,
+   "end": 2551.32,
+   "text": "free trial."
+  },
+  {
+   "start": 2552.28,
+   "end": 2555.36,
+   "text": "What do you make of OpenAI and Sam Altman and what they're doing?"
+  },
+  {
+   "start": 2556.68,
+   "end": 2560.72,
+   "text": "And obviously, you're aware that one of the co-founders, was it um This was Ilya Sutskever?"
+  },
+  {
+   "start": 2562.08,
+   "end": 2566.44,
+   "text": "Ilya yeah. Ilya left and he started a a new company called Superintelligence Safety."
+  },
+  {
+   "start": 2567.4,
+   "end": 2572.68,
+   "text": "Superintelligence Safety. >> AI safety wasn't challenging enough, he decided to just jump right to the hard problem."
+  },
+  {
+   "start": 2574.96,
+   "end": 2579.04,
+   "text": "As an onlooker, when you see that people are leaving OpenAI to to start"
+  },
+  {
+   "start": 2580.28,
+   "end": 2580.28,
+   "text": "superintelligent"
+  },
+  {
+   "start": 2581.44,
+   "end": 2582.28,
+   "text": "safety companies,"
+  },
+  {
+   "start": 2584.36,
+   "end": 2585.28,
+   "text": "what was your read on that situation?"
+  },
+  {
+   "start": 2586.72,
+   "end": 2589.52,
+   "text": "So, a lot of people who worked with Sam"
+  },
+  {
+   "start": 2590.72,
+   "end": 2598.8,
+   "text": "said that maybe he's not the most direct person in terms of being honest with them and they had concerns about his views on safety."
+  },
+  {
+   "start": 2600.28,
+   "end": 2603.6,
+   "text": "That's part of it. So, they wanted more control, they wanted more"
+  },
+  {
+   "start": 2604.52,
+   "end": 2605.4,
+   "text": "concentration on safety."
+  },
+  {
+   "start": 2606.32,
+   "end": 2610.56,
+   "text": "But, also it seems that anyone who leaves that company and starts a new one gets a $20"
+  },
+  {
+   "start": 2611.52,
+   "end": 2612.88,
+   "text": "valuation just for having it started."
+  },
+  {
+   "start": 2613.84,
+   "end": 2615.64,
+   "text": "You don't have a product, you don't have customers, but"
+  },
+  {
+   "start": 2616.84,
+   "end": 2623.36,
+   "text": "if you want to make many billions of dollars, just do that. So, it seems like a very rational thing to do for anyone who can."
+  },
+  {
+   "start": 2624.36,
+   "end": 2626.52,
+   "text": "So, I'm not surprised that there is a lot of attrition."
+  },
+  {
+   "start": 2628.28,
+   "end": 2631.32,
+   "text": "Meeting him in person, he's super nice, very smart."
+  },
+  {
+   "start": 2633.04,
+   "end": 2633.04,
+   "text": "Absolutely"
+  },
+  {
+   "start": 2635.28,
+   "end": 2637.36,
+   "text": "perfect public interface. You see him testify"
+  },
+  {
+   "start": 2638.28,
+   "end": 2638.48,
+   "text": "in the Senate,"
+  },
+  {
+   "start": 2639.48,
+   "end": 2642.48,
+   "text": "he says the right thing to the senators. You see him talk to the investors,"
+  },
+  {
+   "start": 2643.56,
+   "end": 2644.24,
+   "text": "they get the right message."
+  },
+  {
+   "start": 2645.28,
+   "end": 2648.52,
+   "text": "But, if you look at what people who know him personally are saying,"
+  },
+  {
+   "start": 2650.0,
+   "end": 2651.88,
+   "text": "it's probably not the right person to be"
+  },
+  {
+   "start": 2653.08,
+   "end": 2654.72,
+   "text": "controlling a project of that impact."
+  },
+  {
+   "start": 2657.08,
+   "end": 2657.08,
+   "text": "Why?"
+  },
+  {
+   "start": 2659.2,
+   "end": 2660.48,
+   "text": "He puts safety second."
+  },
+  {
+   "start": 2663.36,
+   "end": 2663.8,
+   "text": "Second to"
+  },
+  {
+   "start": 2665.32,
+   "end": 2666.88,
+   "text": "winning this race to superintelligence,"
+  },
+  {
+   "start": 2667.8,
+   "end": 2670.96,
+   "text": "being the guy who created God and controlling light cone of the universe."
+  },
+  {
+   "start": 2671.96,
+   "end": 2672.2,
+   "text": "He's worse."
+  },
+  {
+   "start": 2674.28,
+   "end": 2677.96,
+   "text": "Do you suspect that's what he's driven by is by the the legacy of being an impactful"
+  },
+  {
+   "start": 2678.88,
+   "end": 2679.96,
+   "text": "person that did a"
+  },
+  {
+   "start": 2681.0,
+   "end": 2681.96,
+   "text": "remarkable thing versus"
+  },
+  {
+   "start": 2683.2,
+   "end": 2685.24,
+   "text": "the consequence that that might have on for society?"
+  },
+  {
+   "start": 2686.6,
+   "end": 2695.64,
+   "text": "Because it's interesting that his his other startup is Worldcoin, which is basically a platform to create universal basic income. I a platform to give us income in a world where"
+  },
+  {
+   "start": 2697.12,
+   "end": 2700.76,
+   "text": "people don't have jobs anymore. So, on one hand you're creating an AI company, on the other hand you're creating a company"
+  },
+  {
+   "start": 2701.68,
+   "end": 2703.28,
+   "text": "that is preparing for people to not have employment."
+  },
+  {
+   "start": 2705.28,
+   "end": 2705.92,
+   "text": "It also has other"
+  },
+  {
+   "start": 2707.36,
+   "end": 2710.12,
+   "text": "properties. It keeps track of everyone's biometrics."
+  },
+  {
+   "start": 2712.28,
+   "end": 2712.28,
+   "text": "It"
+  },
+  {
+   "start": 2713.48,
+   "end": 2718.96,
+   "text": "keeps you in charge of a world's economy, world's wealth. They are retaining a large portion of Worldcoins."
+  },
+  {
+   "start": 2720.52,
+   "end": 2726.36,
+   "text": "So, I I think it's kind of very reasonable part to integrate with world dominance."
+  },
+  {
+   "start": 2727.36,
+   "end": 2730.36,
+   "text": "If you have a superintelligence system and you control money,"
+  },
+  {
+   "start": 2732.08,
+   "end": 2732.48,
+   "text": "you're doing well."
+  },
+  {
+   "start": 2736.36,
+   "end": 2737.64,
+   "text": "Why would someone want world dominance?"
+  },
+  {
+   "start": 2740.04,
+   "end": 2741.4,
+   "text": "People have different levels of ambition."
+  },
+  {
+   "start": 2742.36,
+   "end": 2752.0,
+   "text": "Then you are very young person with billions of dollars, fame, you start looking for more ambitious projects. Some people want to go to Mars, others want to control light cone of the universe."
+  },
+  {
+   "start": 2753.88,
+   "end": 2762.56,
+   "text": "What What did you say, light cone of the universe? >> Light cone. So, every part of the universe light can reach from this point, meaning anything accessible you want to grab and"
+  },
+  {
+   "start": 2763.8,
+   "end": 2766.36,
+   "text": "bring into your control. You think Sam Altman wants to control"
+  },
+  {
+   "start": 2767.8,
+   "end": 2768.36,
+   "text": "every part of the universe?"
+  },
+  {
+   "start": 2770.0,
+   "end": 2771.32,
+   "text": "I I suspect he might, yes."
+  },
+  {
+   "start": 2772.48,
+   "end": 2772.48,
+   "text": "Hmm."
+  },
+  {
+   "start": 2773.44,
+   "end": 2779.16,
+   "text": "It doesn't mean he doesn't want a side effect of it being a very beneficial technology which makes all the humans happy."
+  },
+  {
+   "start": 2780.24,
+   "end": 2781.68,
+   "text": "Happy humans are good for control."
+  },
+  {
+   "start": 2784.44,
+   "end": 2785.08,
+   "text": "If you had to guess"
+  },
+  {
+   "start": 2787.12,
+   "end": 2788.72,
+   "text": "what the world looks like in"
+  },
+  {
+   "start": 2790.08,
+   "end": 2790.08,
+   "text": "2100,"
+  },
+  {
+   "start": 2792.64,
+   "end": 2793.36,
+   "text": "if you had to guess,"
+  },
+  {
+   "start": 2795.04,
+   "end": 2795.48,
+   "text": "it's either"
+  },
+  {
+   "start": 2796.68,
+   "end": 2801.64,
+   "text": "free of human existence or it's completely not comprehensible to someone like us."
+  },
+  {
+   "start": 2804.4,
+   "end": 2805.04,
+   "text": "It's one of those extremes."
+  },
+  {
+   "start": 2806.32,
+   "end": 2810.68,
+   "text": "So, there's either no humans It's basically the world is destroyed or it's so different"
+  },
+  {
+   "start": 2811.72,
+   "end": 2811.72,
+   "text": "that"
+  },
+  {
+   "start": 2812.8,
+   "end": 2814.04,
+   "text": "I cannot envision those predictions."
+  },
+  {
+   "start": 2816.0,
+   "end": 2817.6,
+   "text": "What can be done"
+  },
+  {
+   "start": 2818.52,
+   "end": 2822.84,
+   "text": "to turn this ship to a more certain positive outcome at this point?"
+  },
+  {
+   "start": 2824.08,
+   "end": 2829.16,
+   "text": "Is Is there still things that we can do or is it too late? So, I believe in personal self-interest."
+  },
+  {
+   "start": 2830.16,
+   "end": 2840.92,
+   "text": "If people realize that doing this thing is really bad for them personally, they will not do it. So, our job is to convince everyone with any power in this space creating this technology working for these companies,"
+  },
+  {
+   "start": 2842.36,
+   "end": 2843.76,
+   "text": "they are doing something very bad"
+  },
+  {
+   "start": 2844.76,
+   "end": 2849.08,
+   "text": "for them. Not just forget about eight billion people you're experimenting on with no permission,"
+  },
+  {
+   "start": 2850.52,
+   "end": 2850.72,
+   "text": "no consent,"
+  },
+  {
+   "start": 2852.0,
+   "end": 2865.36,
+   "text": "you will not be happy with the outcome. If we can get everyone to understand that's the default, and it's not just me saying it. You had Geoff Hinton on him. Nobel Prize winner, founder of the whole machine learning space. He says the same thing. Bengio,"
+  },
+  {
+   "start": 2866.32,
+   "end": 2872.96,
+   "text": "dozens of others, top scholars. We had a statement about dangers of AI signed by thousands of scholars, computer scientists."
+  },
+  {
+   "start": 2873.88,
+   "end": 2874.32,
+   "text": "This is basically"
+  },
+  {
+   "start": 2875.4,
+   "end": 2886.84,
+   "text": "what we think right now and we need to make it a universal. No one should disagree with this. And then, we may actually make good decisions about what technology to build. It doesn't guarantee long-term"
+  },
+  {
+   "start": 2887.88,
+   "end": 2893.4,
+   "text": "safety for humanity, but it means we're not trying to get there as soon as possible to the worst possible outcome."
+  },
+  {
+   "start": 2894.72,
+   "end": 2896.44,
+   "text": "And do you Are you hopeful that that's even possible?"
+  },
+  {
+   "start": 2898.96,
+   "end": 2901.2,
+   "text": "I want to try. We have no choice but to try."
+  },
+  {
+   "start": 2902.8,
+   "end": 2906.8,
+   "text": "And what would need to happen and who would need to act? What is it government legislation? Is it"
+  },
+  {
+   "start": 2907.88,
+   "end": 2912.08,
+   "text": "Unfortunately, I don't think making it illegal is sufficient. There are different jurisdictions,"
+  },
+  {
+   "start": 2913.16,
+   "end": 2921.52,
+   "text": "there is, you know, loopholes. And what are you going to do if somebody does it? You're going to fine them for destroying humanity? Like very steep fines for it? Like what are you going to do? It's not enforceable."
+  },
+  {
+   "start": 2922.6,
+   "end": 2928.16,
+   "text": "If they do create it, now the superintelligence is in charge. So, the judicial system we have is not impactful."
+  },
+  {
+   "start": 2929.32,
+   "end": 2932.28,
+   "text": "And all the punishments we have are designed for punishing humans."
+  },
+  {
+   "start": 2933.4,
+   "end": 2935.72,
+   "text": "Prisons, capital punishment doesn't apply to AI."
+  },
+  {
+   "start": 2936.64,
+   "end": 2940.28,
+   "text": "Here's the problem I have is when I have these conversations, I never feel like I walk away with"
+  },
+  {
+   "start": 2943.32,
+   "end": 2945.04,
+   "text": "hope that something's going to go well."
+  },
+  {
+   "start": 2945.96,
+   "end": 2948.56,
+   "text": "And what I mean by that is I never feel like I walk away with clear"
+  },
+  {
+   "start": 2949.52,
+   "end": 2950.04,
+   "text": "some kind of a clear"
+  },
+  {
+   "start": 2951.04,
+   "end": 2962.48,
+   "text": "set of actions that can course correct what might happen here. So, what should What should I do? What should the person sat at home listening to this do? You You talked to a lot of people who are building this technology."
+  },
+  {
+   "start": 2963.52,
+   "end": 2963.52,
+   "text": "Mhm."
+  },
+  {
+   "start": 2964.6,
+   "end": 2966.12,
+   "text": "Ask them precisely to explain"
+  },
+  {
+   "start": 2967.6,
+   "end": 2976.36,
+   "text": "some of those things they claim to be impossible, how they solved it or going to solve it before they get to where they're going. Do you know, I don't think Sam Altman wants to talk to me."
+  },
+  {
+   "start": 2977.4,
+   "end": 2981.0,
+   "text": "I don't know. He seems to go on a lot of podcasts. Maybe he does. >> wants to go on mine."
+  },
+  {
+   "start": 2983.44,
+   "end": 2984.68,
+   "text": "I wonder why that is."
+  },
+  {
+   "start": 2987.08,
+   "end": 2989.48,
+   "text": "I'd love to speak to him, but I don't I don't think he wants to"
+  },
+  {
+   "start": 2990.92,
+   "end": 2992.44,
+   "text": "I don't think he wants me to"
+  },
+  {
+   "start": 2994.28,
+   "end": 3008.24,
+   "text": "interview him. Have an open challenge. Maybe money is not the incentive, but whatever attracts people like that, whoever can convince you that it's possible to control and make safe super intelligence gets the prize. They come on your show and prove their case."
+  },
+  {
+   "start": 3010.04,
+   "end": 3016.2,
+   "text": "Anyone. If no one claims the prize or even accepts the challenge after a few years, maybe we don't have anyone with solutions."
+  },
+  {
+   "start": 3017.6,
+   "end": 3018.08,
+   "text": "We have companies"
+  },
+  {
+   "start": 3019.08,
+   "end": 3023.04,
+   "text": "valued again at billions and billions of dollars working on safe super intelligence."
+  },
+  {
+   "start": 3024.6,
+   "end": 3026.32,
+   "text": "We haven't seen their output yet."
+  },
+  {
+   "start": 3029.96,
+   "end": 3037.76,
+   "text": "Yeah, I'd like to speak to Ilya as well cuz I know he's he's working on safe super intelligence, so Notice the pattern too. If you look at history of AI safety organizations"
+  },
+  {
+   "start": 3039.52,
+   "end": 3039.52,
+   "text": "or"
+  },
+  {
+   "start": 3040.72,
+   "end": 3041.6,
+   "text": "departments within companies,"
+  },
+  {
+   "start": 3042.88,
+   "end": 3046.4,
+   "text": "they usually start well, very ambitious, and then they fail and disappear."
+  },
+  {
+   "start": 3047.76,
+   "end": 3047.76,
+   "text": "So,"
+  },
+  {
+   "start": 3048.92,
+   "end": 3051.56,
+   "text": "OpenAI had super intelligence alignment team."
+  },
+  {
+   "start": 3052.72,
+   "end": 3055.52,
+   "text": "The day they announced it, I think they said we're going to solve it in 4 years."
+  },
+  {
+   "start": 3056.72,
+   "end": 3058.36,
+   "text": "Like half a year later they canceled the team."
+  },
+  {
+   "start": 3059.76,
+   "end": 3061.28,
+   "text": "And there is dozens of similar examples."
+  },
+  {
+   "start": 3062.72,
+   "end": 3062.72,
+   "text": "Leading"
+  },
+  {
+   "start": 3064.0,
+   "end": 3065.4,
+   "text": "a perfect safety for super intelligence,"
+  },
+  {
+   "start": 3066.44,
+   "end": 3072.56,
+   "text": "perpetual safety as it keeps improving, modifying, interacting with people. You're never going to get there. It's impossible."
+  },
+  {
+   "start": 3074.88,
+   "end": 3085.44,
+   "text": "There is a big difference between difficult problems in computer science and be complete problems and impossible problems. And I think control indefinite control of super intelligence is such a problem."
+  },
+  {
+   "start": 3086.4,
+   "end": 3087.48,
+   "text": "So, what's the point trying then if it's impossible?"
+  },
+  {
+   "start": 3088.44,
+   "end": 3101.56,
+   "text": "Well, I'm trying to prove that it is specifically that. Once we establish something is impossible, fewer people will waste their time claiming they can do it and find looking for money. So many people go and give me a billion dollars in 2 years and I'll solve it for you."
+  },
+  {
+   "start": 3102.6,
+   "end": 3103.28,
+   "text": "Well, I don't think you will."
+  },
+  {
+   "start": 3104.88,
+   "end": 3108.24,
+   "text": "But people aren't going to stop striving towards it. So, if there's no attempts to"
+  },
+  {
+   "start": 3109.2,
+   "end": 3122.72,
+   "text": "make it safe and there's more people increasingly striving towards it, then it's inevitable. But it changes what we do. If we know that it's impossible to make it right, to make it safe, then this direct path of just build it as soon as you can become suicide mission."
+  },
+  {
+   "start": 3123.8,
+   "end": 3128.4,
+   "text": "Hopefully fewer people will pursue that. They may go in other directions like again,"
+  },
+  {
+   "start": 3129.56,
+   "end": 3136.4,
+   "text": "I'm a scientist, I'm an engineer. I love AI. I love technology. I use it all the time. Build useful tools. Stop building agents."
+  },
+  {
+   "start": 3137.48,
+   "end": 3143.52,
+   "text": "Build narrow super intelligence, not a general one. I'm not saying you shouldn't make billions of dollars. I love billions of dollars."
+  },
+  {
+   "start": 3145.2,
+   "end": 3145.2,
+   "text": "But"
+  },
+  {
+   "start": 3146.36,
+   "end": 3148.16,
+   "text": "don't kill everyone, yourself included."
+  },
+  {
+   "start": 3153.32,
+   "end": 3154.36,
+   "text": "They don't think they're going to though."
+  },
+  {
+   "start": 3155.4,
+   "end": 3156.2,
+   "text": "Then tell us why."
+  },
+  {
+   "start": 3157.16,
+   "end": 3166.36,
+   "text": "I hear things about intuition. I hear things about we'll solve it later. Tell me specifically in scientific terms. Publish a peer-reviewed paper explaining how you're going to control super intelligence."
+  },
+  {
+   "start": 3168.48,
+   "end": 3178.72,
+   "text": "It's strange. It's strange to it's strange to even bother if there was even a 1% chance of human extinction. It's strange to do something. Like if there was a 1% chance Someone told me there was a 1% chance that if I got in a car,"
+  },
+  {
+   "start": 3180.2,
+   "end": 3188.96,
+   "text": "I might not I might not be alive, I would not get in the car. If you told me there was a 1% chance that if I drank whatever liquid is in this cup right now, I might die, I would not drink the liquid."
+  },
+  {
+   "start": 3189.92,
+   "end": 3190.6,
+   "text": "Even if there was"
+  },
+  {
+   "start": 3192.28,
+   "end": 3192.92,
+   "text": "a billion dollars"
+  },
+  {
+   "start": 3194.48,
+   "end": 3206.6,
+   "text": "if I survived. So, the 99% chance is I get a billion dollars, the 1% is I die. I wouldn't drink it. I wouldn't take the chance. It's worse than that. Not just you die, everyone dies. Yeah. Yeah. Now, would we let you drink it at any odds?"
+  },
+  {
+   "start": 3207.56,
+   "end": 3211.8,
+   "text": "That's for us to decide. You don't get to make that choice for us. To get consent"
+  },
+  {
+   "start": 3212.72,
+   "end": 3213.44,
+   "text": "from human subjects,"
+  },
+  {
+   "start": 3214.64,
+   "end": 3217.16,
+   "text": "you need them to comprehend what they are consenting to."
+  },
+  {
+   "start": 3218.12,
+   "end": 3220.28,
+   "text": "If those systems are unexplainable, unpredictable,"
+  },
+  {
+   "start": 3221.2,
+   "end": 3224.04,
+   "text": "how can they consent? They don't know what they are consenting to. Mhm."
+  },
+  {
+   "start": 3224.96,
+   "end": 3227.0,
+   "text": "So, it's impossible to get consent by definition."
+  },
+  {
+   "start": 3228.2,
+   "end": 3229.76,
+   "text": "So, this experiment can never be run ethically."
+  },
+  {
+   "start": 3230.84,
+   "end": 3234.6,
+   "text": "By definition, they are doing unethical experimentation on human subjects."
+  },
+  {
+   "start": 3235.76,
+   "end": 3236.52,
+   "text": "Do you think people should be protesting?"
+  },
+  {
+   "start": 3237.84,
+   "end": 3251.16,
+   "text": "There are people protesting. There is Stop AI. There is Pause AI. They block offices of OpenAI. They do it weekly, monthly. There are quite a few actions and they're recruiting new people. You think more people should be protesting? Do you think that's an effective solution?"
+  },
+  {
+   "start": 3252.56,
+   "end": 3265.68,
+   "text": "If you can get it to a large enough scale to where majority of population is participating, it would be impactful. I don't know if they can scale from current numbers to that, but I support everyone trying everything peacefully and legally."
+  },
+  {
+   "start": 3267.32,
+   "end": 3270.88,
+   "text": "And for the for the person listening at home, what should they what should they be doing? What what"
+  },
+  {
+   "start": 3271.8,
+   "end": 3274.0,
+   "text": "cuz they they don't want to feel powerless. None of us want to feel powerless."
+  },
+  {
+   "start": 3275.6,
+   "end": 3290.52,
+   "text": "So, it depends on what scale we are asking about time scale. I was saying like this year your kid goes to college, what major to pick? Should they go to college at all? Yeah. Should you switch jobs? Should you go into certain industries? Those questions we can answer. We can talk about immediate future."
+  },
+  {
+   "start": 3291.68,
+   "end": 3293.64,
+   "text": "What should you do in 5 years with"
+  },
+  {
+   "start": 3295.16,
+   "end": 3303.08,
+   "text": "this being created? For an average person, not much. Just like they can't influence World War III nuclear holocaust, anything like that. It's"
+  },
+  {
+   "start": 3304.04,
+   "end": 3304.32,
+   "text": "not something"
+  },
+  {
+   "start": 3305.32,
+   "end": 3306.2,
+   "text": "anyone's going to ask them about."
+  },
+  {
+   "start": 3307.32,
+   "end": 3316.28,
+   "text": "Today, if you want to be a part of this movement, yeah, join Pause AI, join Stop AI. Those are organizations currently trying to build up momentum to"
+  },
+  {
+   "start": 3317.52,
+   "end": 3317.52,
+   "text": "bring"
+  },
+  {
+   "start": 3318.88,
+   "end": 3319.68,
+   "text": "democratic powers"
+  },
+  {
+   "start": 3320.64,
+   "end": 3321.52,
+   "text": "to influence those individuals."
+  },
+  {
+   "start": 3323.28,
+   "end": 3323.6,
+   "text": "So, in the meantime,"
+  },
+  {
+   "start": 3325.2,
+   "end": 3329.88,
+   "text": "not a huge amount. I was wondering if there there are any interesting strategies in the meantime. Like should I be thinking differently about"
+  },
+  {
+   "start": 3330.88,
+   "end": 3331.88,
+   "text": "my family, about"
+  },
+  {
+   "start": 3333.0,
+   "end": 3336.08,
+   "text": "I mean, you've got kids, right? You've got three kids. That I know about, yeah."
+  },
+  {
+   "start": 3337.84,
+   "end": 3345.76,
+   "text": "How are you thinking about parenting in this world that you see around the corner? How are you thinking about what to say to them, the advice to give them, what they should be learning? So, there is general advice."
+  },
+  {
+   "start": 3347.2,
+   "end": 3351.12,
+   "text": "I would say that there is the main that you should live your everyday as if it's your last."
+  },
+  {
+   "start": 3352.32,
+   "end": 3356.44,
+   "text": "It's a good advice no matter what. If you have 3 years left or 30 years left, you live your best life."
+  },
+  {
+   "start": 3357.8,
+   "end": 3357.8,
+   "text": "So,"
+  },
+  {
+   "start": 3359.8,
+   "end": 3361.72,
+   "text": "try to not do things you hate for too long."
+  },
+  {
+   "start": 3363.36,
+   "end": 3364.08,
+   "text": "Do interesting things."
+  },
+  {
+   "start": 3365.04,
+   "end": 3365.72,
+   "text": "Do impactful things."
+  },
+  {
+   "start": 3366.72,
+   "end": 3368.8,
+   "text": "If you can do all that while helping people, do that."
+  },
+  {
+   "start": 3370.2,
+   "end": 3370.8,
+   "text": "Simulation theory"
+  },
+  {
+   "start": 3372.12,
+   "end": 3372.96,
+   "text": "is a interesting"
+  },
+  {
+   "start": 3374.0,
+   "end": 3379.08,
+   "text": "sort of adjacent subject here because as computers begin to accelerate and get more intelligent and we're able to"
+  },
+  {
+   "start": 3381.88,
+   "end": 3389.24,
+   "text": "you know, do things with AI that we can never have imagined in terms of like imagine the worlds that we could create with virtual reality. I think it was Google that recently released"
+  },
+  {
+   "start": 3390.52,
+   "end": 3391.68,
+   "text": "what was it called? Um"
+  },
+  {
+   "start": 3393.12,
+   "end": 3394.24,
+   "text": "like the AI worlds."
+  },
+  {
+   "start": 3395.24,
+   "end": 3397.32,
+   "text": "You take a picture and it generates a whole world."
+  },
+  {
+   "start": 3398.24,
+   "end": 3402.08,
+   "text": "Yeah. Yeah. You can move through the world. I'll put it on the screen for people to see, but Google have released this technology"
+  },
+  {
+   "start": 3403.04,
+   "end": 3404.88,
+   "text": "which allows you, I think with a simple prompt actually,"
+  },
+  {
+   "start": 3405.88,
+   "end": 3406.72,
+   "text": "to make a three-dimensional"
+  },
+  {
+   "start": 3407.96,
+   "end": 3419.24,
+   "text": "world that you can then navigate through. And in that world it has memory. So, in the world if you paint on a wall and turn away, you look back, the wall >> Yeah, it's persistent. And when I saw that, I thought oh God, Jesus, bloody hell, this is"
+  },
+  {
+   "start": 3420.84,
+   "end": 3426.84,
+   "text": "this is like the foothills of being able to create a simulation that's indistinguishable from everything I see here. Right."
+  },
+  {
+   "start": 3428.04,
+   "end": 3434.04,
+   "text": "That's why I think we are in one. That's exactly the reason. AI is getting to the level of creating human agents,"
+  },
+  {
+   "start": 3435.0,
+   "end": 3440.0,
+   "text": "human level agents, and virtual reality is getting to the level of being indistinguishable from ours."
+  },
+  {
+   "start": 3440.92,
+   "end": 3444.48,
+   "text": "So, you think this is a simulation? I'm pretty sure we are in a simulation, yeah."
+  },
+  {
+   "start": 3446.36,
+   "end": 3452.8,
+   "text": "For someone that isn't familiar with the simulation arguments, what are what are the first principles here that convince you that we are currently living in a simulation?"
+  },
+  {
+   "start": 3454.36,
+   "end": 3454.36,
+   "text": "So,"
+  },
+  {
+   "start": 3455.56,
+   "end": 3465.4,
+   "text": "you need certain technologies to make it happen. If you believe we can create human level AI, Yeah. and you believe we can create virtual reality as good as this in terms of resolution, haptics,"
+  },
+  {
+   "start": 3466.44,
+   "end": 3467.84,
+   "text": "whatever properties it has,"
+  },
+  {
+   "start": 3469.0,
+   "end": 3471.32,
+   "text": "then I commit right now, the moment this is affordable,"
+  },
+  {
+   "start": 3472.36,
+   "end": 3477.32,
+   "text": "I'm going to run billions of simulations of this exact moment making sure you are statistically in one."
+  },
+  {
+   "start": 3479.88,
+   "end": 3489.84,
+   "text": "Say that last part again. You're going to run you're going to run I'm going to commit right now when it's very affordable. It's like 10 bucks a month to run it. I'm going to run a billion simulations of this interview."
+  },
+  {
+   "start": 3491.56,
+   "end": 3491.56,
+   "text": "Why?"
+  },
+  {
+   "start": 3492.88,
+   "end": 3497.44,
+   "text": "Because statistically that means you are in one right now. The chance of you being in the real one is one in a billion."
+  },
+  {
+   "start": 3499.72,
+   "end": 3500.04,
+   "text": "Okay. So,"
+  },
+  {
+   "start": 3501.0,
+   "end": 3503.08,
+   "text": "to make sure I'm clear on this, It's a retroactive placement."
+  },
+  {
+   "start": 3504.24,
+   "end": 3505.32,
+   "text": "Yeah. So, the minute it's affordable,"
+  },
+  {
+   "start": 3506.68,
+   "end": 3506.68,
+   "text": "then"
+  },
+  {
+   "start": 3508.16,
+   "end": 3509.12,
+   "text": "you can run billions of them"
+  },
+  {
+   "start": 3510.04,
+   "end": 3515.24,
+   "text": "and they would feel and appear to be exactly like this interview right now. >> Right. So, assuming that AI has"
+  },
+  {
+   "start": 3516.24,
+   "end": 3516.24,
+   "text": "internal"
+  },
+  {
+   "start": 3517.16,
+   "end": 3525.96,
+   "text": "states, experiences, qualia. Some people argue that they don't. Some say they already have it. That's a separate philosophical question, but if we can simulate this, I will."
+  },
+  {
+   "start": 3528.92,
+   "end": 3530.4,
+   "text": "Some people might misunderstand. You're not"
+  },
+  {
+   "start": 3531.8,
+   "end": 3532.68,
+   "text": "you're not saying that you will."
+  },
+  {
+   "start": 3533.76,
+   "end": 3536.64,
+   "text": "You're saying that someone will. I can also do it. I don't mind."
+  },
+  {
+   "start": 3538.6,
+   "end": 3545.72,
+   "text": "Okay. Of course, others will do it before I get there. If I'm getting it for $10, somebody got it for $1,000. That's not the point. If you have technology,"
+  },
+  {
+   "start": 3546.64,
+   "end": 3548.68,
+   "text": "we're definitely running a lot of simulations for"
+  },
+  {
+   "start": 3549.6,
+   "end": 3550.36,
+   "text": "research, for entertainment,"
+  },
+  {
+   "start": 3551.36,
+   "end": 3551.36,
+   "text": "games,"
+  },
+  {
+   "start": 3552.72,
+   "end": 3553.32,
+   "text": "all sorts of reasons."
+  },
+  {
+   "start": 3554.6,
+   "end": 3562.16,
+   "text": "And the number of those greatly exceeds the number of real worlds we're in. Look at all the video games kids are playing. Every kid plays 10 different games."
+  },
+  {
+   "start": 3563.12,
+   "end": 3568.24,
+   "text": "You know, billion kids in the world. So, there is 10 billion simulations in one real world. Mhm."
+  },
+  {
+   "start": 3571.24,
+   "end": 3579.24,
+   "text": "Even more so when we think about advanced AI super intelligent systems. Their thinking is not like ours. They think in a lot more detail. They run experiments."
+  },
+  {
+   "start": 3580.16,
+   "end": 3582.44,
+   "text": "So, running a detailed simulation"
+  },
+  {
+   "start": 3583.36,
+   "end": 3590.28,
+   "text": "of some problem at the level of creating artificial humans and simulating the whole planet would be something they'll do routinely."
+  },
+  {
+   "start": 3591.56,
+   "end": 3595.6,
+   "text": "So, there is a good chance this is not me doing it for $10. It's a future simulation"
+  },
+  {
+   "start": 3596.64,
+   "end": 3598.28,
+   "text": "thinking about something in this world."
+  },
+  {
+   "start": 3603.08,
+   "end": 3604.8,
+   "text": "So, it could be the case that"
+  },
+  {
+   "start": 3606.96,
+   "end": 3609.16,
+   "text": "a species of humans or a species of intelligence"
+  },
+  {
+   "start": 3610.2,
+   "end": 3610.6,
+   "text": "in some form"
+  },
+  {
+   "start": 3611.56,
+   "end": 3614.08,
+   "text": "got to this point where they could affordably run"
+  },
+  {
+   "start": 3616.0,
+   "end": 3617.0,
+   "text": "simulations that are indistinguishable"
+  },
+  {
+   "start": 3618.16,
+   "end": 3618.36,
+   "text": "from this"
+  },
+  {
+   "start": 3619.4,
+   "end": 3621.88,
+   "text": "and they decided to do it and this is it right now."
+  },
+  {
+   "start": 3625.64,
+   "end": 3630.24,
+   "text": "And it would make sense that they would run simulations as experiments or for games or for entertainment. And also,"
+  },
+  {
+   "start": 3631.16,
+   "end": 3642.0,
+   "text": "when we think about time in the world that I'm in in this simulation that I could be in right now, time feels long relatively. You know, I have 24 hours in a day, but on there in their world it could be"
+  },
+  {
+   "start": 3643.24,
+   "end": 3651.36,
+   "text": "Time is relative. Relative, yeah. It could be a second. My whole life could be a millisecond in there. >> Right. You can change speed of simulations you're running for sure."
+  },
+  {
+   "start": 3653.12,
+   "end": 3664.28,
+   "text": "So, your belief is that this is probably a simulation. Most likely. And there is a lot of agreement on that if you look again returning to religions. Every religion basically describes what? A super intelligent being"
+  },
+  {
+   "start": 3665.48,
+   "end": 3668.0,
+   "text": "an engineer, a programmer creating a fake world"
+  },
+  {
+   "start": 3668.96,
+   "end": 3674.84,
+   "text": "for testing purposes or for whatever. But, if you took the simulation hypothesis paper"
+  },
+  {
+   "start": 3675.92,
+   "end": 3679.32,
+   "text": "you go to jungle, you talk to primitive people, a local tribe"
+  },
+  {
+   "start": 3680.28,
+   "end": 3682.16,
+   "text": "and in their language you tell them about it."
+  },
+  {
+   "start": 3683.16,
+   "end": 3687.68,
+   "text": "Go back two generations later. They have religion. That's basically what the story is."
+  },
+  {
+   "start": 3689.84,
+   "end": 3705.96,
+   "text": "Religion, you know, it describes a simulation theory basically. Somebody creates >> So, by default that was the first theory we had and now with science more and more people are going like I'm giving it non-trivial probability. A few people as high as I am, but a lot of people give it some credence. What percentage are you at"
+  },
+  {
+   "start": 3706.08,
+   "end": 3708.52,
+   "text": "in terms of believing that we are currently living in a simulation? Very"
+  },
+  {
+   "start": 3709.48,
+   "end": 3709.92,
+   "text": "close to certainty."
+  },
+  {
+   "start": 3712.24,
+   "end": 3713.64,
+   "text": "And what does that mean for"
+  },
+  {
+   "start": 3714.76,
+   "end": 3718.8,
+   "text": "the nature of your life? If you're close to 100% certain that we are currently living in a simulation"
+  },
+  {
+   "start": 3720.12,
+   "end": 3721.36,
+   "text": "does that change anything in your life?"
+  },
+  {
+   "start": 3722.44,
+   "end": 3731.4,
+   "text": "So, all the things you care about are still the same. Pain still hurts. Love still love, right? Like those things are not different, so it doesn't matter. They're still important. That's what matters."
+  },
+  {
+   "start": 3732.64,
+   "end": 3732.64,
+   "text": "The"
+  },
+  {
+   "start": 3733.76,
+   "end": 3734.28,
+   "text": "little 1%"
+  },
+  {
+   "start": 3735.32,
+   "end": 3740.8,
+   "text": "difference is that I care about what's outside the simulation. I want to learn about it. I write papers about it. So, that's the only impact."
+  },
+  {
+   "start": 3742.64,
+   "end": 3743.68,
+   "text": "And what do you think is outside of the simulation?"
+  },
+  {
+   "start": 3744.8,
+   "end": 3745.08,
+   "text": "I don't know."
+  },
+  {
+   "start": 3746.08,
+   "end": 3746.6,
+   "text": "But, we can"
+  },
+  {
+   "start": 3747.84,
+   "end": 3751.36,
+   "text": "look at this world and derive some properties of the simulators."
+  },
+  {
+   "start": 3752.64,
+   "end": 3756.04,
+   "text": "So, clearly brilliant engineer, brilliant scientist, brilliant artist."
+  },
+  {
+   "start": 3757.36,
+   "end": 3758.76,
+   "text": "Not so good with morals and ethics."
+  },
+  {
+   "start": 3760.28,
+   "end": 3760.72,
+   "text": "Room for improvement."
+  },
+  {
+   "start": 3762.08,
+   "end": 3771.12,
+   "text": "In our view of what morals and ethics should be. Well, we we know there is suffering in the world. So, unless you think it's ethical to torture children, then"
+  },
+  {
+   "start": 3772.52,
+   "end": 3773.68,
+   "text": "I'm questioning your approach."
+  },
+  {
+   "start": 3774.8,
+   "end": 3787.96,
+   "text": "But, in terms of incentives to create a positive incentive, you probably also need to create negative incentives. Suffering seems to be one of the negatives and incentives built into our design to stop me doing things I shouldn't do. So, like put my hand in a fire, it's going to hurt."
+  },
+  {
+   "start": 3788.92,
+   "end": 3797.4,
+   "text": "But, it's all about levels, levels of suffering, right? So, unpleasant stimuli, negative feedback doesn't have to be at like negative infinity hell levels."
+  },
+  {
+   "start": 3798.4,
+   "end": 3802.76,
+   "text": "You don't want to burn alive and feel it. You want to be like, \"Oh, this is uncomfortable. I'm going to stop.\""
+  },
+  {
+   "start": 3804.52,
+   "end": 3820.64,
+   "text": "It's interesting because we we assume that they don't have great moral morals and ethics, but we too would we take animals and cook them and eat them for a dinner and we also take conduct experiments on mice and rats >> But, to get university approval to conduct an experiment you submit a proposal and there is a panel"
+  },
+  {
+   "start": 3821.08,
+   "end": 3828.68,
+   "text": "of ethicists who would say, \"You can't experiment on humans. You can't burn babies. You can't eat animals alive.\" All those things would be banned."
+  },
+  {
+   "start": 3830.6,
+   "end": 3837.68,
+   "text": "In most parts of the world. Where they have ethical boards. Yeah. Cuz some places don't bother with it, so they have easier approval process."
+  },
+  {
+   "start": 3839.32,
+   "end": 3846.32,
+   "text": "It's funny when you talk about the simulation theory, there's a there's an element of the conversation that makes life feel less meaningful in a weird way."
+  },
+  {
+   "start": 3848.8,
+   "end": 3848.8,
+   "text": "Like"
+  },
+  {
+   "start": 3849.84,
+   "end": 3850.92,
+   "text": "I know it doesn't matter"
+  },
+  {
+   "start": 3852.0,
+   "end": 3856.44,
+   "text": "but whenever I have this conversation with people not on the podcast about are we living in a simulation"
+  },
+  {
+   "start": 3857.8,
+   "end": 3865.6,
+   "text": "you almost see a little bit of meaning come out of their life for a second and then they forget and then they carry on. But, the the the thought that this is a simulation"
+  },
+  {
+   "start": 3866.64,
+   "end": 3866.64,
+   "text": "almost"
+  },
+  {
+   "start": 3867.8,
+   "end": 3868.8,
+   "text": "posits that it's not important"
+  },
+  {
+   "start": 3870.4,
+   "end": 3875.4,
+   "text": "or that I I think humans want to believe that this is the highest level and we're that the most important and we're the"
+  },
+  {
+   "start": 3876.64,
+   "end": 3878.52,
+   "text": "it's all about us. We're quite egotistical by design."
+  },
+  {
+   "start": 3880.48,
+   "end": 3895.68,
+   "text": "And yeah, I just a interesting observation I've always had when I have these conversations with people that it it seems to strip something out of their life. Do you feel religious people feel that way? They know there is another world and the one that matters is not this one. Do you feel they don't value their lives the"
+  },
+  {
+   "start": 3895.76,
+   "end": 3895.76,
+   "text": "same?"
+  },
+  {
+   "start": 3896.76,
+   "end": 3897.36,
+   "text": "I guess in some religions."
+  },
+  {
+   "start": 3898.36,
+   "end": 3898.72,
+   "text": "Think um"
+  },
+  {
+   "start": 3899.68,
+   "end": 3901.92,
+   "text": "they think that this world is being created for them"
+  },
+  {
+   "start": 3902.92,
+   "end": 3905.24,
+   "text": "and that they are going to go to this heaven or or hell"
+  },
+  {
+   "start": 3906.28,
+   "end": 3909.08,
+   "text": "and that still puts them at the very center of it. But, it but if it's a simulation,"
+  },
+  {
+   "start": 3910.08,
+   "end": 3910.8,
+   "text": "you know, we could just be"
+  },
+  {
+   "start": 3912.48,
+   "end": 3917.28,
+   "text": "some computer game that a 4-year-old alien has is messing around with and while he's got some time to burn."
+  },
+  {
+   "start": 3918.68,
+   "end": 3929.28,
+   "text": "But, maybe there is, you know, a test and there is a better simulation you go to and a worse one. Maybe there are different difficulty levels. Maybe you want to play it on a harder setting next time."
+  },
+  {
+   "start": 3930.24,
+   "end": 3935.32,
+   "text": "I've just invested millions into this and become a co-owner of the company. It's a company called KetoneIQ"
+  },
+  {
+   "start": 3936.8,
+   "end": 3946.04,
+   "text": "and the story is quite interesting. I started talking about ketosis on this podcast and the fact that I'm very low carb, very very low sugar and my body produces ketones which have made me incredibly focused,"
+  },
+  {
+   "start": 3947.12,
+   "end": 3952.92,
+   "text": "have improved my endurance, have improved my mood and have made me more capable at doing what I do here. And because I was talking about it on the podcast,"
+  },
+  {
+   "start": 3953.88,
+   "end": 3959.76,
+   "text": "a couple of weeks later these showed up on my desk in my HQ in London, these little shots. And oh my"
+  },
+  {
+   "start": 3960.68,
+   "end": 3979.0,
+   "text": "god. The impact this had on my ability to articulate myself, on my focus, on my workouts, on my mood, on stopping me crashing throughout the day was so profound that I reached out to the founders of the company and now I'm a co-owner of this business. I highly highly recommend you look into this. I highly recommend you"
+  },
+  {
+   "start": 3979.04,
+   "end": 3982.56,
+   "text": "look at the science behind the product. If you want to try it for yourself, visit ketone.com/steven"
+  },
+  {
+   "start": 3984.64,
+   "end": 3989.72,
+   "text": "for 30% off your subscription order and you'll also get a free gift with your second shipment. That's ketone.com/steven."
+  },
+  {
+   "start": 3992.96,
+   "end": 3996.0,
+   "text": "And I'm so honored that once again a company I own can sponsor my podcast."
+  },
+  {
+   "start": 3997.12,
+   "end": 4013.04,
+   "text": "I've built companies from scratch and backed many more. And there's a blind spot that I keep seeing in early stage founders. They spend very little time thinking about HR. And it's not because they're reckless or they don't care, it's because they're obsessed with building their companies and I can't fault them for that. At that stage you're thinking"
+  },
+  {
+   "start": 4013.4,
+   "end": 4027.16,
+   "text": "about the product, how to attract new customers, how to grow your team, really how to survive. And HR slips down the list because it doesn't feel urgent. But, sooner or later it is. And when things get messy, tools like our sponsor today JustWorks go from being a nice-to-have"
+  },
+  {
+   "start": 4028.28,
+   "end": 4043.88,
+   "text": "to being a necessity. Something goes sideways and you find yourself having conversations you did not see coming. This is when you learn that HR really is the infrastructure of your company and without it things wobble. And JustWorks stops you learning this the hard way. It takes care of the stuff that would otherwise drain your energy and your"
+  },
+  {
+   "start": 4044.0,
+   "end": 4060.28,
+   "text": "time automating payroll, health insurance benefits and it gives your team human support at any hour. It grows with your small business from startup through to growth even when you start hiring team members abroad. So, if you want HR support that's there through the exciting times and the challenging times, head to justworks.com"
+  },
+  {
+   "start": 4061.6,
+   "end": 4062.28,
+   "text": "now. That's justworks.com."
+  },
+  {
+   "start": 4064.76,
+   "end": 4065.52,
+   "text": "And do you think much about longevity?"
+  },
+  {
+   "start": 4066.56,
+   "end": 4071.56,
+   "text": "A lot, yeah. It's probably the second most important problem because if AI doesn't get us, that will."
+  },
+  {
+   "start": 4072.6,
+   "end": 4074.52,
+   "text": "What do you mean? You're going to die of old age."
+  },
+  {
+   "start": 4076.12,
+   "end": 4078.36,
+   "text": "Which is fine. That's not good. You want to die?"
+  },
+  {
+   "start": 4079.28,
+   "end": 4082.76,
+   "text": "I mean You don't have to. It's just a disease. We can cure it."
+  },
+  {
+   "start": 4085.24,
+   "end": 4086.4,
+   "text": "Nothing stops you from living forever."
+  },
+  {
+   "start": 4088.08,
+   "end": 4089.0,
+   "text": "As long as universe exists"
+  },
+  {
+   "start": 4089.96,
+   "end": 4090.8,
+   "text": "unless we escape the simulation."
+  },
+  {
+   "start": 4092.36,
+   "end": 4097.72,
+   "text": "But, we wouldn't want a world where everybody could live forever, right? That would be Sure we do. Why? Who do you want to die?"
+  },
+  {
+   "start": 4099.36,
+   "end": 4113.0,
+   "text": "Well, I don't know. I I mean I say this because it's all I've ever known that people die, but wouldn't the world become pretty overcrowded if >> No, you stop reproducing if you live forever. You have kids because you want a replacement for you. If you live forever, you're like, \"I'll have kids in a million years. That's"
+  },
+  {
+   "start": 4113.16,
+   "end": 4115.04,
+   "text": "cool.\" I'll go explore universe first."
+  },
+  {
+   "start": 4116.36,
+   "end": 4118.28,
+   "text": "Plus, if you look at actual population dynamics"
+  },
+  {
+   "start": 4119.32,
+   "end": 4122.16,
+   "text": "outside of like one continent, we're all shrinking. We're not growing."
+  },
+  {
+   "start": 4123.32,
+   "end": 4124.88,
+   "text": "This is crazy. It's crazy that the more"
+  },
+  {
+   "start": 4125.8,
+   "end": 4140.96,
+   "text": "rich people get, the less kids they they have which aligns with what you're saying and I do actually think I think if I'm going to be completely honest here, I think if I knew that I was going to live to 1,000 years old, there's no way I'd be having kids at 30. Right. It's a Biological clocks are"
+  },
+  {
+   "start": 4141.0,
+   "end": 4146.16,
+   "text": "based on terminal points. Whereas, if your biological clock is infinite, you'd be like one day."
+  },
+  {
+   "start": 4147.56,
+   "end": 4148.2,
+   "text": "And you think that's close?"
+  },
+  {
+   "start": 4149.52,
+   "end": 4150.56,
+   "text": "Uh Being able to extend our lives?"
+  },
+  {
+   "start": 4151.64,
+   "end": 4159.2,
+   "text": "It's one breakthrough away. I think somewhere in our genome we have this rejuvenation loop and it's set to basically give us at most 120."
+  },
+  {
+   "start": 4160.4,
+   "end": 4161.92,
+   "text": "I think we can reset it to something bigger."
+  },
+  {
+   "start": 4163.64,
+   "end": 4166.04,
+   "text": "AI is probably going to accelerate that. That's"
+  },
+  {
+   "start": 4167.0,
+   "end": 4169.16,
+   "text": "one very important application area, yes, absolutely."
+  },
+  {
+   "start": 4170.52,
+   "end": 4172.68,
+   "text": "So, maybe Brian Johnson's right when he says don't die."
+  },
+  {
+   "start": 4173.64,
+   "end": 4175.96,
+   "text": "Now, he keeps saying to me, he's like, don't die now."
+  },
+  {
+   "start": 4176.88,
+   "end": 4177.32,
+   "text": "Don't die ever."
+  },
+  {
+   "start": 4178.24,
+   "end": 4186.8,
+   "text": "Because he's saying like don't die before we get to the technology. >> Right. Longevity escape velocity. You want to long live long enough to live forever. If at some point we"
+  },
+  {
+   "start": 4187.92,
+   "end": 4196.88,
+   "text": "every year of your existence add 2 years to your existence through medical breakthroughs, then you live forever. You just have to make it to that point of longevity escape velocity."
+  },
+  {
+   "start": 4198.2,
+   "end": 4201.32,
+   "text": "And he thinks that longevity escape velocity, especially in the world of AI, is pretty"
+  },
+  {
+   "start": 4202.28,
+   "end": 4202.48,
+   "text": "is pretty"
+  },
+  {
+   "start": 4203.72,
+   "end": 4205.72,
+   "text": "is decades away, minimum, which means"
+  },
+  {
+   "start": 4206.72,
+   "end": 4222.48,
+   "text": "As soon as we fully understand human genome, I think we'll make amazing breakthroughs very quickly. Because we know some people have genes for living way longer. They have generations of people who are centenarians. So, if we can understand that and copy that or copy it from some animals which will live forever,"
+  },
+  {
+   "start": 4223.92,
+   "end": 4225.24,
+   "text": "we'll get there. Would you want to live forever?"
+  },
+  {
+   "start": 4227.92,
+   "end": 4239.84,
+   "text": ">> Reverse reverse the question. Let's say we lived forever and you ask me, do you want to die in 40 years? Why would I say yes? I don't know. Maybe >> You just used to the default. Yeah, I am used to the default. And nobody wants to die. Like, no matter how old you are, nobody goes, yeah,"
+  },
+  {
+   "start": 4240.0,
+   "end": 4242.0,
+   "text": "I want to die this year. Everyone's like, ah, I want to keep living."
+  },
+  {
+   "start": 4243.76,
+   "end": 4248.08,
+   "text": "I wonder if life and everything would be less special if I lived for"
+  },
+  {
+   "start": 4249.28,
+   "end": 4260.64,
+   "text": "10,000 years. I wonder if going to Hawaii for the first time or, I don't know, a relationship. All of these things would be way less special to me if they were less scarce."
+  },
+  {
+   "start": 4262.04,
+   "end": 4278.08,
+   "text": "And if that I just, you know, It could be individually less special, but there is so much more you can do. Right now, you can only make plans to do something for a decade or two. You cannot have an ambitious plan of working on this project for 500 years. Imagine possibilities open to you with infinite time in"
+  },
+  {
+   "start": 4278.2,
+   "end": 4278.72,
+   "text": "an infinite universe."
+  },
+  {
+   "start": 4281.16,
+   "end": 4281.16,
+   "text": "Gosh."
+  },
+  {
+   "start": 4282.52,
+   "end": 4285.48,
+   "text": "Well, you can't. >> Because it's exhausting, I guess. It's a big amount of time."
+  },
+  {
+   "start": 4286.76,
+   "end": 4288.88,
+   "text": "I don't know about you, but I don't remember like 99%"
+  },
+  {
+   "start": 4289.84,
+   "end": 4290.64,
+   "text": "of my life in detail."
+  },
+  {
+   "start": 4291.6,
+   "end": 4295.8,
+   "text": "I remember big highlights. So, even if I enjoyed Hawaii 10 years ago, I'll enjoy it again."
+  },
+  {
+   "start": 4297.12,
+   "end": 4310.28,
+   "text": "Are you thinking about that really practically as as in terms of, you know, if in the same way that Brian Johnson is Brian Johnson is convinced that we're like maybe two decades away from being able to extend life. Are you thinking about that practically? And are you doing anything about it? >> Diet, nutrition."
+  },
+  {
+   "start": 4311.52,
+   "end": 4325.64,
+   "text": "I try to think about investment strategies which pay out in the long years, yeah. Really? Yeah, of course. What do you mean of course? Of course Why wouldn't you if you think this is what's going to happen? You you should try that. So, if we get AI right, now, what happens to economy?"
+  },
+  {
+   "start": 4326.68,
+   "end": 4328.96,
+   "text": "We talked about Worldcoin. We talked about free labor."
+  },
+  {
+   "start": 4330.08,
+   "end": 4334.56,
+   "text": "What's money? Is it now Bitcoin? Do you invest in that? Is there something else which becomes"
+  },
+  {
+   "start": 4335.48,
+   "end": 4337.2,
+   "text": "the only resource we cannot fake?"
+  },
+  {
+   "start": 4338.16,
+   "end": 4341.88,
+   "text": "So, those things are very important research topics. So, you're investing in Bitcoin, aren't you?"
+  },
+  {
+   "start": 4343.68,
+   "end": 4343.68,
+   "text": "Yeah."
+  },
+  {
+   "start": 4346.4,
+   "end": 4346.4,
+   "text": "Because"
+  },
+  {
+   "start": 4347.4,
+   "end": 4350.48,
+   "text": "it's a It's the only scarce resource. Nothing else has scarcity."
+  },
+  {
+   "start": 4351.84,
+   "end": 4357.92,
+   "text": "Everything else, if price goes up, will make more. I can make as much gold as you want given a proper price point."
+  },
+  {
+   "start": 4358.92,
+   "end": 4359.76,
+   "text": "You cannot make more Bitcoin."
+  },
+  {
+   "start": 4361.24,
+   "end": 4365.36,
+   "text": "Some people say Bitcoin is just this thing on a computer that we all agreed was valuable. >> Yeah, a thing on a computer."
+  },
+  {
+   "start": 4368.04,
+   "end": 4368.04,
+   "text": "Remember?"
+  },
+  {
+   "start": 4369.92,
+   "end": 4386.64,
+   "text": "Okay, so, I mean, not investment advice, but investment advice. It's hilarious how that's one of those things where they tell you it's not, but you know it is immediately. There is a your call is important to us. That means your call is of zero importance. And investment is like that. Yeah, yeah, when they say no investment advice,"
+  },
+  {
+   "start": 4387.08,
+   "end": 4392.36,
+   "text": "it's definitely investment advice. Um, but it's not investment advice. Okay, so, you're bullish on Bitcoin because it's"
+  },
+  {
+   "start": 4393.92,
+   "end": 4394.72,
+   "text": "it can't be messed with."
+  },
+  {
+   "start": 4395.84,
+   "end": 4398.84,
+   "text": "It is the only thing which we know how much there is"
+  },
+  {
+   "start": 4400.24,
+   "end": 4406.48,
+   "text": "in the universe. So, gold, there could be an asteroid made out of pure gold heading towards us, devaluing it."
+  },
+  {
+   "start": 4407.56,
+   "end": 4408.76,
+   "text": "Well, also killing all of us, but"
+  },
+  {
+   "start": 4410.04,
+   "end": 4415.6,
+   "text": "Bitcoin, I know exactly the numbers. And even the 21 million is an upper limit. How many are lost?"
+  },
+  {
+   "start": 4416.56,
+   "end": 4419.56,
+   "text": "Passwords forgotten. I don't know what Satoshi's doing with his million."
+  },
+  {
+   "start": 4420.96,
+   "end": 4425.0,
+   "text": "It's getting scarcer every day while more and more people are trying to accumulate it."
+  },
+  {
+   "start": 4427.4,
+   "end": 4429.44,
+   "text": "Some people worry that it could be hacked with a supercomputer."
+  },
+  {
+   "start": 4430.64,
+   "end": 4435.52,
+   "text": "A quantum computer can break that algorithm. There is strategies for switching"
+  },
+  {
+   "start": 4436.48,
+   "end": 4441.48,
+   "text": "to quantum resistant cryptography for that. And quantum computers are still kind of weak."
+  },
+  {
+   "start": 4442.92,
+   "end": 4445.16,
+   "text": "Do you think there's any changes to my life that I should make"
+  },
+  {
+   "start": 4446.44,
+   "end": 4449.92,
+   "text": "following this conversation? Is there anything that I should do differently the minute I walk out of this door?"
+  },
+  {
+   "start": 4451.84,
+   "end": 4456.52,
+   "text": "I assume you already invest in Bitcoin heavily. Yes, I'm an an investor in Bitcoin. Is this financial advice?"
+  },
+  {
+   "start": 4457.92,
+   "end": 4461.84,
+   "text": "Uh, no, just you seem to be winning. Maybe it's your simulation. You're rich, handsome."
+  },
+  {
+   "start": 4462.84,
+   "end": 4465.84,
+   "text": "You have famous people hang out with you like that's pretty good."
+  },
+  {
+   "start": 4468.68,
+   "end": 4468.92,
+   "text": "Keep it up."
+  },
+  {
+   "start": 4473.28,
+   "end": 4486.88,
+   "text": "Robin Hanson has a paper about how to live in a simulation, what you should be doing in it. And your goal is to do exactly that. You want to be interesting. You want to hang out with famous people so they don't shut it down. So, you are part of a part someone's actually watching on pay-per-view or something"
+  },
+  {
+   "start": 4487.24,
+   "end": 4487.4,
+   "text": "like that."
+  },
+  {
+   "start": 4488.8,
+   "end": 4494.52,
+   "text": "Well, I don't know if you want to be watched on pay-per-view because then you would be the same >> Then they shut you down. If no one's watching, why would they play it?"
+  },
+  {
+   "start": 4497.8,
+   "end": 4504.84,
+   "text": "I'm saying you don't you want to fly under the radar? Don't you want to be the the guy just living a normal life that the the masters Those are NPCs. Nobody wants to be an NPC."
+  },
+  {
+   "start": 4507.08,
+   "end": 4507.28,
+   "text": "Are you religious?"
+  },
+  {
+   "start": 4508.44,
+   "end": 4513.72,
+   "text": "Not in any traditional sense, but I believe in simulation hypothesis which has a super intelligent being. So,"
+  },
+  {
+   "start": 4514.92,
+   "end": 4515.6,
+   "text": "But you don't believe in the like,"
+  },
+  {
+   "start": 4516.72,
+   "end": 4517.48,
+   "text": "you know, the religious books."
+  },
+  {
+   "start": 4518.56,
+   "end": 4523.04,
+   "text": "So, different religions. This religion will tell you don't work Saturday. This one, don't work Sunday."
+  },
+  {
+   "start": 4524.16,
+   "end": 4530.24,
+   "text": "Don't eat pigs. Don't eat carbs. They just have local traditions on top of that theory. That's all it is. They're all the same religion."
+  },
+  {
+   "start": 4531.28,
+   "end": 4532.56,
+   "text": "They all worship super intelligent being."
+  },
+  {
+   "start": 4533.84,
+   "end": 4535.64,
+   "text": "They all think this world is not the main one."
+  },
+  {
+   "start": 4537.52,
+   "end": 4539.36,
+   "text": "And they argue about which animal not to eat."
+  },
+  {
+   "start": 4541.4,
+   "end": 4545.0,
+   "text": "Skip the local flavors. Concentrate on what do all the religions have in common?"
+  },
+  {
+   "start": 4546.84,
+   "end": 4547.72,
+   "text": "And that's the interesting part."
+  },
+  {
+   "start": 4549.12,
+   "end": 4550.8,
+   "text": "They all think there is something greater than humans."
+  },
+  {
+   "start": 4551.72,
+   "end": 4553.12,
+   "text": "Very capable, all-knowing, all-powerful."
+  },
+  {
+   "start": 4554.24,
+   "end": 4555.12,
+   "text": "Then they run a computer game."
+  },
+  {
+   "start": 4556.12,
+   "end": 4557.84,
+   "text": "For those characters in the game, I am that."
+  },
+  {
+   "start": 4558.8,
+   "end": 4562.44,
+   "text": "I can change the whole world. I can shut it down. I know everything in the world."
+  },
+  {
+   "start": 4565.56,
+   "end": 4574.72,
+   "text": "It's funny. I was thinking earlier on when we started talking about the simulation theory that there's there might be something in a in us that has been left from the creator, almost like a clue. Like a like an intuition."
+  },
+  {
+   "start": 4576.32,
+   "end": 4579.8,
+   "text": "Cuz that's what we we tend to have through history. Humans have this intuition. Yeah. That"
+  },
+  {
+   "start": 4580.72,
+   "end": 4590.24,
+   "text": "all the things you said are true. That there's this somebody above and that We have generations of people who were religious, who believed God told them and was there and gave them books."
+  },
+  {
+   "start": 4591.28,
+   "end": 4596.12,
+   "text": "And that has been passed on for many generations. This is probably one of the earliest generations not to have universal"
+  },
+  {
+   "start": 4597.2,
+   "end": 4597.72,
+   "text": "religious belief."
+  },
+  {
+   "start": 4600.36,
+   "end": 4601.32,
+   "text": "What if those people are telling the truth?"
+  },
+  {
+   "start": 4602.36,
+   "end": 4617.08,
+   "text": "What if there's people there's people that say God came to them and said something. Imagine that. Imagine if that was part of the I'm looking at the news today. Something happened an hour ago and I'm getting different conflicting results. I can't even get with cameras, with drones, with like guy on Twitter there. I still don't know what"
+  },
+  {
+   "start": 4617.2,
+   "end": 4618.48,
+   "text": "happened. And you think"
+  },
+  {
+   "start": 4619.44,
+   "end": 4623.48,
+   "text": "3,000 years ago we have accurate record of translations? No, of course not."
+  },
+  {
+   "start": 4625.04,
+   "end": 4627.32,
+   "text": "You know, these conversations you have around AI safety."
+  },
+  {
+   "start": 4628.44,
+   "end": 4629.76,
+   "text": "Do you think they make people feel good?"
+  },
+  {
+   "start": 4632.32,
+   "end": 4645.2,
+   "text": "I don't know if they feel good or bad, but people find it interesting. It's one of those topics where I can't have a conversation about different cures for cancer with an average person, but everyone has opinions about AI. Everyone has opinions about simulation."
+  },
+  {
+   "start": 4646.32,
+   "end": 4651.16,
+   "text": "It's interesting that you don't have to be highly educated or a genius to understand those concepts."
+  },
+  {
+   "start": 4653.24,
+   "end": 4654.84,
+   "text": "Cuz I tend to think that it makes me feel"
+  },
+  {
+   "start": 4656.68,
+   "end": 4656.92,
+   "text": "not positive."
+  },
+  {
+   "start": 4658.92,
+   "end": 4659.88,
+   "text": "And I understand"
+  },
+  {
+   "start": 4661.16,
+   "end": 4663.24,
+   "text": "that, but I've always been of the opinion that"
+  },
+  {
+   "start": 4667.12,
+   "end": 4670.68,
+   "text": "you shouldn't live in a world of delusion where you're just seeking to be positive"
+  },
+  {
+   "start": 4671.6,
+   "end": 4672.04,
+   "text": "have sort of"
+  },
+  {
+   "start": 4673.12,
+   "end": 4673.12,
+   "text": "positive"
+  },
+  {
+   "start": 4674.28,
+   "end": 4676.2,
+   "text": "things said and avoid uncomfortable conversations."
+  },
+  {
+   "start": 4677.32,
+   "end": 4680.16,
+   "text": "Actually, progress often in my life comes from like having uncomfortable conversations,"
+  },
+  {
+   "start": 4681.88,
+   "end": 4685.88,
+   "text": "becoming aware about something, and then at least being informed about how I can do something about it."
+  },
+  {
+   "start": 4687.04,
+   "end": 4687.24,
+   "text": "And so,"
+  },
+  {
+   "start": 4689.52,
+   "end": 4696.92,
+   "text": "I think that's why that's why I asked the question cuz I think I assume most people will should, if they're, you know, if they're normal human beings, listen to these conversations and go,"
+  },
+  {
+   "start": 4698.28,
+   "end": 4698.76,
+   "text": "gosh, that's scary."
+  },
+  {
+   "start": 4700.04,
+   "end": 4701.32,
+   "text": "And this is concerning."
+  },
+  {
+   "start": 4704.0,
+   "end": 4707.44,
+   "text": "And and then I can come back to this point which is like, well, what do I do with that energy?"
+  },
+  {
+   "start": 4708.76,
+   "end": 4719.0,
+   "text": "Yeah, but I'm trying to point out this is not different than so many conversations. We can talk about, oh, there is starvation in this region, genocide in this region. You're all dying."
+  },
+  {
+   "start": 4719.92,
+   "end": 4720.56,
+   "text": "Cancer is spreading."
+  },
+  {
+   "start": 4721.48,
+   "end": 4729.56,
+   "text": "Atheism is up. You can always find something to be very depressed about and nothing you can do about it. And we're very good at concentrating"
+  },
+  {
+   "start": 4730.48,
+   "end": 4734.24,
+   "text": "on what we can change, what we are good at, and"
+  },
+  {
+   "start": 4735.72,
+   "end": 4735.72,
+   "text": "basically"
+  },
+  {
+   "start": 4737.24,
+   "end": 4751.72,
+   "text": "not trying to embrace the whole world as a local environment. So, historically, you grew up with a tribe. You had a dozen people around you. If something happened to one of them, it was very rare. It was an accident. Now, if I go on the internet, somebody gets killed everywhere all the time. Somehow,"
+  },
+  {
+   "start": 4753.08,
+   "end": 4756.12,
+   "text": "thousands of people are reported to me every day. I don't even have time to notice."
+  },
+  {
+   "start": 4757.92,
+   "end": 4760.44,
+   "text": "It's just too much. So, I have to put filters in place."
+  },
+  {
+   "start": 4761.6,
+   "end": 4763.84,
+   "text": "And I think this topic is what"
+  },
+  {
+   "start": 4765.2,
+   "end": 4768.16,
+   "text": "people are very good at filtering as like this was this entertaining"
+  },
+  {
+   "start": 4769.92,
+   "end": 4771.72,
+   "text": "talk I went to, kind of like a show,"
+  },
+  {
+   "start": 4772.64,
+   "end": 4777.8,
+   "text": "and the moment I exit, it ends. So, usually I would go give a keynote at a conference and"
+  },
+  {
+   "start": 4779.24,
+   "end": 4782.36,
+   "text": "I tell them basically you're going to die, you have 2 years left, any questions?"
+  },
+  {
+   "start": 4783.6,
+   "end": 4784.24,
+   "text": "And people be like,"
+  },
+  {
+   "start": 4785.48,
+   "end": 4785.96,
+   "text": "will I lose my job?"
+  },
+  {
+   "start": 4787.12,
+   "end": 4790.48,
+   "text": "How do I lubricate my sex robot? Like all sorts of nonsense, clearly"
+  },
+  {
+   "start": 4791.56,
+   "end": 4793.08,
+   "text": "understanding what I'm trying to say there."
+  },
+  {
+   "start": 4794.52,
+   "end": 4796.84,
+   "text": "And those are good questions, interesting questions, but not"
+  },
+  {
+   "start": 4797.84,
+   "end": 4800.96,
+   "text": "fully embracing the result. They're still in their bubble of local"
+  },
+  {
+   "start": 4801.92,
+   "end": 4802.28,
+   "text": "versus global."
+  },
+  {
+   "start": 4803.48,
+   "end": 4805.96,
+   "text": "And the people that disagree with you the most as it relates to AI safety,"
+  },
+  {
+   "start": 4807.52,
+   "end": 4808.16,
+   "text": "what is it that they say?"
+  },
+  {
+   "start": 4810.44,
+   "end": 4810.8,
+   "text": "What are their counterarguments"
+  },
+  {
+   "start": 4811.72,
+   "end": 4811.72,
+   "text": "typically?"
+  },
+  {
+   "start": 4813.2,
+   "end": 4822.76,
+   "text": "So, many don't engage at all. Like they have no background knowledge in the subject. They never read a single book, single paper, not just by me, by anyone."
+  },
+  {
+   "start": 4823.92,
+   "end": 4828.92,
+   "text": "They may be even working in a field, so they are doing some machine learning work for some company maximizing"
+  },
+  {
+   "start": 4829.92,
+   "end": 4830.16,
+   "text": "ad clicks."
+  },
+  {
+   "start": 4831.32,
+   "end": 4833.88,
+   "text": "And to them, those systems are very narrow."
+  },
+  {
+   "start": 4835.04,
+   "end": 4839.68,
+   "text": "And then they hear that all this AI is going to take over the world like has no hands."
+  },
+  {
+   "start": 4840.68,
+   "end": 4846.68,
+   "text": "How would it do that? It's nonsense. This guy is crazy, has a beard, why would I listen to him, right? That's uh"
+  },
+  {
+   "start": 4847.68,
+   "end": 4849.68,
+   "text": "Then they start reading a little bit. They"
+  },
+  {
+   "start": 4850.72,
+   "end": 4861.36,
+   "text": "go, oh okay, so maybe I can be dangerous, yeah, I see that, but we always solve problems in the past, we're going to solve them again. I mean, at some point we fixed the computer virus or something, so it's the same."
+  },
+  {
+   "start": 4862.64,
+   "end": 4868.44,
+   "text": "And basically, the more exposure they have, the less likely they are to keep that position."
+  },
+  {
+   "start": 4869.4,
+   "end": 4871.28,
+   "text": "I know many people who went from"
+  },
+  {
+   "start": 4872.56,
+   "end": 4872.56,
+   "text": "super"
+  },
+  {
+   "start": 4873.92,
+   "end": 4874.36,
+   "text": "careless developer"
+  },
+  {
+   "start": 4875.32,
+   "end": 4881.72,
+   "text": "to safety researcher. I don't know anyone who went from I worry about AI safety to like there is nothing to worry about."
+  },
+  {
+   "start": 4889.28,
+   "end": 4889.88,
+   "text": "What are your closing statements?"
+  },
+  {
+   "start": 4891.24,
+   "end": 4897.16,
+   "text": "Uh let's make sure that it's not a closing statement we need to give for humanity. Let's make sure we stay in charge, in control."
+  },
+  {
+   "start": 4898.64,
+   "end": 4913.72,
+   "text": "Let's make sure we only build things which are beneficial to us. Let's make sure people who are making those decisions are remotely qualified to do it. They are good, not just at science, engineering, and business, but also have moral and ethical standards."
+  },
+  {
+   "start": 4915.2,
+   "end": 4924.44,
+   "text": "And uh if you're doing something which impacts other people, you should ask their permission before you do that. If there was one button in front of you and it would"
+  },
+  {
+   "start": 4927.2,
+   "end": 4929.76,
+   "text": "shut down every AI company in the world right now"
+  },
+  {
+   "start": 4930.76,
+   "end": 4930.76,
+   "text": "permanently,"
+  },
+  {
+   "start": 4931.68,
+   "end": 4933.48,
+   "text": "with the inability for anybody to start a new one,"
+  },
+  {
+   "start": 4934.4,
+   "end": 4939.92,
+   "text": "would you press the button? Are we losing narrow AI or just superintelligent AGI part? Losing all of AI."
+  },
+  {
+   "start": 4941.52,
+   "end": 4945.08,
+   "text": "That's a hard question because AI is an extremely important, it controls"
+  },
+  {
+   "start": 4946.08,
+   "end": 4950.48,
+   "text": "stock market, power plants, it controls hospitals. It would be a devastating"
+  },
+  {
+   "start": 4951.88,
+   "end": 4951.88,
+   "text": "accident."
+  },
+  {
+   "start": 4952.84,
+   "end": 4956.8,
+   "text": "Millions of people would lose their lives. Okay, we can keep narrow AI. Oh, yeah."
+  },
+  {
+   "start": 4958.2,
+   "end": 4974.6,
+   "text": "That's what we want. We want narrow AI to do all this for us, but not God we don't control doing things to us. So, you would stop it, you would stop AGI and superintelligence. >> We have AGI. What we have today is great for almost everything. We can make secretaries out of it. 99%"
+  },
+  {
+   "start": 4975.72,
+   "end": 4978.56,
+   "text": "of the economic potential of current technology has not been deployed."
+  },
+  {
+   "start": 4979.64,
+   "end": 4983.84,
+   "text": "We make AI so quickly, it doesn't have time to propagate through the industry, through technology."
+  },
+  {
+   "start": 4985.12,
+   "end": 4987.36,
+   "text": "Something like half of all jobs are considered BS jobs."
+  },
+  {
+   "start": 4988.32,
+   "end": 4989.4,
+   "text": "They don't need to be done, jobs."
+  },
+  {
+   "start": 4990.68,
+   "end": 4995.28,
+   "text": "So, those can be not even automated, they can just gone. But I'm saying we can replace 60%"
+  },
+  {
+   "start": 4996.2,
+   "end": 4996.84,
+   "text": "of jobs today"
+  },
+  {
+   "start": 4997.88,
+   "end": 4998.64,
+   "text": "with existing models."
+  },
+  {
+   "start": 4999.8,
+   "end": 5002.76,
+   "text": "We've not done that. So, if the goal is to grow economy, to develop,"
+  },
+  {
+   "start": 5003.84,
+   "end": 5006.84,
+   "text": "we can do it for decades without having to create superintelligence"
+  },
+  {
+   "start": 5007.8,
+   "end": 5012.12,
+   "text": "as soon as possible. Do you think globally, especially in the Western world, unemployment's only going to go up from here?"
+  },
+  {
+   "start": 5013.04,
+   "end": 5015.16,
+   "text": "Do you think relatively this is the low of unemployment?"
+  },
+  {
+   "start": 5016.84,
+   "end": 5024.92,
+   "text": "I mean, it fluctuates a lot with other factors. There are wars, there is economic cycles, but overall, the more jobs you automate and the higher is the intellectual"
+  },
+  {
+   "start": 5026.12,
+   "end": 5028.6,
+   "text": "necessity to start a job, the fewer people qualify."
+  },
+  {
+   "start": 5030.88,
+   "end": 5031.84,
+   "text": "So, if we plotted it on a graph"
+  },
+  {
+   "start": 5033.04,
+   "end": 5049.88,
+   "text": "over the next 20 years, you're assuming unemployment's gradually going to go up over that time. I think so. Fewer and fewer people would be able to contribute. Already, we kind of understand it because we created minimum wage. We understood some people don't contribute enough economic value to get paid"
+  },
+  {
+   "start": 5050.84,
+   "end": 5055.28,
+   "text": "anything really. So, we had to force employers to pay them more than they're worth."
+  },
+  {
+   "start": 5057.0,
+   "end": 5058.6,
+   "text": "And we haven't updated it. It's what, 725"
+  },
+  {
+   "start": 5059.6,
+   "end": 5060.48,
+   "text": "federally in US?"
+  },
+  {
+   "start": 5061.72,
+   "end": 5063.88,
+   "text": "If you keep up with the economy, it should be like $25"
+  },
+  {
+   "start": 5065.04,
+   "end": 5065.44,
+   "text": "an hour now."
+  },
+  {
+   "start": 5066.8,
+   "end": 5073.92,
+   "text": "Which means all these people making less are not contributing enough economic output to justify what they're getting paid."
+  },
+  {
+   "start": 5075.08,
+   "end": 5079.28,
+   "text": "We have a closing tradition on this podcast where the last guest leaves a question for the next guest not knowing who they're leaving it for."
+  },
+  {
+   "start": 5080.28,
+   "end": 5083.72,
+   "text": "And the question left for you is, what are what are the most important"
+  },
+  {
+   "start": 5085.24,
+   "end": 5085.24,
+   "text": "characteristics"
+  },
+  {
+   "start": 5087.2,
+   "end": 5087.52,
+   "text": "for a friend,"
+  },
+  {
+   "start": 5088.76,
+   "end": 5088.76,
+   "text": "colleague,"
+  },
+  {
+   "start": 5090.96,
+   "end": 5091.12,
+   "text": "or mate?"
+  },
+  {
+   "start": 5092.44,
+   "end": 5093.0,
+   "text": "Those are very different"
+  },
+  {
+   "start": 5094.16,
+   "end": 5094.64,
+   "text": "types of people."
+  },
+  {
+   "start": 5095.84,
+   "end": 5098.36,
+   "text": "Mhm. But for all of them, loyalty is number one."
+  },
+  {
+   "start": 5100.24,
+   "end": 5101.28,
+   "text": "And what does loyalty mean to you?"
+  },
+  {
+   "start": 5103.04,
+   "end": 5107.52,
+   "text": "Not betraying you, not screwing you, not cheating on you."
+  },
+  {
+   "start": 5110.88,
+   "end": 5111.36,
+   "text": "Despite the temptation."
+  },
+  {
+   "start": 5112.64,
+   "end": 5115.8,
+   "text": "Despite the world being as it is, situation, environment."
+  },
+  {
+   "start": 5117.96,
+   "end": 5124.96,
+   "text": "Dr. Roman, thank you so much. Thank you so much for doing what you do because you're you're starting a conversation and pushing forward a conversation and doing research that is"
+  },
+  {
+   "start": 5125.88,
+   "end": 5128.28,
+   "text": "incredibly important and you're doing it in the face of a lot of um"
+  },
+  {
+   "start": 5129.2,
+   "end": 5129.44,
+   "text": "a lot of skeptics."
+  },
+  {
+   "start": 5130.72,
+   "end": 5136.52,
+   "text": "I'd say there's a lot of people that have a lot of incentives to discredit what you're saying and what you do because they have"
+  },
+  {
+   "start": 5137.6,
+   "end": 5142.16,
+   "text": "their own incentives and they have billions of dollars on the line and they have their jobs on the line potentially as well, so"
+  },
+  {
+   "start": 5143.12,
+   "end": 5145.84,
+   "text": "it's really important that there are people out there that are willing to"
+  },
+  {
+   "start": 5147.8,
+   "end": 5149.68,
+   "text": "I guess stick their head above the parapet and"
+  },
+  {
+   "start": 5150.92,
+   "end": 5153.28,
+   "text": "come on shows like this and go on big platforms and talk about"
+  },
+  {
+   "start": 5154.88,
+   "end": 5157.72,
+   "text": "the unexplainable, unpredictable, uncontrollable future that we're heading towards."
+  },
+  {
+   "start": 5159.24,
+   "end": 5163.88,
+   "text": "So, thank you for doing that. This book, which which I think everybody should should check out if they want a continuation of this conversation,"
+  },
+  {
+   "start": 5165.12,
+   "end": 5165.68,
+   "text": "I think it was published in 2024,"
+  },
+  {
+   "start": 5167.72,
+   "end": 5180.0,
+   "text": "gives a holistic view on many of the things we've talked about today, um preventing AI failures and much, much more. And I'm going to link it below for anybody that wants to read it. If people want to learn more from you, if they want to go further into your work, what's the best thing for them to do?"
+  },
+  {
+   "start": 5180.28,
+   "end": 5194.76,
+   "text": "Where do they go? They can follow me, follow me on Facebook, follow me on X, just don't follow me home. Very important. >> do it. Okay, so I'll put your Twitter, your X account um as well below so people can follow you there. And yeah, thank you so much for doing what you did. Remarkably eye-opening and it's"
+  },
+  {
+   "start": 5194.84,
+   "end": 5201.72,
+   "text": "given me so much food for thought and it's actually convinced me more that we are living in a simulation. But it's also made me think quite differently of religion, I have to say,"
+  },
+  {
+   "start": 5202.64,
+   "end": 5207.68,
+   "text": "because um you're right, all the religions, when you get away from the sort of the local traditions, they do all point at the same thing."
+  },
+  {
+   "start": 5208.76,
+   "end": 5220.72,
+   "text": "And actually, if they are all pointing at the same thing, then maybe the fundamental truths that exist across them should be something I pay more attention to. Things like loving thy neighbor, things like the fact that we are all one, that there's a a divine creator, and maybe also"
+  },
+  {
+   "start": 5221.72,
+   "end": 5223.88,
+   "text": "they all seem to have consequence beyond this life."
+  },
+  {
+   "start": 5225.0,
+   "end": 5226.04,
+   "text": "So, maybe I should be thinking more about"
+  },
+  {
+   "start": 5227.84,
+   "end": 5230.2,
+   "text": "how I behave in this life and and where I might end up thereafter."
+  },
+  {
+   "start": 5231.6,
+   "end": 5232.4,
+   "text": "Roman, thank you. Amen."
+  },
+  {
+   "start": 5243.0,
+   "end": 5243.92,
+   "text": "Oh oh oh oh oh."
+  },
+  {
+   "start": 5255.8,
+   "end": 5256.72,
+   "text": "Oh oh oh oh oh."
+  }
+ ]
+}

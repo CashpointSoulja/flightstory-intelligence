@@ -1,0 +1,6175 @@
+{
+ "id": "giT0ytynSqg",
+ "title": "Godfather of AI: They Keep Silencing Me But I’m Trying to Warn Them!",
+ "upload_date": "20250616",
+ "duration": 5407,
+ "url": "https://www.youtube.com/watch?v=giT0ytynSqg",
+ "words": 16543,
+ "segments": [
+  {
+   "start": 0.4,
+   "end": 9.12,
+   "text": "They call you the Godfather of AI. So, what would you be saying to people about their career prospects in a world of super intelligence? Train to be a plumber. Really? Yeah."
+  },
+  {
+   "start": 10.52,
+   "end": 11.28,
+   "text": "Okay, I'm going to become a plumber."
+  },
+  {
+   "start": 12.24,
+   "end": 18.56,
+   "text": "Geoffrey Hinton is the Nobel Prize-winning pioneer whose groundbreaking work has shaped AI and the future of humanity."
+  },
+  {
+   "start": 19.6,
+   "end": 33.8,
+   "text": "Why do they call you the Godfather of AI? Because there weren't many people who believed that we could model AI on the brain so that it learned to do complicated things like recognize objects in images or even do reasoning. And I pushed that approach for 50 years. And then Google acquired that technology. And I worked there for"
+  },
+  {
+   "start": 33.92,
+   "end": 41.24,
+   "text": "10 years on something that's now used all the time in AI. And then you left? Yeah. Why? So that I could talk freely at a conference. What did you want to talk about freely?"
+  },
+  {
+   "start": 42.76,
+   "end": 43.88,
+   "text": "How dangerous AI could be."
+  },
+  {
+   "start": 45.64,
+   "end": 53.4,
+   "text": "I realized that these things will one day get smarter than us. And we've never had to deal with that. And if you want to know what life's like when you're not the apex intelligence, ask a chicken."
+  },
+  {
+   "start": 54.84,
+   "end": 68.12,
+   "text": "So, there's a risks that come from people misusing AI. And then there's risks from AI getting super smart and suddenly it doesn't need us. Is that a real risk? Yes, it is. But they're not going to stop it because it's too good for too many things. What about regulations? They have some but they're not designed to deal"
+  },
+  {
+   "start": 68.28,
+   "end": 84.6,
+   "text": "with those sort of threats. Like the European regulations have a clause that say, \"None of these apply to military uses of AI.\" Really? Yeah, it's crazy. One of your students left OpenAI. Yeah. He was probably the most important person behind the development of the early versions of ChatGPT. And I think he left because he had safety concerns."
+  },
+  {
+   "start": 85.48,
+   "end": 89.08,
+   "text": "We should recognize that this stuff is an existential threat. And we have to face the possibility"
+  },
+  {
+   "start": 90.16,
+   "end": 91.96,
+   "text": "that unless we do something soon,"
+  },
+  {
+   "start": 92.92,
+   "end": 93.64,
+   "text": "we're near the end."
+  },
+  {
+   "start": 94.68,
+   "end": 96.64,
+   "text": "So, let's do the risks and what we end up doing in such a world."
+  },
+  {
+   "start": 99.64,
+   "end": 101.56,
+   "text": "This has always blown my mind a little bit. 53%"
+  },
+  {
+   "start": 102.76,
+   "end": 114.52,
+   "text": "of you that listen to this show regularly haven't yet subscribed to this show. So, could I ask you for a favor before we start? If you like this show and you like what we do here and you want to support us, the free simple way that you can do just that is by hitting the subscribe button. And"
+  },
+  {
+   "start": 114.64,
+   "end": 127.08,
+   "text": "my commitment to you is if you do that, then I'll do everything in my power, me and my team, to make sure that this show is better for you every single week. We'll listen to your feedback. We'll find the guest that you want me to speak to. And we'll continue to do what we do. Thank you so"
+  },
+  {
+   "start": 127.2,
+   "end": 127.2,
+   "text": "much."
+  },
+  {
+   "start": 131.24,
+   "end": 131.96,
+   "text": "Geoffrey Hinton."
+  },
+  {
+   "start": 133.32,
+   "end": 135.0,
+   "text": "They call you the Godfather of AI."
+  },
+  {
+   "start": 136.36,
+   "end": 138.4,
+   "text": "Uh yes, they do. Why do they call you that?"
+  },
+  {
+   "start": 139.32,
+   "end": 144.6,
+   "text": "There weren't that many people who believed that we could make neural networks work, artificial neural networks."
+  },
+  {
+   "start": 145.52,
+   "end": 146.6,
+   "text": "So, for a long time in AI,"
+  },
+  {
+   "start": 147.56,
+   "end": 148.6,
+   "text": "from the 1950s onwards,"
+  },
+  {
+   "start": 150.08,
+   "end": 152.4,
+   "text": "there were kind of two ideas about how to do AI."
+  },
+  {
+   "start": 154.12,
+   "end": 157.4,
+   "text": "One idea was that sort of core of human intelligence was reasoning."
+  },
+  {
+   "start": 158.88,
+   "end": 160.92,
+   "text": "And to do reasoning, you needed to use some form of logic."
+  },
+  {
+   "start": 162.16,
+   "end": 163.96,
+   "text": "And so, AI had to be based around logic."
+  },
+  {
+   "start": 165.32,
+   "end": 171.68,
+   "text": "And in your head, you must have something like symbolic expressions that you manipulated with rules. And that's how intelligence worked."
+  },
+  {
+   "start": 172.92,
+   "end": 174.88,
+   "text": "And things like learning or reasoning by analogy,"
+  },
+  {
+   "start": 175.84,
+   "end": 178.28,
+   "text": "they'd all come later once we figured out how basic reasoning works."
+  },
+  {
+   "start": 179.6,
+   "end": 181.24,
+   "text": "There was a different approach, which is to say,"
+  },
+  {
+   "start": 182.32,
+   "end": 186.64,
+   "text": "\"Let's model AI on the brain cuz obviously the brain makes us intelligent."
+  },
+  {
+   "start": 187.88,
+   "end": 188.64,
+   "text": "So, simulate"
+  },
+  {
+   "start": 189.76,
+   "end": 201.52,
+   "text": "a network of brain cells on a computer and try and figure out how you would learn strengths of connections between brain cells so that it learned to do complicated things like recognize objects in images or recognize speech"
+  },
+  {
+   "start": 202.48,
+   "end": 203.48,
+   "text": "or even do reasoning.\""
+  },
+  {
+   "start": 204.48,
+   "end": 205.96,
+   "text": "I pushed that approach for like 50 years."
+  },
+  {
+   "start": 207.04,
+   "end": 208.76,
+   "text": "Because so few people believed in it,"
+  },
+  {
+   "start": 210.24,
+   "end": 213.68,
+   "text": "there weren't many good universities that had groups that did that. So,"
+  },
+  {
+   "start": 214.84,
+   "end": 215.4,
+   "text": "if you did that,"
+  },
+  {
+   "start": 216.32,
+   "end": 222.52,
+   "text": "the best young students who believed in that came and worked with you. So, I was very fortunate in getting a whole lot of really good students."
+  },
+  {
+   "start": 223.92,
+   "end": 224.92,
+   "text": "Some of which have gone on to create"
+  },
+  {
+   "start": 226.08,
+   "end": 228.88,
+   "text": "and play an instrumental role in creating platforms like OpenAI."
+  },
+  {
+   "start": 229.88,
+   "end": 234.8,
+   "text": "Yes, so Ilya Sutskever would be a a nice example. A whole bunch of them. Why did you"
+  },
+  {
+   "start": 236.0,
+   "end": 238.24,
+   "text": "believe that modeling it off the brain was a more effective approach?"
+  },
+  {
+   "start": 239.56,
+   "end": 243.08,
+   "text": "It wasn't just me believed it. Early on, von Neumann believed it."
+  },
+  {
+   "start": 244.16,
+   "end": 250.6,
+   "text": "And Turing believed it. And if either of those had lived, I think AI would have had a very different history. But they both died young."
+  },
+  {
+   "start": 251.96,
+   "end": 252.92,
+   "text": "You think AI would have been here sooner?"
+  },
+  {
+   "start": 253.96,
+   "end": 259.8,
+   "text": "I think neural net the neural net approach would have been accepted much sooner if either of them had lived."
+  },
+  {
+   "start": 260.8,
+   "end": 262.32,
+   "text": "In this season of your life, what"
+  },
+  {
+   "start": 263.36,
+   "end": 267.04,
+   "text": "mission are you on? My main mission now is to warn people"
+  },
+  {
+   "start": 268.28,
+   "end": 269.4,
+   "text": "how dangerous AI could be."
+  },
+  {
+   "start": 270.8,
+   "end": 271.64,
+   "text": "Did you know that when you"
+  },
+  {
+   "start": 272.72,
+   "end": 273.08,
+   "text": "became the Godfather"
+  },
+  {
+   "start": 274.08,
+   "end": 283.44,
+   "text": "of AI? No, not really. I was quite slow to understand some of the risks. Some of the risks were always very obvious like people would use AI to make autonomous lethal weapons."
+  },
+  {
+   "start": 284.56,
+   "end": 287.12,
+   "text": "That is, things that go around deciding by themselves who to kill."
+  },
+  {
+   "start": 288.12,
+   "end": 291.56,
+   "text": "Other risks, like the idea that they would one day get smarter than us"
+  },
+  {
+   "start": 292.76,
+   "end": 293.92,
+   "text": "and maybe we'd become irrelevant."
+  },
+  {
+   "start": 295.24,
+   "end": 297.92,
+   "text": "I was slow to recognize that. Other people recognized it"
+  },
+  {
+   "start": 298.88,
+   "end": 317.16,
+   "text": "20 years ago. I only recognized a few years ago that that was a real risk that was come might be coming quite soon. How could you not have foreseen that if if with everything you know here about cracking the ability for these computers to learn similar to how humans learn and just, you know, introducing any rate of"
+  },
+  {
+   "start": 317.28,
+   "end": 317.28,
+   "text": "improvement?"
+  },
+  {
+   "start": 318.48,
+   "end": 322.76,
+   "text": "It's a very good question. How could you not have seen that? But remember neural networks"
+  },
+  {
+   "start": 323.68,
+   "end": 324.48,
+   "text": "20, 30 years ago"
+  },
+  {
+   "start": 325.4,
+   "end": 325.52,
+   "text": "were very"
+  },
+  {
+   "start": 326.64,
+   "end": 332.36,
+   "text": "primitive in what they could do. They were nowhere near as good as humans but things like vision and language and speech recognition."
+  },
+  {
+   "start": 333.64,
+   "end": 336.96,
+   "text": "The idea that you have to not worry about it getting smarter than people, that seemed silly then."
+  },
+  {
+   "start": 338.2,
+   "end": 340.44,
+   "text": "When did that change? It changed for the general population"
+  },
+  {
+   "start": 341.36,
+   "end": 342.76,
+   "text": "when ChatGPT came out."
+  },
+  {
+   "start": 343.92,
+   "end": 344.92,
+   "text": "It changed for me"
+  },
+  {
+   "start": 345.96,
+   "end": 347.0,
+   "text": "when I realized that"
+  },
+  {
+   "start": 348.04,
+   "end": 350.08,
+   "text": "the kinds of digital intelligences we're making"
+  },
+  {
+   "start": 351.08,
+   "end": 354.72,
+   "text": "have something that makes them far superior to the kind of biological intelligence we have."
+  },
+  {
+   "start": 355.76,
+   "end": 357.12,
+   "text": "If I want to share information with you,"
+  },
+  {
+   "start": 358.16,
+   "end": 359.04,
+   "text": "so I go off and I learn something."
+  },
+  {
+   "start": 360.28,
+   "end": 361.16,
+   "text": "And I'd like to tell you what I learned."
+  },
+  {
+   "start": 362.32,
+   "end": 363.0,
+   "text": "So, I produce some sentences."
+  },
+  {
+   "start": 364.32,
+   "end": 377.12,
+   "text": "This is a rather simplistic model but roughly right. Your brain is trying to figure out, \"How can I change the strengths of connections between neurons so I might have put that word next?\" And so, you'll do a lot of learning when a very surprising word comes. And not much learning when if it's a when it's a very"
+  },
+  {
+   "start": 377.32,
+   "end": 381.32,
+   "text": "obvious word. If I say fish and chips, you don't do much learning when I say chips."
+  },
+  {
+   "start": 382.24,
+   "end": 385.52,
+   "text": "But if I say fish and cucumber, you do a lot more learning. You wonder, \"Why did I say cucumber?\""
+  },
+  {
+   "start": 386.6,
+   "end": 390.4,
+   "text": "So, that's roughly what's going on in your brain. I'm predicting what's coming next."
+  },
+  {
+   "start": 391.36,
+   "end": 402.96,
+   "text": "That's how we think it's working. Nobody really knows for sure how the brain works. And nobody knows how it gets the information about whether you should increase the strength of a connection or decrease the strength of a connection. That's the crucial thing."
+  },
+  {
+   "start": 404.0,
+   "end": 405.44,
+   "text": "But what we do know now from AI"
+  },
+  {
+   "start": 407.08,
+   "end": 408.56,
+   "text": "is that if you could get information"
+  },
+  {
+   "start": 409.88,
+   "end": 414.8,
+   "text": "about whether to increase or decrease a connection strength so as to do better whatever task you're trying to do,"
+  },
+  {
+   "start": 415.92,
+   "end": 420.2,
+   "text": "then we could learn incredible things cuz that's what we're doing now with artificial neural nets."
+  },
+  {
+   "start": 421.52,
+   "end": 424.92,
+   "text": "It's just we don't know for real brains how they get that signal about whether to increase or decrease."
+  },
+  {
+   "start": 426.88,
+   "end": 441.32,
+   "text": "As we sit here today, what are the big concerns you have around safety of AI? If we were to to list the the top couple that are really front of mind and that we should be thinking about. Um Can I have more than a couple? Go ahead. I'll write them all down and we'll go through them. Okay,"
+  },
+  {
+   "start": 441.56,
+   "end": 443.04,
+   "text": "first of all, I want to make a distinction"
+  },
+  {
+   "start": 444.12,
+   "end": 445.72,
+   "text": "between two completely different kinds of risk."
+  },
+  {
+   "start": 447.56,
+   "end": 452.88,
+   "text": "There's risks that come from people misusing AI. Yeah. And that's most of the risks"
+  },
+  {
+   "start": 454.04,
+   "end": 455.08,
+   "text": "and all of the short-term risks."
+  },
+  {
+   "start": 456.56,
+   "end": 460.72,
+   "text": "And then there's risks that come from AI getting super smart and suddenly it doesn't need us."
+  },
+  {
+   "start": 461.88,
+   "end": 462.36,
+   "text": "Is that a real risk?"
+  },
+  {
+   "start": 463.48,
+   "end": 467.8,
+   "text": "And I talk mainly about that second risk because lots of people say, \"Is that a real risk?\""
+  },
+  {
+   "start": 468.84,
+   "end": 469.44,
+   "text": "And yes, it is."
+  },
+  {
+   "start": 470.64,
+   "end": 479.88,
+   "text": "Now, we don't know how much of a risk it is. We've never been in that situation before. We've never had to deal with things smarter than us. So, really the thing about that existential threat"
+  },
+  {
+   "start": 480.8,
+   "end": 481.16,
+   "text": "is that"
+  },
+  {
+   "start": 482.12,
+   "end": 494.88,
+   "text": "we have no idea how to deal with it. We have no idea what it's going to look like. And anybody who tells you they know just what's going to happen and how to deal with it, they're talking nonsense. So, we don't know how to estimate the probability probabilities it'll replace us."
+  },
+  {
+   "start": 496.08,
+   "end": 499.04,
+   "text": "Um some people say it's like less than 1%. My friend Jan LeCun,"
+  },
+  {
+   "start": 500.0,
+   "end": 505.6,
+   "text": "who was a postdoc with me, thinks, \"No, no, no, no. We're always going to be We build these things. We're always going to be in control."
+  },
+  {
+   "start": 506.56,
+   "end": 507.64,
+   "text": "We'll build them to be obedient.\""
+  },
+  {
+   "start": 509.12,
+   "end": 509.12,
+   "text": "And"
+  },
+  {
+   "start": 510.36,
+   "end": 510.56,
+   "text": "other people,"
+  },
+  {
+   "start": 511.72,
+   "end": 512.12,
+   "text": "like Yudkowsky,"
+  },
+  {
+   "start": 513.2,
+   "end": 517.64,
+   "text": "say, \"No, no, no. These things are going to wipe us out for sure. If anybody builds it, it's going to wipe us all out.\""
+  },
+  {
+   "start": 518.64,
+   "end": 519.44,
+   "text": "And he's confident of that."
+  },
+  {
+   "start": 520.44,
+   "end": 521.88,
+   "text": "I think both of those positions are extreme."
+  },
+  {
+   "start": 523.2,
+   "end": 526.36,
+   "text": "It's very hard to estimate the probabilities in between. If you had to bet"
+  },
+  {
+   "start": 527.44,
+   "end": 528.72,
+   "text": "on who was right out of your two friends,"
+  },
+  {
+   "start": 531.6,
+   "end": 535.2,
+   "text": "I simply don't know. So, if I had to bet, I'd say the probability is in between."
+  },
+  {
+   "start": 536.4,
+   "end": 540.6,
+   "text": "And I don't know where to estimate it in between. I often say 10 to 20% chance they'll wipe us out."
+  },
+  {
+   "start": 541.52,
+   "end": 542.4,
+   "text": "But that's just"
+  },
+  {
+   "start": 543.68,
+   "end": 547.6,
+   "text": "gut. Based on the idea that we're we're still making them and we're pretty ingenious."
+  },
+  {
+   "start": 548.88,
+   "end": 549.48,
+   "text": "And the hope is"
+  },
+  {
+   "start": 550.48,
+   "end": 552.84,
+   "text": "that if enough smart people do enough research with enough resources,"
+  },
+  {
+   "start": 554.16,
+   "end": 556.64,
+   "text": "we'll figure out a way to build them so they'll never want to"
+  },
+  {
+   "start": 557.72,
+   "end": 558.0,
+   "text": "harm us."
+  },
+  {
+   "start": 559.04,
+   "end": 571.68,
+   "text": "Sometimes I think if we we talk about that second um path, sometimes I think about nuclear bombs and the the invention of the atomic bomb and how it compares. Like how is this different because the atomic bomb came along and I imagine a lot of people at that time thought our days are numbered."
+  },
+  {
+   "start": 572.76,
+   "end": 576.12,
+   "text": "Oh yes, I was there. We did. Yeah. But but but what's what"
+  },
+  {
+   "start": 577.16,
+   "end": 577.56,
+   "text": "We're still here."
+  },
+  {
+   "start": 578.48,
+   "end": 579.88,
+   "text": "We're still here, yes. So,"
+  },
+  {
+   "start": 580.92,
+   "end": 582.76,
+   "text": "the atomic bomb was really only good for one thing."
+  },
+  {
+   "start": 583.88,
+   "end": 588.56,
+   "text": "And it was very obvious how it worked. Even if you hadn't had the pictures of Hiroshima and Nagasaki,"
+  },
+  {
+   "start": 589.8,
+   "end": 591.92,
+   "text": "it was obvious that it was a very big bomb"
+  },
+  {
+   "start": 593.08,
+   "end": 593.52,
+   "text": "that was very dangerous."
+  },
+  {
+   "start": 594.92,
+   "end": 595.12,
+   "text": "With AI,"
+  },
+  {
+   "start": 596.64,
+   "end": 599.12,
+   "text": "it's good for many, many things."
+  },
+  {
+   "start": 600.2,
+   "end": 602.04,
+   "text": "It's going to be magnificent in healthcare and education"
+  },
+  {
+   "start": 603.28,
+   "end": 605.08,
+   "text": "and more or less any industry that needs to"
+  },
+  {
+   "start": 606.24,
+   "end": 608.76,
+   "text": "use its data is going to be able to use it better with AI."
+  },
+  {
+   "start": 609.92,
+   "end": 611.2,
+   "text": "So, we're not going to stop the development."
+  },
+  {
+   "start": 613.76,
+   "end": 619.2,
+   "text": "You know, people say, \"Well, why don't we just stop it now?\" We're not going to stop it cuz it's too good for too many things."
+  },
+  {
+   "start": 620.52,
+   "end": 628.52,
+   "text": "Also, we're not going to stop it cuz it's good for battle robots and none of the countries that sell weapons are going to want to stop it. Like the European regulations,"
+  },
+  {
+   "start": 630.2,
+   "end": 632.32,
+   "text": "they have some regulations about AI and it's good they have some regulations,"
+  },
+  {
+   "start": 633.72,
+   "end": 636.44,
+   "text": "but they're not designed to deal with most of the threats. And in particular,"
+  },
+  {
+   "start": 637.84,
+   "end": 643.96,
+   "text": "the European regulations have a clause in them that say, \"None of these regulations apply to military uses of AI.\""
+  },
+  {
+   "start": 645.72,
+   "end": 647.72,
+   "text": "So, governments are willing to regulate regulate"
+  },
+  {
+   "start": 649.16,
+   "end": 651.4,
+   "text": "companies and people, but they're not willing to regulate themselves."
+  },
+  {
+   "start": 653.52,
+   "end": 654.72,
+   "text": "It seems pretty crazy to me that they"
+  },
+  {
+   "start": 655.92,
+   "end": 659.4,
+   "text": "I go back and forth, but if Europe has a regulation, but the rest of the world doesn't,"
+  },
+  {
+   "start": 660.48,
+   "end": 668.52,
+   "text": "Yeah, it puts them at a competitive disadvantage. Yeah. And we're seeing this already. I don't think people realize that when OpenAI release a new model or a new piece of software in America,"
+  },
+  {
+   "start": 669.76,
+   "end": 678.76,
+   "text": "they can't release it to the to Europe yet because of regulations here. So, Sam Altman tweeted saying, \"Our new AI agent thing is available to everybody, but it can't come to Europe yet because there's regulations.\""
+  },
+  {
+   "start": 680.52,
+   "end": 682.36,
+   "text": "Yes. What does that do? Does that give us a productive disadvantage?"
+  },
+  {
+   "start": 683.44,
+   "end": 690.52,
+   "text": "Productivity disadvantage? Right. What we need is I mean, at this point in history, when we're about to produce things more intelligent than ourselves,"
+  },
+  {
+   "start": 691.76,
+   "end": 692.52,
+   "text": "what we really need"
+  },
+  {
+   "start": 693.68,
+   "end": 697.0,
+   "text": "is a kind of world government that works run by intelligent, thoughtful people."
+  },
+  {
+   "start": 698.0,
+   "end": 698.88,
+   "text": "And that's not what we got."
+  },
+  {
+   "start": 700.44,
+   "end": 700.44,
+   "text": "So,"
+  },
+  {
+   "start": 701.6,
+   "end": 703.96,
+   "text": "free for all. Well, that what we've got is"
+  },
+  {
+   "start": 705.08,
+   "end": 705.36,
+   "text": "sort of"
+  },
+  {
+   "start": 707.24,
+   "end": 707.56,
+   "text": "we've got capitalism,"
+  },
+  {
+   "start": 708.64,
+   "end": 713.52,
+   "text": "which is done very nicely by us. It has produced lots of goods goods and services for us, but"
+  },
+  {
+   "start": 714.72,
+   "end": 715.24,
+   "text": "these big companies,"
+  },
+  {
+   "start": 716.64,
+   "end": 719.08,
+   "text": "they're legally required to try maximize profits."
+  },
+  {
+   "start": 720.52,
+   "end": 723.2,
+   "text": "And that's not what you want from the people developing this stuff."
+  },
+  {
+   "start": 725.04,
+   "end": 733.72,
+   "text": "So, let's do the risks then. You talked about there's human risks and then there's So, I've distinguished these two kinds of risk. Let's talk about all the risks from bad human actors using AI."
+  },
+  {
+   "start": 735.12,
+   "end": 736.28,
+   "text": "There's cyber attacks."
+  },
+  {
+   "start": 738.24,
+   "end": 738.52,
+   "text": "So, between"
+  },
+  {
+   "start": 739.76,
+   "end": 739.76,
+   "text": "2023"
+  },
+  {
+   "start": 740.8,
+   "end": 740.88,
+   "text": "and 2024,"
+  },
+  {
+   "start": 742.64,
+   "end": 744.68,
+   "text": "they increased by about a factor of 12, 1,200%."
+  },
+  {
+   "start": 747.48,
+   "end": 748.24,
+   "text": "And that's probably because"
+  },
+  {
+   "start": 749.24,
+   "end": 752.4,
+   "text": "these large language models make it much easier to do phishing attacks."
+  },
+  {
+   "start": 753.52,
+   "end": 757.72,
+   "text": "And a phishing attack for anyone that doesn't know is It's they send you something saying,"
+  },
+  {
+   "start": 758.8,
+   "end": 768.44,
+   "text": "uh, \"Hi, I'm your friend John and I'm stuck in El Salvador. Could you just wire this money?\" That's one kind of attack. But the phishing attacks are really trying to get your login credentials."
+  },
+  {
+   "start": 769.48,
+   "end": 784.56,
+   "text": "And now with AI, they can clone my voice, my image. all that. I'm struggling at the moment because there's a bunch of AI scams on X and also Meta. And there's one in particular on Meta, so Instagram, Facebook at the moment, which is a paid advert where they've taken my voice from the podcast. They've taken the my"
+  },
+  {
+   "start": 784.68,
+   "end": 791.04,
+   "text": "mannerisms and they've made a new video of me encouraging people to go and take part in this crypto Ponzi scam or whatever."
+  },
+  {
+   "start": 791.96,
+   "end": 804.36,
+   "text": "And we've been you know, we spent weeks and weeks and weeks and weeks and end emailing Meta telling, \"Please take this down.\" They take it down, another one pops up. They take that one down, another one pops up. So, it's like whack-a-mole. Yeah, that's very annoying. The the heartbreaking part is you get the messages from people that"
+  },
+  {
+   "start": 804.48,
+   "end": 805.0,
+   "text": "have fallen for the scam."
+  },
+  {
+   "start": 805.92,
+   "end": 816.8,
+   "text": "And they've lost 500 pounds or 500 dollars or something. with you cuz you recommended it. And I'm I'm like I'm sad for them. It's very annoying. I have a a smaller version of that, which is peo- some people now publish papers"
+  },
+  {
+   "start": 818.16,
+   "end": 824.72,
+   "text": "with me as one of the authors. Mhm. And it looks like it's in order that they can get lots of citations to themselves. Ah."
+  },
+  {
+   "start": 826.04,
+   "end": 830.04,
+   "text": "So, cyber attacks are a very real threat. There's been an explosion of those. And these already,"
+  },
+  {
+   "start": 831.28,
+   "end": 832.12,
+   "text": "obviously AI is very patient,"
+  },
+  {
+   "start": 833.04,
+   "end": 837.6,
+   "text": "so they can go through 100 million lines of code looking for known ways of attacking them."
+  },
+  {
+   "start": 838.6,
+   "end": 841.64,
+   "text": "That's easy to do, but they're going to get more creative and they may"
+  },
+  {
+   "start": 842.64,
+   "end": 844.76,
+   "text": "some people believe, and I"
+  },
+  {
+   "start": 846.04,
+   "end": 848.84,
+   "text": "some people who know a lot believe that maybe by 2030,"
+  },
+  {
+   "start": 850.36,
+   "end": 852.36,
+   "text": "they'll be creating new kinds of cyber attacks"
+  },
+  {
+   "start": 853.88,
+   "end": 855.4,
+   "text": "which no person ever thought of."
+  },
+  {
+   "start": 856.72,
+   "end": 864.92,
+   "text": "So, that's very worrisome. Because they can think for themselves and discover new ways to attack. They can draw new conclusions from much more data than a person ever saw."
+  },
+  {
+   "start": 866.12,
+   "end": 866.84,
+   "text": "Is there anything you're doing"
+  },
+  {
+   "start": 868.04,
+   "end": 870.32,
+   "text": "to protect yourself from cyber attacks at all? Yes."
+  },
+  {
+   "start": 871.44,
+   "end": 872.84,
+   "text": "It's one of the few places where I"
+  },
+  {
+   "start": 873.76,
+   "end": 874.64,
+   "text": "changed what I do radically"
+  },
+  {
+   "start": 875.68,
+   "end": 876.64,
+   "text": "because I'm scared of cyber attacks."
+  },
+  {
+   "start": 877.84,
+   "end": 883.8,
+   "text": "Canadian banks are extremely safe. In 2008, no Canadian banks came anywhere near going bust."
+  },
+  {
+   "start": 884.96,
+   "end": 886.52,
+   "text": "So, they're very safe banks cuz they're well regulated,"
+  },
+  {
+   "start": 887.52,
+   "end": 888.0,
+   "text": "fairly well regulated."
+  },
+  {
+   "start": 889.08,
+   "end": 889.08,
+   "text": "Nevertheless,"
+  },
+  {
+   "start": 890.52,
+   "end": 892.68,
+   "text": "I think a cyber attack might be able to bring down a bank."
+  },
+  {
+   "start": 893.92,
+   "end": 893.92,
+   "text": "Now,"
+  },
+  {
+   "start": 894.84,
+   "end": 897.2,
+   "text": "if you have all my savings are in shares in banks,"
+  },
+  {
+   "start": 898.48,
+   "end": 898.8,
+   "text": "held by banks."
+  },
+  {
+   "start": 900.0,
+   "end": 900.52,
+   "text": "So, if the bank"
+  },
+  {
+   "start": 901.56,
+   "end": 901.8,
+   "text": "gets attacked"
+  },
+  {
+   "start": 902.84,
+   "end": 905.08,
+   "text": "and it holds your shares, they're still your shares."
+  },
+  {
+   "start": 906.64,
+   "end": 907.48,
+   "text": "And so, I think you'd be okay"
+  },
+  {
+   "start": 908.6,
+   "end": 908.6,
+   "text": "unless"
+  },
+  {
+   "start": 909.96,
+   "end": 910.08,
+   "text": "the attacker"
+  },
+  {
+   "start": 911.0,
+   "end": 912.64,
+   "text": "sells the shares cuz the bank can sell the shares."
+  },
+  {
+   "start": 913.8,
+   "end": 915.2,
+   "text": "If the attacker sells your shares,"
+  },
+  {
+   "start": 916.44,
+   "end": 916.84,
+   "text": "I think you're screwed."
+  },
+  {
+   "start": 918.24,
+   "end": 922.76,
+   "text": "I don't know I mean, maybe the bank would have to try and reimburse you, but the bank's bust by now, right? So,"
+  },
+  {
+   "start": 924.12,
+   "end": 926.12,
+   "text": "So, I'm worried about a Canadian bank being"
+  },
+  {
+   "start": 927.08,
+   "end": 931.24,
+   "text": "taken down by a cyber attack and the attacker selling selling shares that it holds."
+  },
+  {
+   "start": 932.48,
+   "end": 935.64,
+   "text": "So, I spread my money my children's money between three banks"
+  },
+  {
+   "start": 937.24,
+   "end": 940.6,
+   "text": "in the belief that if a cyber attack takes down one Canadian bank,"
+  },
+  {
+   "start": 941.64,
+   "end": 944.76,
+   "text": "the other Canadian banks will very quickly get very careful."
+  },
+  {
+   "start": 946.04,
+   "end": 947.92,
+   "text": "And do you have a phone that's not connected to the internet?"
+  },
+  {
+   "start": 948.92,
+   "end": 955.48,
+   "text": "Do you have any like you know, I'm thinking about storing data and stuff like that. Do you think it's wise to consider having cold storage? I have"
+  },
+  {
+   "start": 956.48,
+   "end": 958.2,
+   "text": "a little disk drive and I back up my laptop"
+  },
+  {
+   "start": 959.12,
+   "end": 959.72,
+   "text": "on this hard drive."
+  },
+  {
+   "start": 960.72,
+   "end": 963.32,
+   "text": "So, I actually have everything on my laptop on a hard drive."
+  },
+  {
+   "start": 964.56,
+   "end": 969.2,
+   "text": "At least, you know, if the whole internet went down, I had the sense I still got it on my laptop and I still got"
+  },
+  {
+   "start": 970.16,
+   "end": 970.92,
+   "text": "my information. Okay."
+  },
+  {
+   "start": 972.44,
+   "end": 973.28,
+   "text": "Then the next thing is"
+  },
+  {
+   "start": 974.4,
+   "end": 976.68,
+   "text": "using AIs to create nasty viruses."
+  },
+  {
+   "start": 978.52,
+   "end": 978.52,
+   "text": "Okay."
+  },
+  {
+   "start": 979.64,
+   "end": 980.56,
+   "text": "And the problem with that is"
+  },
+  {
+   "start": 981.56,
+   "end": 982.56,
+   "text": "that just requires"
+  },
+  {
+   "start": 983.68,
+   "end": 985.2,
+   "text": "one crazy guy with a grudge."
+  },
+  {
+   "start": 986.16,
+   "end": 987.68,
+   "text": "One guy who knows a little bit of molecular biology,"
+  },
+  {
+   "start": 989.0,
+   "end": 989.76,
+   "text": "knows a lot about AI,"
+  },
+  {
+   "start": 990.84,
+   "end": 992.0,
+   "text": "and just wants to destroy the world."
+  },
+  {
+   "start": 993.32,
+   "end": 994.08,
+   "text": "You can now create"
+  },
+  {
+   "start": 995.8,
+   "end": 996.0,
+   "text": "new viruses"
+  },
+  {
+   "start": 997.28,
+   "end": 998.68,
+   "text": "relatively cheaply using AI."
+  },
+  {
+   "start": 999.8,
+   "end": 1005.2,
+   "text": "And you don't have to be a very skilled molecular biologist to do it. And that's very scary. So, you could have a small cult, for example."
+  },
+  {
+   "start": 1007.2,
+   "end": 1009.68,
+   "text": "A small cult might be able to raise a few million dollars."
+  },
+  {
+   "start": 1010.92,
+   "end": 1013.48,
+   "text": "For a few million dollars, they might be able to design a whole bunch of viruses."
+  },
+  {
+   "start": 1014.48,
+   "end": 1015.92,
+   "text": "Well, I'm thinking about some of our foreign adversaries"
+  },
+  {
+   "start": 1017.0,
+   "end": 1026.72,
+   "text": "doing government-funded programs. I mean, there was lots of talk around COVID and the Wuhan laboratory and what they were doing in gain-of-function research, but I'm wondering if in, you know, a China or a Russia or an Iran or something,"
+  },
+  {
+   "start": 1028.2,
+   "end": 1032.88,
+   "text": "the government could fund a a program for a small group of scientists to make a virus that they could, you know,"
+  },
+  {
+   "start": 1033.96,
+   "end": 1044.44,
+   "text": "I think they could, yes. Now, they'd be worried about retaliation. They'd be worried about other governments doing the same to them. Hopefully, that would help keep it under control. They might also be worried about the virus spreading to their country."
+  },
+  {
+   "start": 1045.36,
+   "end": 1045.36,
+   "text": "Okay."
+  },
+  {
+   "start": 1046.48,
+   "end": 1048.52,
+   "text": "Then there's, um, corrupting elections."
+  },
+  {
+   "start": 1050.24,
+   "end": 1050.24,
+   "text": "Okay."
+  },
+  {
+   "start": 1051.4,
+   "end": 1053.48,
+   "text": "So, if you wanted to use AI to corrupt elections,"
+  },
+  {
+   "start": 1055.4,
+   "end": 1057.4,
+   "text": "a very effective thing is to be able to do targeted"
+  },
+  {
+   "start": 1058.32,
+   "end": 1058.76,
+   "text": "political advertisements"
+  },
+  {
+   "start": 1060.2,
+   "end": 1061.4,
+   "text": "where you know a lot about the person."
+  },
+  {
+   "start": 1064.16,
+   "end": 1064.16,
+   "text": "So,"
+  },
+  {
+   "start": 1065.4,
+   "end": 1067.04,
+   "text": "anybody wanting to use AI for corrupting"
+  },
+  {
+   "start": 1067.96,
+   "end": 1067.96,
+   "text": "elections"
+  },
+  {
+   "start": 1069.0,
+   "end": 1070.72,
+   "text": "would try and get as much data as they could"
+  },
+  {
+   "start": 1071.8,
+   "end": 1072.92,
+   "text": "about everybody in the electorate."
+  },
+  {
+   "start": 1073.92,
+   "end": 1077.64,
+   "text": "With that in mind, it's a bit worrying what Musk is doing at present in the States"
+  },
+  {
+   "start": 1078.76,
+   "end": 1082.4,
+   "text": "going in and insisting on getting access to all these things that were very carefully siloed."
+  },
+  {
+   "start": 1083.72,
+   "end": 1085.44,
+   "text": "The claim is it's to make things more efficient,"
+  },
+  {
+   "start": 1086.64,
+   "end": 1089.68,
+   "text": "but it's exactly what you would want if you intended to corrupt the next election."
+  },
+  {
+   "start": 1090.68,
+   "end": 1093.32,
+   "text": "How do you mean? Could you get all this data on the people? all this data on people."
+  },
+  {
+   "start": 1094.28,
+   "end": 1099.56,
+   "text": "You know how much they make, where they live, you know everything about them. Once you know that, it's very easy to manipulate them."
+  },
+  {
+   "start": 1100.8,
+   "end": 1103.4,
+   "text": "Because you can make an AI that You can send messages,"
+  },
+  {
+   "start": 1104.68,
+   "end": 1107.56,
+   "text": "um, that they'll find very convincing telling them not to vote, for example."
+  },
+  {
+   "start": 1109.56,
+   "end": 1110.64,
+   "text": "So, I have no no"
+  },
+  {
+   "start": 1111.92,
+   "end": 1116.32,
+   "text": "reason other than common sense to think this, but I wouldn't be surprised if part of the motivation"
+  },
+  {
+   "start": 1117.64,
+   "end": 1120.16,
+   "text": "of getting all this data from American government sources"
+  },
+  {
+   "start": 1121.48,
+   "end": 1124.44,
+   "text": "is to corrupt elections. Another part might be"
+  },
+  {
+   "start": 1125.4,
+   "end": 1127.12,
+   "text": "that it's very nice training data for a big model."
+  },
+  {
+   "start": 1128.68,
+   "end": 1137.2,
+   "text": "But he would have to be taking that data from the government and feeding it into his Yes. And what they've done is turned off lots of the security controls, got rid of the"
+  },
+  {
+   "start": 1138.24,
+   "end": 1140.24,
+   "text": "some of the organization to protect against that."
+  },
+  {
+   "start": 1141.64,
+   "end": 1142.64,
+   "text": "Um, so that's corrupting elections."
+  },
+  {
+   "start": 1143.68,
+   "end": 1145.28,
+   "text": "Okay. Then there's, um, creating"
+  },
+  {
+   "start": 1146.6,
+   "end": 1147.48,
+   "text": "these two echo chambers"
+  },
+  {
+   "start": 1149.12,
+   "end": 1149.12,
+   "text": "by"
+  },
+  {
+   "start": 1150.28,
+   "end": 1151.32,
+   "text": "organizations like YouTube"
+  },
+  {
+   "start": 1152.84,
+   "end": 1152.84,
+   "text": "and"
+  },
+  {
+   "start": 1153.76,
+   "end": 1153.76,
+   "text": "Facebook"
+  },
+  {
+   "start": 1155.24,
+   "end": 1157.16,
+   "text": "showing people things that will make them indignant."
+  },
+  {
+   "start": 1158.2,
+   "end": 1159.16,
+   "text": "People love to be indignant."
+  },
+  {
+   "start": 1160.52,
+   "end": 1161.28,
+   "text": "Indignant as in angry?"
+  },
+  {
+   "start": 1162.2,
+   "end": 1164.28,
+   "text": "Or what does indignant mean? Feeling I'm"
+  },
+  {
+   "start": 1165.44,
+   "end": 1171.52,
+   "text": "sort of angry, but feeling righteous. Okay. So, for example, if you were to show me something that said,"
+  },
+  {
+   "start": 1172.48,
+   "end": 1177.68,
+   "text": "\"Trump did this crazy thing. Here's a video of Trump doing this completely crazy thing.\" I would immediately click on it."
+  },
+  {
+   "start": 1180.68,
+   "end": 1183.64,
+   "text": "Okay, so putting us in echo chambers and dividing us. Yes. And that's,"
+  },
+  {
+   "start": 1184.56,
+   "end": 1188.32,
+   "text": "um, the policy that YouTube and Facebook and others"
+  },
+  {
+   "start": 1189.32,
+   "end": 1191.36,
+   "text": "use for deciding what to show you next"
+  },
+  {
+   "start": 1192.6,
+   "end": 1193.88,
+   "text": "is causing that."
+  },
+  {
+   "start": 1195.0,
+   "end": 1196.56,
+   "text": "If they had a policy of showing you"
+  },
+  {
+   "start": 1197.56,
+   "end": 1198.0,
+   "text": "balanced things,"
+  },
+  {
+   "start": 1198.92,
+   "end": 1201.2,
+   "text": "they wouldn't get so many clicks and they wouldn't be able to sell so many advertisements."
+  },
+  {
+   "start": 1202.56,
+   "end": 1204.4,
+   "text": "And so it's basically the profit motive is saying"
+  },
+  {
+   "start": 1205.84,
+   "end": 1208.96,
+   "text": "show them whatever will make them click. And what will make them click is"
+  },
+  {
+   "start": 1210.12,
+   "end": 1211.08,
+   "text": "things that are more and more extreme."
+  },
+  {
+   "start": 1212.28,
+   "end": 1227.4,
+   "text": "And that confirm my existing bias. They confirm my existing bias. So you're getting your biases confirmed all the time. Further and further and further and further. Means you're you're driving away now there's in the states there's two communities that don't hardly talk to each other. I'm not sure people realize that this is actually happening every time they"
+  },
+  {
+   "start": 1227.48,
+   "end": 1230.88,
+   "text": "open an app. But if you go on a TikTok or a YouTube or one of these big social networks,"
+  },
+  {
+   "start": 1232.08,
+   "end": 1233.52,
+   "text": "the algorithm as you you said is designed"
+  },
+  {
+   "start": 1234.44,
+   "end": 1235.48,
+   "text": "to show you more of the things"
+  },
+  {
+   "start": 1236.44,
+   "end": 1248.56,
+   "text": "that you had interest in last time. So if you just play that out over 10 years, it's going to drive you further and further and further into whatever ideology or belief you have and further away from nuance and common sense and um parity,"
+  },
+  {
+   "start": 1249.76,
+   "end": 1259.76,
+   "text": "which is a pretty remarkable thing. That I like people don't know it's happening. They just open their phones and experience something and think this is the news or the experience everyone else is having."
+  },
+  {
+   "start": 1260.72,
+   "end": 1264.72,
+   "text": "Right. So basically, if you have a newspaper and everybody gets the same newspaper,"
+  },
+  {
+   "start": 1265.68,
+   "end": 1272.56,
+   "text": "Yeah. you get to see all sorts of things you weren't looking for and you get a sense that if it's in the newspaper, it's an important thing or significant thing."
+  },
+  {
+   "start": 1273.48,
+   "end": 1274.48,
+   "text": "But if you have your own news feed,"
+  },
+  {
+   "start": 1275.52,
+   "end": 1276.96,
+   "text": "my news feed on my iPhone,"
+  },
+  {
+   "start": 1277.96,
+   "end": 1279.48,
+   "text": "three quarters of the stories are about AI."
+  },
+  {
+   "start": 1280.6,
+   "end": 1286.2,
+   "text": "And I find it very hard to know if the whole world's talking about AI all the time or if it's just my news feed."
+  },
+  {
+   "start": 1288.88,
+   "end": 1290.56,
+   "text": "Okay, so driving me into my echo chambers,"
+  },
+  {
+   "start": 1291.6,
+   "end": 1296.72,
+   "text": "um which is going to continue to divide us further and further. I'm actually noticing that the algorithms are becoming even more"
+  },
+  {
+   "start": 1298.36,
+   "end": 1298.72,
+   "text": "what's the word?"
+  },
+  {
+   "start": 1300.4,
+   "end": 1306.04,
+   "text": "Tailored. And people might go that's great, but what it means is they're becoming even more personalized which was is means that my reality"
+  },
+  {
+   "start": 1307.12,
+   "end": 1312.04,
+   "text": "is becoming even further from your reality. Yeah, it's crazy. We don't have a shared reality anymore."
+  },
+  {
+   "start": 1313.24,
+   "end": 1320.92,
+   "text": "I share reality with other people who watch the BBC and other BBC news and other people who read the Guardian and other people who read the New York Times."
+  },
+  {
+   "start": 1322.32,
+   "end": 1325.88,
+   "text": "I have almost no shared reality with people who watch Fox News."
+  },
+  {
+   "start": 1328.0,
+   "end": 1328.72,
+   "text": "It's pretty it's pretty um"
+  },
+  {
+   "start": 1329.68,
+   "end": 1331.48,
+   "text": "I I I It's worrisome. Yeah."
+  },
+  {
+   "start": 1332.44,
+   "end": 1337.84,
+   "text": "Behind all this is the idea that these companies just want to make profit and they'll do whatever it takes to make more profit."
+  },
+  {
+   "start": 1338.88,
+   "end": 1339.44,
+   "text": "Because they have to."
+  },
+  {
+   "start": 1340.48,
+   "end": 1341.8,
+   "text": "They're legally obliged to that."
+  },
+  {
+   "start": 1343.44,
+   "end": 1347.04,
+   "text": "So we almost can't blame the company, can we? If they're if that's Well,"
+  },
+  {
+   "start": 1348.08,
+   "end": 1352.8,
+   "text": "capitalism's done very well for us. It's produced lots of goodies. Yeah. But you need to have it very well regulated."
+  },
+  {
+   "start": 1354.4,
+   "end": 1355.2,
+   "text": "So what you really want"
+  },
+  {
+   "start": 1356.48,
+   "end": 1357.92,
+   "text": "is to have rules so that"
+  },
+  {
+   "start": 1359.04,
+   "end": 1361.48,
+   "text": "when some company is trying to make as much profit as possible,"
+  },
+  {
+   "start": 1363.08,
+   "end": 1366.96,
+   "text": "in order to make that profit, they have to do things that are good for people in general,"
+  },
+  {
+   "start": 1367.88,
+   "end": 1372.12,
+   "text": "not things that are bad for people in general. So once you get to a situation where in order to make more profit,"
+  },
+  {
+   "start": 1373.28,
+   "end": 1375.28,
+   "text": "the company starts doing things that are very bad for society,"
+  },
+  {
+   "start": 1376.76,
+   "end": 1378.28,
+   "text": "like showing you things that are more and more extreme,"
+  },
+  {
+   "start": 1379.56,
+   "end": 1380.76,
+   "text": "that's what regulations are for."
+  },
+  {
+   "start": 1381.76,
+   "end": 1385.84,
+   "text": "So you need regulations with capitalism. Now companies will always say"
+  },
+  {
+   "start": 1386.76,
+   "end": 1386.76,
+   "text": "regulations"
+  },
+  {
+   "start": 1387.92,
+   "end": 1394.48,
+   "text": "get in the way, make us less efficient, and that's true. The whole point of regulations is to stop them doing things to make profit that hurts society."
+  },
+  {
+   "start": 1396.0,
+   "end": 1396.76,
+   "text": "And we need strong regulation."
+  },
+  {
+   "start": 1397.88,
+   "end": 1402.12,
+   "text": "Who's going to decide whether it has society or not? Because, you know, That's the job of politicians."
+  },
+  {
+   "start": 1403.4,
+   "end": 1415.92,
+   "text": "Unfortunately, if the politicians are owned by the companies, that's not so good. And also the politicians might not understand the technology. We you've probably seen the Senate hearings where they wheel out, you know, Mark Zuckerberg and these big tech CEOs. And it is quite embarrassing because they're asking the wrong questions."
+  },
+  {
+   "start": 1417.2,
+   "end": 1420.6,
+   "text": "Well, I've seen the video of the US education secretary"
+  },
+  {
+   "start": 1421.6,
+   "end": 1424.12,
+   "text": "talking about how they're going to get AI in the classrooms,"
+  },
+  {
+   "start": 1425.24,
+   "end": 1426.4,
+   "text": "except she thought it was called A1."
+  },
+  {
+   "start": 1428.48,
+   "end": 1431.64,
+   "text": "She's actually there saying we're going to have all the kids interacting with A1."
+  },
+  {
+   "start": 1433.0,
+   "end": 1445.8,
+   "text": "There is a school system that's going to start um making sure that first graders or even pre-K's have A1 teaching, you know, every year starting, you know, that far down in the grades. And that's just a that's a wonderful thing."
+  },
+  {
+   "start": 1450.88,
+   "end": 1453.16,
+   "text": "And these are what these are the people that These are the people in charge."
+  },
+  {
+   "start": 1454.76,
+   "end": 1459.76,
+   "text": "Ultimately, the tech companies are in charge because they will outsmart the tech companies in the states now,"
+  },
+  {
+   "start": 1460.8,
+   "end": 1462.16,
+   "text": "at least a few weeks ago when I was there,"
+  },
+  {
+   "start": 1463.16,
+   "end": 1464.12,
+   "text": "they were running"
+  },
+  {
+   "start": 1465.04,
+   "end": 1474.88,
+   "text": "an advertisement about how it was very important not to regulate AI cuz it would hurt us in the competition with China. Yeah. And that's a that's a plausible argument, no? Yes, it will."
+  },
+  {
+   "start": 1475.92,
+   "end": 1476.6,
+   "text": "But you have to decide."
+  },
+  {
+   "start": 1477.8,
+   "end": 1478.68,
+   "text": "Do you want to compete with China"
+  },
+  {
+   "start": 1480.24,
+   "end": 1481.48,
+   "text": "by doing things that will"
+  },
+  {
+   "start": 1482.72,
+   "end": 1482.72,
+   "text": "do"
+  },
+  {
+   "start": 1483.64,
+   "end": 1484.56,
+   "text": "a lot of harm to your society?"
+  },
+  {
+   "start": 1486.08,
+   "end": 1486.56,
+   "text": "And you probably don't."
+  },
+  {
+   "start": 1489.52,
+   "end": 1505.64,
+   "text": "I guess they would say that it's not just China, it's Denmark and Australia and Canada and Yeah, they're not they're not so worried about and Germany. But if they kneecap themselves with regulation, if they slow themselves down, then the founders, the entrepreneurs, the investors are going to go I think calling it kneecapping is uh taking a particular"
+  },
+  {
+   "start": 1506.08,
+   "end": 1509.92,
+   "text": "point of view. It's tak- taking the point of view that regulations are sort of very harmful."
+  },
+  {
+   "start": 1510.96,
+   "end": 1512.16,
+   "text": "What you need to do is just constrain"
+  },
+  {
+   "start": 1513.08,
+   "end": 1515.0,
+   "text": "the big companies so that in order to make profit,"
+  },
+  {
+   "start": 1516.48,
+   "end": 1517.8,
+   "text": "they have to do things that are socially useful."
+  },
+  {
+   "start": 1518.76,
+   "end": 1525.8,
+   "text": "Like Google search is a great example. That didn't need regulation because it just made information available to people. It was great."
+  },
+  {
+   "start": 1526.88,
+   "end": 1528.52,
+   "text": "But then if you take YouTube which starts"
+  },
+  {
+   "start": 1529.56,
+   "end": 1529.96,
+   "text": "showing you adverts"
+  },
+  {
+   "start": 1531.12,
+   "end": 1532.4,
+   "text": "and showing you more and more extreme things,"
+  },
+  {
+   "start": 1533.32,
+   "end": 1533.76,
+   "text": "that needs regulation."
+  },
+  {
+   "start": 1535.24,
+   "end": 1536.6,
+   "text": "But we don't have the people to regulate it."
+  },
+  {
+   "start": 1537.64,
+   "end": 1539.56,
+   "text": "As we've identified. I think people know pretty well"
+  },
+  {
+   "start": 1540.6,
+   "end": 1546.12,
+   "text": "um that particular problem of showing you more and more extreme things. That's a well- known problem that the politicians understand."
+  },
+  {
+   "start": 1547.48,
+   "end": 1549.52,
+   "text": "They just um need to get on and regulate it."
+  },
+  {
+   "start": 1550.56,
+   "end": 1555.32,
+   "text": "So that was the the next point which was that the algorithms are going to drive us further into our echo chambers. Right."
+  },
+  {
+   "start": 1556.56,
+   "end": 1558.44,
+   "text": "What's next? Lethal autonomous weapons."
+  },
+  {
+   "start": 1559.92,
+   "end": 1561.48,
+   "text": "Lethal autonomous weapons."
+  },
+  {
+   "start": 1563.6,
+   "end": 1567.28,
+   "text": "That means things that can kill you and make their own decision about whether to kill you."
+  },
+  {
+   "start": 1568.4,
+   "end": 1572.0,
+   "text": "Which is the great dream, I guess, of the military-industrial complex."
+  },
+  {
+   "start": 1573.08,
+   "end": 1574.28,
+   "text": "Being able to create such weapons."
+  },
+  {
+   "start": 1575.84,
+   "end": 1577.04,
+   "text": "the worst thing about them is"
+  },
+  {
+   "start": 1578.08,
+   "end": 1583.16,
+   "text": "big powerful countries always have the ability to invade smaller poorer countries."
+  },
+  {
+   "start": 1584.56,
+   "end": 1585.0,
+   "text": "They're just more powerful."
+  },
+  {
+   "start": 1586.12,
+   "end": 1586.12,
+   "text": "But"
+  },
+  {
+   "start": 1587.04,
+   "end": 1588.56,
+   "text": "if you do that using actual soldiers,"
+  },
+  {
+   "start": 1589.96,
+   "end": 1591.16,
+   "text": "you get bodies coming back in bags"
+  },
+  {
+   "start": 1592.4,
+   "end": 1592.4,
+   "text": "and"
+  },
+  {
+   "start": 1593.4,
+   "end": 1595.84,
+   "text": "the relatives of the soldiers who were killed don't like it."
+  },
+  {
+   "start": 1596.8,
+   "end": 1597.56,
+   "text": "So you get something like Vietnam."
+  },
+  {
+   "start": 1599.28,
+   "end": 1600.64,
+   "text": "In the end there's a lot of protest at home."
+  },
+  {
+   "start": 1601.96,
+   "end": 1604.08,
+   "text": "If instead of bodies coming back in bags,"
+  },
+  {
+   "start": 1605.12,
+   "end": 1605.76,
+   "text": "it was dead robots,"
+  },
+  {
+   "start": 1607.36,
+   "end": 1608.04,
+   "text": "there'd be much less protest"
+  },
+  {
+   "start": 1609.08,
+   "end": 1609.36,
+   "text": "and the military-industrial"
+  },
+  {
+   "start": 1610.4,
+   "end": 1612.8,
+   "text": "complex would like it much more cuz robots are expensive."
+  },
+  {
+   "start": 1614.36,
+   "end": 1614.36,
+   "text": "And"
+  },
+  {
+   "start": 1615.4,
+   "end": 1617.16,
+   "text": "suppose you had something that could get killed and"
+  },
+  {
+   "start": 1618.08,
+   "end": 1618.96,
+   "text": "was expensive to replace,"
+  },
+  {
+   "start": 1619.88,
+   "end": 1620.48,
+   "text": "that would be just great."
+  },
+  {
+   "start": 1621.68,
+   "end": 1621.88,
+   "text": "Big countries"
+  },
+  {
+   "start": 1622.8,
+   "end": 1626.2,
+   "text": "can invade small countries much more easily because they don't have their soldiers being killed."
+  },
+  {
+   "start": 1627.28,
+   "end": 1628.52,
+   "text": "And the risk here is"
+  },
+  {
+   "start": 1629.56,
+   "end": 1629.56,
+   "text": "that"
+  },
+  {
+   "start": 1631.0,
+   "end": 1631.56,
+   "text": "these robots will"
+  },
+  {
+   "start": 1632.68,
+   "end": 1638.36,
+   "text": "malfunction or they'll just be more No, no. That's even if the robots do exactly what the people who built the robots want them to do,"
+  },
+  {
+   "start": 1639.28,
+   "end": 1648.56,
+   "text": "the risk is that it's going to make big countries invade small countries more often. More often because they can. And it's not a nice thing to do. So it brings down the friction of war. It brings down the cost of doing an invasion."
+  },
+  {
+   "start": 1650.4,
+   "end": 1659.04,
+   "text": "And these machines will be smarter at warfare as well. So they'll be Well, even when the machines aren't smarter. So the lethal autonomous weapons, they can make them now."
+  },
+  {
+   "start": 1660.32,
+   "end": 1660.32,
+   "text": "And"
+  },
+  {
+   "start": 1661.44,
+   "end": 1667.48,
+   "text": "they I think all the big defense firms are busy making them. Even if they're not smarter than people, they're still very nasty, scary things."
+  },
+  {
+   "start": 1668.52,
+   "end": 1672.24,
+   "text": "Cuz I'm thinking that, you know, they could show just a picture, go get this guy."
+  },
+  {
+   "start": 1673.24,
+   "end": 1675.36,
+   "text": "Yeah. And go take out anyone he's been texting."
+  },
+  {
+   "start": 1676.8,
+   "end": 1677.48,
+   "text": "And this little wasp"
+  },
+  {
+   "start": 1678.4,
+   "end": 1680.8,
+   "text": "So two days ago, I was visiting a friend of mine in Sussex"
+  },
+  {
+   "start": 1681.88,
+   "end": 1683.32,
+   "text": "who had a drone that cost less than £200."
+  },
+  {
+   "start": 1685.28,
+   "end": 1685.28,
+   "text": "And"
+  },
+  {
+   "start": 1687.04,
+   "end": 1689.24,
+   "text": "the drone went up, it took a good look at me,"
+  },
+  {
+   "start": 1690.56,
+   "end": 1691.68,
+   "text": "and then it could follow me through the woods."
+  },
+  {
+   "start": 1693.0,
+   "end": 1701.2,
+   "text": "And it follow- it was very spooky having this drone. It was about 2 m behind me. It was looking at me. If I moved over there, it moved over there. It could just track me."
+  },
+  {
+   "start": 1702.52,
+   "end": 1702.6,
+   "text": "For £200."
+  },
+  {
+   "start": 1703.96,
+   "end": 1704.8,
+   "text": "But it was already quite spooky."
+  },
+  {
+   "start": 1706.08,
+   "end": 1710.68,
+   "text": "Yeah, and I imagine there's as you say a race going on as we speak to who can build the most complex autonomous"
+  },
+  {
+   "start": 1711.96,
+   "end": 1712.4,
+   "text": "autonomous weapons."
+  },
+  {
+   "start": 1713.52,
+   "end": 1719.72,
+   "text": "There is a a risk I often hear that some of these things will combine and the cyber attack will release weapons."
+  },
+  {
+   "start": 1721.4,
+   "end": 1726.52,
+   "text": "Sure. Um you can you can get combinatorially many risks by combining these other risks."
+  },
+  {
+   "start": 1728.12,
+   "end": 1730.56,
+   "text": "So I mean, for example, you could get a superintelligent"
+  },
+  {
+   "start": 1731.88,
+   "end": 1731.88,
+   "text": "AI"
+  },
+  {
+   "start": 1733.04,
+   "end": 1733.92,
+   "text": "that decides to get rid of people."
+  },
+  {
+   "start": 1735.08,
+   "end": 1737.28,
+   "text": "And the obvious way to do that is just to make one of these nasty viruses."
+  },
+  {
+   "start": 1738.92,
+   "end": 1739.8,
+   "text": "If you made a virus that was"
+  },
+  {
+   "start": 1741.36,
+   "end": 1744.32,
+   "text": "very contagious, very lethal, and very slow,"
+  },
+  {
+   "start": 1746.08,
+   "end": 1747.92,
+   "text": "everybody would have it before they realized what was happening."
+  },
+  {
+   "start": 1749.08,
+   "end": 1751.28,
+   "text": "I mean, I think if a superintelligence wanted to get rid of us,"
+  },
+  {
+   "start": 1752.48,
+   "end": 1759.64,
+   "text": "it would probably go for something biological like that that wouldn't affect it. Do you not think it could just very quickly turn us against each other? For example, it could send a warning"
+  },
+  {
+   "start": 1760.68,
+   "end": 1763.8,
+   "text": "on the nuclear systems in America that there's a nuclear bomb coming from Russia"
+  },
+  {
+   "start": 1764.88,
+   "end": 1773.12,
+   "text": "or vice versa and one retaliates. Yeah. I mean, my basic view is there's so many ways in which a superintelligence could get rid of us. It's not worth speculating about."
+  },
+  {
+   "start": 1775.64,
+   "end": 1781.92,
+   "text": "What what is What you have to do is prevent it ever wanting to. That's what we should be doing research on."
+  },
+  {
+   "start": 1782.88,
+   "end": 1788.84,
+   "text": "There's no way we're going to prevent it from it's smarter than us, right? There's no way we're going to prevent it getting rid of us if it wants to."
+  },
+  {
+   "start": 1790.16,
+   "end": 1792.36,
+   "text": "We're not used to thinking about things smarter than us."
+  },
+  {
+   "start": 1793.88,
+   "end": 1796.96,
+   "text": "If you want to know what life's like when you're not the apex intelligence,"
+  },
+  {
+   "start": 1798.4,
+   "end": 1798.68,
+   "text": "ask a chicken."
+  },
+  {
+   "start": 1803.24,
+   "end": 1806.04,
+   "text": "Yeah, I was thinking about my dog Pablo, my French bulldog, this morning as I left home."
+  },
+  {
+   "start": 1807.4,
+   "end": 1817.56,
+   "text": "He has no idea where I'm going. He has no idea what I do. Right. I can't even talk to him. Yeah. And the get the intelligence gap will be like that. So, you're telling me that if I'm Pablo, my French bulldog,"
+  },
+  {
+   "start": 1818.6,
+   "end": 1820.08,
+   "text": "I need to figure out a way to make"
+  },
+  {
+   "start": 1821.0,
+   "end": 1821.16,
+   "text": "my owner"
+  },
+  {
+   "start": 1822.4,
+   "end": 1823.08,
+   "text": "not wipe me out."
+  },
+  {
+   "start": 1824.28,
+   "end": 1824.28,
+   "text": "Yeah."
+  },
+  {
+   "start": 1825.48,
+   "end": 1827.84,
+   "text": "So, we have one example of that, which is mothers and babies."
+  },
+  {
+   "start": 1829.28,
+   "end": 1833.28,
+   "text": "Evolution put a lot of work into that. Mothers are smarter than babies, but babies are in control."
+  },
+  {
+   "start": 1834.48,
+   "end": 1841.32,
+   "text": "And they're in control cuz the mother just can't bear Lots of hormones and things, but the baby The mother just can't bear the sound of the baby crying."
+  },
+  {
+   "start": 1842.44,
+   "end": 1842.76,
+   "text": "Not all mothers."
+  },
+  {
+   "start": 1843.72,
+   "end": 1846.76,
+   "text": "Not all mothers. And then the baby's not in control, and then bad things happen."
+  },
+  {
+   "start": 1848.08,
+   "end": 1848.64,
+   "text": "We somehow need"
+  },
+  {
+   "start": 1850.08,
+   "end": 1854.48,
+   "text": "to figure out how to make them not want to take over. The analogy I often use is"
+  },
+  {
+   "start": 1855.88,
+   "end": 1857.6,
+   "text": "forget about intelligence, think about physical strength."
+  },
+  {
+   "start": 1858.6,
+   "end": 1863.08,
+   "text": "Suppose you have a nice little tiger cub. It's sort of a bit bigger than a cat. It's really cute."
+  },
+  {
+   "start": 1864.32,
+   "end": 1873.6,
+   "text": "It's very cuddly, very interesting to watch, except that you better be sure that when it grows up, it never wants to kill you, cuz if it ever wanted to kill you, you'd be dead in a few seconds."
+  },
+  {
+   "start": 1875.12,
+   "end": 1877.52,
+   "text": "And you're saying that AI we have now is the tiger cub. Yep."
+  },
+  {
+   "start": 1878.56,
+   "end": 1879.64,
+   "text": "And it's growing up. Yep."
+  },
+  {
+   "start": 1881.4,
+   "end": 1895.64,
+   "text": "So, we need to train it as it's when it's a baby. a tiger has lots of innate stuff built in, so you know when it grows up, it's not a safe thing to have around. But lions, people that have lions as pets, Yes. sometimes the lion is affectionate to its creator, but not to others. Yes."
+  },
+  {
+   "start": 1896.6,
+   "end": 1897.64,
+   "text": "And we don't know whether these AIs"
+  },
+  {
+   "start": 1900.0,
+   "end": 1907.24,
+   "text": "We We simply don't know whether we can make them not want to take over and not want to hurt us. Do you think we can? Do you think it's possible to train superintelligence?"
+  },
+  {
+   "start": 1908.16,
+   "end": 1909.48,
+   "text": "don't think it's clear that we can."
+  },
+  {
+   "start": 1910.56,
+   "end": 1911.56,
+   "text": "So, I think it might be hopeless."
+  },
+  {
+   "start": 1912.8,
+   "end": 1913.28,
+   "text": "But I also think"
+  },
+  {
+   "start": 1914.88,
+   "end": 1915.52,
+   "text": "we might be able to."
+  },
+  {
+   "start": 1916.44,
+   "end": 1920.2,
+   "text": "And it'd be sort of crazy if people went extinct cuz we couldn't be bothered to try."
+  },
+  {
+   "start": 1921.48,
+   "end": 1922.08,
+   "text": "If that's even a possibility,"
+  },
+  {
+   "start": 1923.4,
+   "end": 1925.4,
+   "text": "how do you feel about your life's work? Because you were"
+  },
+  {
+   "start": 1926.52,
+   "end": 1926.52,
+   "text": "Yeah."
+  },
+  {
+   "start": 1927.84,
+   "end": 1929.84,
+   "text": "Um it's sort of takes the edge off it, doesn't it?"
+  },
+  {
+   "start": 1931.2,
+   "end": 1933.84,
+   "text": "I mean, the AI is going to be wonderful in healthcare, and wonderful in education,"
+  },
+  {
+   "start": 1935.16,
+   "end": 1937.4,
+   "text": "and wonderful I mean, it's going to make call centers much more efficient."
+  },
+  {
+   "start": 1938.48,
+   "end": 1942.56,
+   "text": "Though one worries a bit about what the people who are doing that job now do. It makes me sad."
+  },
+  {
+   "start": 1943.56,
+   "end": 1946.6,
+   "text": "I don't feel particularly guilty about developing AI like"
+  },
+  {
+   "start": 1947.56,
+   "end": 1948.16,
+   "text": "40 years ago,"
+  },
+  {
+   "start": 1949.2,
+   "end": 1949.2,
+   "text": "because"
+  },
+  {
+   "start": 1950.84,
+   "end": 1962.2,
+   "text": "at that time we had no idea that this stuff was going to happen this fast. We thought we had plenty of time to worry about things like that. They When you When you can't get the AI to do much, you want to get it to do a little bit more, you don't worry about"
+  },
+  {
+   "start": 1963.24,
+   "end": 1968.64,
+   "text": "this stupid little thing is going to take over from people. You just want it to be able to do a little bit more of the things people can do."
+  },
+  {
+   "start": 1969.56,
+   "end": 1972.08,
+   "text": "It's not like I knowingly did something"
+  },
+  {
+   "start": 1973.2,
+   "end": 1973.2,
+   "text": "thinking,"
+  },
+  {
+   "start": 1974.12,
+   "end": 1976.52,
+   "text": "\"This might wipe us all out, but I'm going to do it anyway.\" Mhm."
+  },
+  {
+   "start": 1978.16,
+   "end": 1981.28,
+   "text": "But it is a bit sad that it's not just going to be something for good."
+  },
+  {
+   "start": 1983.32,
+   "end": 1985.36,
+   "text": "So, I feel I have a duty now to talk about the risks."
+  },
+  {
+   "start": 1987.0,
+   "end": 1991.44,
+   "text": "And if you could play it forward, and you could go forward 30, 50 years, and you found out that it led to the extinction of humanity,"
+  },
+  {
+   "start": 1993.24,
+   "end": 1994.32,
+   "text": "and if that does end up being the"
+  },
+  {
+   "start": 1997.6,
+   "end": 1997.6,
+   "text": "outcome,"
+  },
+  {
+   "start": 2001.0,
+   "end": 2001.96,
+   "text": "Well, if you played it forward and"
+  },
+  {
+   "start": 2002.96,
+   "end": 2004.0,
+   "text": "it led to the extinction of humanity,"
+  },
+  {
+   "start": 2005.36,
+   "end": 2006.52,
+   "text": "I would use that to tell"
+  },
+  {
+   "start": 2007.84,
+   "end": 2012.6,
+   "text": "people to tell their governments that we really have to work on how we're going to keep this stuff under control."
+  },
+  {
+   "start": 2014.12,
+   "end": 2017.72,
+   "text": "I think we need people to tell governments that governments have to force the companies"
+  },
+  {
+   "start": 2018.8,
+   "end": 2020.04,
+   "text": "to use their resources to work on safety."
+  },
+  {
+   "start": 2021.68,
+   "end": 2024.24,
+   "text": "And they're not doing much of that, because you don't make profits that way."
+  },
+  {
+   "start": 2025.44,
+   "end": 2026.96,
+   "text": "One of your your students we talked about earlier,"
+  },
+  {
+   "start": 2027.92,
+   "end": 2031.4,
+   "text": "um Ilya? Yep. Ilya left OpenAI."
+  },
+  {
+   "start": 2032.6,
+   "end": 2036.64,
+   "text": "Yep. And there was lots of conversation around the fact that he left because he had safety concerns."
+  },
+  {
+   "start": 2037.6,
+   "end": 2041.32,
+   "text": "Yes. And he's gone on to set set up a AI safety company."
+  },
+  {
+   "start": 2042.44,
+   "end": 2042.44,
+   "text": "Yes."
+  },
+  {
+   "start": 2043.96,
+   "end": 2044.6,
+   "text": "Why do you think he left?"
+  },
+  {
+   "start": 2046.52,
+   "end": 2048.44,
+   "text": "I think he left cuz he had safety concerns. Really?"
+  },
+  {
+   "start": 2049.48,
+   "end": 2049.88,
+   "text": "Um I still"
+  },
+  {
+   "start": 2050.92,
+   "end": 2061.2,
+   "text": "have lunch with him from time to time. Oh, okay. His parents live in Toronto, and when he comes to Toronto, we have lunch together. He doesn't talk to me about what went on at OpenAI, so I have no inside information about that, but I know Ilya very well."
+  },
+  {
+   "start": 2062.12,
+   "end": 2072.52,
+   "text": "And he is genuinely concerned with safety. So, I think that's why he left. Because he was one of the top people. I mean, he was He was probably the most important person behind the development of um ChatGPT."
+  },
+  {
+   "start": 2074.0,
+   "end": 2075.32,
+   "text": "The The early versions like GPT-2,"
+  },
+  {
+   "start": 2076.36,
+   "end": 2080.04,
+   "text": "he was very important in the development of that. You know him personally, so you know his character."
+  },
+  {
+   "start": 2081.4,
+   "end": 2085.72,
+   "text": "Yes. He has a good moral compass. He's not like someone like Musk who has no moral compass."
+  },
+  {
+   "start": 2087.28,
+   "end": 2088.36,
+   "text": "Does Sam Altman have a good moral compass?"
+  },
+  {
+   "start": 2090.2,
+   "end": 2090.4,
+   "text": "We'll see."
+  },
+  {
+   "start": 2093.56,
+   "end": 2096.64,
+   "text": "I don't know Sam, so I don't want to comment on that."
+  },
+  {
+   "start": 2097.56,
+   "end": 2098.08,
+   "text": "But from what you've seen,"
+  },
+  {
+   "start": 2099.48,
+   "end": 2101.4,
+   "text": "are you concerned about the actions that they've taken?"
+  },
+  {
+   "start": 2102.6,
+   "end": 2104.4,
+   "text": "Cuz if you know Ilya, and Ilya's a good guy, and he's left,"
+  },
+  {
+   "start": 2106.08,
+   "end": 2112.96,
+   "text": "that would give you some insight, yes. It would give you some reason to believe that there's a problem there. And if you look at Sam's"
+  },
+  {
+   "start": 2114.0,
+   "end": 2114.0,
+   "text": "statements"
+  },
+  {
+   "start": 2115.64,
+   "end": 2116.28,
+   "text": "some years ago,"
+  },
+  {
+   "start": 2117.68,
+   "end": 2129.56,
+   "text": "he sort of happily said in one interview, \"Um this stuff will probably kill us all.\" That's not exactly what he said, but that's what it amounted to. Now he's saying you don't need to worry too much about it. And I suspect that's not"
+  },
+  {
+   "start": 2130.72,
+   "end": 2131.16,
+   "text": "driven by"
+  },
+  {
+   "start": 2132.8,
+   "end": 2135.4,
+   "text": "seeking after the truth. That's driven by seeking after money."
+  },
+  {
+   "start": 2136.96,
+   "end": 2138.56,
+   "text": "Is it money, or is it power?"
+  },
+  {
+   "start": 2139.76,
+   "end": 2144.8,
+   "text": "Yeah, I shouldn't have said money. It's It's some some combination of this, yes. Okay, I guess money's a proxy for power, but"
+  },
+  {
+   "start": 2145.92,
+   "end": 2150.2,
+   "text": "I I've got a friend who's a billionaire, and he is in those circles."
+  },
+  {
+   "start": 2151.4,
+   "end": 2161.24,
+   "text": "And when I went to his house and had lunch with him one day, he knows lots of people in AI building the biggest AI companies in the world, and he gave me a cautionary warning across the across his kitchen table in London,"
+  },
+  {
+   "start": 2162.24,
+   "end": 2170.84,
+   "text": "where he gave me an insight into the private conversations these people have, not the media interviews they do where they talk about safety and all these things, but actually what some of these individuals think is going to happen."
+  },
+  {
+   "start": 2172.0,
+   "end": 2173.12,
+   "text": "And what do they think's going to happen?"
+  },
+  {
+   "start": 2174.36,
+   "end": 2175.16,
+   "text": "It's not what they say publicly."
+  },
+  {
+   "start": 2176.4,
+   "end": 2177.12,
+   "text": "You know, one one"
+  },
+  {
+   "start": 2178.12,
+   "end": 2181.96,
+   "text": "person who I should probably shouldn't name, who is the who is leading one of the biggest AI companies in the world,"
+  },
+  {
+   "start": 2182.88,
+   "end": 2190.92,
+   "text": "he told me that he knows this person very well, and he privately thinks that we're heading towards this kind of dystopian world where we have just huge amounts of free time, we don't work anymore,"
+  },
+  {
+   "start": 2192.2,
+   "end": 2198.88,
+   "text": "and this person doesn't really give a [ __ ] about the harm that it's going to have on the world. And this person who I'm referring to is building one of the biggest AI companies in the world."
+  },
+  {
+   "start": 2199.92,
+   "end": 2212.36,
+   "text": "And I then watch this person's interviews online, I'm trying to figure out which of the three people it is. Yeah, well, it's one of those three people. Okay. And I watch this person's interviews online, and I I reflect on the conversation that my billionaire friend had with me, who knows him, and I go, \"Fucking hell, this guy's"
+  },
+  {
+   "start": 2212.6,
+   "end": 2215.24,
+   "text": "lying publicly. Like, he's not telling the the truth to the world.\""
+  },
+  {
+   "start": 2216.16,
+   "end": 2220.76,
+   "text": "And that's haunted me a little bit. It's part of the reason I have so many conversations around AI on this podcast, because I'm like, I don't know if they're"
+  },
+  {
+   "start": 2222.24,
+   "end": 2225.44,
+   "text": "I think they're a lit Some of them are a little bit sadistic about power."
+  },
+  {
+   "start": 2226.52,
+   "end": 2236.76,
+   "text": "I think they they like the idea that they will change the world. That they will be the one that fundamentally shifts the world. I think Musk is clearly like that, right?"
+  },
+  {
+   "start": 2239.52,
+   "end": 2246.12,
+   "text": "He's such a complex character that I don't I don't really know how to place Musk. Um He's done some really good things like um pushing"
+  },
+  {
+   "start": 2247.12,
+   "end": 2252.44,
+   "text": "electric cars. That was a really good thing to do. Yeah. Some of the things he said about self-driving were a bit exaggerated,"
+  },
+  {
+   "start": 2253.4,
+   "end": 2257.16,
+   "text": "but he That was a really useful thing he did. Giving the Ukrainians"
+  },
+  {
+   "start": 2258.08,
+   "end": 2260.92,
+   "text": "communication during the war with Russia. Starlink, yeah."
+  },
+  {
+   "start": 2261.96,
+   "end": 2266.72,
+   "text": "That was a really good thing he did. There's a bunch of things like that. Mhm. Um but he's also done some very bad things."
+  },
+  {
+   "start": 2269.04,
+   "end": 2270.72,
+   "text": "So, coming back to this point of"
+  },
+  {
+   "start": 2273.88,
+   "end": 2274.84,
+   "text": "the possibility of"
+  },
+  {
+   "start": 2275.88,
+   "end": 2275.88,
+   "text": "destruction,"
+  },
+  {
+   "start": 2277.8,
+   "end": 2279.36,
+   "text": "and the motives of these big companies,"
+  },
+  {
+   "start": 2281.56,
+   "end": 2286.08,
+   "text": "are you at all hopeful that anything can be done to slow down the pace and acceleration of AI?"
+  },
+  {
+   "start": 2287.0,
+   "end": 2287.76,
+   "text": "Okay, there's two issues."
+  },
+  {
+   "start": 2288.72,
+   "end": 2295.96,
+   "text": "One is, can you slow it down? Yeah. And the other is, can you make it so of it will be safe in the end? It won't wipe us all out."
+  },
+  {
+   "start": 2297.04,
+   "end": 2298.56,
+   "text": "I don't believe we're going to slow it down."
+  },
+  {
+   "start": 2300.0,
+   "end": 2306.36,
+   "text": "Yeah. And the reason I don't believe we're going to slow it down is because there's competition between countries, and competition between companies within a country,"
+  },
+  {
+   "start": 2307.48,
+   "end": 2309.12,
+   "text": "and all of that is making it go faster and faster."
+  },
+  {
+   "start": 2310.2,
+   "end": 2313.28,
+   "text": "And if the US slowed it down, China wouldn't slow it down."
+  },
+  {
+   "start": 2314.36,
+   "end": 2314.36,
+   "text": "Does"
+  },
+  {
+   "start": 2315.32,
+   "end": 2317.96,
+   "text": "Ilya think it's possible to make AI safe?"
+  },
+  {
+   "start": 2320.04,
+   "end": 2320.6,
+   "text": "I think he does."
+  },
+  {
+   "start": 2321.6,
+   "end": 2323.28,
+   "text": "He won't tell me what his secret source is."
+  },
+  {
+   "start": 2324.4,
+   "end": 2335.32,
+   "text": "I don't I'm not sure how many people know what his secret source is. I think a lot of the investors don't know what his secret source is, but they've given him billions of dollars anyway, cuz they have so much faith in Ilya, which isn't foolish. I mean,"
+  },
+  {
+   "start": 2336.4,
+   "end": 2338.12,
+   "text": "he was very important in AlexNet, which"
+  },
+  {
+   "start": 2339.04,
+   "end": 2341.68,
+   "text": "got object recognition working well. He was the main"
+  },
+  {
+   "start": 2343.04,
+   "end": 2345.36,
+   "text": "the main force behind the things like GPT-2,"
+  },
+  {
+   "start": 2347.04,
+   "end": 2348.52,
+   "text": "which then led to ChatGPT."
+  },
+  {
+   "start": 2350.16,
+   "end": 2350.16,
+   "text": "So,"
+  },
+  {
+   "start": 2351.12,
+   "end": 2353.28,
+   "text": "I think having a lot of faith in Ilya is a very reasonable decision."
+  },
+  {
+   "start": 2354.4,
+   "end": 2358.24,
+   "text": "There's something quite haunting about the guy that made and was the main force behind GPT-2,"
+  },
+  {
+   "start": 2359.2,
+   "end": 2360.64,
+   "text": "which led rise to this whole revolution,"
+  },
+  {
+   "start": 2361.88,
+   "end": 2362.36,
+   "text": "left the company"
+  },
+  {
+   "start": 2363.8,
+   "end": 2364.48,
+   "text": "because of safety reasons."
+  },
+  {
+   "start": 2365.56,
+   "end": 2366.72,
+   "text": "He knows something that I don't know."
+  },
+  {
+   "start": 2368.08,
+   "end": 2371.0,
+   "text": "About what might happen next. Well, the company had"
+  },
+  {
+   "start": 2372.08,
+   "end": 2373.08,
+   "text": "No, I don't know the precise details."
+  },
+  {
+   "start": 2374.16,
+   "end": 2379.52,
+   "text": "Um but I'm fairly sure the company had indicated that would it would use a significant fraction of its resources"
+  },
+  {
+   "start": 2380.96,
+   "end": 2382.96,
+   "text": "of the compute time for doing safety research,"
+  },
+  {
+   "start": 2383.96,
+   "end": 2389.84,
+   "text": "and then it kept then it reduced that fraction. I think that's one of the things that happened. Yeah, that was reported publicly. Yes. Yeah."
+  },
+  {
+   "start": 2391.92,
+   "end": 2395.2,
+   "text": "We've gotten to the autonomous weapons part of the risk framework."
+  },
+  {
+   "start": 2396.16,
+   "end": 2398.52,
+   "text": "Right. So, the next one is joblessness."
+  },
+  {
+   "start": 2399.6,
+   "end": 2402.0,
+   "text": "Yeah. In the past, new technologies have come in"
+  },
+  {
+   "start": 2403.28,
+   "end": 2405.4,
+   "text": "which didn't lead to joblessness. New jobs were created."
+  },
+  {
+   "start": 2406.88,
+   "end": 2409.44,
+   "text": "So, the classic example people use is automatic teller machines."
+  },
+  {
+   "start": 2410.52,
+   "end": 2411.96,
+   "text": "When automatic teller machines came in,"
+  },
+  {
+   "start": 2413.28,
+   "end": 2416.64,
+   "text": "a lot of bank tellers didn't lose their jobs. They just got to do more interesting things."
+  },
+  {
+   "start": 2417.68,
+   "end": 2417.92,
+   "text": "But here,"
+  },
+  {
+   "start": 2419.4,
+   "end": 2423.0,
+   "text": "I think this is more like when they got machines in the Industrial Revolution,"
+  },
+  {
+   "start": 2424.28,
+   "end": 2424.28,
+   "text": "and"
+  },
+  {
+   "start": 2426.64,
+   "end": 2430.96,
+   "text": "you can't have a job digging ditches now because a machine can dig ditches much better than you can."
+  },
+  {
+   "start": 2432.28,
+   "end": 2434.28,
+   "text": "And I think for mundane intellectual labor,"
+  },
+  {
+   "start": 2435.72,
+   "end": 2437.8,
+   "text": "AI is just going to replace everybody."
+  },
+  {
+   "start": 2439.28,
+   "end": 2441.84,
+   "text": "Now, it will may well be in the form of"
+  },
+  {
+   "start": 2442.84,
+   "end": 2448.0,
+   "text": "you have fewer people using AI assistants. So, it's a combination of a person and an AI assistant,"
+  },
+  {
+   "start": 2449.28,
+   "end": 2451.2,
+   "text": "and they're doing the work that 10 people could do previously."
+  },
+  {
+   "start": 2452.76,
+   "end": 2455.08,
+   "text": "People say that it will create new jobs, though. So, we'll be fine."
+  },
+  {
+   "start": 2456.16,
+   "end": 2460.24,
+   "text": "Yes, and that's been the case for other technologies, but this is a very different kind of technology."
+  },
+  {
+   "start": 2461.4,
+   "end": 2463.76,
+   "text": "If it can do all mundane human intellectual labor,"
+  },
+  {
+   "start": 2465.24,
+   "end": 2471.24,
+   "text": "then what new jobs is it going to create? You'd have You'd have to be very skilled to have a job that it couldn't just do."
+  },
+  {
+   "start": 2472.24,
+   "end": 2478.8,
+   "text": "So, I don't I don't think they're right. I think you can try and generalize from other technologies that come in like computers"
+  },
+  {
+   "start": 2479.96,
+   "end": 2490.16,
+   "text": "or automatic teller machines, but I think this is different. People use this phrase. They say, AI won't take your job, a human using AI will take your job. Yes, I think that's true. But for many jobs,"
+  },
+  {
+   "start": 2491.44,
+   "end": 2492.84,
+   "text": "that will mean you need far fewer people."
+  },
+  {
+   "start": 2493.96,
+   "end": 2496.88,
+   "text": "My niece answers letters of complaint to a health service."
+  },
+  {
+   "start": 2498.12,
+   "end": 2503.6,
+   "text": "It used to take her 25 minutes. She'd read the complaint, and she'd think how to reply, and she'd write a letter, and"
+  },
+  {
+   "start": 2504.68,
+   "end": 2505.88,
+   "text": "now she just scans it into"
+  },
+  {
+   "start": 2507.12,
+   "end": 2507.52,
+   "text": "um a chatbot,"
+  },
+  {
+   "start": 2508.8,
+   "end": 2508.8,
+   "text": "and"
+  },
+  {
+   "start": 2510.12,
+   "end": 2513.52,
+   "text": "it writes the letter. She just checks the letter. Occasionally, she tells it to"
+  },
+  {
+   "start": 2514.52,
+   "end": 2515.32,
+   "text": "revise it in some ways."
+  },
+  {
+   "start": 2516.4,
+   "end": 2517.68,
+   "text": "The whole process takes her 5 minutes."
+  },
+  {
+   "start": 2519.0,
+   "end": 2520.72,
+   "text": "That means she can answer five times as many letters."
+  },
+  {
+   "start": 2522.12,
+   "end": 2525.04,
+   "text": "And that means they need five times fewer of her."
+  },
+  {
+   "start": 2526.16,
+   "end": 2528.2,
+   "text": "So, she can do the job that five of her used to do."
+  },
+  {
+   "start": 2529.4,
+   "end": 2529.4,
+   "text": "Now,"
+  },
+  {
+   "start": 2530.88,
+   "end": 2535.04,
+   "text": "that will mean they need less people. In other jobs, like in health care,"
+  },
+  {
+   "start": 2536.28,
+   "end": 2536.76,
+   "text": "they're much more elastic."
+  },
+  {
+   "start": 2538.04,
+   "end": 2540.64,
+   "text": "So, if you could make doctors five times as efficient,"
+  },
+  {
+   "start": 2541.72,
+   "end": 2545.52,
+   "text": "we could all have five times as much health care for the same price, and that would be great."
+  },
+  {
+   "start": 2546.56,
+   "end": 2549.24,
+   "text": "There's There's almost no limit to how much health care people can absorb."
+  },
+  {
+   "start": 2550.52,
+   "end": 2553.28,
+   "text": "They always want more health care if there's no cost to it."
+  },
+  {
+   "start": 2554.24,
+   "end": 2557.12,
+   "text": "There are jobs where you can make a person with an AI assistant"
+  },
+  {
+   "start": 2558.04,
+   "end": 2564.24,
+   "text": "much more efficient, and you won't need to less people because you'll just have much more of that being done. But"
+  },
+  {
+   "start": 2565.16,
+   "end": 2566.48,
+   "text": "most jobs I think are not like that."
+  },
+  {
+   "start": 2567.48,
+   "end": 2568.88,
+   "text": "Am I right in thinking this sort of Industrial Revolution"
+  },
+  {
+   "start": 2570.36,
+   "end": 2571.2,
+   "text": "would play a role in replacing"
+  },
+  {
+   "start": 2572.16,
+   "end": 2572.16,
+   "text": "muscles?"
+  },
+  {
+   "start": 2573.28,
+   "end": 2580.84,
+   "text": "Yes, exactly. And this revolution in AI replaces intelligence, the brain. Yeah. So, So, mundane intellectual labor is like having strong muscles,"
+  },
+  {
+   "start": 2581.88,
+   "end": 2581.88,
+   "text": "and"
+  },
+  {
+   "start": 2582.96,
+   "end": 2583.76,
+   "text": "it's not worth much anymore."
+  },
+  {
+   "start": 2585.08,
+   "end": 2590.04,
+   "text": "So, muscles have been replaced. Now, we intelligence is being replaced. Yeah. So, what remains?"
+  },
+  {
+   "start": 2591.64,
+   "end": 2593.2,
+   "text": "Maybe for a while some kinds of creativity."
+  },
+  {
+   "start": 2594.28,
+   "end": 2596.56,
+   "text": "But the whole idea of superintelligence is nothing remains."
+  },
+  {
+   "start": 2597.76,
+   "end": 2601.72,
+   "text": "Um these things will get to be better than us at everything. So, what what do we end up doing in such a world?"
+  },
+  {
+   "start": 2602.8,
+   "end": 2604.12,
+   "text": "Well, if they work for us,"
+  },
+  {
+   "start": 2605.2,
+   "end": 2609.0,
+   "text": "we end up getting lots of goods and services for not much effort."
+  },
+  {
+   "start": 2610.36,
+   "end": 2613.28,
+   "text": "Okay. But that sounds tempting and nice, but"
+  },
+  {
+   "start": 2614.24,
+   "end": 2618.48,
+   "text": "I don't know. There's a cautionary tale in creating more and more ease for humans in in it going"
+  },
+  {
+   "start": 2619.4,
+   "end": 2619.4,
+   "text": "badly."
+  },
+  {
+   "start": 2620.4,
+   "end": 2621.04,
+   "text": "Yes, and"
+  },
+  {
+   "start": 2622.52,
+   "end": 2624.16,
+   "text": "we need to figure out if we can make it go well."
+  },
+  {
+   "start": 2625.08,
+   "end": 2628.92,
+   "text": "So, the the nice scenario is imagine a company with a CEO"
+  },
+  {
+   "start": 2630.44,
+   "end": 2631.16,
+   "text": "who is very dumb,"
+  },
+  {
+   "start": 2632.32,
+   "end": 2633.8,
+   "text": "probably the son of the former CEO,"
+  },
+  {
+   "start": 2635.16,
+   "end": 2636.12,
+   "text": "and he has an executive assistant"
+  },
+  {
+   "start": 2637.44,
+   "end": 2637.88,
+   "text": "who's very smart,"
+  },
+  {
+   "start": 2639.24,
+   "end": 2639.24,
+   "text": "and"
+  },
+  {
+   "start": 2640.36,
+   "end": 2640.48,
+   "text": "he says,"
+  },
+  {
+   "start": 2641.52,
+   "end": 2642.28,
+   "text": "I think we should do this."
+  },
+  {
+   "start": 2643.28,
+   "end": 2644.8,
+   "text": "And the executive assistant makes it all work."
+  },
+  {
+   "start": 2645.84,
+   "end": 2649.32,
+   "text": "The CEO feels great. He doesn't understand that he's not really in control."
+  },
+  {
+   "start": 2650.32,
+   "end": 2656.2,
+   "text": "And in In some sense, he is in control. He suggests what the company should do. She just makes it all work. Everything's great."
+  },
+  {
+   "start": 2657.4,
+   "end": 2657.92,
+   "text": "That's the good scenario."
+  },
+  {
+   "start": 2659.4,
+   "end": 2662.44,
+   "text": "And the bad scenario? The bad scenario is she thinks, why do we need him?"
+  },
+  {
+   "start": 2664.44,
+   "end": 2664.44,
+   "text": "Yeah."
+  },
+  {
+   "start": 2666.88,
+   "end": 2670.32,
+   "text": "I mean, in a world where we have superintelligence, which you don't believe is that far away."
+  },
+  {
+   "start": 2671.8,
+   "end": 2677.56,
+   "text": "Yeah, I think it might not be that far away. It's very hard to predict, but I think we might get it in like 20 years or even less."
+  },
+  {
+   "start": 2678.84,
+   "end": 2687.04,
+   "text": "I made the biggest investment I've ever made in a company because of my girlfriend. I came home one night, and my lovely girlfriend was up at 1:00 a.m. in the morning"
+  },
+  {
+   "start": 2688.0,
+   "end": 2706.4,
+   "text": "pulling her hair out as she tried to piece together her own online store for her business. And in that moment, I remembered an email I'd had from a guy called John, the founder of Stan Store, our new sponsor, and a company I've invested incredibly heavily in. And Stan Store helps creators to sell digital products, courses, coaching, and"
+  },
+  {
+   "start": 2706.48,
+   "end": 2709.36,
+   "text": "memberships all through a simple customizable link-in-bio"
+  },
+  {
+   "start": 2710.32,
+   "end": 2718.92,
+   "text": "system. And it handles everything: payments, bookings, emails, community engagement, and even links with Shopify. And I believe in it so much that I'm going to launch"
+  },
+  {
+   "start": 2719.92,
+   "end": 2720.88,
+   "text": "a Stan Challenge."
+  },
+  {
+   "start": 2721.84,
+   "end": 2724.32,
+   "text": "And as part of this challenge, I'm going to give away $100,000"
+  },
+  {
+   "start": 2725.68,
+   "end": 2730.56,
+   "text": "to one of you. If you want to take part in this challenge, if you want to monetize the knowledge that you have, visit stevenbartlett.stan.store"
+  },
+  {
+   "start": 2733.56,
+   "end": 2741.28,
+   "text": "to sign up. And you'll also get an extended 30-day free trial of Stan Store if you use that link. Your next move could quite frankly change everything."
+  },
+  {
+   "start": 2742.24,
+   "end": 2745.84,
+   "text": "Because I talked about ketosis on this podcast and ketones, a brand called Ketone-IQ"
+  },
+  {
+   "start": 2746.84,
+   "end": 2754.44,
+   "text": "sent me their little product here. It was on my desk when I got to the office. I picked it up. It sat on my desk for a couple of weeks. Then one day, I tried it."
+  },
+  {
+   "start": 2755.64,
+   "end": 2768.28,
+   "text": "And honestly, I have not looked back ever since. I now have this everywhere I go. When I travel all around the world, it's in my hotel room. My team will put it there. Before I did the podcast recording today that I've just finished, I had a shot of Ketone-IQ."
+  },
+  {
+   "start": 2769.36,
+   "end": 2782.56,
+   "text": "And as is always the case when I fall in love with a product, I called the CEO and asked if I could invest a couple of million quid into their company. So, I'm now an investor in the company as well as them being a brand sponsor. I find it so easy to drop into deep focused work when"
+  },
+  {
+   "start": 2782.68,
+   "end": 2789.96,
+   "text": "I've had one of these. I would love you to try one and see the impact it has on you, your focus, your productivity, and your endurance. So, if you want to try it today, visit ketone.com/steven"
+  },
+  {
+   "start": 2791.44,
+   "end": 2795.8,
+   "text": "for 30% off your subscription. Plus, you'll receive a free gift with your second shipment."
+  },
+  {
+   "start": 2796.88,
+   "end": 2797.12,
+   "text": "That's ketone.com/steven."
+  },
+  {
+   "start": 2799.84,
+   "end": 2807.56,
+   "text": "I'm excited for you. I am. So, what's the difference between what we have now and superintelligence? Because it seems to be really intelligent to me when I use like ChatGPT-3"
+  },
+  {
+   "start": 2808.76,
+   "end": 2815.0,
+   "text": "or Gemini or Okay. So, it's already AI is already better than us at a lot of things in particular areas"
+  },
+  {
+   "start": 2816.48,
+   "end": 2824.68,
+   "text": "like chess, for example. Yeah. AI is so much better than us that people will never beat those things again. Maybe the occasional win, but basically,"
+  },
+  {
+   "start": 2825.6,
+   "end": 2826.48,
+   "text": "they'll never be comparable again."
+  },
+  {
+   "start": 2827.48,
+   "end": 2831.08,
+   "text": "Obviously, same in Go. In terms of the amount of knowledge they have,"
+  },
+  {
+   "start": 2832.4,
+   "end": 2839.24,
+   "text": "um something like GPT-4 knows thousands of times more than you do. There's a few areas in which your knowledge is better than it's."
+  },
+  {
+   "start": 2840.24,
+   "end": 2840.24,
+   "text": "And"
+  },
+  {
+   "start": 2841.2,
+   "end": 2845.6,
+   "text": "almost all areas, it just knows more than you do. What areas am I better than it?"
+  },
+  {
+   "start": 2847.04,
+   "end": 2847.84,
+   "text": "Probably in"
+  },
+  {
+   "start": 2848.8,
+   "end": 2848.8,
+   "text": "interviewing"
+  },
+  {
+   "start": 2850.0,
+   "end": 2850.0,
+   "text": "CEOs."
+  },
+  {
+   "start": 2850.92,
+   "end": 2851.76,
+   "text": "You're probably better at that."
+  },
+  {
+   "start": 2853.0,
+   "end": 2854.84,
+   "text": "You've got a lot of experience at it. You're a good interviewer."
+  },
+  {
+   "start": 2856.0,
+   "end": 2856.96,
+   "text": "You know a lot about it."
+  },
+  {
+   "start": 2857.88,
+   "end": 2862.2,
+   "text": "If you tried If you got GPT-4 to interview a CEO, probably do a worse job."
+  },
+  {
+   "start": 2863.24,
+   "end": 2863.24,
+   "text": "Okay."
+  },
+  {
+   "start": 2866.04,
+   "end": 2867.92,
+   "text": "I'm trying to think if that if I agree with that statement."
+  },
+  {
+   "start": 2868.84,
+   "end": 2877.64,
+   "text": "Uh GPT-4, I think, for sure. Yeah. Um but I But I guess you could train one on the how I ask Yeah, I guess you could train one on this how I ask questions and what I do and Sure."
+  },
+  {
+   "start": 2878.92,
+   "end": 2879.6,
+   "text": "And if you took a general-purpose"
+  },
+  {
+   "start": 2880.96,
+   "end": 2883.68,
+   "text": "sort of foundation model, and then you trained it up on"
+  },
+  {
+   "start": 2884.72,
+   "end": 2889.12,
+   "text": "not just you, but every every interview you could find doing interviews like this,"
+  },
+  {
+   "start": 2890.08,
+   "end": 2894.64,
+   "text": "but especially you, it would probably get to be quite good at doing your job, but probably not as good as you for a while."
+  },
+  {
+   "start": 2897.0,
+   "end": 2900.68,
+   "text": "Okay. So, there's a few areas left, and then superintelligence becomes when it's"
+  },
+  {
+   "start": 2902.08,
+   "end": 2909.52,
+   "text": "better than us at all things. When it's much smarter than you in almost all things, it's better than you. Yeah. And you you you say that this might be a decade away or so."
+  },
+  {
+   "start": 2910.92,
+   "end": 2914.32,
+   "text": "Yeah, it might be. It might be even closer. Some people think it's even closer."
+  },
+  {
+   "start": 2915.48,
+   "end": 2918.56,
+   "text": "It might well be much further. It might be 50 years away. That's still a possibility."
+  },
+  {
+   "start": 2919.96,
+   "end": 2920.6,
+   "text": "It might be that somehow"
+  },
+  {
+   "start": 2922.0,
+   "end": 2925.28,
+   "text": "training on human data limits you to not be much smarter than humans."
+  },
+  {
+   "start": 2926.28,
+   "end": 2928.48,
+   "text": "My guess is between 10 and 20 years we'll have superintelligence."
+  },
+  {
+   "start": 2930.0,
+   "end": 2930.52,
+   "text": "On this point of joblessness,"
+  },
+  {
+   "start": 2931.6,
+   "end": 2943.04,
+   "text": "it is something I've been thinking a lot about in particular because I started messing around with AI agents, and we released an episode on the podcast actually this morning where we had a debate about AI agents with some CEO of a big AI agent company and a few other people."
+  },
+  {
+   "start": 2944.24,
+   "end": 2945.56,
+   "text": "And it was the first moment where I had"
+  },
+  {
+   "start": 2946.56,
+   "end": 2952.16,
+   "text": "No, it was another moment where I had a eureka moment about what the future might look like. When I was able in the interview"
+  },
+  {
+   "start": 2953.12,
+   "end": 2961.8,
+   "text": "to tell this agent to order all of us drinks, and then 5 minutes later in the interview, you see the guy show up with the drinks, and I didn't touch anything. I just told it to order us drinks to the studio."
+  },
+  {
+   "start": 2962.76,
+   "end": 2974.52,
+   "text": "And it didn't know about who you normally got your drinks from. It figured that out from the web. Yeah, figured it out cuz it went on Uber Eats. It has my my my data, I guess. And it I we put it on the screen in real time so everyone at home could see the agent going through the"
+  },
+  {
+   "start": 2974.64,
+   "end": 2977.12,
+   "text": "internet, picking the drinks, adding a tip for the driver,"
+  },
+  {
+   "start": 2978.16,
+   "end": 2984.92,
+   "text": "putting my address in, putting my credit card details in, and then the next thing you see is the drinks show up. So, that was one moment, and then the other moment was when"
+  },
+  {
+   "start": 2985.92,
+   "end": 2986.68,
+   "text": "I used a tool called Replit"
+  },
+  {
+   "start": 2988.0,
+   "end": 2992.56,
+   "text": "and I built software by just telling the agent what I wanted. Yes. It's amazing, right?"
+  },
+  {
+   "start": 2993.56,
+   "end": 3001.6,
+   "text": "It's amazing and terrifying at the same time. Yes. Because it can build software like that, right? Yeah. Remember that the AI,"
+  },
+  {
+   "start": 3002.56,
+   "end": 3003.92,
+   "text": "when it's training, is using code."
+  },
+  {
+   "start": 3005.52,
+   "end": 3006.64,
+   "text": "And if it can modify its own code,"
+  },
+  {
+   "start": 3008.52,
+   "end": 3012.88,
+   "text": "then it gets quite scary, right? Cuz it can modify its own code. itself in a way we can't change ourselves."
+  },
+  {
+   "start": 3014.08,
+   "end": 3016.0,
+   "text": "We can't change our innate endowment, right?"
+  },
+  {
+   "start": 3017.92,
+   "end": 3019.4,
+   "text": "There's nothing about itself that it couldn't change."
+  },
+  {
+   "start": 3021.56,
+   "end": 3022.76,
+   "text": "On this point of joblessness, you have kids."
+  },
+  {
+   "start": 3023.8,
+   "end": 3040.2,
+   "text": "I do. And they have kids? No, they don't have kids. No grandkids yet. What would you be saying to people about their career prospects in a world of super intelligence? What should we we be thinking about? Um in the meantime, I'd say it's going to be a long time before it's as good at physical manipulation as us."
+  },
+  {
+   "start": 3040.84,
+   "end": 3041.8,
+   "text": "Okay. And so,"
+  },
+  {
+   "start": 3042.84,
+   "end": 3044.2,
+   "text": "a good bet would be to be a plumber."
+  },
+  {
+   "start": 3047.64,
+   "end": 3061.56,
+   "text": "Until the humanoid robots show up. In such a world where there is mass joblessness, which is not something that you just predict, but this is something that Sam Altman at OpenAI, I've heard him predict and many of the CEOs and Elon Musk, I watched an interview which I'll play on screen of him being asked this question,"
+  },
+  {
+   "start": 3062.52,
+   "end": 3072.88,
+   "text": "and it's very rare that you see Elon Musk silent for 12 seconds or whatever it was. And then he basically says something about he actually is living in suspended disbelief. I he's basically just not thinking about it."
+  },
+  {
+   "start": 3073.8,
+   "end": 3076.92,
+   "text": "When you think about advising your children on a career with so much that is changing,"
+  },
+  {
+   "start": 3078.36,
+   "end": 3079.64,
+   "text": "what do you tell them that's going to be of value?"
+  },
+  {
+   "start": 3093.2,
+   "end": 3093.2,
+   "text": "Well,"
+  },
+  {
+   "start": 3095.68,
+   "end": 3096.52,
+   "text": "that is a tough question to answer."
+  },
+  {
+   "start": 3097.92,
+   "end": 3104.0,
+   "text": "I would just say, you know, to to sort of follow their heart in terms of what they they find um interesting to do or fulfilling to do."
+  },
+  {
+   "start": 3105.16,
+   "end": 3110.6,
+   "text": "I mean, if I think about it too hard, it frankly can be uh just just disheartening and uh demotivating."
+  },
+  {
+   "start": 3111.96,
+   "end": 3111.96,
+   "text": "Um"
+  },
+  {
+   "start": 3113.0,
+   "end": 3113.0,
+   "text": "because"
+  },
+  {
+   "start": 3114.4,
+   "end": 3116.24,
+   "text": "I mean, I I go through I I know I"
+  },
+  {
+   "start": 3117.68,
+   "end": 3120.72,
+   "text": "I've put a lot of blood, sweat, and tears into building the companies"
+  },
+  {
+   "start": 3121.88,
+   "end": 3125.2,
+   "text": "and then it and then I'm like, wait, well, like, should I be doing this? Because"
+  },
+  {
+   "start": 3126.32,
+   "end": 3130.0,
+   "text": "if I'm sacrificing time with friends and family that I would prefer to to to"
+  },
+  {
+   "start": 3131.16,
+   "end": 3133.52,
+   "text": "But but then, ultimately, the AI can do all these things."
+  },
+  {
+   "start": 3134.88,
+   "end": 3137.36,
+   "text": "Does that make sense? I I don't know. Um"
+  },
+  {
+   "start": 3138.6,
+   "end": 3140.64,
+   "text": "to some extent, I have to have deliberate suspension of disbelief"
+  },
+  {
+   "start": 3141.64,
+   "end": 3142.56,
+   "text": "in order to be to remain motivated."
+  },
+  {
+   "start": 3143.72,
+   "end": 3143.72,
+   "text": "Um"
+  },
+  {
+   "start": 3145.04,
+   "end": 3147.36,
+   "text": "so I I I guess I would say just, you know,"
+  },
+  {
+   "start": 3151.04,
+   "end": 3160.48,
+   "text": "work on things that you find interesting, fulfilling, and um and and that contribute uh some good to the rest of society. Yeah, a lot of these threats, it's very hard to"
+  },
+  {
+   "start": 3161.48,
+   "end": 3163.08,
+   "text": "intellectually, you can see the threat,"
+  },
+  {
+   "start": 3164.08,
+   "end": 3165.84,
+   "text": "but it's very hard to come to terms with it emotionally."
+  },
+  {
+   "start": 3167.84,
+   "end": 3170.6,
+   "text": "Yeah. I I haven't come to terms with it emotionally yet. What do you mean by that?"
+  },
+  {
+   "start": 3173.28,
+   "end": 3174.6,
+   "text": "I haven't come to terms with"
+  },
+  {
+   "start": 3175.92,
+   "end": 3179.52,
+   "text": "what the development of super intelligence could do to my children's future."
+  },
+  {
+   "start": 3181.8,
+   "end": 3182.56,
+   "text": "I'm okay. I'm 77."
+  },
+  {
+   "start": 3184.32,
+   "end": 3185.2,
+   "text": "I'm going to be out of it Yeah, soon."
+  },
+  {
+   "start": 3186.16,
+   "end": 3186.16,
+   "text": "But"
+  },
+  {
+   "start": 3187.12,
+   "end": 3189.68,
+   "text": "for my children and my my younger friends,"
+  },
+  {
+   "start": 3191.08,
+   "end": 3191.6,
+   "text": "my nephews and nieces,"
+  },
+  {
+   "start": 3193.16,
+   "end": 3193.44,
+   "text": "and their children,"
+  },
+  {
+   "start": 3194.68,
+   "end": 3194.68,
+   "text": "um"
+  },
+  {
+   "start": 3197.8,
+   "end": 3199.48,
+   "text": "I just don't like to think about what could happen."
+  },
+  {
+   "start": 3203.52,
+   "end": 3203.52,
+   "text": "Why?"
+  },
+  {
+   "start": 3205.04,
+   "end": 3205.6,
+   "text": "Cuz it could be awful."
+  },
+  {
+   "start": 3209.84,
+   "end": 3210.28,
+   "text": "In in what way?"
+  },
+  {
+   "start": 3212.52,
+   "end": 3214.12,
+   "text": "Well, if AI ever decided to take over,"
+  },
+  {
+   "start": 3215.48,
+   "end": 3218.08,
+   "text": "I mean, it would need people for a while to run the power stations"
+  },
+  {
+   "start": 3219.28,
+   "end": 3222.24,
+   "text": "until it designed better analog machines to run the power stations."
+  },
+  {
+   "start": 3223.6,
+   "end": 3226.12,
+   "text": "There's so many ways it could get rid of people,"
+  },
+  {
+   "start": 3227.16,
+   "end": 3228.56,
+   "text": "all of which would, of course, be very nasty."
+  },
+  {
+   "start": 3230.48,
+   "end": 3231.96,
+   "text": "Is that part of the reason you do what you do now?"
+  },
+  {
+   "start": 3233.0,
+   "end": 3236.36,
+   "text": "Yeah. I I mean, I think we should be making a huge effort right now"
+  },
+  {
+   "start": 3237.76,
+   "end": 3239.52,
+   "text": "to try and figure out if we can develop it safely."
+  },
+  {
+   "start": 3240.8,
+   "end": 3254.0,
+   "text": "Are you concerned about the mid-term impact potentially on your nephews and your your kids in terms of their jobs as well? Yeah, I'm concerned about all that. Are there any particular industries that you think are most at risk? People talk about the creative industries a lot, and it's sort of knowledge work."
+  },
+  {
+   "start": 3255.0,
+   "end": 3262.88,
+   "text": "They talk about lawyers and accountants and stuff like that. Yeah, so that's why I mentioned plumbers. I think plumbers are less at risk. Okay, I'm going to become a plumber. Someone like a legal assistant,"
+  },
+  {
+   "start": 3264.28,
+   "end": 3264.36,
+   "text": "a paralegal,"
+  },
+  {
+   "start": 3265.4,
+   "end": 3266.16,
+   "text": "Mhm. um"
+  },
+  {
+   "start": 3267.08,
+   "end": 3276.52,
+   "text": "they're not going to be needed for very long. And is there a wealth inequality issue here that will will arise from this? I think in a society which shared out things fairly,"
+  },
+  {
+   "start": 3277.8,
+   "end": 3279.04,
+   "text": "if you get a big increase in productivity,"
+  },
+  {
+   "start": 3280.56,
+   "end": 3282.28,
+   "text": "everybody should be better off. Mhm."
+  },
+  {
+   "start": 3283.48,
+   "end": 3285.24,
+   "text": "But if you can replace lots of people"
+  },
+  {
+   "start": 3286.32,
+   "end": 3286.52,
+   "text": "by AIs,"
+  },
+  {
+   "start": 3288.52,
+   "end": 3291.04,
+   "text": "then the people who get replaced will be worse off"
+  },
+  {
+   "start": 3292.48,
+   "end": 3292.48,
+   "text": "and"
+  },
+  {
+   "start": 3293.6,
+   "end": 3296.6,
+   "text": "the company that supplies the AIs will be much better off"
+  },
+  {
+   "start": 3298.88,
+   "end": 3300.12,
+   "text": "and the company that uses the AIs."
+  },
+  {
+   "start": 3301.24,
+   "end": 3304.84,
+   "text": "So, it's going to increase the gap between rich and poor. And we know that"
+  },
+  {
+   "start": 3305.8,
+   "end": 3307.32,
+   "text": "if you look at that gap between rich and poor,"
+  },
+  {
+   "start": 3308.28,
+   "end": 3315.48,
+   "text": "that basically tells you how nice a society is. If you have a big gap, you get very nasty societies in which people live in walled communities and put"
+  },
+  {
+   "start": 3316.92,
+   "end": 3318.68,
+   "text": "other people in mass jails."
+  },
+  {
+   "start": 3320.08,
+   "end": 3329.32,
+   "text": "It's not good to increase the gap between rich and poor. The International Monetary Fund has expressed profound concerns that generative AI could cause massive labor disruptions and rising inequality"
+  },
+  {
+   "start": 3330.4,
+   "end": 3332.48,
+   "text": "and has called for policies that prevent this from happening."
+  },
+  {
+   "start": 3333.56,
+   "end": 3334.44,
+   "text": "I read that in the Business Insider."
+  },
+  {
+   "start": 3335.96,
+   "end": 3338.48,
+   "text": "Have they given any idea of what the policy should look like? No."
+  },
+  {
+   "start": 3339.56,
+   "end": 3344.04,
+   "text": "Yeah, that's the problem. I mean, if AI can make everything much more efficient and get rid of people for most jobs"
+  },
+  {
+   "start": 3345.16,
+   "end": 3348.44,
+   "text": "or have a person assisted by AI doing many, many"
+  },
+  {
+   "start": 3349.96,
+   "end": 3350.32,
+   "text": "people's work,"
+  },
+  {
+   "start": 3351.24,
+   "end": 3354.08,
+   "text": "it's not obvious what to do about it. Universal basic income?"
+  },
+  {
+   "start": 3355.2,
+   "end": 3358.4,
+   "text": "Give everybody money? Yeah, I I I think that's a good start."
+  },
+  {
+   "start": 3359.56,
+   "end": 3359.56,
+   "text": "And"
+  },
+  {
+   "start": 3361.0,
+   "end": 3361.72,
+   "text": "it stops people starving,"
+  },
+  {
+   "start": 3363.04,
+   "end": 3370.84,
+   "text": "but for a lot of people, their dignity is tied up with their job. I mean, who you think you are is tied up with you doing this job, right? Yeah. And"
+  },
+  {
+   "start": 3372.08,
+   "end": 3374.32,
+   "text": "if we said, we'll give you the same money just to sit around,"
+  },
+  {
+   "start": 3375.88,
+   "end": 3376.76,
+   "text": "that would impact your dignity."
+  },
+  {
+   "start": 3378.2,
+   "end": 3379.08,
+   "text": "You said something earlier about"
+  },
+  {
+   "start": 3380.16,
+   "end": 3391.8,
+   "text": "it's surpassing or being superior to human intelligence. A lot of people, I think, like to believe that AI is is on a computer and it's something you can just turn off if you don't like it. Well, let me tell you why I think it's superior."
+  },
+  {
+   "start": 3392.72,
+   "end": 3394.32,
+   "text": "Okay. Um it's digital."
+  },
+  {
+   "start": 3395.8,
+   "end": 3396.28,
+   "text": "And because it's digital,"
+  },
+  {
+   "start": 3397.72,
+   "end": 3400.84,
+   "text": "you can have you can simulate a neural network on one piece of hardware."
+  },
+  {
+   "start": 3401.8,
+   "end": 3405.52,
+   "text": "Yeah. And you can simulate exactly the same neural network on a different piece of hardware."
+  },
+  {
+   "start": 3406.48,
+   "end": 3408.24,
+   "text": "Mhm. So, you can have clones of the same intelligence."
+  },
+  {
+   "start": 3409.96,
+   "end": 3413.44,
+   "text": "Now, you could get this one to go off and look at one bit of the internet"
+  },
+  {
+   "start": 3414.56,
+   "end": 3416.48,
+   "text": "and this other one to look at a different bit of the internet."
+  },
+  {
+   "start": 3417.48,
+   "end": 3419.16,
+   "text": "And while they're looking at these different bits of the internet,"
+  },
+  {
+   "start": 3420.44,
+   "end": 3431.52,
+   "text": "they can be syncing with each other, so they keep their weights the same. The connection strengths the same. Weights the connection strengths. Mhm. So, this one might look at something on the internet and say, oh, I'd like to increase this strength of this connection a bit."
+  },
+  {
+   "start": 3432.8,
+   "end": 3438.48,
+   "text": "And it can convey that information to this one, so it can increase the strength of that connection a bit based on this one's experience."
+  },
+  {
+   "start": 3439.56,
+   "end": 3452.2,
+   "text": "And when you say the strength of the connection, you're talking about learning. That's learning, yes. Learning consists of saying, instead of this one giving 2.4 votes for whether that one should turn on, we'll have this one give 2.5 votes for whether this one should turn on."
+  },
+  {
+   "start": 3453.16,
+   "end": 3457.36,
+   "text": "And that would be a little bit of learning. Mhm. So, these two different copies of the same neural net"
+  },
+  {
+   "start": 3459.36,
+   "end": 3461.96,
+   "text": "are getting different experiences. They're looking at different data,"
+  },
+  {
+   "start": 3462.92,
+   "end": 3466.16,
+   "text": "but they're sharing what they've learned by averaging their weights together. Mhm."
+  },
+  {
+   "start": 3467.12,
+   "end": 3470.76,
+   "text": "And they can do that averaging at like a you can average a trillion weights."
+  },
+  {
+   "start": 3471.92,
+   "end": 3472.96,
+   "text": "When you and I transfer information,"
+  },
+  {
+   "start": 3474.04,
+   "end": 3475.84,
+   "text": "we're limited to the amount of information in a sentence."
+  },
+  {
+   "start": 3476.84,
+   "end": 3480.72,
+   "text": "And the amount of information in a sentence is maybe 100 bits. It's very little information."
+  },
+  {
+   "start": 3481.84,
+   "end": 3487.0,
+   "text": "We're lucky if we're transferring like 10 bits a second. Mhm. These things are transferring trillions of bits a second."
+  },
+  {
+   "start": 3487.96,
+   "end": 3490.28,
+   "text": "So, they're billions of times better than us at sharing information."
+  },
+  {
+   "start": 3492.2,
+   "end": 3493.24,
+   "text": "And that's because they're digital"
+  },
+  {
+   "start": 3494.36,
+   "end": 3501.28,
+   "text": "and you can have two bits of hardware using the connection strengths in exactly the same way. We're analog and you can't do that. Your brain's different from my brain."
+  },
+  {
+   "start": 3502.44,
+   "end": 3511.88,
+   "text": "And if I could see the connection strengths between all your neurons, it wouldn't do me any good cuz my neurons work slightly differently and they're connected up slightly differently. Mhm. So, when you die,"
+  },
+  {
+   "start": 3513.0,
+   "end": 3514.24,
+   "text": "all your knowledge dies with you."
+  },
+  {
+   "start": 3515.2,
+   "end": 3522.36,
+   "text": "When these things die, suppose you take these two digital intelligences that are clones of each other, and you destroy the hardware they run on."
+  },
+  {
+   "start": 3523.36,
+   "end": 3526.8,
+   "text": "As long as you've stored the connection strengths somewhere, you can just build new hardware"
+  },
+  {
+   "start": 3528.4,
+   "end": 3529.6,
+   "text": "that executes the same instructions,"
+  },
+  {
+   "start": 3530.76,
+   "end": 3534.32,
+   "text": "so it'll know how to use those connection strengths, and you've recreated that intelligence."
+  },
+  {
+   "start": 3535.24,
+   "end": 3535.64,
+   "text": "So, they're immortal."
+  },
+  {
+   "start": 3536.84,
+   "end": 3538.32,
+   "text": "We've actually solved the problem of immortality,"
+  },
+  {
+   "start": 3539.84,
+   "end": 3540.96,
+   "text": "but it's only for digital things."
+  },
+  {
+   "start": 3542.4,
+   "end": 3542.64,
+   "text": "So, it knows"
+  },
+  {
+   "start": 3543.88,
+   "end": 3548.08,
+   "text": "it will essentially know everything that humans know, but more, because it will learn new things."
+  },
+  {
+   "start": 3549.12,
+   "end": 3553.96,
+   "text": "It will learn new things. It will also see all sorts of analogies that people probably never saw."
+  },
+  {
+   "start": 3555.64,
+   "end": 3556.0,
+   "text": "So, for example,"
+  },
+  {
+   "start": 3557.32,
+   "end": 3559.52,
+   "text": "at the point when GPT-4 couldn't look on the web,"
+  },
+  {
+   "start": 3560.68,
+   "end": 3563.88,
+   "text": "I asked it, why is a compost heap like an atom bomb?"
+  },
+  {
+   "start": 3565.92,
+   "end": 3573.6,
+   "text": "Off you go. I have no idea. Exactly. Excellent. Most That's exactly what most people would say. It said, \"Well, the time scales are very different"
+  },
+  {
+   "start": 3574.76,
+   "end": 3575.92,
+   "text": "and the energy scales are very different."
+  },
+  {
+   "start": 3577.08,
+   "end": 3581.04,
+   "text": "But then it went on to talk about how a compost heap, as it gets hotter, generates heat faster."
+  },
+  {
+   "start": 3582.56,
+   "end": 3586.36,
+   "text": "And an atom bomb, as it produces more neutrons, generates neutrons faster."
+  },
+  {
+   "start": 3587.48,
+   "end": 3588.8,
+   "text": "Mhm. And so they're both chain reactions,"
+  },
+  {
+   "start": 3589.92,
+   "end": 3591.24,
+   "text": "but at very different time and energy scales."
+  },
+  {
+   "start": 3592.28,
+   "end": 3594.72,
+   "text": "And I believe GPT-4 had seen that during its training."
+  },
+  {
+   "start": 3596.8,
+   "end": 3608.28,
+   "text": "It had understood the analogy between a compost heap and an atom bomb. And the reason I believe that is, if you've only got a trillion connections, remember you have 100 trillion, Mhm. and you need to have thousands of times more knowledge than a person,"
+  },
+  {
+   "start": 3609.84,
+   "end": 3612.0,
+   "text": "you need to compress information into those connections."
+  },
+  {
+   "start": 3613.28,
+   "end": 3614.04,
+   "text": "And to compress information,"
+  },
+  {
+   "start": 3615.12,
+   "end": 3630.32,
+   "text": "you need to see analogies between different things. In other words, it needs to see all the things that are chain reactions and understand the basic idea of a chain reaction and code that, and then code the ways in which they're different. And that's just a more efficient way of coding things than coding each of them separately. Mhm."
+  },
+  {
+   "start": 3631.12,
+   "end": 3635.64,
+   "text": "So, it's seen many, many analogies, probably many analogies that people have never seen."
+  },
+  {
+   "start": 3636.72,
+   "end": 3641.6,
+   "text": "That's why I also think that people who say these things will never be creative, they're going to be much more creative than us."
+  },
+  {
+   "start": 3642.68,
+   "end": 3647.36,
+   "text": "Because they're going to see all sorts of analogies we never saw. And a lot of creativity is about seeing strange analogies."
+  },
+  {
+   "start": 3649.16,
+   "end": 3651.64,
+   "text": "People are somewhat romantic about the specialness of what it is to be human."
+  },
+  {
+   "start": 3652.76,
+   "end": 3658.24,
+   "text": "And you hear lots of people saying, \"Oh, it's very, very different. It's a it's a computer. We are, you know, we're conscious. We are creative."
+  },
+  {
+   "start": 3659.2,
+   "end": 3666.68,
+   "text": "We we have these sort of innate, unique abilities that the computers will never have.\" What do you say to those people? I'd argue a bit with the innate."
+  },
+  {
+   "start": 3667.6,
+   "end": 3667.6,
+   "text": "Um"
+  },
+  {
+   "start": 3669.44,
+   "end": 3669.44,
+   "text": "So,"
+  },
+  {
+   "start": 3671.76,
+   "end": 3675.16,
+   "text": "the first thing I say is we have a long history of believing people are special."
+  },
+  {
+   "start": 3676.6,
+   "end": 3682.04,
+   "text": "And we should have learned by now. We thought we were at the center of the universe. We thought we were made in the image of God."
+  },
+  {
+   "start": 3683.12,
+   "end": 3687.6,
+   "text": "White people thought they were very special. Mhm. We just tend to want to think we're special."
+  },
+  {
+   "start": 3688.52,
+   "end": 3690.04,
+   "text": "Mhm. My belief is"
+  },
+  {
+   "start": 3691.52,
+   "end": 3692.36,
+   "text": "that more or less everyone"
+  },
+  {
+   "start": 3693.72,
+   "end": 3700.0,
+   "text": "has a completely wrong model of what the mind is. Let's suppose I drink a lot or I drop some acid, Mhm. and not recommended,"
+  },
+  {
+   "start": 3701.24,
+   "end": 3701.88,
+   "text": "and I"
+  },
+  {
+   "start": 3703.72,
+   "end": 3708.32,
+   "text": "say to you, \"I have the subjective experience of little pink elephants floating in front of me.\" Mhm."
+  },
+  {
+   "start": 3709.4,
+   "end": 3709.84,
+   "text": "Most people"
+  },
+  {
+   "start": 3711.68,
+   "end": 3712.52,
+   "text": "interpret that as"
+  },
+  {
+   "start": 3713.8,
+   "end": 3715.64,
+   "text": "there's some kind of inner theater called the mind,"
+  },
+  {
+   "start": 3718.36,
+   "end": 3720.28,
+   "text": "and only I can see what's in my mind."
+  },
+  {
+   "start": 3721.6,
+   "end": 3722.32,
+   "text": "And in this inner theater,"
+  },
+  {
+   "start": 3723.52,
+   "end": 3725.68,
+   "text": "there's a little pink elephants floating around. Mhm."
+  },
+  {
+   "start": 3726.68,
+   "end": 3729.08,
+   "text": "So, in other words, what's happened is my perceptual system's gone wrong,"
+  },
+  {
+   "start": 3730.24,
+   "end": 3734.24,
+   "text": "and I'm trying to indicate to you how it's gone wrong and what it's trying to tell me."
+  },
+  {
+   "start": 3735.28,
+   "end": 3739.64,
+   "text": "And the way I do that is by telling you what would have to be out there in the real world"
+  },
+  {
+   "start": 3741.12,
+   "end": 3741.12,
+   "text": "for"
+  },
+  {
+   "start": 3742.04,
+   "end": 3742.72,
+   "text": "it to be telling the truth."
+  },
+  {
+   "start": 3744.96,
+   "end": 3745.88,
+   "text": "And so these little pink elephants,"
+  },
+  {
+   "start": 3746.92,
+   "end": 3747.92,
+   "text": "they're not in some inner theater."
+  },
+  {
+   "start": 3749.32,
+   "end": 3752.04,
+   "text": "These little pink elephants are hypothetical things in the real world."
+  },
+  {
+   "start": 3753.16,
+   "end": 3756.64,
+   "text": "And that's my way of telling you how my perceptual system's telling me fibs."
+  },
+  {
+   "start": 3758.04,
+   "end": 3758.96,
+   "text": "So, now I must do that with a chatbot."
+  },
+  {
+   "start": 3759.92,
+   "end": 3759.92,
+   "text": "Yeah."
+  },
+  {
+   "start": 3761.12,
+   "end": 3764.32,
+   "text": "Cuz I believe that current multimodal chatbots have subjective experiences."
+  },
+  {
+   "start": 3766.0,
+   "end": 3767.2,
+   "text": "And very few people believe that."
+  },
+  {
+   "start": 3768.28,
+   "end": 3769.28,
+   "text": "But I'll try and make you believe it."
+  },
+  {
+   "start": 3770.2,
+   "end": 3775.88,
+   "text": "So, suppose I have a multimodal chatbot. It's got a robot arm, so it can point, and it's got a camera, so it can see things."
+  },
+  {
+   "start": 3777.12,
+   "end": 3778.2,
+   "text": "And I put an object in front of it,"
+  },
+  {
+   "start": 3779.12,
+   "end": 3779.88,
+   "text": "and I say, \"Point at the object.\""
+  },
+  {
+   "start": 3780.96,
+   "end": 3782.08,
+   "text": "It goes like this. No problem."
+  },
+  {
+   "start": 3783.56,
+   "end": 3785.16,
+   "text": "Then I put a prism in front of its lens."
+  },
+  {
+   "start": 3786.28,
+   "end": 3789.76,
+   "text": "And so then I put an object in front of it, and I say, \"Point at the object.\" And it goes there."
+  },
+  {
+   "start": 3791.08,
+   "end": 3797.84,
+   "text": "Good. And I say, \"No, that's not where the object is. The object's actually straight in front of you, but I put a prism in front of your lens.\""
+  },
+  {
+   "start": 3799.12,
+   "end": 3802.0,
+   "text": "And the chatbot says, \"Oh, I see. The prism bent the light rays."
+  },
+  {
+   "start": 3802.92,
+   "end": 3802.92,
+   "text": "So,"
+  },
+  {
+   "start": 3803.96,
+   "end": 3807.76,
+   "text": "um the object's actually there, but I had the subjective experience that it was there.\""
+  },
+  {
+   "start": 3808.96,
+   "end": 3816.4,
+   "text": "Mhm. Now, if the chatbot says that, it's using the word subjective experience exactly the way people use them. It's an alternative view of what's going on."
+  },
+  {
+   "start": 3817.32,
+   "end": 3818.8,
+   "text": "They're hypothetical states of the world,"
+  },
+  {
+   "start": 3820.04,
+   "end": 3827.88,
+   "text": "which if they were true would mean my perceptual system wasn't lying. And that's the best way I can tell you what my perceptual system's doing when it's lying to me. Mhm. Now,"
+  },
+  {
+   "start": 3829.08,
+   "end": 3831.96,
+   "text": "we need to go further to deal with sentience and consciousness and feelings and emotions,"
+  },
+  {
+   "start": 3833.08,
+   "end": 3839.36,
+   "text": "but I think in the end they're all going to be dealt with in a similar way. There's no reason machines can't have them all. But people say machines can't have feelings."
+  },
+  {
+   "start": 3840.88,
+   "end": 3846.24,
+   "text": "And people are curiously confident about that. I've no idea why. Suppose I make a battle robot,"
+  },
+  {
+   "start": 3847.16,
+   "end": 3848.16,
+   "text": "and it's a little battle robot,"
+  },
+  {
+   "start": 3849.28,
+   "end": 3850.48,
+   "text": "and it sees a big battle robot"
+  },
+  {
+   "start": 3851.72,
+   "end": 3852.8,
+   "text": "that's much more powerful than it."
+  },
+  {
+   "start": 3854.0,
+   "end": 3855.84,
+   "text": "It would be really useful if it got scared."
+  },
+  {
+   "start": 3857.52,
+   "end": 3857.52,
+   "text": "Mhm."
+  },
+  {
+   "start": 3858.88,
+   "end": 3858.88,
+   "text": "Now,"
+  },
+  {
+   "start": 3859.92,
+   "end": 3860.44,
+   "text": "when I get scared,"
+  },
+  {
+   "start": 3861.64,
+   "end": 3865.88,
+   "text": "um various physiological things happen that we don't need to go into, and those won't happen with the robot."
+  },
+  {
+   "start": 3867.2,
+   "end": 3876.52,
+   "text": "But all the cognitive things, like I better get the hell out of here, Yeah. Mhm. and I better sort of change my way of thinking, so I focus and focus and focus and I get distracted,"
+  },
+  {
+   "start": 3877.8,
+   "end": 3879.84,
+   "text": "all of that will happen with robots, too."
+  },
+  {
+   "start": 3881.12,
+   "end": 3887.16,
+   "text": "People will build in things so that they, when it the circumstance is such they should get the hell out of there, they get scared and run away."
+  },
+  {
+   "start": 3888.28,
+   "end": 3889.24,
+   "text": "They'll have emotions then."
+  },
+  {
+   "start": 3890.24,
+   "end": 3891.68,
+   "text": "They won't have the physiological aspects,"
+  },
+  {
+   "start": 3892.68,
+   "end": 3893.88,
+   "text": "but they will have all the cognitive aspects."
+  },
+  {
+   "start": 3895.0,
+   "end": 3900.88,
+   "text": "And I think it would be odd to say they're just simulating emotions. No, they're really having those emotions. The little robot got scared and ran away."
+  },
+  {
+   "start": 3902.4,
+   "end": 3906.8,
+   "text": "It's not running away because of adrenaline, it's running away because of a sequence of sort of neurological"
+  },
+  {
+   "start": 3907.8,
+   "end": 3911.68,
+   "text": "in its neural net processes happened, which means which have the equivalent effect to adrenaline."
+  },
+  {
+   "start": 3913.24,
+   "end": 3918.8,
+   "text": "So, do you do you think just adrenaline, right? There's a lot of cognitive stuff goes on when you get scared. Yeah. So, do you think that"
+  },
+  {
+   "start": 3921.56,
+   "end": 3922.4,
+   "text": "there is conscious AI?"
+  },
+  {
+   "start": 3923.64,
+   "end": 3924.68,
+   "text": "And when I say conscious, I mean"
+  },
+  {
+   "start": 3925.76,
+   "end": 3928.28,
+   "text": "that represents the same properties of consciousness that a human has."
+  },
+  {
+   "start": 3929.32,
+   "end": 3934.12,
+   "text": "There's two issues here. There's a sort of empirical one and a philosophical one. I don't think there's anything in principle"
+  },
+  {
+   "start": 3935.04,
+   "end": 3936.68,
+   "text": "that stops machines from being conscious."
+  },
+  {
+   "start": 3938.56,
+   "end": 3942.28,
+   "text": "I'll give you a little demonstration of that before we carry on. Mhm. Suppose I take your brain,"
+  },
+  {
+   "start": 3943.44,
+   "end": 3944.88,
+   "text": "and I take one brain cell in your brain,"
+  },
+  {
+   "start": 3946.24,
+   "end": 3950.88,
+   "text": "and I replace it by, it's a bit Black Mirror-like, I replace it by a little piece of nanotechnology"
+  },
+  {
+   "start": 3952.04,
+   "end": 3952.72,
+   "text": "that's just the same size,"
+  },
+  {
+   "start": 3954.28,
+   "end": 3962.04,
+   "text": "that behaves in exactly the same way when it gets pings from other neurons. It sends out pings just as the brain cell would have. So, the other neurons don't know anything's changed."
+  },
+  {
+   "start": 3963.8,
+   "end": 3966.92,
+   "text": "Okay. I've just replaced one of your brain cells with this little piece of nanotechnology."
+  },
+  {
+   "start": 3968.12,
+   "end": 3968.72,
+   "text": "Would you still be conscious?"
+  },
+  {
+   "start": 3970.12,
+   "end": 3970.12,
+   "text": "Yeah."
+  },
+  {
+   "start": 3971.04,
+   "end": 3974.24,
+   "text": "Now you can see where this argument's going. Yeah. So, if you replaced all of them,"
+  },
+  {
+   "start": 3975.32,
+   "end": 3977.36,
+   "text": "as I replace them all, at what point do you stop being conscious?"
+  },
+  {
+   "start": 3979.0,
+   "end": 3987.04,
+   "text": "Well, people think of consciousness as this like ethereal thing that exists maybe beyond the brain cells. Yeah, well, people have a lot of crazy ideas."
+  },
+  {
+   "start": 3989.08,
+   "end": 3995.8,
+   "text": "Um People don't know what consciousness is, and they often don't know what they mean by it. Mhm. And then they fall back on saying, \"Well,"
+  },
+  {
+   "start": 3996.8,
+   "end": 4002.68,
+   "text": "I know it cuz I've got it, and I can see that I've got it.\" And they fall back on this theater model of the mind, which I think is nonsense."
+  },
+  {
+   "start": 4003.96,
+   "end": 4008.96,
+   "text": "What do you think of consciousness as if you had to try and define it? Is it cuz I think of it as just like the awareness of myself? I don't know."
+  },
+  {
+   "start": 4010.36,
+   "end": 4011.92,
+   "text": "I think it's a term we'll stop using."
+  },
+  {
+   "start": 4013.44,
+   "end": 4014.96,
+   "text": "Suppose you want to understand how a car works."
+  },
+  {
+   "start": 4016.28,
+   "end": 4025.72,
+   "text": "Well, you know some cars have a lot of oomph, and other cars have a lot less oomph. Like an Aston Martin's got lots of oomph. Mhm. And a little Toyota Corolla doesn't have much oomph."
+  },
+  {
+   "start": 4026.72,
+   "end": 4029.56,
+   "text": "But oomph isn't a very good concept for understanding cars."
+  },
+  {
+   "start": 4030.96,
+   "end": 4035.6,
+   "text": "Um if you want to understand cars, you need to understand about electric engines or petrol engines and how they work."
+  },
+  {
+   "start": 4036.56,
+   "end": 4037.68,
+   "text": "And it gives rise to oomph."
+  },
+  {
+   "start": 4038.84,
+   "end": 4043.56,
+   "text": "But oomph isn't a very useful explanatory concept. It's a kind of essence of a car. It's the essence of an Aston Martin."
+  },
+  {
+   "start": 4044.68,
+   "end": 4047.2,
+   "text": "But it doesn't explain much. I think consciousness is like that."
+  },
+  {
+   "start": 4048.4,
+   "end": 4049.6,
+   "text": "And I think we'll stop using that term."
+  },
+  {
+   "start": 4050.6,
+   "end": 4051.24,
+   "text": "But I don't think there's anything"
+  },
+  {
+   "start": 4052.6,
+   "end": 4054.76,
+   "text": "any reason why a machine shouldn't have it. If"
+  },
+  {
+   "start": 4056.0,
+   "end": 4058.96,
+   "text": "your view of consciousness is that it intrinsically involves self-awareness,"
+  },
+  {
+   "start": 4060.72,
+   "end": 4064.48,
+   "text": "then the machine's got to have self-awareness. It's got to have cognition about its own cognition and stuff."
+  },
+  {
+   "start": 4065.4,
+   "end": 4065.4,
+   "text": "But"
+  },
+  {
+   "start": 4067.32,
+   "end": 4069.12,
+   "text": "I'm a materialist through and through,"
+  },
+  {
+   "start": 4070.24,
+   "end": 4073.76,
+   "text": "and I don't think there's any reason why a machine shouldn't have consciousness."
+  },
+  {
+   "start": 4074.8,
+   "end": 4079.8,
+   "text": "Do you think they do then have the same consciousness that we think of ourselves as being uniquely"
+  },
+  {
+   "start": 4081.04,
+   "end": 4082.8,
+   "text": "uh given as a gift when we're born?"
+  },
+  {
+   "start": 4083.84,
+   "end": 4085.24,
+   "text": "I'm ambivalent about that at present."
+  },
+  {
+   "start": 4086.56,
+   "end": 4086.56,
+   "text": "So,"
+  },
+  {
+   "start": 4088.52,
+   "end": 4091.08,
+   "text": "I don't think there's this hard line. I think as soon as you have a machine"
+  },
+  {
+   "start": 4092.24,
+   "end": 4092.72,
+   "text": "that has some self-awareness,"
+  },
+  {
+   "start": 4094.84,
+   "end": 4095.32,
+   "text": "it's got some consciousness."
+  },
+  {
+   "start": 4096.72,
+   "end": 4096.72,
+   "text": "Um"
+  },
+  {
+   "start": 4097.68,
+   "end": 4099.6,
+   "text": "I think it's an emergent property of a complex system."
+  },
+  {
+   "start": 4101.24,
+   "end": 4102.48,
+   "text": "It's not a sort of essence that's"
+  },
+  {
+   "start": 4104.0,
+   "end": 4109.28,
+   "text": "throughout the universe. It's you make this really complicated system that's complicated enough to have a model of itself,"
+  },
+  {
+   "start": 4110.96,
+   "end": 4111.48,
+   "text": "and it does perception."
+  },
+  {
+   "start": 4112.72,
+   "end": 4112.96,
+   "text": "And I think"
+  },
+  {
+   "start": 4114.16,
+   "end": 4120.52,
+   "text": "then you're beginning to get a conscious machine. So, I don't think there's any sharp distinction between what we've got now and conscious machines."
+  },
+  {
+   "start": 4121.6,
+   "end": 4128.0,
+   "text": "I don't think it's going to one day we're going to wake up and say, \"Hey, if you put this special chemical in, it becomes conscious.\" It's not going to be like that."
+  },
+  {
+   "start": 4129.08,
+   "end": 4142.88,
+   "text": "I think we all wonder if these computers are like thinking like we are on their own when we're not there, and if they're experiencing emotions, if they're contending with I we I think we probably, you know, we think about things like love and things that feel unique to biological species."
+  },
+  {
+   "start": 4144.16,
+   "end": 4145.0,
+   "text": "Um are they sat there thinking?"
+  },
+  {
+   "start": 4146.32,
+   "end": 4149.12,
+   "text": "Are they do they have concerns? I think they really are thinking."
+  },
+  {
+   "start": 4150.28,
+   "end": 4151.8,
+   "text": "And I think as soon as you make AI agents,"
+  },
+  {
+   "start": 4152.84,
+   "end": 4153.36,
+   "text": "they will have concerns."
+  },
+  {
+   "start": 4154.68,
+   "end": 4159.4,
+   "text": "If you want to make an effective AI agent, suppose you let's take a call center. Mhm. In a call center,"
+  },
+  {
+   "start": 4160.48,
+   "end": 4161.04,
+   "text": "you have people at present."
+  },
+  {
+   "start": 4162.44,
+   "end": 4163.84,
+   "text": "They have all sorts of emotions and feelings,"
+  },
+  {
+   "start": 4164.96,
+   "end": 4166.04,
+   "text": "which are kind of useful."
+  },
+  {
+   "start": 4167.24,
+   "end": 4168.6,
+   "text": "So, suppose I call up the call center"
+  },
+  {
+   "start": 4170.0,
+   "end": 4170.84,
+   "text": "and I'm actually lonely"
+  },
+  {
+   "start": 4171.92,
+   "end": 4177.6,
+   "text": "and I don't actually want to know the answer to why my computer isn't working. I just want somebody to talk to."
+  },
+  {
+   "start": 4178.88,
+   "end": 4179.36,
+   "text": "After a while,"
+  },
+  {
+   "start": 4180.32,
+   "end": 4181.16,
+   "text": "the person in the call center"
+  },
+  {
+   "start": 4182.4,
+   "end": 4186.24,
+   "text": "will either get bored or get annoyed with me and will terminate it."
+  },
+  {
+   "start": 4187.76,
+   "end": 4189.52,
+   "text": "Well, you replace them by an AI agent."
+  },
+  {
+   "start": 4190.72,
+   "end": 4192.32,
+   "text": "The AI agent needs to have the same kind of responses."
+  },
+  {
+   "start": 4193.28,
+   "end": 4203.8,
+   "text": "If someone's just called up cuz they just want to talk to the AI agent and we're happy to talk for whole the whole day to the AI agent, that's not good for business and you want an AI agent that either gets bored or gets irritated"
+  },
+  {
+   "start": 4204.92,
+   "end": 4206.72,
+   "text": "and says, \"I'm sorry, but I don't have time for this.\" Then"
+  },
+  {
+   "start": 4207.84,
+   "end": 4209.8,
+   "text": "once it does that, I think it's got emotions."
+  },
+  {
+   "start": 4211.84,
+   "end": 4211.84,
+   "text": "Now,"
+  },
+  {
+   "start": 4212.96,
+   "end": 4217.72,
+   "text": "like I say, emotions have two aspects to them. There's the cognitive aspect and the behavioral aspect"
+  },
+  {
+   "start": 4218.72,
+   "end": 4220.0,
+   "text": "and then there's a physiological aspect"
+  },
+  {
+   "start": 4220.92,
+   "end": 4222.0,
+   "text": "and these go together with us"
+  },
+  {
+   "start": 4223.0,
+   "end": 4223.0,
+   "text": "and"
+  },
+  {
+   "start": 4223.96,
+   "end": 4236.64,
+   "text": "if the AI agent gets embarrassed, he won't go red. Yeah. Um So, there's no physiological won't start sweating. Yeah. But it might have all the same behavior and in that case I'd say, \"Yeah, it's having emotion It's got an emotion.\" So, it's going to have the same sort of cognitive"
+  },
+  {
+   "start": 4237.6,
+   "end": 4242.64,
+   "text": "thought and then it's going to act upon that cognitive thought. way, but without the physiological responses."
+  },
+  {
+   "start": 4243.72,
+   "end": 4253.32,
+   "text": "And does that matter that it doesn't go red in the face and it's just a different I mean, that's a response to the it somewhat different from us. Yeah. For some things, the physiological aspects are very important"
+  },
+  {
+   "start": 4254.24,
+   "end": 4254.44,
+   "text": "like love."
+  },
+  {
+   "start": 4255.44,
+   "end": 4257.32,
+   "text": "They're a long way from having love the same way we do."
+  },
+  {
+   "start": 4258.64,
+   "end": 4260.52,
+   "text": "But I don't see why they shouldn't have emotions."
+  },
+  {
+   "start": 4261.84,
+   "end": 4264.52,
+   "text": "So, I think what's happened is people have a model"
+  },
+  {
+   "start": 4265.44,
+   "end": 4268.76,
+   "text": "of how the mind works and what feelings are and what emotions are"
+  },
+  {
+   "start": 4269.72,
+   "end": 4270.6,
+   "text": "and their model is just wrong."
+  },
+  {
+   "start": 4272.12,
+   "end": 4273.8,
+   "text": "What um what brought you to Google?"
+  },
+  {
+   "start": 4275.44,
+   "end": 4278.64,
+   "text": "You You worked at Google for about a decade, right? Yeah. What brought you there?"
+  },
+  {
+   "start": 4279.6,
+   "end": 4280.2,
+   "text": "I have a"
+  },
+  {
+   "start": 4281.24,
+   "end": 4282.24,
+   "text": "son who has learning difficulties"
+  },
+  {
+   "start": 4283.92,
+   "end": 4287.12,
+   "text": "and in order to be sure he would never be out on the street"
+  },
+  {
+   "start": 4288.36,
+   "end": 4289.08,
+   "text": "I needed to get"
+  },
+  {
+   "start": 4290.04,
+   "end": 4290.76,
+   "text": "several million dollars"
+  },
+  {
+   "start": 4292.12,
+   "end": 4293.52,
+   "text": "and I wasn't going to get that as an academic."
+  },
+  {
+   "start": 4294.96,
+   "end": 4295.04,
+   "text": "I tried."
+  },
+  {
+   "start": 4295.96,
+   "end": 4300.6,
+   "text": "So, I taught a Coursera course in the hope that I'd make lots of money that way, but there was no money in that."
+  },
+  {
+   "start": 4301.56,
+   "end": 4302.36,
+   "text": "So, I figured out, well,"
+  },
+  {
+   "start": 4303.4,
+   "end": 4305.4,
+   "text": "the only way to get millions of dollars"
+  },
+  {
+   "start": 4306.4,
+   "end": 4306.8,
+   "text": "is to"
+  },
+  {
+   "start": 4307.8,
+   "end": 4309.52,
+   "text": "sell myself to a big company."
+  },
+  {
+   "start": 4311.16,
+   "end": 4311.16,
+   "text": "And"
+  },
+  {
+   "start": 4312.28,
+   "end": 4312.76,
+   "text": "so, when I was 65"
+  },
+  {
+   "start": 4314.68,
+   "end": 4316.88,
+   "text": "fortunately for me, I had two brilliant students"
+  },
+  {
+   "start": 4318.0,
+   "end": 4318.88,
+   "text": "who produced something called AlexNet,"
+  },
+  {
+   "start": 4319.88,
+   "end": 4322.76,
+   "text": "which was neural net that was very good at recognizing objects in images."
+  },
+  {
+   "start": 4324.24,
+   "end": 4324.24,
+   "text": "And"
+  },
+  {
+   "start": 4325.96,
+   "end": 4325.96,
+   "text": "so,"
+  },
+  {
+   "start": 4327.2,
+   "end": 4328.32,
+   "text": "Ilya and Alex and I"
+  },
+  {
+   "start": 4329.36,
+   "end": 4331.12,
+   "text": "set up a little company and auctioned it."
+  },
+  {
+   "start": 4332.24,
+   "end": 4335.96,
+   "text": "And we actually set up an auction where we had a number of big companies bidding for us."
+  },
+  {
+   "start": 4337.96,
+   "end": 4339.12,
+   "text": "And that company was called"
+  },
+  {
+   "start": 4340.12,
+   "end": 4340.12,
+   "text": "AlexNet."
+  },
+  {
+   "start": 4341.08,
+   "end": 4344.28,
+   "text": "No, the the network that recognized objects was called AlexNet."
+  },
+  {
+   "start": 4345.24,
+   "end": 4348.08,
+   "text": "Company was called DNN Research, deep neural network research."
+  },
+  {
+   "start": 4349.24,
+   "end": 4352.16,
+   "text": "And it was doing things like this. I'll put this graph up on the screen. That's AlexNet."
+  },
+  {
+   "start": 4353.16,
+   "end": 4354.4,
+   "text": "This picture shows eight images"
+  },
+  {
+   "start": 4355.52,
+   "end": 4355.52,
+   "text": "and"
+  },
+  {
+   "start": 4356.64,
+   "end": 4364.44,
+   "text": "AlexNet's ability, which is your company's ability to spot what was in those images. Yeah. So, it could tell the difference between various kinds of mushroom"
+  },
+  {
+   "start": 4365.8,
+   "end": 4368.64,
+   "text": "and about 12% of ImageNet is dogs"
+  },
+  {
+   "start": 4369.88,
+   "end": 4373.8,
+   "text": "and to be good at ImageNet, you have to tell the difference between very similar kinds of dog"
+  },
+  {
+   "start": 4374.76,
+   "end": 4376.08,
+   "text": "and it would got to be very good at that."
+  },
+  {
+   "start": 4377.24,
+   "end": 4378.6,
+   "text": "And your your company AlexNet won"
+  },
+  {
+   "start": 4379.76,
+   "end": 4383.36,
+   "text": "several awards, I believe, for its ability to out outperform its competitors"
+  },
+  {
+   "start": 4384.44,
+   "end": 4386.28,
+   "text": "and so Google ultimately ended up acquiring"
+  },
+  {
+   "start": 4387.24,
+   "end": 4387.44,
+   "text": "your technology."
+  },
+  {
+   "start": 4388.4,
+   "end": 4390.24,
+   "text": "Google acquired that technology and some other technology."
+  },
+  {
+   "start": 4392.0,
+   "end": 4394.24,
+   "text": "And you went to work at Google at age, what, 66?"
+  },
+  {
+   "start": 4395.44,
+   "end": 4398.08,
+   "text": "I went at age 65 to work at Google. 65"
+  },
+  {
+   "start": 4399.0,
+   "end": 4400.0,
+   "text": "and you left at age 76?"
+  },
+  {
+   "start": 4401.04,
+   "end": 4405.04,
+   "text": "75. 75, okay. I worked there for more or less exactly 10 years. And what were you doing there?"
+  },
+  {
+   "start": 4406.04,
+   "end": 4409.96,
+   "text": "Okay, they were very nice to me. They said They said pretty much you can do what you like."
+  },
+  {
+   "start": 4411.04,
+   "end": 4413.8,
+   "text": "I worked on something called distillation that did really work well"
+  },
+  {
+   "start": 4415.32,
+   "end": 4428.96,
+   "text": "and that's now used all the time. In AI? In AI and distillation is a way of taking what a big model knows, a big neural net knows, and getting that knowledge into a small neural net. Then at the end, I got very interested in analog computation"
+  },
+  {
+   "start": 4430.08,
+   "end": 4434.32,
+   "text": "and whether it would be possible to get these big language models running in analog hardware"
+  },
+  {
+   "start": 4435.56,
+   "end": 4436.68,
+   "text": "so they used much less energy."
+  },
+  {
+   "start": 4437.76,
+   "end": 4439.04,
+   "text": "And it was while I was doing that work"
+  },
+  {
+   "start": 4439.96,
+   "end": 4443.8,
+   "text": "that I began to really realize how much better digital is for sharing information."
+  },
+  {
+   "start": 4445.48,
+   "end": 4446.24,
+   "text": "Was there a eureka moment?"
+  },
+  {
+   "start": 4448.52,
+   "end": 4449.84,
+   "text": "There was a eureka month or two."
+  },
+  {
+   "start": 4450.88,
+   "end": 4456.76,
+   "text": "Um and it was a sort of coupling of ChatGPT coming out. Although Google had very similar things a year earlier."
+  },
+  {
+   "start": 4457.68,
+   "end": 4463.36,
+   "text": "And I'm I'd seen those and that had a big impact effect on me. The closest I had to a eureka moment"
+  },
+  {
+   "start": 4464.4,
+   "end": 4464.76,
+   "text": "was when"
+  },
+  {
+   "start": 4465.8,
+   "end": 4467.0,
+   "text": "a Google system called Palm"
+  },
+  {
+   "start": 4468.36,
+   "end": 4469.88,
+   "text": "was able to say why a joke was funny."
+  },
+  {
+   "start": 4470.92,
+   "end": 4475.56,
+   "text": "And I'd always thought of that as a kind of landmark. If it can say why a joke's funny, it really does understand."
+  },
+  {
+   "start": 4477.08,
+   "end": 4478.2,
+   "text": "And it could say why a joke was funny."
+  },
+  {
+   "start": 4481.76,
+   "end": 4485.6,
+   "text": "And that coupled with realizing why digital is so much better than analog for sharing information"
+  },
+  {
+   "start": 4487.12,
+   "end": 4488.0,
+   "text": "suddenly made me"
+  },
+  {
+   "start": 4489.4,
+   "end": 4490.36,
+   "text": "very interested in AI safety"
+  },
+  {
+   "start": 4491.68,
+   "end": 4494.16,
+   "text": "and that these things were going to get a lot smarter than us."
+  },
+  {
+   "start": 4495.64,
+   "end": 4496.36,
+   "text": "Why did you leave Google?"
+  },
+  {
+   "start": 4497.88,
+   "end": 4499.68,
+   "text": "The main reason I left Google was cuz I was 75"
+  },
+  {
+   "start": 4501.16,
+   "end": 4501.68,
+   "text": "and I wanted to retire."
+  },
+  {
+   "start": 4502.92,
+   "end": 4504.0,
+   "text": "I've done a very bad job of that."
+  },
+  {
+   "start": 4505.0,
+   "end": 4509.88,
+   "text": "The precise time year when I left Google was so that I could talk freely at a conference at MIT."
+  },
+  {
+   "start": 4511.24,
+   "end": 4511.84,
+   "text": "But I left cuz"
+  },
+  {
+   "start": 4512.84,
+   "end": 4513.0,
+   "text": "I was"
+  },
+  {
+   "start": 4514.04,
+   "end": 4526.96,
+   "text": "I'm old and I was finding it harder to program. I was making many more mistakes when I programmed, which is very annoying. You wanted to talk freely at a conference at MIT. Yes. I'd MIT organized by MIT Tech Review. What did you want to talk about freely? AI safety."
+  },
+  {
+   "start": 4527.96,
+   "end": 4533.8,
+   "text": "And you couldn't do that while you were at Google? Well, I could have done it while I was at Google and Google encouraged me to stay and work on AI safety."
+  },
+  {
+   "start": 4534.72,
+   "end": 4536.32,
+   "text": "I said I could do whatever I liked on AI safety."
+  },
+  {
+   "start": 4537.56,
+   "end": 4539.6,
+   "text": "You kind of censor yourself. If you work for a big company"
+  },
+  {
+   "start": 4540.76,
+   "end": 4544.32,
+   "text": "you don't feel right saying things that will damage the big company."
+  },
+  {
+   "start": 4545.4,
+   "end": 4547.68,
+   "text": "Even if you could get away with it, it just feels wrong to me."
+  },
+  {
+   "start": 4549.12,
+   "end": 4552.84,
+   "text": "I didn't leave cuz I was cross with anything Google was doing. I think Google actually behaved very responsibly."
+  },
+  {
+   "start": 4554.04,
+   "end": 4556.36,
+   "text": "When they had these big chatbots, they didn't release them."
+  },
+  {
+   "start": 4557.72,
+   "end": 4559.2,
+   "text": "Possibly cuz they were worried about their reputation."
+  },
+  {
+   "start": 4560.56,
+   "end": 4572.92,
+   "text": "They had a very good reputation and they didn't want to damage it. So, OpenAI didn't have a reputation and so they could afford to take the gamble. I mean, there's also a big conversation happening around how it will cannibalize their core business in search."
+  },
+  {
+   "start": 4574.28,
+   "end": 4586.52,
+   "text": "There is now, yes. Yeah. Yeah. And it's the old innovator's dilemma to some degree, I guess. Exactly. Yes, it is. Bad skin, I've had it and I'm sure many of you listening have had it, too. Or maybe you have it right now."
+  },
+  {
+   "start": 4587.76,
+   "end": 4601.36,
+   "text": "I know how draining it can be, especially if you're in a job where you're presenting often like I am. So, let me tell you about something that's helped both my partner and me and my sister, which is red light therapy. I only got into this a couple of years ago, but I wish I'd known a little bit"
+  },
+  {
+   "start": 4601.52,
+   "end": 4617.76,
+   "text": "sooner. I've been using our show sponsors BonCharge's infrared sauna blanket for a while now, but I just got hold of their red light therapy mask as well. Red light has been proven to have so many benefits for the body. Like any area of your skin that's exposed will see a reduction in scarring, wrinkles and even blemishes."
+  },
+  {
+   "start": 4618.68,
+   "end": 4631.48,
+   "text": "It also helps with complexion. It boosts collagen and it does that by targeting the upper layers of your skin. And BonCharge ships worldwide with easy returns and a year-long warranty on all of their products. So, if you'd like to try it yourself, head over to boncharge.com/diary"
+  },
+  {
+   "start": 4633.56,
+   "end": 4634.84,
+   "text": "and use code diary for 25%"
+  },
+  {
+   "start": 4636.0,
+   "end": 4637.16,
+   "text": "off any product sitewide."
+  },
+  {
+   "start": 4638.2,
+   "end": 4639.92,
+   "text": "Just make sure you order through this link. boncharge.com/diary"
+  },
+  {
+   "start": 4642.32,
+   "end": 4643.0,
+   "text": "with code diary."
+  },
+  {
+   "start": 4644.04,
+   "end": 4660.52,
+   "text": "Make sure you keep what I'm about to say to yourself. I'm inviting 10,000 of you to come even deeper into the Diary of a CEO. Welcome to my inner circle. This is a brand new private community that I'm launching to the world. We have so many incredible things that happen that you are never shown. We have the"
+  },
+  {
+   "start": 4660.64,
+   "end": 4677.4,
+   "text": "briefs that are on my iPad when I'm recording the conversation. We have clips we've never released. We have behind-the-scenes conversations with the guest and also the episodes that we've never ever released and so much more. In the circle, you'll have direct access to me. You can tell us what you want this show to be, who you want"
+  },
+  {
+   "start": 4677.6,
+   "end": 4690.44,
+   "text": "us to interview and the types of conversations you would love us to have. But remember, for now, we're only inviting the first 10,000 people that join before it closes. So, if you want to join our private close community, head to the link in the description below or go to DOAC"
+  },
+  {
+   "start": 4691.88,
+   "end": 4691.88,
+   "text": "circle.com."
+  },
+  {
+   "start": 4694.12,
+   "end": 4694.76,
+   "text": "I will speak to you there."
+  },
+  {
+   "start": 4696.12,
+   "end": 4698.76,
+   "text": "I'm continually shocked by the types of individuals that listen to this conversation"
+  },
+  {
+   "start": 4699.84,
+   "end": 4709.8,
+   "text": "um because they come up to me sometimes. So, I hear from politicians, I hear from some royal people, I hear from entrepreneurs all over the world, whether they are the entrepreneurs building some of the biggest companies in the world or they're, you know, early-stage startups."
+  },
+  {
+   "start": 4711.36,
+   "end": 4711.8,
+   "text": "For those people"
+  },
+  {
+   "start": 4712.8,
+   "end": 4716.08,
+   "text": "that are listening to this conversation now, that are in positions of power and influence"
+  },
+  {
+   "start": 4717.8,
+   "end": 4719.0,
+   "text": "world leaders, let's say."
+  },
+  {
+   "start": 4719.96,
+   "end": 4720.72,
+   "text": "What's your message to them?"
+  },
+  {
+   "start": 4722.2,
+   "end": 4728.04,
+   "text": "I'd say what you need is highly regulated capitalism. That's what seems to work best. And what would you say to the average person?"
+  },
+  {
+   "start": 4729.8,
+   "end": 4730.68,
+   "text": "Not doesn't work in the industry"
+  },
+  {
+   "start": 4731.76,
+   "end": 4732.72,
+   "text": "somewhat concerned about the future"
+  },
+  {
+   "start": 4734.2,
+   "end": 4735.4,
+   "text": "doesn't know if they're hopeless or not."
+  },
+  {
+   "start": 4736.44,
+   "end": 4737.48,
+   "text": "What should they be doing in their own lives?"
+  },
+  {
+   "start": 4739.4,
+   "end": 4743.04,
+   "text": "My feeling is there's not much they can do. This isn't isn't going to be decided"
+  },
+  {
+   "start": 4744.0,
+   "end": 4751.36,
+   "text": "by Just as climate change isn't going to be decided by people separating out the plastic bags from the um compostables."
+  },
+  {
+   "start": 4752.56,
+   "end": 4755.52,
+   "text": "That's not going to have much effect. It's going to be decided by whether"
+  },
+  {
+   "start": 4756.52,
+   "end": 4759.56,
+   "text": "the lobbyists for the big energy companies can be kept under control."
+  },
+  {
+   "start": 4760.56,
+   "end": 4763.12,
+   "text": "I don't think there's much people can do to"
+  },
+  {
+   "start": 4764.28,
+   "end": 4765.0,
+   "text": "except for"
+  },
+  {
+   "start": 4766.72,
+   "end": 4767.72,
+   "text": "try and pressure their governments"
+  },
+  {
+   "start": 4769.32,
+   "end": 4769.32,
+   "text": "to"
+  },
+  {
+   "start": 4770.64,
+   "end": 4772.28,
+   "text": "force the big companies to work on AI safety."
+  },
+  {
+   "start": 4773.4,
+   "end": 4774.0,
+   "text": "That they can do."
+  },
+  {
+   "start": 4776.68,
+   "end": 4777.36,
+   "text": "You've lived a fascinating"
+  },
+  {
+   "start": 4778.4,
+   "end": 4778.4,
+   "text": "fascinating"
+  },
+  {
+   "start": 4779.4,
+   "end": 4783.32,
+   "text": "winding life. I think one of the things most people don't know about you is that your family has a"
+  },
+  {
+   "start": 4785.36,
+   "end": 4787.92,
+   "text": "big history of being involved in tremendous things."
+  },
+  {
+   "start": 4788.92,
+   "end": 4792.84,
+   "text": "You have a family tree which is one of the most impressive that I've ever seen or read about."
+  },
+  {
+   "start": 4793.92,
+   "end": 4794.36,
+   "text": "Your great"
+  },
+  {
+   "start": 4795.52,
+   "end": 4801.92,
+   "text": "great grandfather, George Boole, founded the Boolean algebra logic which is one of the foundational principles of modern computer science."
+  },
+  {
+   "start": 4803.04,
+   "end": 4809.12,
+   "text": "You have uh your great great grandmother, Mary Everest Boole, who was a mathematician and educator who made huge"
+  },
+  {
+   "start": 4810.48,
+   "end": 4813.0,
+   "text": "leaps forward in mathematics from what I was able to ascertain."
+  },
+  {
+   "start": 4814.12,
+   "end": 4817.96,
+   "text": "Um I mean I can get the list goes on and on and on. I mean your great great uncle, George Everest,"
+  },
+  {
+   "start": 4819.44,
+   "end": 4820.72,
+   "text": "is what Mount Everest is named after."
+  },
+  {
+   "start": 4822.52,
+   "end": 4823.08,
+   "text": "Is that is that correct?"
+  },
+  {
+   "start": 4824.64,
+   "end": 4826.84,
+   "text": "I think he's my great great great uncle. His"
+  },
+  {
+   "start": 4828.32,
+   "end": 4829.2,
+   "text": "his niece"
+  },
+  {
+   "start": 4830.64,
+   "end": 4831.52,
+   "text": "married George Boole."
+  },
+  {
+   "start": 4833.2,
+   "end": 4835.76,
+   "text": "So Mary Mary Boole was Mary Everest Boole."
+  },
+  {
+   "start": 4836.68,
+   "end": 4837.92,
+   "text": "Um she was a niece of Everest."
+  },
+  {
+   "start": 4839.44,
+   "end": 4841.2,
+   "text": "And your first cousin once removed, Joan Hinton,"
+  },
+  {
+   "start": 4842.32,
+   "end": 4852.08,
+   "text": "was involved in the new a nuclear physicist who worked on the Manhattan Project which is the World War II development of the first nuclear bomb. Yeah, she was one of the two female physicists at Los Alamos."
+  },
+  {
+   "start": 4853.76,
+   "end": 4853.92,
+   "text": "And then"
+  },
+  {
+   "start": 4855.32,
+   "end": 4857.08,
+   "text": "after they dropped the bomb, she moved to China."
+  },
+  {
+   "start": 4858.36,
+   "end": 4860.68,
+   "text": "Why? She was very cross with them dropping the bomb."
+  },
+  {
+   "start": 4861.96,
+   "end": 4864.16,
+   "text": "And her family had a lot of links with China."
+  },
+  {
+   "start": 4865.28,
+   "end": 4865.44,
+   "text": "Her mother"
+  },
+  {
+   "start": 4866.56,
+   "end": 4867.16,
+   "text": "was friends with"
+  },
+  {
+   "start": 4868.16,
+   "end": 4868.56,
+   "text": "Chairman Mao."
+  },
+  {
+   "start": 4869.84,
+   "end": 4869.84,
+   "text": "Hm."
+  },
+  {
+   "start": 4870.92,
+   "end": 4871.2,
+   "text": "Quite weird."
+  },
+  {
+   "start": 4873.16,
+   "end": 4874.08,
+   "text": "When you look back at your life, Geoffrey,"
+  },
+  {
+   "start": 4876.6,
+   "end": 4879.4,
+   "text": "with the hindsight you have now and the retro- retrospective clarity,"
+  },
+  {
+   "start": 4882.56,
+   "end": 4884.6,
+   "text": "what might you have done differently if you were advising me?"
+  },
+  {
+   "start": 4886.48,
+   "end": 4886.88,
+   "text": "I guess I have"
+  },
+  {
+   "start": 4887.92,
+   "end": 4888.64,
+   "text": "two pieces of advice."
+  },
+  {
+   "start": 4890.0,
+   "end": 4890.36,
+   "text": "One is"
+  },
+  {
+   "start": 4891.48,
+   "end": 4892.28,
+   "text": "if you have an intuition"
+  },
+  {
+   "start": 4893.84,
+   "end": 4896.4,
+   "text": "that people are doing things wrong and there's a better way to do things,"
+  },
+  {
+   "start": 4897.6,
+   "end": 4900.24,
+   "text": "don't give up on that intuition just cuz people say it's silly."
+  },
+  {
+   "start": 4901.24,
+   "end": 4904.56,
+   "text": "Don't give up on the intuition until you figured out why it's wrong."
+  },
+  {
+   "start": 4905.52,
+   "end": 4907.6,
+   "text": "Figured out for yourself why that intuition isn't correct."
+  },
+  {
+   "start": 4908.92,
+   "end": 4909.12,
+   "text": "And usually"
+  },
+  {
+   "start": 4910.36,
+   "end": 4910.56,
+   "text": "it's wrong"
+  },
+  {
+   "start": 4911.64,
+   "end": 4914.92,
+   "text": "if it disagrees with everybody else and you'll eventually figure out why it's wrong."
+  },
+  {
+   "start": 4916.56,
+   "end": 4918.12,
+   "text": "But just occasionally you'll have an intuition"
+  },
+  {
+   "start": 4919.2,
+   "end": 4928.36,
+   "text": "that's actually right and everybody else is wrong. Hm. And I lucked out that way. Early on I thought neural nets are definitely the way to go to make AI."
+  },
+  {
+   "start": 4929.56,
+   "end": 4931.2,
+   "text": "And almost everybody said that was crazy."
+  },
+  {
+   "start": 4932.4,
+   "end": 4935.68,
+   "text": "And I stuck with it because I couldn't it just seemed to me it was obviously right."
+  },
+  {
+   "start": 4937.28,
+   "end": 4937.28,
+   "text": "Now"
+  },
+  {
+   "start": 4938.48,
+   "end": 4939.88,
+   "text": "the idea that you should stick with your intuitions"
+  },
+  {
+   "start": 4941.4,
+   "end": 4942.88,
+   "text": "isn't going to work if you have bad intuitions."
+  },
+  {
+   "start": 4944.24,
+   "end": 4947.68,
+   "text": "But if you have bad intuitions, you're never going to do anything anyway, so you might as well stick with them."
+  },
+  {
+   "start": 4950.52,
+   "end": 4956.64,
+   "text": "And in your own career journey, is there anything you look back on and say with the hindsight I have now, I should have taken a different approach at that juncture?"
+  },
+  {
+   "start": 4959.0,
+   "end": 4960.36,
+   "text": "I wish I spent more time with my wife."
+  },
+  {
+   "start": 4962.12,
+   "end": 4962.12,
+   "text": "Um"
+  },
+  {
+   "start": 4967.4,
+   "end": 4968.56,
+   "text": "and with my children when they were little."
+  },
+  {
+   "start": 4970.96,
+   "end": 4972.12,
+   "text": "I was kind of obsessed with work."
+  },
+  {
+   "start": 4975.36,
+   "end": 4977.92,
+   "text": "Your wife passed away. Yeah. From ovarian cancer?"
+  },
+  {
+   "start": 4979.04,
+   "end": 4993.04,
+   "text": "No, or that was another wife. Okay. Um I had two wives die of cancer. Oh, really? Sorry. The first one died of ovarian cancer and the second one died of pancreatic cancer. And you wish you'd spent more time with her. With the second wife, yeah. Who was a wonderful person."
+  },
+  {
+   "start": 4994.92,
+   "end": 4999.56,
+   "text": "Why do you say that in your 70s? What is it that you've you've figured out that I might not know yet?"
+  },
+  {
+   "start": 5001.04,
+   "end": 5003.28,
+   "text": "Oh, just cuz she's gone and I can't spend more time with her now."
+  },
+  {
+   "start": 5004.28,
+   "end": 5004.28,
+   "text": "Hm."
+  },
+  {
+   "start": 5006.52,
+   "end": 5007.32,
+   "text": "But you didn't know that at the time."
+  },
+  {
+   "start": 5009.96,
+   "end": 5010.8,
+   "text": "At the time you think"
+  },
+  {
+   "start": 5013.0,
+   "end": 5017.04,
+   "text": "I mean it was likely I would die before her just cuz she was a woman and I was a man."
+  },
+  {
+   "start": 5018.0,
+   "end": 5018.88,
+   "text": "Um I didn't"
+  },
+  {
+   "start": 5020.84,
+   "end": 5022.0,
+   "text": "I just didn't spend enough time when I could."
+  },
+  {
+   "start": 5023.92,
+   "end": 5036.96,
+   "text": "I I think I I inquire there because I think there's many of us that are so consumed with what we're doing professionally that we kind of assume or more immortality with our partners because they've always been there, so we Yeah. I mean She was very supportive of me spending a lot of time working."
+  },
+  {
+   "start": 5038.28,
+   "end": 5038.28,
+   "text": "But"
+  },
+  {
+   "start": 5039.52,
+   "end": 5043.48,
+   "text": "And why do you say your children as well? What's the what's the issue? spend enough time with them when they were little."
+  },
+  {
+   "start": 5045.84,
+   "end": 5047.12,
+   "text": "And you regret that now? Yeah."
+  },
+  {
+   "start": 5050.2,
+   "end": 5050.2,
+   "text": "Hm."
+  },
+  {
+   "start": 5052.56,
+   "end": 5056.72,
+   "text": "If you um if you had a closing message for for my for my listeners about AI and AI safety,"
+  },
+  {
+   "start": 5057.92,
+   "end": 5058.4,
+   "text": "what would that be, Geoffrey?"
+  },
+  {
+   "start": 5060.28,
+   "end": 5063.76,
+   "text": "There's still a chance that we can figure out how to develop AI"
+  },
+  {
+   "start": 5064.8,
+   "end": 5066.16,
+   "text": "that won't want to take over from us."
+  },
+  {
+   "start": 5067.16,
+   "end": 5067.84,
+   "text": "And because there's a chance,"
+  },
+  {
+   "start": 5068.88,
+   "end": 5073.32,
+   "text": "we should put enormous resources into trying to figure that out cuz if we don't, it's going to take over."
+  },
+  {
+   "start": 5074.64,
+   "end": 5075.04,
+   "text": "And are you hopeful?"
+  },
+  {
+   "start": 5076.84,
+   "end": 5078.6,
+   "text": "I just don't know. I'm agnostic."
+  },
+  {
+   "start": 5080.36,
+   "end": 5084.32,
+   "text": "You must get get better get in bed at night and when you're thinking to yourself about probabilities"
+  },
+  {
+   "start": 5085.36,
+   "end": 5092.0,
+   "text": "of outcomes, there must be a bias in one direction cuz there certainly is for me. I mean imagine everyone listening now has a"
+  },
+  {
+   "start": 5093.52,
+   "end": 5094.04,
+   "text": "internal prediction"
+  },
+  {
+   "start": 5095.64,
+   "end": 5098.08,
+   "text": "that they might not say out loud, but of how they think it's going to play out."
+  },
+  {
+   "start": 5099.28,
+   "end": 5101.04,
+   "text": "I really don't know. I genuinely don't know."
+  },
+  {
+   "start": 5102.0,
+   "end": 5103.08,
+   "text": "I think it's incredibly uncertain."
+  },
+  {
+   "start": 5104.28,
+   "end": 5106.08,
+   "text": "When I'm feeling slightly depressed, I think"
+  },
+  {
+   "start": 5107.72,
+   "end": 5112.68,
+   "text": "people are toast. AI is going to take over. When I'm feeling cheerful, I think we'll figure out a way."
+  },
+  {
+   "start": 5113.68,
+   "end": 5114.84,
+   "text": "Maybe one of the facets of being a human"
+  },
+  {
+   "start": 5115.88,
+   "end": 5120.92,
+   "text": "um is because we've always been here like we were saying about our loved ones and our relationships, we assume"
+  },
+  {
+   "start": 5122.24,
+   "end": 5129.04,
+   "text": "casually that we will always be here and we'll always figure everything out. But there's a beginning and an end to everything as we saw from the dinosaurs. I mean"
+  },
+  {
+   "start": 5129.96,
+   "end": 5129.96,
+   "text": "Yeah."
+  },
+  {
+   "start": 5131.08,
+   "end": 5131.08,
+   "text": "And"
+  },
+  {
+   "start": 5132.92,
+   "end": 5133.8,
+   "text": "we have to face the possibility"
+  },
+  {
+   "start": 5135.52,
+   "end": 5136.56,
+   "text": "that unless we do something"
+  },
+  {
+   "start": 5138.08,
+   "end": 5138.08,
+   "text": "soon,"
+  },
+  {
+   "start": 5139.84,
+   "end": 5140.6,
+   "text": "we're near the end."
+  },
+  {
+   "start": 5142.6,
+   "end": 5145.48,
+   "text": "We have a closing tradition on this podcast where the last guest leaves a question in their diary."
+  },
+  {
+   "start": 5146.76,
+   "end": 5147.8,
+   "text": "And the question that they've left for you"
+  },
+  {
+   "start": 5149.04,
+   "end": 5149.04,
+   "text": "is"
+  },
+  {
+   "start": 5154.8,
+   "end": 5156.16,
+   "text": "with everything that you see ahead of us,"
+  },
+  {
+   "start": 5157.92,
+   "end": 5160.24,
+   "text": "what is the biggest threat you see to human happiness?"
+  },
+  {
+   "start": 5164.68,
+   "end": 5169.2,
+   "text": "I think the joblessness is a fairly urgent short-term threat to human happiness."
+  },
+  {
+   "start": 5170.4,
+   "end": 5172.44,
+   "text": "I think if you make lots and lots of people unemployed,"
+  },
+  {
+   "start": 5173.88,
+   "end": 5175.32,
+   "text": "even if they get universal basic income,"
+  },
+  {
+   "start": 5176.6,
+   "end": 5176.6,
+   "text": "um"
+  },
+  {
+   "start": 5177.52,
+   "end": 5178.2,
+   "text": "they're not going to be happy."
+  },
+  {
+   "start": 5179.84,
+   "end": 5185.84,
+   "text": "Because they need purpose. Because they need purpose, yes. And struggle. to feel they're contributing something. They're useful."
+  },
+  {
+   "start": 5187.32,
+   "end": 5189.84,
+   "text": "And do you think that outcome that there's going to be huge job displacement"
+  },
+  {
+   "start": 5190.88,
+   "end": 5192.36,
+   "text": "is more probable than not? Yes."
+  },
+  {
+   "start": 5193.76,
+   "end": 5199.28,
+   "text": "I do. And what's the That one I think is definitely more probable than not. If I worked in a call center, I'd be terrified."
+  },
+  {
+   "start": 5201.28,
+   "end": 5204.92,
+   "text": "And what's the time frame for that in terms of mass job displacement? it's beginning to happen already."
+  },
+  {
+   "start": 5206.12,
+   "end": 5207.56,
+   "text": "I wrote an article in the Atlantic recently"
+  },
+  {
+   "start": 5208.8,
+   "end": 5212.56,
+   "text": "that said it's already getting hard for university graduates to get jobs."
+  },
+  {
+   "start": 5213.92,
+   "end": 5219.04,
+   "text": "And part of that may be that people are already using AI for the jobs they would have got."
+  },
+  {
+   "start": 5220.0,
+   "end": 5226.08,
+   "text": "I spoke to the CEO of a major company that everyone will know of, lots of people use, and he said to me in DMs"
+  },
+  {
+   "start": 5227.12,
+   "end": 5228.92,
+   "text": "that they used to have seven just over 7,000 employees."
+  },
+  {
+   "start": 5229.88,
+   "end": 5232.04,
+   "text": "He said uh by last year they were down to I think 5,000."
+  },
+  {
+   "start": 5233.32,
+   "end": 5234.16,
+   "text": "He said right now they have 3,600"
+  },
+  {
+   "start": 5235.44,
+   "end": 5238.08,
+   "text": "and he said by the end of summer because of AI agents, they'll be down to 3,000."
+  },
+  {
+   "start": 5239.56,
+   "end": 5246.16,
+   "text": "So you've said It's happening already. Yes. He's halved his workforce because AI agents can now handle 80% of the customer service inquiries"
+  },
+  {
+   "start": 5247.4,
+   "end": 5247.76,
+   "text": "and other things."
+  },
+  {
+   "start": 5248.88,
+   "end": 5250.48,
+   "text": "So it's it's happening already. Yeah."
+  },
+  {
+   "start": 5251.72,
+   "end": 5254.56,
+   "text": "So urgent action is needed. Yep. I don't know what that urgent action is."
+  },
+  {
+   "start": 5256.24,
+   "end": 5259.04,
+   "text": "That's a tricky one cuz that depends very much on the political system."
+  },
+  {
+   "start": 5260.48,
+   "end": 5263.0,
+   "text": "And political systems are all going in the wrong direction at present."
+  },
+  {
+   "start": 5264.16,
+   "end": 5267.72,
+   "text": "And what do we need to do? Save up money? Like do we save money? Do we move to another part of the world?"
+  },
+  {
+   "start": 5269.12,
+   "end": 5269.48,
+   "text": "I don't know."
+  },
+  {
+   "start": 5270.76,
+   "end": 5271.64,
+   "text": "What would you tell your kids to do?"
+  },
+  {
+   "start": 5273.32,
+   "end": 5275.08,
+   "text": "They said, \"Dad, look, there's going to be loads of just job displacement.\""
+  },
+  {
+   "start": 5276.48,
+   "end": 5278.68,
+   "text": "Because I worked for Google for 10 years, they have enough money."
+  },
+  {
+   "start": 5279.6,
+   "end": 5280.48,
+   "text": "Okay. Okay. [ __ ]"
+  },
+  {
+   "start": 5281.56,
+   "end": 5283.36,
+   "text": "So they're not typical. What if they didn't have money?"
+  },
+  {
+   "start": 5284.28,
+   "end": 5284.76,
+   "text": "Train to be a plumber."
+  },
+  {
+   "start": 5285.88,
+   "end": 5286.36,
+   "text": "Really? Yeah."
+  },
+  {
+   "start": 5290.96,
+   "end": 5294.76,
+   "text": "Geoffrey, thank you so much. You're the first Nobel Prize winner that I've ever"
+  },
+  {
+   "start": 5295.84,
+   "end": 5297.88,
+   "text": "had a conversation with, I think, in my life."
+  },
+  {
+   "start": 5298.84,
+   "end": 5306.6,
+   "text": "So that's a a tremendous honor and you you you received that award for a lifetime of exceptional work in pushing the world forward in so many profound ways that will lead to great"
+  },
+  {
+   "start": 5307.68,
+   "end": 5318.68,
+   "text": "and that have led to great advancements in things that matter so much to us. And now you've turned this season in your life to shining a light on some of your own work, but also on the the the broader risks of AI and how um"
+  },
+  {
+   "start": 5320.08,
+   "end": 5322.36,
+   "text": "and how it might impact us adversely. And there's very few people"
+  },
+  {
+   "start": 5323.44,
+   "end": 5333.84,
+   "text": "that have worked inside the the machine of a Google or a big tech company that have contributed to the field of AI that are now at the very forefront of warning us against the very thing that they worked upon."
+  },
+  {
+   "start": 5335.04,
+   "end": 5337.72,
+   "text": "There are actually a surprising number of us now."
+  },
+  {
+   "start": 5338.68,
+   "end": 5339.56,
+   "text": "They're not as uh"
+  },
+  {
+   "start": 5340.72,
+   "end": 5345.2,
+   "text": "as public and they're actually quite hard to get to have these kinds of conversations because many of them are still in that industry."
+  },
+  {
+   "start": 5346.52,
+   "end": 5353.96,
+   "text": "So, you know, someone who tries to contact these people often and ask invites them to have conversations, they often are a little bit hesitant to speak openly, so they speak privately,"
+  },
+  {
+   "start": 5355.16,
+   "end": 5368.64,
+   "text": "but they're less willing to openly because maybe maybe they still have something at at some sort of incentives at play. I have an advantage over them which is I'm older so I'm unemployed so I can say what I have. Well there you go. So thank you for doing what you do it's a real honor and please do"
+  },
+  {
+   "start": 5368.76,
+   "end": 5370.48,
+   "text": "continue to do it. Thank you. Thank you so much."
+  },
+  {
+   "start": 5374.8,
+   "end": 5378.4,
+   "text": "Many people think I'm joking when I say that but I'm not. What are you coming for? Yeah."
+  },
+  {
+   "start": 5381.24,
+   "end": 5382.24,
+   "text": "And plumbers are pretty well paid."
+  }
+ ]
+}
