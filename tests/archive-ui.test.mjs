@@ -150,7 +150,7 @@ test('starts with no prefilled or automatic search', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   assert.match(html, /id="query"[^>]*value=""[^>]*minlength="2"[^>]*maxlength="500"/);
   assert.match(html, /Choose a topic\.<br><em>Find a clip\.<\/em>/);
-  assert.match(html, /Choose a topic…/);
+  assert.match(html, /Search the archive…/);
   assert.doesNotMatch(app, /if\s*\(query\.value\)\s*form\.requestSubmit\(\)/);
 });
 
@@ -235,11 +235,11 @@ test('clip drafts expose local edit and review state without implying a shared a
   assert.match(html, /Clips <b id="queue-count">0/);
   assert.match(html, /<h2>Clip drafts<\/h2>/);
   assert.match(html, /Clip-ready moments saved on this device\./);
-  assert.match(app, /const saveLabel = saveDisabled \? 'Finish cut edit first' : saved \? '✓ Saved · Remove from drafts' : 'Add to drafts'/);
-  assert.match(app, /<button class="save" id="save-moment" type="button"/);
-  assert.doesNotMatch(app, /id="save-moment"[^>]*aria-pressed=/);
-  assert.match(app, /persistQueue\(isSaved \? 'Draft removed from this device\.' : 'Draft saved on this device · not shared\.'\)/);
-  assert.match(app, /document\.querySelector\('#save-moment'\)\?\.focus\(\{ preventScroll: true \}\)/);
+  assert.match(app, /<span>\$\{saved \? 'SAVED' : 'CREATE CLIP'\}<\/span>/);
+  assert.match(app, /\[15,30,60,90\]\.map\(seconds =>/);
+  assert.match(app, /persistQueue\(`\$\{duration\}s clip draft created\.`\)/);
+  assert.doesNotMatch(app, /id="save-moment"/);
+  assert.doesNotMatch(app, /Add to drafts/);
   assert.match(styles, /\.clip-item a:focus-visible,\.save:focus-visible,\.searchbox button:focus-visible\{outline:2px solid var\(--violet\);outline-offset:3px\}/);
   assert.match(app, /data-edit-cut=/);
   assert.match(app, /REVIEWED LOCALLY/);
@@ -332,8 +332,9 @@ test('archive graph exposes concepts rather than generic transcript fragments', 
   assert.ok(graph.edges.every(edge => nodeIds.has(edge.source) && nodeIds.has(edge.target)));
 });
 
-test('transcript result cards expose a direct local draft action', async () => {
+test('transcript result cards route CREATE CLIP to the evidence panel presets', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   assert.match(app, /data-save-citation=/);
-  assert.match(app, /event\.stopPropagation\(\);[\s\S]*?toggleSaved\(item\)/);
+  assert.match(app, /event\.stopPropagation\(\);[\s\S]*?selectEvidence\(item\);[\s\S]*?#evidence-panel'\)\.scrollIntoView/);
+  assert.doesNotMatch(app, /toggleSaved/);
 });
