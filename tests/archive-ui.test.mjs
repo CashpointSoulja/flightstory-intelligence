@@ -177,6 +177,12 @@ test('the interactive graph color token resolves from the root theme', async () 
   assert.match(graph, /var\(--lilac\)/);
 });
 
+test('workspace toggle sits with the composer and the old draft label is gone', async () => {
+  const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  assert.ok(html.indexOf('workspace-switch') > html.indexOf('class="composer"'));
+  assert.doesNotMatch(html.split('</header>')[0], />Drafts\s/);
+});
+
 test('describes AI results, local saves, and the distinct archive count scopes honestly', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
@@ -190,7 +196,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.match(app, /data-claim-source=/);
   assert.match(app, /content\.querySelectorAll\('\[data-claim-source\]'\)/);
   assert.doesNotMatch(app, /OPENAI GROUNDED/);
-  assert.match(html, /Drafts are saved on this device only/);
+  assert.match(html, /Clip-ready moments saved on this device/);
   assert.match(html, /Graph videos/);
   assert.match(html, /SEARCHABLE DEMO/);
   assert.match(html, /Graph metadata only/);
@@ -225,9 +231,9 @@ test('clip drafts expose local edit and review state without implying a shared a
   const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
-  assert.match(html, /Drafts <b id="queue-count">0/);
+  assert.match(html, /Clips <b id="queue-count">0/);
   assert.match(html, /<h2>Clip drafts<\/h2>/);
-  assert.match(html, /Drafts are saved on this device only\./);
+  assert.match(html, /Clip-ready moments saved on this device\./);
   assert.match(app, /const saveLabel = saveDisabled \? 'Finish cut edit first' : saved \? '✓ Saved · Remove from drafts' : 'Add to drafts'/);
   assert.match(app, /<button class="save" id="save-moment" type="button"/);
   assert.doesNotMatch(app, /id="save-moment"[^>]*aria-pressed=/);
