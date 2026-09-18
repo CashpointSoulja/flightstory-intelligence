@@ -85,7 +85,19 @@ function rankEvidence(query, items) {
   const scope = guestScopedEvidence(query, items);
   const nameTokens = new Set(scope.nameTokens);
   const words = queryWords(query).filter(word => !nameTokens.has(word));
-  const ranked = scope.items.map(item => ({ item, score: words.reduce((score, word) => { const text = `${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase(); return score + (textMatchesWord(text, word) ? 1 : 0); }, 0), guest: canonicalGuest(item.guest || '') })).sort((a, b) => b.score - a.score);
+  const texts = scope.items.map(item => `${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase());
+  // IDF weighting: rare words (waking, exhausted) outrank common ones (stop),
+  // so single-word ties no longer drown the relevant segments in noise.
+  const weight = new Map(words.map(word => {
+    let df = 0;
+    for (const text of texts) if (textMatchesWord(text, word)) df++;
+    return [word, Math.log(1 + scope.items.length / (1 + df))];
+  }));
+  const ranked = scope.items.map((item, index) => {
+    let score = 0, weighted = 0;
+    for (const word of words) if (textMatchesWord(texts[index], word)) { score++; weighted += weight.get(word); }
+    return { item, score, weighted, guest: canonicalGuest(item.guest || '') };
+  }).sort((a, b) => b.weighted - a.weighted);
   if (scope.mentioned.length > 1) {
     const queues = scope.mentioned.map(name => ranked.filter(item => item.guest === name));
     const balanced = [];
