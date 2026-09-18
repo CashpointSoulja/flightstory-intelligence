@@ -20,7 +20,7 @@ const evidence = [
 
 const styles = document.createElement('style');
 styles.textContent = `
-  .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d;z-index:1}.universe-node-label{position:absolute;z-index:4;transform:translate(9px,-50%);white-space:nowrap;color:rgba(243,240,237,.78);font:9px 'neue-haas-grotesk-display';letter-spacing:.08em;pointer-events:none;text-shadow:0 1px 9px #08080d}
+  .universe-stage{position:absolute;inset:0;overflow:hidden;background:radial-gradient(circle at 50% 47%,rgba(199,167,255,.13),transparent 23%),#08080d;z-index:1}.universe-node-label{position:absolute;z-index:4;transform:translate(9px,-50%);white-space:nowrap;color:rgba(243,240,237,.78);font:9px 'neue-haas-grotesk-display';letter-spacing:.08em;pointer-events:none;text-shadow:0 1px 9px #08080d}.universe-node-label--row{pointer-events:auto;cursor:pointer;padding:5px 2px 5px 10px;border-left:1px solid rgba(199,167,255,.35)}.universe-node-label--row:hover{color:#f3f0ed;border-left-color:#c7a7ff}
   .universe-stage canvas{display:block;width:100%;height:100%;touch-action:none;cursor:grab}.universe-stage canvas:active{cursor:grabbing}
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'neue-haas-grotesk-display',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
   .universe-access[open]{width:min(440px,calc(100vw - 32px))}.universe-access-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(241,240,237,.06)}.universe-access-row button,.universe-access-row a{padding:7px 6px;color:var(--muted);background:none;border:0;text-align:left;text-decoration:none;font:9px 'neue-haas-grotesk-display',monospace;cursor:pointer}.universe-access-row button{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:var(--paper);background:rgba(187,164,255,.1);outline-color:var(--lilac)}
@@ -29,7 +29,7 @@ styles.textContent = `
 `;
 
 styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
-styles.textContent += '.universe-stage{background:#f1f1ef}.universe-node-label{color:rgba(17,17,19,.72);text-shadow:0 1px 8px rgba(255,255,255,.9)}.universe-heading{color:#111113}.universe-heading span,.universe-hint,.universe-foot small{color:#77777b}.universe-map-key{color:rgba(17,17,19,.72)}.universe-controls button{border-color:rgba(17,17,19,.18);background:rgba(255,255,255,.78);color:#55545a}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:#ee625b;color:#111113}.universe-inspector{background:rgba(255,255,255,.9);border-left-color:#ee625b}.universe-inspector strong{color:#111113}.universe-inspector button{color:#c84b46}.universe-access-list{background:rgba(255,255,255,.94);border-color:#dededb}.universe-access-row{border-bottom-color:rgba(17,17,19,.1)}.universe-access-row button,.universe-access-row a{color:#77777b}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:#111113;background:rgba(238,98,91,.1)}';
+styles.textContent += '.universe-stage{background:#f1f1ef}.universe-node-label{color:rgba(17,17,19,.72);text-shadow:0 1px 8px rgba(255,255,255,.9)}.universe-node-label--row{border-left-color:rgba(238,98,91,.4)}.universe-node-label--row:hover{color:#111113;border-left-color:#ee625b}.universe-heading{color:#111113}.universe-heading span,.universe-hint,.universe-foot small{color:#77777b}.universe-map-key{color:rgba(17,17,19,.72)}.universe-controls button{border-color:rgba(17,17,19,.18);background:rgba(255,255,255,.78);color:#55545a}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:#ee625b;color:#111113}.universe-inspector{background:rgba(255,255,255,.9);border-left-color:#ee625b}.universe-inspector strong{color:#111113}.universe-inspector button{color:#c84b46}.universe-access-list{background:rgba(255,255,255,.94);border-color:#dededb}.universe-access-row{border-bottom-color:rgba(17,17,19,.1)}.universe-access-row button,.universe-access-row a{color:#77777b}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:#111113;background:rgba(238,98,91,.1)}';
 document.head.appendChild(styles);
 host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">BROWSE THE ARCHIVE MAP <span>INDEXING IN PROGRESS</span></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-controls"><button type="button" data-back hidden>← FULL MAP</button><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
@@ -329,9 +329,11 @@ function enterTopicFocus(node) {
     root.add(line); focusMomentLines.push(line);
     const label = document.createElement('span');
     label.className = 'universe-node-label';
+    label.classList.add('universe-node-label--row');
     label.textContent = useSubtopics
       ? `${moment.name.length > 38 ? `${moment.name.slice(0, 38)}…` : moment.name} · ${moment.count}`
       : `${moment.title.length > 38 ? `${moment.title.slice(0, 38)}…` : moment.title} · ${formatTime(moment.seconds)}`;
+    label.addEventListener('click', () => selectNode(mesh));
     stage.appendChild(label);
     focusMomentLabels.push({ node: mesh, label });
   });
@@ -405,7 +407,7 @@ function resize() { const width = host.clientWidth; const height = host.clientHe
 new ResizeObserver(resize).observe(host);
 resize();
 
-function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of [...topicLabels, ...focusMomentLabels]) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
+function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.transform = 'translate(9px,-50%)'; label.style.opacity = point.z < 1 ? '.82' : '0'; } focusMomentLabels.forEach(({ label }, index) => { label.style.left = 'auto'; label.style.right = '18px'; label.style.top = `${64 + index * 24}px`; label.style.transform = 'none'; label.style.textAlign = 'right'; label.style.opacity = '.82'; }); }
 function canRender({ ready, inView, visible }) { return ready && inView && visible; }
 function shouldAnimate({ reduced, inView, visible }) { return !reduced && inView && visible; }
 function requestRender() {
