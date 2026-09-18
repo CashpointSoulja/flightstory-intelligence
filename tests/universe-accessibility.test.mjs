@@ -55,7 +55,7 @@ test('topic inspectors expose linked transcript moments with timestamped source 
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
 
   assert.match(graph, /const inspectorMomentItems = data\.kind === 'topic' \? \(data\.sources \|\| \[\]\) : data\.kind === 'subtopic'/);
-  assert.match(graph, /link\.textContent = `\$\{moment\.title\} · \$\{formatTime\(moment\.seconds\)\} ↗`/);
+  assert.match(graph, /link\.textContent = `\$\{moment\.title\} · \$\{formatTime\(Math\.round\(moment\.seconds\)\)\} ↗`/);
   assert.match(graph, /nodeSourceUrl\(\{ source: moment\.url, seconds: moment\.seconds \}\)/);
   assert.match(graph, /setAttribute\('aria-label', 'Linked transcript moments'\)/);
 });
