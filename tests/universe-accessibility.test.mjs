@@ -70,7 +70,8 @@ test('topic nodes zoom into clickable moment sub-nodes with background and back-
   assert.match(graph, /kind: 'subtopic', title: moment\.name, count: moment\.count, moments: moment\.moments/);
   assert.match(graph, /label\.classList\.add\('universe-node-label--row'\)/);
   assert.match(graph, /label\.addEventListener\('click', \(\) => selectNode\(mesh\)\)/);
-  assert.match(graph, /label\.style\.right = '18px'; label\.style\.top = `\$\{64 \+ index \* 24\}px`/);
+  assert.match(graph, /label\.style\.right = `\$\{rowOffset\}px`; label\.style\.top = `\$\{64 \+ index \* 24\}px`/);
+  assert.match(graph, /universe-node-label--row\{display:block!important/);
   assert.match(graph, /visibleNodes = \[node, \.\.\.focusMomentNodes\]/);
   assert.match(graph, /<button type="button" data-back hidden>← FULL MAP<\/button>/);
   assert.match(graph, /if \(hitNode\.userData\.kind === 'topic' && activeGraphLayer === 'topics'\) enterTopicFocus\(hitNode\);/);
