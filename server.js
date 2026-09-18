@@ -135,8 +135,7 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
 function excerptPassWillCallOpenAI(query, items) {
   const ranking = rankEvidence(query, items);
   if (!ranking.contentWordCount && !ranking.guestScoped) return false;
-  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
-  return ranking.items.some(({ item, score }) => (ranking.contentWordCount === 0 ? ranking.guestScoped : score >= minOverlap) && item.quote);
+  return ranking.items.some(({ item, score }) => (ranking.contentWordCount === 0 ? ranking.guestScoped : score >= 1) && item.quote);
 }
 
 function searchLocal(query, items) {
@@ -162,7 +161,7 @@ async function searchOpenAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_0
   if (!apiKey) return null;
   const ranking = rankEvidence(query, items);
   if (!ranking.contentWordCount && !ranking.guestScoped) return null;
-  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
+  const minOverlap = ranking.guestScoped ? Math.min(2, ranking.contentWordCount) : 1;
   const ranked = ranking.items
     .filter(({ score }) => ranking.contentWordCount === 0 ? ranking.guestScoped : score >= minOverlap)
     .slice(0, 24)
