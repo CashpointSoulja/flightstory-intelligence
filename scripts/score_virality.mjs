@@ -57,6 +57,41 @@ for (const w of windows) {
   if (!clash) kept.push(w);
 }
 const top = kept.slice(0, KEEP_TOP);
+
+// Carry LLM judgments across index rebuilds: a window whose text still
+// matches a previously scored window (same episode) keeps its llmScore even
+// when its timestamp moved (e.g. the intro-montage remap). Without this,
+// every rebuild wipes the LLM pass.
+try {
+  const prev = JSON.parse(await readFile(new URL('../data/virality-scores.json', import.meta.url), 'utf8'));
+  const normWords = t => new Set(String(t).toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(Boolean));
+  const prevByEp = new Map();
+  for (const w of prev.windows || []) {
+    if (w.llmScore == null) continue;
+    if (!prevByEp.has(w.videoId)) prevByEp.set(w.videoId, []);
+    prevByEp.get(w.videoId).push({ words: normWords(w.excerpt), llmScore: w.llmScore });
+  }
+  let carried = 0;
+  for (const w of top) {
+    const words = normWords(w.excerpt);
+    let best = 0, bestScore = null;
+    for (const c of prevByEp.get(w.videoId) || []) {
+      let inter = 0;
+      for (const x of words) if (c.words.has(x)) inter++;
+      const j = inter / (words.size + c.words.size - inter || 1);
+      if (j > best) { best = j; bestScore = c.llmScore; }
+    }
+    if (best >= 0.5 && bestScore != null) {
+      w.heuristicScore = w.score;
+      w.llmScore = bestScore;
+      w.score = bestScore;
+      w.tier = bestScore >= 8.5 ? 'TOP CLIP' : bestScore >= 7 ? 'STRONG' : 'SOLID';
+      carried++;
+    }
+  }
+  if (carried) console.log(`llmScore carried across rebuild for ${carried} windows`);
+} catch {}
+
 const out = {
   generatedAt: new Date().toISOString(),
   method: `heuristic rubric proxies, ${WINDOW_S}s windows step ${STEP_S}, NMS ${NMS_RADIUS_S}s; rubric validated vs DOAC top shorts (hits >=7 vs random max 6, calibrate_virality.mjs)`,

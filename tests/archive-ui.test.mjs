@@ -363,3 +363,20 @@ test('clip maker preview embeds a windowed YouTube player that stops at the out-
   assert.match(styles, /#clip-preview-player\{width:100%;aspect-ratio:16\/9/);
   assert.match(styles, /\.clip-presets button\[aria-pressed="true"\]\{border-color:var\(--signal\)/);
 });
+
+test('intro-montage citations remap to the real in-episode utterance', async () => {
+  const remapScript = await readFile(new URL('../scripts/build_intro_remap.mjs', import.meta.url), 'utf8');
+  const applyScript = await readFile(new URL('../scripts/apply_intro_remap.mjs', import.meta.url), 'utf8');
+  const scorer = await readFile(new URL('../scripts/score_virality.mjs', import.meta.url), 'utf8');
+  const remap = JSON.parse(await readFile(new URL('../data/intro-remap.json', import.meta.url), 'utf8'));
+  const demo = JSON.parse(await readFile(new URL('../public/demo-index.json', import.meta.url), 'utf8'));
+  assert.match(remapScript, /first 120s|INTRO_S = 120/);
+  assert.match(remapScript, /MIN_VERBATIM_HITS = 5/);
+  assert.match(applyScript, /s\.introRemapped = true/);
+  assert.match(scorer, /llmScore carried across rebuild/);
+  // The validated psychopath moment was montage at 0:00; the real Q&A is ~35:00 in.
+  assert.equal(remap.remap['AcK_zgJjnoo:0'].start, 2098.56);
+  const psych = demo.segments.find(s => s.id === 'AcK_zgJjnoo:0');
+  assert.ok(psych.start > 2000, 'demo citation points into the episode body');
+  assert.equal(psych.introRemapped, true);
+});

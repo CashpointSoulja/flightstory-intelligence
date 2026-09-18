@@ -1,0 +1,801 @@
+{
+ "generatedAt": "2026-09-18T16:29:40.300Z",
+ "introThresholdS": 120,
+ "verbatimShingle": 8,
+ "minVerbatimHits": 5,
+ "matched": 158,
+ "coldOpensKept": 193,
+ "noCorpus": 0,
+ "remap": {
+  "-Hwlvkfp698:0": {
+   "start": 6537,
+   "end": 6546,
+   "verbatimHits": 34
+  },
+  "-pdCDq_MTj4:0": {
+   "start": 842.56,
+   "end": 848.3199999999999,
+   "verbatimHits": 9
+  },
+  "0DZK1nawEXQ:0": {
+   "start": 3879,
+   "end": 3889,
+   "verbatimHits": 13
+  },
+  "0GQozcTPyO0:0": {
+   "start": 4422.52,
+   "end": 4437.400000000001,
+   "verbatimHits": 26
+  },
+  "0kOtvoX88J0:0": {
+   "start": 2712,
+   "end": 2721,
+   "verbatimHits": 12
+  },
+  "0t_DD5568RA:0": {
+   "start": 4463.6,
+   "end": 4470.4400000000005,
+   "verbatimHits": 14
+  },
+  "19_sGcrsWhg:0": {
+   "start": 5039,
+   "end": 5048,
+   "verbatimHits": 6
+  },
+  "1cRmjpBBn7s:0": {
+   "start": 344.4,
+   "end": 359.09999999999997,
+   "verbatimHits": 6
+  },
+  "1g9VX34MSUA:0": {
+   "start": 809.92,
+   "end": 817.4399999999999,
+   "verbatimHits": 6
+  },
+  "32u5T6lO8qk:0": {
+   "start": 3613.64,
+   "end": 3618.8399999999997,
+   "verbatimHits": 12
+  },
+  "3XP9J3UyTUo:0": {
+   "start": 4925.34,
+   "end": 4942.4400000000005,
+   "verbatimHits": 10
+  },
+  "3eZJ_y68wsg:0": {
+   "start": 5912.56,
+   "end": 5929.92,
+   "verbatimHits": 8
+  },
+  "4QLWlcneJig:0": {
+   "start": 2317.2,
+   "end": 2332.3199999999997,
+   "verbatimHits": 5
+  },
+  "5Jk5XCLAr6w:0": {
+   "start": 7500.8,
+   "end": 7517.68,
+   "verbatimHits": 17
+  },
+  "5Tr7AhkOEj4:0": {
+   "start": 750.12,
+   "end": 755.04,
+   "verbatimHits": 10
+  },
+  "5sCGZAcXKWg:0": {
+   "start": 3417.92,
+   "end": 3436.56,
+   "verbatimHits": 7
+  },
+  "6bL24eHvwoc:0": {
+   "start": 6120.32,
+   "end": 6136.24,
+   "verbatimHits": 8
+  },
+  "6ikIGGi859w:0": {
+   "start": 7456.2,
+   "end": 7468.24,
+   "verbatimHits": 8
+  },
+  "78YN1e8UXdM:0": {
+   "start": 6230,
+   "end": 6239,
+   "verbatimHits": 15
+  },
+  "7l_0ZcSuRwg:0": {
+   "start": 3157.08,
+   "end": 3172.08,
+   "verbatimHits": 6
+  },
+  "8qObdS-bhRM:0": {
+   "start": 481.2,
+   "end": 491.28,
+   "verbatimHits": 9
+  },
+  "99xyy1nUpug:0": {
+   "start": 1598.96,
+   "end": 1611.56,
+   "verbatimHits": 32
+  },
+  "9uSXOr-AdAU:0": {
+   "start": 3282.12,
+   "end": 3294.16,
+   "verbatimHits": 21
+  },
+  "AcK_zgJjnoo:0": {
+   "start": 2098.56,
+   "end": 2113.12,
+   "verbatimHits": 11
+  },
+  "B7tnfSPySb0:0": {
+   "start": 6023.04,
+   "end": 6035.08,
+   "verbatimHits": 5
+  },
+  "BFU1OCkhBwo:0": {
+   "start": 950.96,
+   "end": 967.52,
+   "verbatimHits": 8
+  },
+  "BbGv7GTbRN8:0": {
+   "start": 1173.28,
+   "end": 1188.44,
+   "verbatimHits": 6
+  },
+  "D46zvJI-njU:0": {
+   "start": 6488.56,
+   "end": 6491.04,
+   "verbatimHits": 5
+  },
+  "DazRYdqZRDI:0": {
+   "start": 2437.76,
+   "end": 2453.1200000000003,
+   "verbatimHits": 16
+  },
+  "DnEJrgc1BCk:0": {
+   "start": 5582.96,
+   "end": 5587.32,
+   "verbatimHits": 16
+  },
+  "EXUpMMde51E:0": {
+   "start": 3107.12,
+   "end": 3113.5099999999998,
+   "verbatimHits": 9
+  },
+  "Fg7U-BhiZGE:0": {
+   "start": 1753.76,
+   "end": 1767.04,
+   "verbatimHits": 16
+  },
+  "FjrJ2DJN_pA:0": {
+   "start": 3119.56,
+   "end": 3126.32,
+   "verbatimHits": 9
+  },
+  "FoeQUNASmTU:0": {
+   "start": 957.2,
+   "end": 964.84,
+   "verbatimHits": 8
+  },
+  "G1hqsr5mkzA:0": {
+   "start": 2440,
+   "end": 2450,
+   "verbatimHits": 7
+  },
+  "G4hkYDjPSFs:0": {
+   "start": 3420.28,
+   "end": 3436.2400000000002,
+   "verbatimHits": 14
+  },
+  "GHxXHKpMBm8:0": {
+   "start": 2511.3,
+   "end": 2518.02,
+   "verbatimHits": 17
+  },
+  "GHxXHKpMBm8:16": {
+   "start": 2644.32,
+   "end": 2657.52,
+   "verbatimHits": 17
+  },
+  "H0lbv1pgMc0:0": {
+   "start": 3118.86,
+   "end": 3121.32,
+   "verbatimHits": 5
+  },
+  "H9kPmiV0B34:0": {
+   "start": 3366,
+   "end": 3377,
+   "verbatimHits": 15
+  },
+  "HwVn3WMv5oI:0": {
+   "start": 166.36,
+   "end": 184.24,
+   "verbatimHits": 17
+  },
+  "HwmwyBgzj8c:0": {
+   "start": 7486,
+   "end": 7496,
+   "verbatimHits": 15
+  },
+  "I1i1kXw8L4M:0": {
+   "start": 1177,
+   "end": 1187,
+   "verbatimHits": 10
+  },
+  "I3WUiD8HYn8:0": {
+   "start": 2717,
+   "end": 2727,
+   "verbatimHits": 5
+  },
+  "IYu_PDPqKFc:0": {
+   "start": 370,
+   "end": 380,
+   "verbatimHits": 13
+  },
+  "IgW1jepnJp4:0": {
+   "start": 147.72,
+   "end": 164.04,
+   "verbatimHits": 6
+  },
+  "It5_C6AF1pk:0": {
+   "start": 2559,
+   "end": 2568,
+   "verbatimHits": 18
+  },
+  "Jk7RAkFN4vk:0": {
+   "start": 1709.56,
+   "end": 1728.3999999999999,
+   "verbatimHits": 6
+  },
+  "KVXnVe8eOkM:0": {
+   "start": 3328.4,
+   "end": 3342.44,
+   "verbatimHits": 6
+  },
+  "Lf5oqGOCRCM:0": {
+   "start": 158.24,
+   "end": 174.64000000000001,
+   "verbatimHits": 8
+  },
+  "LgsJ3V9pIG0:0": {
+   "start": 413.04,
+   "end": 421.56,
+   "verbatimHits": 15
+  },
+  "MGposaKNJKQ:0": {
+   "start": 3697.52,
+   "end": 3713,
+   "verbatimHits": 9
+  },
+  "MGxcosNuC8k:0": {
+   "start": 670.08,
+   "end": 674.8000000000001,
+   "verbatimHits": 6
+  },
+  "MM-Qhlxf1pM:0": {
+   "start": 2053.28,
+   "end": 2063,
+   "verbatimHits": 19
+  },
+  "MsERVcx0Qg8:0": {
+   "start": 951.92,
+   "end": 962.28,
+   "verbatimHits": 9
+  },
+  "Mvcu6UfY7d4:0": {
+   "start": 2404,
+   "end": 2413,
+   "verbatimHits": 14
+  },
+  "NB4jZCxRkTw:0": {
+   "start": 944.4,
+   "end": 950.0799999999999,
+   "verbatimHits": 5
+  },
+  "NZd9luVXB80:0": {
+   "start": 4395,
+   "end": 4405,
+   "verbatimHits": 5
+  },
+  "NcaQUH2K-wo:0": {
+   "start": 871,
+   "end": 882,
+   "verbatimHits": 11
+  },
+  "NxTsA72O5x0:0": {
+   "start": 2321.76,
+   "end": 2334.8,
+   "verbatimHits": 13
+  },
+  "NyFSkGMWP5Q:0": {
+   "start": 4998.4,
+   "end": 5013.2,
+   "verbatimHits": 7
+  },
+  "OEDzn83BxFo:0": {
+   "start": 4365.88,
+   "end": 4372.4400000000005,
+   "verbatimHits": 5
+  },
+  "OTrTqs9FLq0:0": {
+   "start": 398,
+   "end": 408,
+   "verbatimHits": 5
+  },
+  "OYg6BTjb90E:0": {
+   "start": 287.2,
+   "end": 300.64,
+   "verbatimHits": 8
+  },
+  "OsAlLgGf9JM:0": {
+   "start": 3820.84,
+   "end": 3834.84,
+   "verbatimHits": 5
+  },
+  "P1ALkQMfkjc:0": {
+   "start": 838,
+   "end": 847,
+   "verbatimHits": 26
+  },
+  "P1CeHGJOX5g:0": {
+   "start": 152.08,
+   "end": 170.32000000000002,
+   "verbatimHits": 13
+  },
+  "P7Y-fynYsgE:0": {
+   "start": 5401,
+   "end": 5411,
+   "verbatimHits": 16
+  },
+  "PHpsdIHpLUE:0": {
+   "start": 1631.52,
+   "end": 1643.92,
+   "verbatimHits": 11
+  },
+  "PUO51DoSEqk:0": {
+   "start": 216.16,
+   "end": 232.72,
+   "verbatimHits": 8
+  },
+  "P_A8XElrAqA:0": {
+   "start": 5459.04,
+   "end": 5473.24,
+   "verbatimHits": 5
+  },
+  "Ppyt3MptX5k:0": {
+   "start": 2280.16,
+   "end": 2296.7999999999997,
+   "verbatimHits": 13
+  },
+  "QCaFWrT0j-g:0": {
+   "start": 1639,
+   "end": 1649,
+   "verbatimHits": 7
+  },
+  "QCaFWrT0j-g:8": {
+   "start": 5211,
+   "end": 5221,
+   "verbatimHits": 26
+  },
+  "QMzxNfX-uAg:0": {
+   "start": 2173.68,
+   "end": 2188.56,
+   "verbatimHits": 11
+  },
+  "Qifsxitq_q4:0": {
+   "start": 785.68,
+   "end": 801.9799999999999,
+   "verbatimHits": 16
+  },
+  "Qx5J5nwDBTo:0": {
+   "start": 3376,
+   "end": 3386,
+   "verbatimHits": 6
+  },
+  "R-5H70SfbG8:0": {
+   "start": 3281,
+   "end": 3290,
+   "verbatimHits": 9
+  },
+  "R6xbXOp7wDA:0": {
+   "start": 275.8,
+   "end": 291.64,
+   "verbatimHits": 29
+  },
+  "RSyX_665sEw:0": {
+   "start": 1616,
+   "end": 1626,
+   "verbatimHits": 14
+  },
+  "RvjR9GM2kX8:0": {
+   "start": 5885,
+   "end": 5894,
+   "verbatimHits": 5
+  },
+  "RwlgFC6S-OE:0": {
+   "start": 1533.36,
+   "end": 1541.52,
+   "verbatimHits": 6
+  },
+  "S9a1nLw70p0:0": {
+   "start": 6000.16,
+   "end": 6006.96,
+   "verbatimHits": 10
+  },
+  "SkAZRNg-VWY:0": {
+   "start": 413.82,
+   "end": 420.24,
+   "verbatimHits": 14
+  },
+  "TYXzR5KahEg:0": {
+   "start": 2861.76,
+   "end": 2875.1600000000003,
+   "verbatimHits": 8
+  },
+  "UMy6GESNkDc:0": {
+   "start": 6806.72,
+   "end": 6821.280000000001,
+   "verbatimHits": 9
+  },
+  "USE89i0kiiQ:0": {
+   "start": 2117,
+   "end": 2127,
+   "verbatimHits": 5
+  },
+  "Us8n8VBQn_c:0": {
+   "start": 4536.12,
+   "end": 4542.12,
+   "verbatimHits": 10
+  },
+  "V-z0k5xu1hM:0": {
+   "start": 206.56,
+   "end": 223.96,
+   "verbatimHits": 8
+  },
+  "VYta88JUbBs:0": {
+   "start": 276,
+   "end": 285,
+   "verbatimHits": 6
+  },
+  "VaVC3PAWqLk:0": {
+   "start": 226.84,
+   "end": 241.48000000000002,
+   "verbatimHits": 16
+  },
+  "VsTMXuIV3OM:0": {
+   "start": 1183.52,
+   "end": 1197.12,
+   "verbatimHits": 9
+  },
+  "W0vTZrZny6A:0": {
+   "start": 366.4,
+   "end": 381.2,
+   "verbatimHits": 8
+  },
+  "W4tqbEmplug:0": {
+   "start": 3043.4,
+   "end": 3053.76,
+   "verbatimHits": 29
+  },
+  "WLWbFVKFffM:0": {
+   "start": 3573,
+   "end": 3583,
+   "verbatimHits": 21
+  },
+  "XDcESvzX58Y:0": {
+   "start": 2564.48,
+   "end": 2581.68,
+   "verbatimHits": 8
+  },
+  "XTGlde-Pbd8:0": {
+   "start": 4371.2,
+   "end": 4383.92,
+   "verbatimHits": 8
+  },
+  "XkxZCJ2pYqs:0": {
+   "start": 1655.16,
+   "end": 1672.5600000000002,
+   "verbatimHits": 8
+  },
+  "Xm_PHZXGe-w:0": {
+   "start": 1049.48,
+   "end": 1064.4,
+   "verbatimHits": 8
+  },
+  "Xs94KBeIiAo:0": {
+   "start": 709.76,
+   "end": 719.2,
+   "verbatimHits": 6
+  },
+  "ZHuZ_8VYCWA:0": {
+   "start": 6060.16,
+   "end": 6080.639999999999,
+   "verbatimHits": 6
+  },
+  "_J1lFZEBq2Y:0": {
+   "start": 4529.56,
+   "end": 4548.84,
+   "verbatimHits": 8
+  },
+  "_yZiNnQftxU:0": {
+   "start": 1016,
+   "end": 1027,
+   "verbatimHits": 5
+  },
+  "_y_vSmiNpBE:0": {
+   "start": 3306.66,
+   "end": 3317.52,
+   "verbatimHits": 8
+  },
+  "ajgwabD4_HE:0": {
+   "start": 5287.12,
+   "end": 5299.76,
+   "verbatimHits": 17
+  },
+  "amUpZsEl5Rs:0": {
+   "start": 4001.64,
+   "end": 4004.66,
+   "verbatimHits": 8
+  },
+  "cLTUA1lneS0:0": {
+   "start": 4555,
+   "end": 4567,
+   "verbatimHits": 8
+  },
+  "cxJgLJGHsWc:0": {
+   "start": 5984.72,
+   "end": 6002.4800000000005,
+   "verbatimHits": 8
+  },
+  "dm2qDrb3UVo:0": {
+   "start": 5149.52,
+   "end": 5164.64,
+   "verbatimHits": 5
+  },
+  "e2mQOGzHtQc:0": {
+   "start": 1996.24,
+   "end": 2015.36,
+   "verbatimHits": 8
+  },
+  "e9dljIL4rBk:0": {
+   "start": 5445.56,
+   "end": 5448.200000000001,
+   "verbatimHits": 5
+  },
+  "eOnIWDMNyfE:0": {
+   "start": 3839.76,
+   "end": 3848.2000000000003,
+   "verbatimHits": 17
+  },
+  "eqPnptAtBJk:0": {
+   "start": 4212,
+   "end": 4222,
+   "verbatimHits": 19
+  },
+  "fu6bYPTp_kE:0": {
+   "start": 311.24,
+   "end": 328.92,
+   "verbatimHits": 15
+  },
+  "gTnLQ3cobBM:0": {
+   "start": 1246.74,
+   "end": 1251.66,
+   "verbatimHits": 12
+  },
+  "gW3vVIFRVhw:0": {
+   "start": 5865.6,
+   "end": 5883.08,
+   "verbatimHits": 12
+  },
+  "giT0ytynSqg:0": {
+   "start": 3008.52,
+   "end": 3017.24,
+   "verbatimHits": 10
+  },
+  "gryta3KZKU4:0": {
+   "start": 1006.36,
+   "end": 1024.44,
+   "verbatimHits": 7
+  },
+  "hCW2NHbWNwA:0": {
+   "start": 5291.8,
+   "end": 5299.320000000001,
+   "verbatimHits": 10
+  },
+  "hQ78Hpwrt80:0": {
+   "start": 226,
+   "end": 235,
+   "verbatimHits": 7
+  },
+  "hVlAOIUA71Y:0": {
+   "start": 6845,
+   "end": 6854,
+   "verbatimHits": 14
+  },
+  "iEo48f_Rs4w:0": {
+   "start": 1111,
+   "end": 1121,
+   "verbatimHits": 5
+  },
+  "iLlrIi9-NfQ:0": {
+   "start": 634,
+   "end": 644,
+   "verbatimHits": 7
+  },
+  "iz_SJ5TpLJ0:0": {
+   "start": 2764.44,
+   "end": 2780.76,
+   "verbatimHits": 7
+  },
+  "jDG1m_b5Ih0:0": {
+   "start": 4269.48,
+   "end": 4283.599999999999,
+   "verbatimHits": 17
+  },
+  "jt5hHb6kzYM:0": {
+   "start": 3302.36,
+   "end": 3319.1200000000003,
+   "verbatimHits": 21
+  },
+  "kBm8Ho-_RXM:0": {
+   "start": 2729.4,
+   "end": 2742.7200000000003,
+   "verbatimHits": 6
+  },
+  "kNOX7a7-kwQ:0": {
+   "start": 558,
+   "end": 568,
+   "verbatimHits": 10
+  },
+  "kizDk8idpT8:0": {
+   "start": 1893.6,
+   "end": 1910.56,
+   "verbatimHits": 7
+  },
+  "kwEtOyaFhCA:0": {
+   "start": 1138.08,
+   "end": 1144.8799999999999,
+   "verbatimHits": 6
+  },
+  "m-nnyNZ0TQ0:0": {
+   "start": 4520.32,
+   "end": 4535.12,
+   "verbatimHits": 14
+  },
+  "mpAZehPviLQ:0": {
+   "start": 2908.16,
+   "end": 2917.6,
+   "verbatimHits": 6
+  },
+  "nJeU72Rgjh4:0": {
+   "start": 176.32,
+   "end": 194.56,
+   "verbatimHits": 13
+  },
+  "nTWXfo7narw:0": {
+   "start": 2210.56,
+   "end": 2221.84,
+   "verbatimHits": 13
+  },
+  "nTiqySjdD6s:0": {
+   "start": 2646,
+   "end": 2657,
+   "verbatimHits": 10
+  },
+  "nYrjhv-AFZA:0": {
+   "start": 471,
+   "end": 480,
+   "verbatimHits": 7
+  },
+  "opB7_JXL0LA:0": {
+   "start": 4233.04,
+   "end": 4249.44,
+   "verbatimHits": 17
+  },
+  "pz6jhMPA-2w:0": {
+   "start": 753.56,
+   "end": 769.9599999999999,
+   "verbatimHits": 5
+  },
+  "q2cg1gEYWJQ:0": {
+   "start": 2694.72,
+   "end": 2699.7599999999998,
+   "verbatimHits": 6
+  },
+  "q_vZ4H3uW28:0": {
+   "start": 7351.28,
+   "end": 7360.48,
+   "verbatimHits": 15
+  },
+  "qel8Fyt78fk:0": {
+   "start": 4951.6,
+   "end": 4957.64,
+   "verbatimHits": 8
+  },
+  "qgeQ5kMVwRA:0": {
+   "start": 4883.72,
+   "end": 4902.400000000001,
+   "verbatimHits": 9
+  },
+  "qxxnRMT9C-8:0": {
+   "start": 3956.28,
+   "end": 3972.5600000000004,
+   "verbatimHits": 17
+  },
+  "rBM6lGk4-fk:0": {
+   "start": 4345,
+   "end": 4355,
+   "verbatimHits": 5
+  },
+  "rOYlOdDgYUU:0": {
+   "start": 3256.4,
+   "end": 3272.7200000000003,
+   "verbatimHits": 9
+  },
+  "rtufWBLOXgw:0": {
+   "start": 812.96,
+   "end": 832.5600000000001,
+   "verbatimHits": 5
+  },
+  "s52O1JH2tnU:0": {
+   "start": 2637.12,
+   "end": 2649.44,
+   "verbatimHits": 11
+  },
+  "sFkR34AMPw8:0": {
+   "start": 1501.68,
+   "end": 1511.72,
+   "verbatimHits": 6
+  },
+  "t38LbMVoPCs:0": {
+   "start": 2247.68,
+   "end": 2264.3599999999997,
+   "verbatimHits": 7
+  },
+  "u0o3IlsEQbI:0": {
+   "start": 254.76,
+   "end": 269.8,
+   "verbatimHits": 6
+  },
+  "uLBsHXNEwAU:0": {
+   "start": 5140.52,
+   "end": 5158.72,
+   "verbatimHits": 9
+  },
+  "uPup-1pDepY:0": {
+   "start": 5487,
+   "end": 5496,
+   "verbatimHits": 15
+  },
+  "ujRwf1HdNjk:0": {
+   "start": 4138.4,
+   "end": 4154.879999999999,
+   "verbatimHits": 9
+  },
+  "uxu37dqVR90:0": {
+   "start": 268,
+   "end": 277,
+   "verbatimHits": 13
+  },
+  "w8h4qksd6Yw:0": {
+   "start": 1948.32,
+   "end": 1956.48,
+   "verbatimHits": 9
+  },
+  "x3e73Qn6NOo:0": {
+   "start": 6224.56,
+   "end": 6239.72,
+   "verbatimHits": 10
+  },
+  "xDQyLnNAXr4:0": {
+   "start": 516,
+   "end": 525,
+   "verbatimHits": 9
+  },
+  "zc8Nh4TMB1s:0": {
+   "start": 6505.84,
+   "end": 6521.32,
+   "verbatimHits": 6
+  }
+ }
+}
