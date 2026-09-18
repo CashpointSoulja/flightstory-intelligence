@@ -7,6 +7,23 @@ import { createClient } from '@insforge/sdk';
 const root = dirname(fileURLToPath(import.meta.url));
 const port = Number(process.env.PORT || 3000);
 const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+// Fast model for the topic router; probed once per instance, pinned to base model if unavailable.
+const routeModelState = { name: process.env.OPENAI_ROUTE_MODEL || 'gpt-4.1-nano', failed: false };
+// Per-instance result cache: repeated/similar normalized queries skip the LLM entirely.
+const SEARCH_CACHE_TTL_MS = 3_600_000;
+const SEARCH_CACHE_MAX = 500;
+function searchCacheKey(mode, query) { return `${mode}:${query.toLowerCase().replace(/\s+/g, ' ').trim()}`; }
+function searchCacheGet(cache, key) {
+  const hit = cache.get(key);
+  if (!hit) return null;
+  if (Date.now() - hit.at > SEARCH_CACHE_TTL_MS) { cache.delete(key); return null; }
+  cache.delete(key); cache.set(key, hit); // LRU touch
+  return hit.value;
+}
+function searchCacheSet(cache, key, value) {
+  if (cache.size >= SEARCH_CACHE_MAX) cache.delete(cache.keys().next().value);
+  cache.set(key, { at: Date.now(), value });
+}
 const insforgeUrl = process.env.NEXT_PUBLIC_INSFORGE_URL || '';
 const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
 const searchAccessMode = process.env.SEARCH_ACCESS_MODE || 'demo';
@@ -65,7 +82,7 @@ function rankEvidence(query, items) {
   return { items: ranked, contentWordCount: words.length, guestScoped: scope.mentioned.length > 0 };
 }
 
-async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_000, graph } = {}) {
+async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_000, graph, modelOverride } = {}) {
   if (!apiKey || !graph?.nodes?.length) return [];
   const labels = graph.nodes.map(node => node.label);
   const response = await fetchImpl('https://api.openai.com/v1/responses', {
@@ -73,7 +90,7 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
     headers: { 'content-type': 'application/json', authorization: `Bearer ${apiKey}` },
     signal: AbortSignal.timeout(timeoutMs),
     body: JSON.stringify({
-      model,
+      model: modelOverride || model,
       store: false,
       max_output_tokens: 120,
       input: [
@@ -87,7 +104,7 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
       temperature: 0
     })
   });
-  if (!response.ok) throw new Error(`OpenAI topic route failed (${response.status})`);
+  if (!response.ok) { const error = new Error(`OpenAI topic route failed (${response.status})`); error.status = response.status; throw error; }
   const data = await response.json();
   const outputText = data.output_text ?? data.output?.flatMap(item => item.content || []).find(part => part.type === 'output_text')?.text;
   if (!outputText) throw new Error('OpenAI topic route returned no text output');
@@ -100,6 +117,13 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
     if (node && !picked.includes(node)) picked.push(node);
   }
   return picked;
+}
+
+function excerptPassWillCallOpenAI(query, items) {
+  const ranking = rankEvidence(query, items);
+  if (!ranking.contentWordCount && !ranking.guestScoped) return false;
+  const minOverlap = Math.min(2, ranking.contentWordCount);
+  return ranking.items.some(({ item, score }) => (ranking.contentWordCount === 0 ? ranking.guestScoped : score >= minOverlap) && item.quote);
 }
 
 function searchLocal(query, items) {
@@ -385,7 +409,8 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
     const boardMatch = /^\/api\/boards\/([0-9a-f-]+)\/clips$/i.exec(pathname);
     const clipMatch = /^\/api\/clips\/([0-9a-f-]+)\/(range|submit|review)$/i.exec(pathname);
     const workspaceRoute = pathname === '/api/boards' || Boolean(boardMatch || clipMatch) || request.method === 'POST' && pathname === '/api/clips';
-    const takeRateLimit = () => {
+    const searchCache = new Map();
+  const takeRateLimit = () => {
       const time = now();
       for (const [ip, bucket] of hits) if (bucket.until <= time) hits.delete(ip);
       const forwardedIp = vercel && (request.headers['x-vercel-forwarded-for'] || request.headers['x-real-ip']);
@@ -509,6 +534,15 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       if (typeof query !== 'string' || query.trim().length < 2 || query.length > 500) return send(response, 400, { error: 'Enter a question between 2 and 500 characters.' });
       // ponytail: per-process fixed-window limiter; use shared storage before multi-instance production.
       if (!takeRateLimit()) return;
+      const t0 = Date.now();
+      // Cache only the public demo path: workspace auth/quota must run on every request.
+      const cacheable = mode === 'demo' && !search;
+      const cacheKey = cacheable ? searchCacheKey(mode, query.trim()) : null;
+      const cached = cacheKey ? searchCacheGet(searchCache, cacheKey) : null;
+      if (cached) {
+        response.setHeader('server-timing', `cache;desc="hit", total;dur=${Date.now() - t0}`);
+        return send(response, 200, cached);
+      }
       let items = evidence;
       if (mode === 'workspace') {
         if (!workspaceId || !insforge.url || !insforge.anonKey) return send(response, 503, { error: 'Workspace search is not configured.' });
@@ -537,11 +571,23 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         if (!result || !Number.isInteger(result.availableCount) || result.availableCount < 1 || !Array.isArray(result.segments)) return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' });
         items = result.segments;
       } else if (mode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
+      const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
+      let topicPromise = null;
+      if (mode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items)) {
+        topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
+        topicPromise = topicGraphPromise
+          .then(graph => searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }))
+          .catch(error => {
+            if ([400, 404].includes(error?.status)) routeModelState.failed = true;
+            console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`);
+            return [];
+          });
+      }
       let result;
       try {
         result = search
           ? await search(query.trim(), { items, mode })
-          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: openAITimeoutMs, items, workspace: mode === 'workspace' });
+          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: mode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: mode === 'workspace' });
       } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; }
       let finalResult = result || searchLocal(query.trim(), items);
       if (mode === 'demo' && !finalResult.citations.length) {
@@ -550,8 +596,16 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         const graph = await topicGraphPromise;
         const moments = await topicMomentsPromise;
         let aiMode = false;
-        let aiNodes = [];
-        try { aiNodes = await searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: openAITimeoutMs, graph }); } catch (error) { console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); }
+        let aiNodes;
+        if (topicPromise) aiNodes = await topicPromise;
+        else {
+          try { aiNodes = await searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }); }
+          catch (error) {
+            if ([400, 404].includes(error?.status)) routeModelState.failed = true;
+            console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`);
+            aiNodes = [];
+          }
+        }
         if (aiNodes.length) aiMode = true;
         const words = queryWords(query);
         const matches = (aiMode ? aiNodes.map(node => ({ node, score: 0 })) : graph.nodes.map(node => {
@@ -579,6 +633,8 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         }
       }
       const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
+      if (cacheKey) searchCacheSet(searchCache, cacheKey, publicResult);
+      response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", total;dur=${Date.now() - t0}`);
       send(response, 200, publicResult);
       return;
     }
