@@ -216,6 +216,42 @@ test('public demo searches only its three built-in excerpts and never calls work
   });
 });
 
+test('public demo routes free-text queries to archive topics through OpenAI when configured', async () => {
+  let topicRouteCalls = 0;
+  await withServer({
+    mode: 'demo',
+    openAIKey: 'test-key',
+    fetchImpl: async (_url, options) => {
+      const request = JSON.parse(options.body);
+      assert.equal(request.text.format.name, 'archive_topic_route');
+      topicRouteCalls++;
+      return new Response(JSON.stringify({ output_text: JSON.stringify({ topics: ['sleep'] }) }), { status: 200 });
+    }
+  }, async url => {
+    const response = await post(url, JSON.stringify({ query: 'how do I stop waking up exhausted' }));
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.mode, 'ai-topic-map');
+    assert.ok(result.citations.length > 0);
+    assert.ok(result.citations.every(citation => citation.mapMatch === true && citation.guest === 'sleep'));
+    assert.ok(topicRouteCalls >= 1);
+  });
+});
+
+test('public demo keeps token topic matching when the OpenAI topic route fails', async () => {
+  await withServer({
+    mode: 'demo',
+    openAIKey: 'test-key',
+    fetchImpl: async () => { throw new Error('network down'); }
+  }, async url => {
+    const response = await post(url, JSON.stringify({ query: 'sleep' }));
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.mode, 'topic-map');
+    assert.ok(result.citations.length > 0);
+  });
+});
+
 test('public demo falls back to topic map sources and still refuses unmatched topics', async () => {
   await withServer({ mode: 'demo', openAIKey: '' }, async url => {
     const response = await post(url, JSON.stringify({ query: 'sleep' }));
