@@ -44,6 +44,30 @@ function loadDemoIndex() {
   return demoIndexPromise;
 }
 let topicMomentsPromise;
+// Virality scores (data/virality-scores.json): offline heuristic ranking of clip
+// potential, validated against DOAC's real top Shorts. Boosts search ranking only;
+// never changes which items pass relevance gates. Revert this commit to remove.
+let viralityPromise;
+function loadVirality() {
+  viralityPromise ??= readFile(join(root, 'data', 'virality-scores.json'), 'utf8').then(JSON.parse).then(data => {
+    const map = new Map();
+    for (const w of data.windows || []) {
+      if (!map.has(w.videoId)) map.set(w.videoId, []);
+      map.get(w.videoId).push({ start: Number(w.start), end: Number(w.end), score: Number(w.score), tier: w.tier });
+    }
+    return map;
+  }).catch(() => new Map());
+  return viralityPromise;
+}
+function viralityFor(map, item) {
+  const wins = map?.get(item.videoId);
+  if (!wins || !Number.isFinite(Number(item.start))) return null;
+  const start = Number(item.start);
+  let best = null;
+  for (const w of wins) if (Math.abs(w.start - start) <= 60 && (!best || w.score > best.score)) best = w;
+  return best;
+}
+function viralityBoost(v) { return !v ? 0 : v.score >= 8.5 ? 2.5 : v.score >= 7 ? 1.5 : v.score >= 5 ? 0.5 : 0; }
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
 
@@ -88,7 +112,7 @@ function guestScopedEvidence(query, items) {
   const nameTokens = [...mentioned].flatMap(key => [...guests.get(key).tokens]);
   return { items: mentioned.size ? items.filter(item => mentioned.has(canonicalGuest(item.guest || ''))) : items, mentioned: [...mentioned], nameTokens };
 }
-function rankEvidence(query, items) {
+function rankEvidence(query, items, boostItem = () => 0) {
   const scope = guestScopedEvidence(query, items);
   const nameTokens = new Set(scope.nameTokens);
   const words = queryWords(query).filter(word => !nameTokens.has(word));
@@ -104,7 +128,7 @@ function rankEvidence(query, items) {
     let score = 0, weighted = 0;
     for (const word of words) if (textMatchesWord(texts[index], word)) { score++; weighted += weight.get(word); }
     return { item, score, weighted, guest: canonicalGuest(item.guest || '') };
-  }).sort((a, b) => b.weighted - a.weighted);
+  }).sort((a, b) => (b.weighted + boostItem(b.item)) - (a.weighted + boostItem(a.item)));
   if (scope.mentioned.length > 1) {
     const queues = scope.mentioned.map(name => ranked.filter(item => item.guest === name));
     const balanced = [];
@@ -151,14 +175,14 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
   return picked;
 }
 
-function excerptPassWillCallOpenAI(query, items) {
-  const ranking = rankEvidence(query, items);
+function excerptPassWillCallOpenAI(query, items, boostItem) {
+  const ranking = rankEvidence(query, items, boostItem);
   if (!ranking.contentWordCount && !ranking.guestScoped) return false;
   return ranking.items.some(({ item, score }) => (ranking.contentWordCount === 0 ? ranking.guestScoped : score >= 1) && item.quote);
 }
 
-function searchLocal(query, items) {
-  const ranking = rankEvidence(query, items);
+function searchLocal(query, items, boostItem) {
+  const ranking = rankEvidence(query, items, boostItem);
   const minOverlap = Math.min(2, ranking.contentWordCount);
   const matches = ranking.guestScoped && !ranking.contentWordCount
     ? ranking.items.slice(0, 4).map(({ item }) => item)
@@ -176,9 +200,9 @@ function instructions(workspace) {
 
 const archiveRefusal = 'I could not verify that in the indexed archive.';
 const normalizeQuoteWhitespace = value => value.replace(/\s+/g, ' ').trim();
-async function searchOpenAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_000, items = evidence, workspace = false } = {}) {
+async function searchOpenAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_000, items = evidence, workspace = false, boostItem } = {}) {
   if (!apiKey) return null;
-  const ranking = rankEvidence(query, items);
+  const ranking = rankEvidence(query, items, boostItem);
   if (!ranking.contentWordCount && !ranking.guestScoped) return null;
   const minOverlap = ranking.guestScoped ? Math.min(2, ranking.contentWordCount) : 1;
   const ranked = ranking.items
@@ -431,7 +455,7 @@ async function body(request) {
 function send(response, status, data, type = 'application/json') { response.writeHead(status, { 'content-type': `${type}; charset=utf-8`, 'cache-control': 'no-store' }); response.end(type === 'application/json' ? JSON.stringify(data) : data); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png' };
 
-export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
+export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, loadViralityScores = loadVirality, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
   const hits = new Map();
   const publicRoot = resolve(root, 'public');
   const server = http.createServer(async (request, response) => {
@@ -585,6 +609,8 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       }
       let items = evidence;
       if (effectiveMode === 'demo') { const demoSegments = await loadDemo(); if (demoSegments) items = demoSegments; }
+      const viralityMap = await loadViralityScores();
+      const boostItem = item => viralityBoost(viralityFor(viralityMap, item));
       if (effectiveMode === 'workspace') {
         if (!workspaceId || !insforge.url || !insforge.anonKey) return send(response, 503, { error: 'Workspace search is not configured.' });
         const access = await authorizeWorkspace(token, { workspaceId, url: insforge.url, anonKey: insforge.anonKey });
@@ -620,7 +646,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         if (result && items.length < 4) {
           const index = await loadIndex();
           if (index?.segments?.length) {
-            const topUp = rankEvidence(query.trim(), index.segments);
+            const topUp = rankEvidence(query.trim(), index.segments, boostItem);
             const minOverlap = Math.min(1, topUp.contentWordCount) || 1;
             const seen = new Set(items.map(item => item.id));
             for (const { item, score } of topUp.items) {
@@ -633,7 +659,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       } else if (effectiveMode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
-      if (effectiveMode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items)) {
+      if (effectiveMode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items, boostItem)) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
         topicPromise = topicGraphPromise
           .then(graph => searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }))
@@ -647,11 +673,11 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       try {
         result = search
           ? await search(query.trim(), { items, mode })
-          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: effectiveMode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: effectiveMode === 'workspace' });
+          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: effectiveMode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: effectiveMode === 'workspace', boostItem });
       } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; diag += ` aiErr:${error?.status || error?.name || 'unknown'}`; }
       if (!result && openAIKey && !search) diag += ' ai:null';
       if (result) diag += ' ai:ok';
-      let finalResult = result || searchLocal(query.trim(), items);
+      let finalResult = result || searchLocal(query.trim(), items, boostItem);
       if (effectiveMode === 'demo' && !finalResult.citations.length) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
         topicMomentsPromise ??= readFile(join(root, 'public', 'topic-moments.json'), 'utf8').then(JSON.parse).catch(() => ({}));

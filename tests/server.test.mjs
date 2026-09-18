@@ -793,3 +793,21 @@ test('never serves the legacy transcript search index when the file exists', asy
     if (created) await unlink(indexPath);
   }
 });
+
+test('virality boost reorders equal-relevance local results toward proven clip potential', async () => {
+  const segments = [
+    { id: 'a', episodeId: 'epA', episode: 'Show A', guest: 'Guest A', videoId: 'vidA0000001', start: 100, end: 109, quote: 'the zephyr protocol explained plainly', searchText: 'Show A the zephyr protocol explained plainly' },
+    { id: 'b', episodeId: 'epB', episode: 'Show B', guest: 'Guest B', videoId: 'vidB0000002', start: 100, end: 109, quote: 'the zephyr protocol explained plainly', searchText: 'Show B the zephyr protocol explained plainly' }
+  ];
+  const viralMap = new Map([['vidB0000002', [{ start: 100, end: 160, score: 7, tier: 'STRONG' }]]]);
+  await withServer({ mode: 'demo', openAIKey: '', loadDemo: async () => segments, loadViralityScores: async () => viralMap }, async url => {
+    const result = await (await post(url, JSON.stringify({ query: 'zephyr protocol' }))).json();
+    assert.equal(result.citations.length, 2);
+    assert.equal(result.citations[0].videoId, 'vidB0000002', 'viral-tier moment outranks an equal-relevance unscored moment');
+  });
+  // control: with no virality data the original relevance order is unchanged
+  await withServer({ mode: 'demo', openAIKey: '', loadDemo: async () => segments, loadViralityScores: async () => new Map() }, async url => {
+    const result = await (await post(url, JSON.stringify({ query: 'zephyr protocol' }))).json();
+    assert.equal(result.citations[0].videoId, 'vidA0000001');
+  });
+});
