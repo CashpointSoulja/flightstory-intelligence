@@ -811,3 +811,15 @@ test('virality boost reorders equal-relevance local results toward proven clip p
     assert.equal(result.citations[0].videoId, 'vidA0000001');
   });
 });
+
+test('citations carry virality tier for the clip badge when a scored window matches', async () => {
+  const segments = [
+    { id: 'c', episodeId: 'epC', episode: 'Show C', guest: 'Guest C', videoId: 'vidC0000003', start: 200, end: 209, quote: 'the quillon method for better sleep', searchText: 'Show C the quillon method for better sleep' }
+  ];
+  const viralMap = new Map([['vidC0000003', [{ start: 200, end: 260, score: 9, tier: 'TOP CLIP' }]]]);
+  await withServer({ mode: 'demo', openAIKey: '', loadDemo: async () => segments, loadViralityScores: async () => viralMap }, async url => {
+    const result = await (await post(url, JSON.stringify({ query: 'quillon method' }))).json();
+    assert.equal(result.citations[0].virality.tier, 'TOP CLIP');
+    assert.equal(result.citations[0].virality.score, 9);
+  });
+});

@@ -720,6 +720,13 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           };
         }
       }
+      // Attach validated virality scores to citations for the clip-potential badge (badge commit; revert to remove).
+      if (finalResult.citations?.length) {
+        finalResult = { ...finalResult, citations: finalResult.citations.map(item => {
+          const v = viralityFor(viralityMap, item);
+          return v && v.score >= 5 ? { ...item, virality: { score: v.score, tier: v.tier } } : item;
+        }) };
+      }
       const publicResult = effectiveMode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
       if (cacheKey) searchCacheSet(searchCache, cacheKey, publicResult);
       response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", router;desc="${routeModelState.failed ? model : routeModelState.name}", total;dur=${Date.now() - t0}${diag ? `, diag;desc="${diag}"` : ''}`);
