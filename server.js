@@ -64,12 +64,12 @@ function guestScopedEvidence(query, items) {
     if (!guests.has(key)) guests.set(key, { givenName: key.split(' ')[0], tokens: new Set() });
     for (const token of normalizedName(item.guest || '').split(' ')) guests.get(key).tokens.add(token);
   }
-  const aliasCounts = new Map();
-  for (const { givenName } of guests.values()) if (!stopwords.has(givenName)) aliasCounts.set(givenName, (aliasCounts.get(givenName) || 0) + 1);
   const mentioned = new Set();
-  for (const [key, { givenName }] of guests) {
+  // Scope only on the full guest name appearing in the query. Single-token alias
+  // matching false-positives on title-prefix "guests" (Sleep Doctor, How..., etc).
+  for (const key of guests.keys()) {
+    if (key.length < 3 || stopwords.has(key)) continue;
     if (queryName === key || queryName.includes(` ${key} `) || queryName.startsWith(`${key} `) || queryName.endsWith(` ${key}`)) mentioned.add(key);
-    else if (aliasCounts.get(givenName) === 1 && queryTokens.has(givenName)) mentioned.add(key);
   }
   const nameTokens = [...mentioned].flatMap(key => [...guests.get(key).tokens]);
   return { items: mentioned.size ? items.filter(item => mentioned.has(canonicalGuest(item.guest || ''))) : items, mentioned: [...mentioned], nameTokens };
@@ -78,7 +78,7 @@ function rankEvidence(query, items) {
   const scope = guestScopedEvidence(query, items);
   const nameTokens = new Set(scope.nameTokens);
   const words = queryWords(query).filter(word => !nameTokens.has(word));
-  const ranked = scope.items.map(item => ({ item, score: words.reduce((score, word) => score + (`${item.quote || ''} ${item.topic || ''}`.toLowerCase().includes(word) ? 1 : 0), 0), guest: canonicalGuest(item.guest || '') })).sort((a, b) => b.score - a.score);
+  const ranked = scope.items.map(item => ({ item, score: words.reduce((score, word) => score + (`${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase().includes(word) ? 1 : 0), 0), guest: canonicalGuest(item.guest || '') })).sort((a, b) => b.score - a.score);
   if (scope.mentioned.length > 1) {
     const queues = scope.mentioned.map(name => ranked.filter(item => item.guest === name));
     const balanced = [];
