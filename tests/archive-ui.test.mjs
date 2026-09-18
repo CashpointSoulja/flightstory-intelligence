@@ -207,7 +207,8 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.match(graph, /ARCHIVE MAP/);
   assert.doesNotMatch(graph, /EVIDENCE UNIVERSE/);
   assert.match(html, /GPT Spark finds moments to publish/);
-  assert.match(auth, /Workspace search requires sign-in and FlightStory membership\. GPT Spark sends your question and matched excerpts to OpenAI/);
+  assert.match(auth, /Search the public archive demo instantly - no sign-in needed\. FlightStory team: sign in for the full corpus/);
+  assert.match(auth, /Full-corpus workspace search active\. GPT Spark sends your question and matched excerpts to OpenAI/);
   assert.match(auth, /data-demo-search-count/);
   assert.match(auth, /demoSearchCount\.hidden = true/);
   assert.match(app, /Private source · public video link unavailable/);
