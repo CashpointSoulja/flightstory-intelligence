@@ -52,8 +52,10 @@ function canonicalGuest(value) {
   while (titles.has(words[0])) words.shift();
   return words.join(' ');
 }
-const stopwords = new Set(['what', 'did', 'have', 'guests', 'guest', 'say', 'said', 'about', 'the', 'and', 'or', 'who', 'which', 'where', 'has', 'any', 'are', 'to', 'of', 'in', 'on', 'for', 'me', 'this', 'that']);
+const stopwords = new Set(['what', 'did', 'have', 'guests', 'guest', 'say', 'said', 'about', 'the', 'and', 'or', 'who', 'which', 'where', 'has', 'any', 'are', 'to', 'of', 'in', 'on', 'for', 'me', 'this', 'that', 'how', 'why']);
 function queryWords(query) { return [...new Set(normalizedName(query).replace(/\bice(?:\s+)?breakers?\b/g, 'conversation starter').split(' ').filter(word => word.length > 2 && !stopwords.has(word)))]; }
+function stemWord(word) { const stem = word.replace(/(ational|ization|ing|edly|ed|ies|es|s)$/, m => m === 'ies' ? 'y' : ''); return stem.length >= 4 && stem !== word ? stem : null; }
+function textMatchesWord(text, word) { return text.includes(word) || (stemWord(word) ? text.includes(stemWord(word)) : false); }
 function guestScopedEvidence(query, items) {
   const queryName = normalizedName(query);
   const queryTokens = new Set(queryName.split(' '));
@@ -64,12 +66,17 @@ function guestScopedEvidence(query, items) {
     if (!guests.has(key)) guests.set(key, { givenName: key.split(' ')[0], tokens: new Set() });
     for (const token of normalizedName(item.guest || '').split(' ')) guests.get(key).tokens.add(token);
   }
+  const aliasCounts = new Map();
+  for (const { givenName } of guests.values()) if (!stopwords.has(givenName)) aliasCounts.set(givenName, (aliasCounts.get(givenName) || 0) + 1);
+  const singleWordQuery = queryWords(query).length === 1;
   const mentioned = new Set();
-  // Scope only on the full guest name appearing in the query. Single-token alias
-  // matching false-positives on title-prefix "guests" (Sleep Doctor, How..., etc).
-  for (const key of guests.keys()) {
+  // Full guest name in the query always scopes. Single-token alias scoping is only
+  // safe for one-word queries ("Vanessa"): in multi-word queries a first-token alias
+  // false-positives on title-prefix guests (Sleep Doctor, Anti-Aging Expert, ...).
+  for (const [key, { givenName }] of guests) {
     if (key.length < 3 || stopwords.has(key)) continue;
     if (queryName === key || queryName.includes(` ${key} `) || queryName.startsWith(`${key} `) || queryName.endsWith(` ${key}`)) mentioned.add(key);
+    else if (singleWordQuery && aliasCounts.get(givenName) === 1 && queryTokens.has(givenName)) mentioned.add(key);
   }
   const nameTokens = [...mentioned].flatMap(key => [...guests.get(key).tokens]);
   return { items: mentioned.size ? items.filter(item => mentioned.has(canonicalGuest(item.guest || ''))) : items, mentioned: [...mentioned], nameTokens };
@@ -78,7 +85,7 @@ function rankEvidence(query, items) {
   const scope = guestScopedEvidence(query, items);
   const nameTokens = new Set(scope.nameTokens);
   const words = queryWords(query).filter(word => !nameTokens.has(word));
-  const ranked = scope.items.map(item => ({ item, score: words.reduce((score, word) => score + (`${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase().includes(word) ? 1 : 0), 0), guest: canonicalGuest(item.guest || '') })).sort((a, b) => b.score - a.score);
+  const ranked = scope.items.map(item => ({ item, score: words.reduce((score, word) => { const text = `${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase(); return score + (textMatchesWord(text, word) ? 1 : 0); }, 0), guest: canonicalGuest(item.guest || '') })).sort((a, b) => b.score - a.score);
   if (scope.mentioned.length > 1) {
     const queues = scope.mentioned.map(name => ranked.filter(item => item.guest === name));
     const balanced = [];
@@ -134,7 +141,7 @@ function excerptPassWillCallOpenAI(query, items) {
 
 function searchLocal(query, items) {
   const ranking = rankEvidence(query, items);
-  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
+  const minOverlap = Math.min(2, ranking.contentWordCount);
   const matches = ranking.guestScoped && !ranking.contentWordCount
     ? ranking.items.slice(0, 4).map(({ item }) => item)
     : minOverlap ? ranking.items.filter(({ score }) => score >= minOverlap).slice(0, 4).map(({ item }) => item) : [];
