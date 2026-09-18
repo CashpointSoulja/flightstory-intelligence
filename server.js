@@ -85,7 +85,7 @@ function rankEvidence(query, items) {
   const scope = guestScopedEvidence(query, items);
   const nameTokens = new Set(scope.nameTokens);
   const words = queryWords(query).filter(word => !nameTokens.has(word));
-  const texts = scope.items.map(item => `${item.quote || ''} ${item.topic || ''} ${item.guest || ''}`.toLowerCase());
+  const texts = scope.items.map(item => `${item.quote || ''} ${item.topic || ''} ${item.guest || ''} ${item.episode || ''}`.toLowerCase());
   // IDF weighting: rare words (waking, exhausted) outrank common ones (stop),
   // so single-word ties no longer drown the relevant segments in noise.
   const weight = new Map(words.map(word => {
