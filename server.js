@@ -634,7 +634,9 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         result = search
           ? await search(query.trim(), { items, mode })
           : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: mode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: mode === 'workspace' });
-      } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; }
+      } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; diag += ` aiErr:${error?.status || error?.name || 'unknown'}`; }
+      if (!result && openAIKey && !search) diag += ' ai:null';
+      if (result) diag += ' ai:ok';
       let finalResult = result || searchLocal(query.trim(), items);
       if (mode === 'demo' && !finalResult.citations.length) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
