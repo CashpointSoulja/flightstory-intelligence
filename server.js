@@ -13,6 +13,7 @@ const searchAccessMode = process.env.SEARCH_ACCESS_MODE || 'demo';
 const flightstoryWorkspaceId = process.env.FLIGHTSTORY_WORKSPACE_ID || '';
 const catalogPath = join(root, 'public', 'catalog.json');
 let topicGraphPromise;
+let topicMomentsPromise;
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
 
@@ -508,7 +509,9 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       let finalResult = result || searchLocal(query.trim(), items);
       if (mode === 'demo' && !finalResult.citations.length) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
+        topicMomentsPromise ??= readFile(join(root, 'public', 'topic-moments.json'), 'utf8').then(JSON.parse).catch(() => ({}));
         const graph = await topicGraphPromise;
+        const moments = await topicMomentsPromise;
         const words = queryWords(query);
         const matches = graph.nodes.map(node => {
           const tokens = normalizedName(node.label).split(' ');
@@ -522,7 +525,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
             answer: 'No verified quote in the indexed demo excerpts, but the archive map connects this to these topics. Each source opens the video at the moment the topic appears.',
             citations: matches.flatMap(({ node }) => [...node.sources].sort((a, b) => b.count - a.count).slice(0, 3).map((src, i) => {
               const videoId = new URL(src.url).searchParams.get('v');
-              const start = Math.floor(src.seconds);
+              const start = moments[`${node.id}:${videoId}`] ?? Math.floor(src.seconds);
               return {
                 id: `${node.id}:${videoId}:${i}`, episode: src.title, guest: node.label, videoId,
                 start, end: start + 30, quote: `${src.count} mentions of "${node.label}" in this episode`,
