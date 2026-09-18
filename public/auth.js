@@ -1,7 +1,7 @@
 const config = await fetch('/api/config').then(response => response.json()).catch(() => ({}));
 const hint = document.querySelector('#hint');
 if (config.searchAccessMode === 'workspace') {
-  if (hint) hint.firstChild.textContent = 'Workspace search requires sign-in and FlightStory membership. GPT Spark sends your question and matched excerpts to OpenAI. ';
+  if (hint) hint.firstChild.textContent = 'Search the public archive demo instantly - no sign-in needed. FlightStory team: sign in for the full corpus. ';
   const coverageLabel = document.querySelector('[data-coverage-label]');
   if (coverageLabel) coverageLabel.textContent = 'WORKSPACE SEARCH';
   const demoSearchCount = document.querySelector('[data-demo-search-count]');
@@ -23,6 +23,7 @@ if (config.searchAccessMode === 'workspace') {
   nav?.appendChild(button);
   const { data } = await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }));
   if (data?.user) {
+    if (hint) hint.firstChild.textContent = 'Full-corpus workspace search active. GPT Spark sends your question and matched excerpts to OpenAI. ';
     window.flightstoryAuth = { searchAccessMode: config.searchAccessMode, user: data.user, getAccessToken: () => insforge.getHttpClient().getValidAccessToken() };
     const { initSharedReview } = await import('./shared-review.js');
     await initSharedReview(window.flightstoryAuth);
@@ -31,7 +32,7 @@ if (config.searchAccessMode === 'workspace') {
     if (status) status.innerHTML = '<span></span> Membership checked on search';
     button.addEventListener('click', async () => { await insforge.auth.signOut(); location.reload(); });
   } else {
-    button.textContent = 'Sign in to search';
+    button.textContent = 'Team sign-in';
     button.addEventListener('click', async () => { button.textContent = 'Opening GitHub…'; await insforge.auth.signInWithOAuth('github', { redirectTo: location.origin }); });
   }
   }

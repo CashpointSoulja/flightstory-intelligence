@@ -134,7 +134,7 @@ test('workspace quota denial and quota RPC failures stop before transcript or Op
 
 test('workspace search quota is not requested for anonymous or non-member searches', async () => {
   for (const [token, access, expectedStatus] of [
-    [null, 'authorized', 401],
+    [null, 'authorized', 200],
     ['valid-token', 'forbidden', 403]
   ]) {
     let quotaCalls = 0;
@@ -197,7 +197,7 @@ test('reports live archive index counts without returning index content', async 
 test('public demo searches only its three built-in excerpts and never calls workspace search', async () => {
   let searched;
   let workspaceCalls = 0;
-  await withServer({
+  await withServer({ loadDemo: async () => null,
     search: async (_query, { items }) => { searched = items; return null; },
     workspaceSearch: async () => { workspaceCalls++; throw new Error('must not run in demo'); }
   }, async url => {
@@ -218,7 +218,7 @@ test('public demo searches only its three built-in excerpts and never calls work
 
 test('public demo routes free-text queries to archive topics through OpenAI when configured', async () => {
   let topicRouteCalls = 0;
-  await withServer({
+  await withServer({ loadDemo: async () => null,
     mode: 'demo',
     openAIKey: 'test-key',
     fetchImpl: async (_url, options) => {
@@ -239,7 +239,7 @@ test('public demo routes free-text queries to archive topics through OpenAI when
 });
 
 test('public demo keeps token topic matching when the OpenAI topic route fails', async () => {
-  await withServer({
+  await withServer({ loadDemo: async () => null,
     mode: 'demo',
     openAIKey: 'test-key',
     fetchImpl: async () => { throw new Error('network down'); }
@@ -253,7 +253,7 @@ test('public demo keeps token topic matching when the OpenAI topic route fails',
 });
 
 test('public demo falls back to topic map sources and still refuses unmatched topics', async () => {
-  await withServer({ mode: 'demo', openAIKey: '' }, async url => {
+  await withServer({ loadDemo: async () => null, mode: 'demo', openAIKey: '' }, async url => {
     const response = await post(url, JSON.stringify({ query: 'sleep' }));
     assert.equal(response.status, 200);
     const result = await response.json();
@@ -296,7 +296,7 @@ test('local fallback keeps intentional one-word searches and refuses weak multi-
 });
 
 test('public demo finds the best conversation starter for singular and plural icebreaker spellings', async () => {
-  await withServer({}, async url => {
+  await withServer({ loadDemo: async () => null,}, async url => {
     for (const query of [
       'What is a good icebreaker?',
       'What is a good ice breaker?',
@@ -344,7 +344,7 @@ test('scopes named guest questions before ranking and keeps explicit comparisons
 
 test('public demo uses OpenAI when configured and labels local fallback honestly', async () => {
   let openAICalls = 0;
-  await withServer({
+  await withServer({ loadDemo: async () => null,
     openAIKey: 'test-key',
     fetchImpl: async (_url, options) => {
       openAICalls++;
@@ -430,7 +430,10 @@ test('workspace search requires a valid session and exact workspace membership',
     const anonymous = await post(url, JSON.stringify({ query: 'launch' }));
     const invalid = await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer bad-token' });
     const nonmember = await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer not-a-member' });
-    assert.equal(anonymous.status, 401);
+    // Anonymous visitors fall through to the public demo search; they must never see the private corpus.
+    assert.equal(anonymous.status, 200);
+    const anonymousResult = await anonymous.json();
+    assert.ok(!anonymousResult.citations.some(item => item.id === 'private-1'));
     assert.equal(invalid.status, 401);
     assert.equal(nonmember.status, 403);
     assert.match((await nonmember.json()).error, /does not have access/i);

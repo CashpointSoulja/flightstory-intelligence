@@ -36,6 +36,13 @@ function loadPrivateIndex() {
   privateIndexPromise ??= readFile(join(root, 'data', 'search-index.json'), 'utf8').then(JSON.parse).catch(() => null);
   return privateIndexPromise;
 }
+
+// Public demo excerpt set (public/demo-index.json): curated, rights-safe, served to anonymous visitors.
+let demoIndexPromise;
+function loadDemoIndex() {
+  demoIndexPromise ??= readFile(join(root, 'public', 'demo-index.json'), 'utf8').then(JSON.parse).then(index => index?.segments?.length ? index.segments : null).catch(() => null);
+  return demoIndexPromise;
+}
 let topicMomentsPromise;
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
@@ -424,7 +431,7 @@ async function body(request) {
 function send(response, status, data, type = 'application/json') { response.writeHead(status, { 'content-type': `${type}; charset=utf-8`, 'cache-control': 'no-store' }); response.end(type === 'application/json' ? JSON.stringify(data) : data); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png' };
 
-export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
+export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
   const hits = new Map();
   const publicRoot = resolve(root, 'public');
   const server = http.createServer(async (request, response) => {
@@ -565,8 +572,11 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       if (!takeRateLimit()) return;
       const t0 = Date.now();
       let diag = '';
+      const token = mode === 'workspace' ? requestBearer(request) : null;
+      // Anonymous visitors get the public demo search; the full corpus stays behind team sign-in.
+      const effectiveMode = mode === 'workspace' && !token ? 'demo' : mode;
       // Cache only the public demo path: workspace auth/quota must run on every request.
-      const cacheable = mode === 'demo' && !search;
+      const cacheable = effectiveMode === 'demo' && !search;
       const cacheKey = cacheable ? searchCacheKey(mode, query.trim()) : null;
       const cached = cacheKey ? searchCacheGet(searchCache, cacheKey) : null;
       if (cached) {
@@ -574,10 +584,9 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         return send(response, 200, cached);
       }
       let items = evidence;
-      if (mode === 'workspace') {
+      if (effectiveMode === 'demo') { const demoSegments = await loadDemo(); if (demoSegments) items = demoSegments; }
+      if (effectiveMode === 'workspace') {
         if (!workspaceId || !insforge.url || !insforge.anonKey) return send(response, 503, { error: 'Workspace search is not configured.' });
-        const token = requestBearer(request);
-        if (!token) return send(response, 401, { error: 'Sign in with GitHub to search the FlightStory workspace.' });
         const access = await authorizeWorkspace(token, { workspaceId, url: insforge.url, anonKey: insforge.anonKey });
         const accessStatus = typeof access === 'string' ? access : access?.status;
         if (accessStatus === 'unauthenticated') return send(response, 401, { error: 'Your session is invalid or expired. Sign in again.' });
@@ -621,10 +630,10 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           }
         }
         diag += ` itemsN:${items.length}`;
-      } else if (mode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
+      } else if (effectiveMode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
-      if (mode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items)) {
+      if (effectiveMode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items)) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
         topicPromise = topicGraphPromise
           .then(graph => searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }))
@@ -638,12 +647,12 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       try {
         result = search
           ? await search(query.trim(), { items, mode })
-          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: mode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: mode === 'workspace' });
+          : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: effectiveMode === 'demo' ? demoTimeoutMs : openAITimeoutMs, items, workspace: effectiveMode === 'workspace' });
       } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; diag += ` aiErr:${error?.status || error?.name || 'unknown'}`; }
       if (!result && openAIKey && !search) diag += ' ai:null';
       if (result) diag += ' ai:ok';
       let finalResult = result || searchLocal(query.trim(), items);
-      if (mode === 'demo' && !finalResult.citations.length) {
+      if (effectiveMode === 'demo' && !finalResult.citations.length) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
         topicMomentsPromise ??= readFile(join(root, 'public', 'topic-moments.json'), 'utf8').then(JSON.parse).catch(() => ({}));
         const graph = await topicGraphPromise;
@@ -685,7 +694,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           };
         }
       }
-      const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
+      const publicResult = effectiveMode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
       if (cacheKey) searchCacheSet(searchCache, cacheKey, publicResult);
       response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", router;desc="${routeModelState.failed ? model : routeModelState.name}", total;dur=${Date.now() - t0}${diag ? `, diag;desc="${diag}"` : ''}`);
       send(response, 200, publicResult);
