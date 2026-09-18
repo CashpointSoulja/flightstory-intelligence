@@ -413,8 +413,8 @@ function renderFrame(timestamp) {
   if (!canRender({ ready: rendererReady, inView: stageInView, visible: pageVisible })) return;
   const now = timestamp / 1000;
   if (!reducedMotion) {
-    if (!focusedTopicNode) root.rotation.y += .00045;
-    stars.rotation.y -= .00012;
+    if (!focusedTopicNode) root.rotation.y += .00005;
+    stars.rotation.y -= .000013;
     videoLines.material.opacity = (activeIds.size ? .13 : .10) + (Math.sin(now * 1.6) + 1) * .01;
   } else {
     videoLines.material.opacity = activeIds.size ? .15 : .12;
