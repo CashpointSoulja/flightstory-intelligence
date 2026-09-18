@@ -66,6 +66,13 @@ function guardClipPreviewEnd(player, start, end) {
   }, 200);
 }
 
+function showClipPreviewFallback() {
+  stopClipPreview();
+  const block = document.querySelector('#clip-preview');
+  const note = block && block.querySelector('[data-preview-window]');
+  if (block && note) { block.hidden = false; note.textContent = 'Inline preview unavailable here - use the watch link to verify the cut.'; }
+}
+
 function mountClipPreview(videoId, start, end, autoplay) {
   const block = document.querySelector('#clip-preview');
   if (!block) return;
@@ -93,14 +100,14 @@ function mountClipPreview(videoId, start, end, autoplay) {
       events: {
         onReady: event => {
           event.target[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
+          setTimeout(() => {
+            try {
+              if (clipPreviewPlayer === event.target && event.target.getPlayerState() === -1) showClipPreviewFallback();
+            } catch (error) {}
+          }, 7000);
         },
         onStateChange: event => { if (window.YT && event.data === YT.PlayerState.PLAYING) guardClipPreviewEnd(event.target, start, end); },
-        onError: () => {
-          stopClipPreview();
-          const block = document.querySelector('#clip-preview');
-          const note = block && block.querySelector('[data-preview-window]');
-          if (block && note) { block.hidden = false; note.textContent = 'Inline preview unavailable here - use the watch link to verify the cut.'; }
-        }
+        onError: () => showClipPreviewFallback()
       }
     });
   }).catch(() => stopClipPreview());
