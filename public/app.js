@@ -67,7 +67,7 @@ function selectEvidence(item) {
   const url = watchUrl(item);
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(item.start)}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
   const saveLabel = saveDisabled ? 'Finish cut edit first' : saved ? '✓ Saved · Remove from drafts' : 'Add to drafts';
-  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span><h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>CREATE CLIP</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}"${saveDisabled ? ' disabled' : ''}>${seconds}s</button>`).join('')}</div><button class="save" id="save-moment" type="button"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${saveLabel}</button><p class="clip-note">Source window ${formatTime(item.start)}–${formatTime(item.end)} · provisional transcript excerpt; verify in the source before review.</p>`;
+  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span><h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>CREATE CLIP</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}"${saveDisabled ? ' disabled' : ''}>${seconds}s</button>`).join('')}</div><button class="save" id="save-moment" type="button"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${saveLabel}</button><p class="clip-note">Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
@@ -91,7 +91,7 @@ function renderResults(result) {
   const isError = result.mode === 'error';
   content.setAttribute('aria-busy', 'false');
   count.textContent = isError ? 'TRY AGAIN' : current.length ? `${current.length} ${current.length === 1 ? 'MOMENT' : 'MOMENTS'}` : 'NO MATCH';
-  const source = isError ? 'ARCHIVE ERROR' : result.mode === 'local-demo' ? 'LOCAL MATCH · DEMO EXCERPTS' : ['ai_match', 'ai-match'].includes(result.mode) ? 'AI MATCH · EXCERPTS ONLY' : result.mode === 'openai' ? 'GPT SPARK · FAST AI PASS' : 'LOCAL FALLBACK';
+  const source = isError ? 'ARCHIVE ERROR' : result.mode === 'topic-map' ? 'ARCHIVE MAP · TOPIC MATCH' : result.mode === 'local-demo' ? 'LOCAL MATCH · DEMO EXCERPTS' : ['ai_match', 'ai-match'].includes(result.mode) ? 'AI MATCH · EXCERPTS ONLY' : result.mode === 'openai' ? 'GPT SPARK · FAST AI PASS' : 'LOCAL FALLBACK';
   const citationNumbers = new Map(current.map((item, index) => [String(item.id), index + 1]));
   const answer = result.mode === 'local-demo' ? '' : Array.isArray(result.claims)
     ? result.claims.length
