@@ -31,7 +31,7 @@ styles.textContent = `
 styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
 styles.textContent += '.universe-stage{background:#f1f1ef}.universe-node-label{color:rgba(17,17,19,.72);text-shadow:0 1px 8px rgba(255,255,255,.9)}.universe-heading{color:#111113}.universe-heading span,.universe-hint,.universe-foot small{color:#77777b}.universe-map-key{color:rgba(17,17,19,.72)}.universe-controls button{border-color:rgba(17,17,19,.18);background:rgba(255,255,255,.78);color:#55545a}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:#ee625b;color:#111113}.universe-inspector{background:rgba(255,255,255,.9);border-left-color:#ee625b}.universe-inspector strong{color:#111113}.universe-inspector button{color:#c84b46}.universe-access-list{background:rgba(255,255,255,.94);border-color:#dededb}.universe-access-row{border-bottom-color:rgba(17,17,19,.1)}.universe-access-row button,.universe-access-row a{color:#77777b}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:#111113;background:rgba(238,98,91,.1)}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">BROWSE THE ARCHIVE MAP <span>INDEXING IN PROGRESS</span></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-controls"><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">BROWSE THE ARCHIVE MAP <span>INDEXING IN PROGRESS</span></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-controls"><button type="button" data-back hidden>← FULL MAP</button><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
 const canvas = document.createElement('canvas');
@@ -71,7 +71,7 @@ controls.maxDistance = 34;
 controls.enablePan = false;
 controls.minPolarAngle = .45;
 controls.maxPolarAngle = Math.PI - .45;
-stage.querySelector('[data-reset]').addEventListener('click', () => { camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
+stage.querySelector('[data-reset]').addEventListener('click', () => { if (focusedTopicNode) { exitTopicFocus(); return; } camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
 stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
 
 const root = new THREE.Group();
@@ -226,6 +226,7 @@ let activeGraphLayer = 'topics';
 let visibleNodes = [];
 
 applyGraphLayer = layer => {
+  if (focusedTopicNode) exitTopicFocus(true);
   const visible = graphLayerVisibility(layer);
   topicNodes.forEach(node => { node.visible = visible.topics; });
   videoNodes.forEach(node => { node.visible = visible.videos; });
@@ -269,9 +270,9 @@ function selectNode(node) {
   if (data.kind === 'video') for (const edge of videoGraph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
   if (data.kind === 'connection') { activeIds.add(data.fromVideo?.id); activeIds.add(data.toVideo?.id); }
   inspectorTitle.textContent = data.kind === 'connection' ? `${data.fromVideo?.title || 'Source A'} ↔ ${data.toVideo?.title || 'Source B'}` : data.title;
-  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
+  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'moment' ? `"${data.topic}" moment · ${data.count || 1} mentions in this episode · ${formatTime(data.seconds)}` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
   openButton.hidden = data.kind === 'core';
-  openButton.textContent = data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : `Open source at ${formatTime(data.seconds)} ↗`;
+  openButton.textContent = data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(data.seconds)} ↗`;
   inspectorMoments.replaceChildren();
   for (const moment of data.kind === 'topic' ? (data.sources || []) : []) {
     const href = nodeSourceUrl({ source: moment.url, seconds: moment.seconds });
@@ -285,11 +286,85 @@ function selectNode(node) {
   requestRender();
 }
 
+// --- topic zoom focus: click a topic -> camera dives in, topic breaks into clickable moment sub-nodes ---
+const momentGeometry = new THREE.SphereGeometry(.09, 8, 8);
+const backButton = stage.querySelector('[data-back]');
+const hintEl = stage.querySelector('.universe-hint');
+const defaultHint = hintEl.textContent;
+let focusedTopicNode = null;
+const focusMomentNodes = [];
+const focusMomentLines = [];
+const focusMomentLabels = [];
+const cameraTween = { active: false, start: null, duration: .9, fromPos: new THREE.Vector3(), toPos: new THREE.Vector3(), fromTarget: new THREE.Vector3(), toTarget: new THREE.Vector3() };
+
+function tweenCamera(toPos, toTarget) {
+  if (reducedMotion) { camera.position.copy(toPos); controls.target.copy(toTarget); controls.update(); requestRender(); return; }
+  cameraTween.fromPos.copy(camera.position); cameraTween.toPos.copy(toPos);
+  cameraTween.fromTarget.copy(controls.target); cameraTween.toTarget.copy(toTarget);
+  cameraTween.start = null; cameraTween.active = true;
+  requestRender();
+}
+
+function enterTopicFocus(node) {
+  if (focusedTopicNode === node) return;
+  exitTopicFocus(true);
+  focusedTopicNode = node;
+  const data = node.userData;
+  const center = node.position;
+  const moments = (data.sources || []).slice(0, 8);
+  const ringCount = Math.max(moments.length, 1);
+  moments.forEach((moment, index) => {
+    const angle = index / ringCount * Math.PI * 2 + Math.PI / ringCount;
+    const position = new THREE.Vector3(center.x + Math.cos(angle) * 1.7, center.y + (index % 2 === 0 ? .3 : -.3), center.z + Math.sin(angle) * 1.7);
+    const mesh = addNode({ id: `${data.id}:moment:${index}`, kind: 'moment', title: moment.title, source: moment.url, seconds: moment.seconds, count: moment.count, topic: data.title, color: data.color }, position, momentGeometry, 1);
+    mesh.material.opacity = 0;
+    focusMomentNodes.push(mesh);
+    const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([center.clone(), position]), new THREE.LineBasicMaterial({ color: data.color, transparent: true, opacity: 0, depthWrite: false }));
+    root.add(line); focusMomentLines.push(line);
+    const label = document.createElement('span');
+    label.className = 'universe-node-label';
+    label.textContent = `${moment.title.length > 38 ? `${moment.title.slice(0, 38)}…` : moment.title} · ${formatTime(moment.seconds)}`;
+    stage.appendChild(label);
+    focusMomentLabels.push({ node: mesh, label });
+  });
+  for (const other of topicNodes) if (other !== node) other.material.opacity = .05;
+  topicLabels.forEach(({ label, node: labelNode }) => { label.hidden = labelNode !== node; });
+  topicBackgrounds.forEach(background => { background.visible = false; });
+  topicCoreLines.forEach(line => { line.visible = false; });
+  graphLines.visible = false; neuralLinks.forEach(line => { line.visible = false; });
+  core.visible = false;
+  visibleNodes = [node, ...focusMomentNodes];
+  const out = center.clone().normalize();
+  if (out.lengthSq() < .01) out.set(0, .3, 1).normalize();
+  tweenCamera(center.clone().add(out.multiplyScalar(3.4)).add(new THREE.Vector3(0, .9, 0)), center.clone());
+  backButton.hidden = false;
+  hintEl.textContent = 'CLICK A MOMENT · CLICK BACKGROUND FOR FULL MAP';
+  selectNode(node);
+  requestRender();
+}
+
+function exitTopicFocus(keepCamera = false) {
+  if (!focusedTopicNode) return;
+  focusedTopicNode = null;
+  for (const mesh of focusMomentNodes) { root.remove(mesh); mesh.material.dispose(); const at = nodes.indexOf(mesh); if (at >= 0) nodes.splice(at, 1); }
+  focusMomentNodes.length = 0;
+  for (const line of focusMomentLines) { root.remove(line); line.geometry.dispose(); line.material.dispose(); }
+  focusMomentLines.length = 0;
+  for (const { label } of focusMomentLabels) label.remove();
+  focusMomentLabels.length = 0;
+  backButton.hidden = true;
+  hintEl.textContent = defaultHint;
+  applyGraphLayer(activeGraphLayer);
+  if (!keepCamera) tweenCamera(new THREE.Vector3(0, 0, 19), new THREE.Vector3(0, 0, 0));
+  requestRender();
+}
+backButton.addEventListener('click', () => exitTopicFocus());
+
 openButton.addEventListener('click', () => {
   const data = selected?.userData;
   if (!data) return;
   if (data.kind === 'connection') window.open(`${data.fromVideo.source}&t=${data.fromVideo.seconds}s`, '_blank', 'noopener');
-  else if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${data.seconds}s`, '_blank', 'noopener');
+  else if (data.kind === 'evidence' || data.kind === 'topic' || data.kind === 'video' || data.kind === 'moment') window.open(`${data.source || `https://www.youtube.com/watch?v=${data.videoId}`}&t=${Math.round(data.seconds)}s`, '_blank', 'noopener');
   else { const input = document.querySelector('#query'); input.value = data.query; document.querySelector('#search-form').requestSubmit(); }
 });
 const raycaster = new THREE.Raycaster();
@@ -315,14 +390,14 @@ function hit(event, pointerDown = false) {
   const nearest = nearestNodeWithinRadius(projected, event.clientX, event.clientY);
   return nearest ? [{ object: nearest }] : [];
 }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
-canvas.addEventListener('pointerdown', event => { const hitNode = hit(event, true)[0]?.object; if (hitNode) selectNode(hitNode); });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'moment' ? `${hitNode.userData.title} · ${formatTime(hitNode.userData.seconds)} · click to open moment` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointerdown', event => { const hitNode = hit(event, true)[0]?.object; if (hitNode) { if (hitNode.userData.kind === 'topic' && activeGraphLayer === 'topics') enterTopicFocus(hitNode); else selectNode(hitNode); } else if (focusedTopicNode) exitTopicFocus(); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); requestRender(); }
 new ResizeObserver(resize).observe(host);
 resize();
 
-function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
+function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of [...topicLabels, ...focusMomentLabels]) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.opacity = point.z < 1 ? '.82' : '0'; } }
 function canRender({ ready, inView, visible }) { return ready && inView && visible; }
 function shouldAnimate({ reduced, inView, visible }) { return !reduced && inView && visible; }
 function requestRender() {
@@ -338,17 +413,31 @@ function renderFrame(timestamp) {
   if (!canRender({ ready: rendererReady, inView: stageInView, visible: pageVisible })) return;
   const now = timestamp / 1000;
   if (!reducedMotion) {
-    root.rotation.y += .00045;
+    if (!focusedTopicNode) root.rotation.y += .00045;
     stars.rotation.y -= .00012;
     videoLines.material.opacity = (activeIds.size ? .13 : .10) + (Math.sin(now * 1.6) + 1) * .01;
   } else {
     videoLines.material.opacity = activeIds.size ? .15 : .12;
   }
-  for (const node of topicNodes) {
-    node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;
-    const pulse = reducedMotion ? 1 : 1 + Math.max(0, Math.sin(now * 1.7 + node.userData.id.length * .41)) * .045;
-    node.scale.setScalar(node.userData.baseScale * pulse);
+  if (cameraTween.active) {
+    if (cameraTween.start === null) cameraTween.start = now;
+    const p = Math.min(1, (now - cameraTween.start) / cameraTween.duration);
+    const eased = p < .5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+    camera.position.lerpVectors(cameraTween.fromPos, cameraTween.toPos, eased);
+    controls.target.lerpVectors(cameraTween.fromTarget, cameraTween.toTarget, eased);
+    if (p >= 1) { cameraTween.active = false; cameraTween.start = null; }
   }
+  for (const node of topicNodes) {
+    node.material.opacity = focusedTopicNode ? (node === focusedTopicNode ? .95 : .05) : activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;
+    const pulse = reducedMotion ? 1 : 1 + Math.max(0, Math.sin(now * 1.7 + node.userData.id.length * .41)) * .045;
+    node.scale.setScalar(node.userData.baseScale * pulse * (node === focusedTopicNode ? 1.35 : 1));
+  }
+  for (const mesh of focusMomentNodes) {
+    mesh.material.opacity = Math.min(.95, mesh.material.opacity + .045);
+    const pulse = reducedMotion ? 1 : 1 + Math.max(0, Math.sin(now * 2.1 + mesh.position.x)) * .08;
+    mesh.scale.setScalar(mesh.userData.baseScale * pulse);
+  }
+  for (const line of focusMomentLines) line.material.opacity = Math.min(.38, line.material.opacity + .018);
   for (const line of neuralLinks) {
     const phase = (now * .16 + line.userData.signalPhase) % 1;
     const envelope = Math.sin(phase * Math.PI);

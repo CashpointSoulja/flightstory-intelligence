@@ -6,7 +6,7 @@ test('floating labels are limited to the twelve most frequent topics', async () 
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
 
   assert.match(graph, /const topicLabels = \[\.\.\.topicNodes\]\.sort\(\(a, b\) => b\.userData\.occurrences - a\.userData\.occurrences\)\.slice\(0, 12\)\.map/);
-  assert.equal((graph.match(/label\.className = 'universe-node-label'/g) || []).length, 1);
+  assert.equal((graph.match(/className = 'universe-node-label'/g) || []).length, 2); // topic labels + zoomed-in moment labels
 });
 
 test('rendered edges use percentile thresholds while inspection retains all connections', async () => {
@@ -31,7 +31,7 @@ test('accessible archive nodes select in-app and keep source opening as a separa
   assert.match(graph, /const sourceLink = document\.createElement\('a'\)/);
   assert.match(graph, /sourceLink\.target = '_blank'/);
   assert.match(graph, /for \(const \[key, button\] of graphSelectionButtons\) button\.setAttribute\('aria-pressed', String\(key === `\$\{data\.kind\}:\$\{data\.id\}`\)\)/);
-  assert.match(graph, /canvas\.addEventListener\('pointerdown', event => \{ const hitNode = hit\(event, true\)\[0\]\?\.object; if \(hitNode\) selectNode\(hitNode\); \}\)/);
+  assert.match(graph, /canvas\.addEventListener\('pointerdown', event => \{ const hitNode = hit\(event, true\)\[0\]\?\.object; if \(hitNode\) \{ if \(hitNode\.userData\.kind === 'topic' && activeGraphLayer === 'topics'\) enterTopicFocus\(hitNode\); else selectNode\(hitNode\); \} else if \(focusedTopicNode\) exitTopicFocus\(\); \}\)/);
   assert.match(graph, /class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong><\/strong><small><\/small>/);
   assert.match(graph, /3D archive map\. Use Browse featured archive nodes to select a topic, video, or citation/);
   assert.doesNotMatch(graph, /canvas\.tabIndex\s*=\s*0/);
@@ -58,4 +58,19 @@ test('topic inspectors expose linked transcript moments with timestamped source 
   assert.match(graph, /link\.textContent = `\$\{moment\.title\} · \$\{formatTime\(moment\.seconds\)\} ↗`/);
   assert.match(graph, /nodeSourceUrl\(\{ source: moment\.url, seconds: moment\.seconds \}\)/);
   assert.match(graph, /setAttribute\('aria-label', 'Linked transcript moments'\)/);
+});
+
+test('topic nodes zoom into clickable moment sub-nodes with background and back-button exits', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+
+  assert.match(graph, /function enterTopicFocus\(node\)/);
+  assert.match(graph, /function exitTopicFocus\(keepCamera = false\)/);
+  assert.match(graph, /kind: 'moment', title: moment\.title, source: moment\.url, seconds: moment\.seconds/);
+  assert.match(graph, /visibleNodes = \[node, \.\.\.focusMomentNodes\]/);
+  assert.match(graph, /<button type="button" data-back hidden>← FULL MAP<\/button>/);
+  assert.match(graph, /if \(hitNode\.userData\.kind === 'topic' && activeGraphLayer === 'topics'\) enterTopicFocus\(hitNode\);/);
+  assert.match(graph, /else if \(focusedTopicNode\) exitTopicFocus\(\)/);
+  assert.match(graph, /backButton\.addEventListener\('click', \(\) => exitTopicFocus\(\)\)/);
+  assert.match(graph, /if \(!focusedTopicNode\) root\.rotation\.y \+= \.00045;/);
+  assert.match(graph, /data\.kind === 'moment' \? `Open moment at \$\{formatTime\(data\.seconds\)\} ↗`/);
 });
