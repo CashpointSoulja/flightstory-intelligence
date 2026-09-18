@@ -71,7 +71,7 @@ controls.maxDistance = 34;
 controls.enablePan = false;
 controls.minPolarAngle = .45;
 controls.maxPolarAngle = Math.PI - .45;
-stage.querySelector('[data-reset]').addEventListener('click', () => { if (focusedTopicNode) { exitTopicFocus(); return; } camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
+stage.querySelector('[data-reset]').addEventListener('click', () => { if (focusedTopicNode) { exitTopicFocus(); return; } if (activeGraphLayer !== 'topics') setGraphLayer('topics'); camera.position.set(0, 0, 19); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
 stage.querySelector('[data-focus]').addEventListener('click', () => { setGraphLayer('evidence'); camera.position.set(0, .4, 8); controls.target.set(0, 0, 0); controls.update(); requestRender(); });
 
 const root = new THREE.Group();

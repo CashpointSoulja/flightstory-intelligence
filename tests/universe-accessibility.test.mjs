@@ -76,6 +76,7 @@ test('topic nodes zoom into clickable moment sub-nodes with background and back-
   assert.match(graph, /if \(hitNode\.userData\.kind === 'topic' && activeGraphLayer === 'topics'\) enterTopicFocus\(hitNode\);/);
   assert.match(graph, /else if \(focusedTopicNode\) exitTopicFocus\(\)/);
   assert.match(graph, /backButton\.addEventListener\('click', \(\) => exitTopicFocus\(\)\)/);
+  assert.match(graph, /if \(activeGraphLayer !== 'topics'\) setGraphLayer\('topics'\);/);
   assert.match(graph, /if \(!focusedTopicNode\) root\.rotation\.y \+= \.00005;/);
   assert.match(graph, /data\.kind === 'moment' \? `Open moment at \$\{formatTime\(data\.seconds\)\} ↗`/);
 });
