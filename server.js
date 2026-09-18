@@ -128,13 +128,13 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
 function excerptPassWillCallOpenAI(query, items) {
   const ranking = rankEvidence(query, items);
   if (!ranking.contentWordCount && !ranking.guestScoped) return false;
-  const minOverlap = Math.min(2, ranking.contentWordCount);
+  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
   return ranking.items.some(({ item, score }) => (ranking.contentWordCount === 0 ? ranking.guestScoped : score >= minOverlap) && item.quote);
 }
 
 function searchLocal(query, items) {
   const ranking = rankEvidence(query, items);
-  const minOverlap = Math.min(2, ranking.contentWordCount);
+  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
   const matches = ranking.guestScoped && !ranking.contentWordCount
     ? ranking.items.slice(0, 4).map(({ item }) => item)
     : minOverlap ? ranking.items.filter(({ score }) => score >= minOverlap).slice(0, 4).map(({ item }) => item) : [];
@@ -155,7 +155,7 @@ async function searchOpenAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12_0
   if (!apiKey) return null;
   const ranking = rankEvidence(query, items);
   if (!ranking.contentWordCount && !ranking.guestScoped) return null;
-  const minOverlap = Math.min(2, ranking.contentWordCount);
+  const minOverlap = ranking.contentWordCount >= 3 ? 2 : 1;
   const ranked = ranking.items
     .filter(({ score }) => ranking.contentWordCount === 0 ? ranking.guestScoped : score >= minOverlap)
     .slice(0, 24)
