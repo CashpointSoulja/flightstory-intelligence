@@ -89,12 +89,18 @@ function mountClipPreview(videoId, start, end, autoplay) {
     if (!document.querySelector('#clip-preview-player')) return;
     clipPreviewPlayer = new YT.Player('clip-preview-player', {
       videoId,
-      playerVars: { rel: 0, modestbranding: 1, playsinline: 1 },
+      playerVars: { rel: 0, modestbranding: 1, playsinline: 1, origin: window.location.origin },
       events: {
         onReady: event => {
           event.target[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
         },
-        onStateChange: event => { if (window.YT && event.data === YT.PlayerState.PLAYING) guardClipPreviewEnd(event.target, start, end); }
+        onStateChange: event => { if (window.YT && event.data === YT.PlayerState.PLAYING) guardClipPreviewEnd(event.target, start, end); },
+        onError: () => {
+          stopClipPreview();
+          const block = document.querySelector('#clip-preview');
+          const note = block && block.querySelector('[data-preview-window]');
+          if (block && note) { block.hidden = false; note.textContent = 'Inline preview unavailable here - use the watch link to verify the cut.'; }
+        }
       }
     });
   }).catch(() => stopClipPreview());
@@ -138,7 +144,7 @@ function selectEvidence(item, options = {}) {
   const saveDisabled = Boolean(editingClipId);
   const url = watchUrl(item);
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(Math.round(item.start))}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
-  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span>${item.virality && item.virality.score >= 7 ? `<span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''}<h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${savedClip && Number(savedClip.requestedDuration) === seconds}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
+  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span>${item.virality && item.virality.score >= 7 ? `<span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''}<h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${Boolean(savedClip && Number(savedClip.requestedDuration) === seconds)}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
