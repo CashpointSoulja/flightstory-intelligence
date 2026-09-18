@@ -82,6 +82,7 @@ const nodes = [];
 const catalogue = await fetch('/api/catalog').then(response => response.ok ? response.json() : []).catch(() => []);
 const graph = await fetch('/topic-graph.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
 const videoGraph = await fetch('/video-links.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
+const subtopicData = await fetch('/topic-subtopics.json').then(response => response.ok ? response.json() : {}).catch(() => ({}));
 
 function addNode(data, position, geometry, scale = 1) {
   const material = new THREE.MeshBasicMaterial({ color: data.color || 0x8c8792, transparent: true, opacity: data.kind === 'episode' ? .72 : 1 });
@@ -270,11 +271,12 @@ function selectNode(node) {
   if (data.kind === 'video') for (const edge of videoGraph.edges) if (edge.source === data.id || edge.target === data.id) { activeIds.add(edge.source); activeIds.add(edge.target); }
   if (data.kind === 'connection') { activeIds.add(data.fromVideo?.id); activeIds.add(data.toVideo?.id); }
   inspectorTitle.textContent = data.kind === 'connection' ? `${data.fromVideo?.title || 'Source A'} ↔ ${data.toVideo?.title || 'Source B'}` : data.title;
-  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'moment' ? `"${data.topic}" moment · ${data.count || 1} mentions in this episode · ${formatTime(data.seconds)}` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
+  inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'subtopic' ? `"${data.topic}" sub-topic · ${data.count || 0} mentions · ${(data.moments || []).length} episodes` : data.kind === 'moment' ? `"${data.topic}" moment · ${data.count || 1} mentions in this episode · ${formatTime(data.seconds)}` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
   openButton.hidden = data.kind === 'core';
-  openButton.textContent = data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(data.seconds)} ↗`;
+  openButton.textContent = data.kind === 'subtopic' ? 'Search this sub-topic ↗' : data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(data.seconds)} ↗`;
   inspectorMoments.replaceChildren();
-  for (const moment of data.kind === 'topic' ? (data.sources || []) : []) {
+  const inspectorMomentItems = data.kind === 'topic' ? (data.sources || []) : data.kind === 'subtopic' ? (data.moments || []).map(moment => ({ title: moment.episode, url: `https://www.youtube.com/watch?v=${moment.videoId}`, seconds: moment.seconds })) : [];
+  for (const moment of inspectorMomentItems) {
     const href = nodeSourceUrl({ source: moment.url, seconds: moment.seconds });
     if (!href) continue;
     const link = document.createElement('a'); link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `${moment.title} · ${formatTime(moment.seconds)} ↗`; inspectorMoments.appendChild(link);
@@ -311,19 +313,25 @@ function enterTopicFocus(node) {
   focusedTopicNode = node;
   const data = node.userData;
   const center = node.position;
-  const moments = (data.sources || []).slice(0, 8);
+  const subtopics = subtopicData[data.id]?.subtopics;
+  const useSubtopics = Array.isArray(subtopics) && subtopics.length > 0;
+  const moments = useSubtopics ? subtopics : (data.sources || []).slice(0, 8);
   const ringCount = Math.max(moments.length, 1);
   moments.forEach((moment, index) => {
     const angle = index / ringCount * Math.PI * 2 + Math.PI / ringCount;
     const position = new THREE.Vector3(center.x + Math.cos(angle) * 1.7, center.y + (index % 2 === 0 ? .3 : -.3), center.z + Math.sin(angle) * 1.7);
-    const mesh = addNode({ id: `${data.id}:moment:${index}`, kind: 'moment', title: moment.title, source: moment.url, seconds: moment.seconds, count: moment.count, topic: data.title, color: data.color }, position, momentGeometry, 1);
+    const mesh = useSubtopics
+      ? addNode({ id: `${data.id}:subtopic:${index}`, kind: 'subtopic', title: moment.name, count: moment.count, moments: moment.moments, query: `${data.title} ${moment.name}`, topic: data.title, color: data.color }, position, momentGeometry, 1)
+      : addNode({ id: `${data.id}:moment:${index}`, kind: 'moment', title: moment.title, source: moment.url, seconds: moment.seconds, count: moment.count, topic: data.title, color: data.color }, position, momentGeometry, 1);
     mesh.material.opacity = 0;
     focusMomentNodes.push(mesh);
     const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([center.clone(), position]), new THREE.LineBasicMaterial({ color: data.color, transparent: true, opacity: 0, depthWrite: false }));
     root.add(line); focusMomentLines.push(line);
     const label = document.createElement('span');
     label.className = 'universe-node-label';
-    label.textContent = `${moment.title.length > 38 ? `${moment.title.slice(0, 38)}…` : moment.title} · ${formatTime(moment.seconds)}`;
+    label.textContent = useSubtopics
+      ? `${moment.name.length > 38 ? `${moment.name.slice(0, 38)}…` : moment.name} · ${moment.count}`
+      : `${moment.title.length > 38 ? `${moment.title.slice(0, 38)}…` : moment.title} · ${formatTime(moment.seconds)}`;
     stage.appendChild(label);
     focusMomentLabels.push({ node: mesh, label });
   });
@@ -338,7 +346,7 @@ function enterTopicFocus(node) {
   if (out.lengthSq() < .01) out.set(0, .3, 1).normalize();
   tweenCamera(center.clone().add(out.multiplyScalar(3.4)).add(new THREE.Vector3(0, .9, 0)), center.clone());
   backButton.hidden = false;
-  hintEl.textContent = 'CLICK A MOMENT · CLICK BACKGROUND FOR FULL MAP';
+  hintEl.textContent = useSubtopics ? 'CLICK A SUB-TOPIC · CLICK BACKGROUND FOR FULL MAP' : 'CLICK A MOMENT · CLICK BACKGROUND FOR FULL MAP';
   selectNode(node);
   requestRender();
 }
@@ -390,7 +398,7 @@ function hit(event, pointerDown = false) {
   const nearest = nearestNodeWithinRadius(projected, event.clientX, event.clientY);
   return nearest ? [{ object: nearest }] : [];
 }
-canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'moment' ? `${hitNode.userData.title} · ${formatTime(hitNode.userData.seconds)} · click to open moment` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
+canvas.addEventListener('pointermove', event => { const hitNode = hit(event)[0]?.object; canvas.style.cursor = hitNode ? 'pointer' : 'grab'; if (!hitNode) { tooltip.style.display = 'none'; return; } tooltip.textContent = hitNode.userData.kind === 'connection' ? `${Math.round((hitNode.userData.score || 0) * 100)}% semantic link · click to inspect` : hitNode.userData.kind === 'evidence' ? `${hitNode.userData.title} · ${hitNode.userData.time}` : hitNode.userData.kind === 'subtopic' ? `${hitNode.userData.title} · ${hitNode.userData.count} mentions · click to explore` : hitNode.userData.kind === 'moment' ? `${hitNode.userData.title} · ${formatTime(hitNode.userData.seconds)} · click to open moment` : hitNode.userData.kind === 'video' ? `${hitNode.userData.title} · video link` : `${hitNode.userData.title} · ${hitNode.userData.occurrences} mentions`; tooltip.style.display = 'block'; tooltip.style.left = `${event.clientX - stage.getBoundingClientRect().left + 12}px`; tooltip.style.top = `${event.clientY - stage.getBoundingClientRect().top + 12}px`; });
 canvas.addEventListener('pointerdown', event => { const hitNode = hit(event, true)[0]?.object; if (hitNode) { if (hitNode.userData.kind === 'topic' && activeGraphLayer === 'topics') enterTopicFocus(hitNode); else selectNode(hitNode); } else if (focusedTopicNode) exitTopicFocus(); });
 
 function resize() { const width = host.clientWidth; const height = host.clientHeight; renderer.setSize(width, height, false); camera.aspect = width / height; camera.updateProjectionMatrix(); requestRender(); }

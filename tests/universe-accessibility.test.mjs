@@ -54,7 +54,7 @@ test('3D clicks fall back to nearby visible nodes only after an exact raycast mi
 test('topic inspectors expose linked transcript moments with timestamped source links', async () => {
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
 
-  assert.match(graph, /data\.kind === 'topic' \? \(data\.sources \|\| \[\]\) : \[\]/);
+  assert.match(graph, /const inspectorMomentItems = data\.kind === 'topic' \? \(data\.sources \|\| \[\]\) : data\.kind === 'subtopic'/);
   assert.match(graph, /link\.textContent = `\$\{moment\.title\} · \$\{formatTime\(moment\.seconds\)\} ↗`/);
   assert.match(graph, /nodeSourceUrl\(\{ source: moment\.url, seconds: moment\.seconds \}\)/);
   assert.match(graph, /setAttribute\('aria-label', 'Linked transcript moments'\)/);
@@ -66,6 +66,8 @@ test('topic nodes zoom into clickable moment sub-nodes with background and back-
   assert.match(graph, /function enterTopicFocus\(node\)/);
   assert.match(graph, /function exitTopicFocus\(keepCamera = false\)/);
   assert.match(graph, /kind: 'moment', title: moment\.title, source: moment\.url, seconds: moment\.seconds/);
+  assert.match(graph, /topic-subtopics\.json/);
+  assert.match(graph, /kind: 'subtopic', title: moment\.name, count: moment\.count, moments: moment\.moments/);
   assert.match(graph, /visibleNodes = \[node, \.\.\.focusMomentNodes\]/);
   assert.match(graph, /<button type="button" data-back hidden>← FULL MAP<\/button>/);
   assert.match(graph, /if \(hitNode\.userData\.kind === 'topic' && activeGraphLayer === 'topics'\) enterTopicFocus\(hitNode\);/);

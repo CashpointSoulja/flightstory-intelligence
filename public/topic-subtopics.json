@@ -1,0 +1,5143 @@
+{
+ "topic-1": {
+  "label": "love",
+  "subtopics": [
+   {
+    "name": "love & sex",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "cLTUA1lneS0",
+      "seconds": 0,
+      "episode": "Jay Shetty: 8 Rules For Perfect Love & Amazing Sex!"
+     }
+    ]
+   },
+   {
+    "name": "choosing a partner",
+    "count": 43,
+    "moments": [
+     {
+      "videoId": "hxsnk90VwCo",
+      "seconds": 0,
+      "episode": "World Expert on Love: Your Brain Already Picked Your Partner"
+     }
+    ]
+   },
+   {
+    "name": "dating apps",
+    "count": 41,
+    "moments": [
+     {
+      "videoId": "AVSn8EYQ43I",
+      "seconds": 101,
+      "episode": "Hinge CEO: The Truth About Dating Apps, Attraction And Finding Love"
+     }
+    ]
+   },
+   {
+    "name": "love vs ambition",
+    "count": 68,
+    "moments": [
+     {
+      "videoId": "cwPKlERwcGk",
+      "seconds": 96,
+      "episode": "Karren Brady: How To Win At Entrepreneurship & Love"
+     },
+     {
+      "videoId": "UMy6GESNkDc",
+      "seconds": 0,
+      "episode": "J\u00fcrgen Klopp: The Real Reason I Fell In Love With Liverpool"
+     }
+    ]
+   },
+   {
+    "name": "loneliness",
+    "count": 63,
+    "moments": [
+     {
+      "videoId": "oI7BxBNp1uE",
+      "seconds": 0,
+      "episode": "Alain De Botton: The REAL Reason We're Lonely, Loveless, Depressed"
+     },
+     {
+      "videoId": "EXUpMMde51E",
+      "seconds": 0,
+      "episode": "Russell Brand: Escaping Anxiety, Addiction & Finding Love"
+     }
+    ]
+   },
+   {
+    "name": "attachment styles",
+    "count": 22,
+    "moments": [
+     {
+      "videoId": "nTWXfo7narw",
+      "seconds": 0,
+      "episode": "Esther Perel: The 3 Attachment Styles & Why You're Struggling With Love"
+     }
+    ]
+   },
+   {
+    "name": "being liked",
+    "count": 28,
+    "moments": [
+     {
+      "videoId": "YEM3nWkB-EE",
+      "seconds": 0,
+      "episode": "Body Language Expert: Tricks That Make People Love & Respect You"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-2": {
+  "label": "brain",
+  "subtopics": [
+   {
+    "name": "screens & brain rot",
+    "count": 122,
+    "moments": [
+     {
+      "videoId": "FN0_ow76hU8",
+      "seconds": 0,
+      "episode": "The Mental Health Doctor: Your Phone Screen & Sitting Is Destroying Your Brain"
+     },
+     {
+      "videoId": "EScgrk7oEwU",
+      "seconds": 0,
+      "episode": "Brain Rot Emergency: These Internal Documents Prove They're Controlling You"
+     },
+     {
+      "videoId": "5wXlmlIXJOI",
+      "seconds": 0,
+      "episode": "Brain Experts WARNING: Watch This Before Using ChatGPT Again"
+     }
+    ]
+   },
+   {
+    "name": "parenting & alcohol",
+    "count": 91,
+    "moments": [
+     {
+      "videoId": "bOi_Y4ythYY",
+      "seconds": 0,
+      "episode": "The No.1 Brain Doctor: This Parenting Mistake Ruins Your Kids Brain"
+     },
+     {
+      "videoId": "Fg7U-BhiZGE",
+      "seconds": 0,
+      "episode": "Alcohol Rewires Your Brain - Dr. Sarah Wakeman"
+     }
+    ]
+   },
+   {
+    "name": "dopamine & tiktok",
+    "count": 81,
+    "moments": [
+     {
+      "videoId": "2ZKLaUbB33o",
+      "seconds": 0,
+      "episode": "Dopamine Expert: How TikTok Is Physically Rewiring Your Brain"
+     },
+     {
+      "videoId": "R6xbXOp7wDA",
+      "seconds": 0,
+      "episode": "Dopamine Expert: Doing This Once A Day Fixes Your Dopamine"
+     }
+    ]
+   },
+   {
+    "name": "brain routines",
+    "count": 68,
+    "moments": [
+     {
+      "videoId": "MGxcosNuC8k",
+      "seconds": 0,
+      "episode": "Andrew Huberman: My Exact Routine To Optimize Brain & Body"
+     },
+     {
+      "videoId": "Oipkl53n938",
+      "seconds": 0,
+      "episode": "The 6 Science Backed Brain Fixes Most People Are Ignoring"
+     }
+    ]
+   },
+   {
+    "name": "habits that harm",
+    "count": 53,
+    "moments": [
+     {
+      "videoId": "WLWbFVKFffM",
+      "seconds": 0,
+      "episode": "The Brain Doctor: 5 Popular Habits That Will Kill Your Brain Health"
+     }
+    ]
+   },
+   {
+    "name": "menopause",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "Cgo2mD4Pc54",
+      "seconds": 0,
+      "episode": "The Menopause Doctor: Menopause Is Shrinking Your Brain - Dr Lisa Mosconi"
+     }
+    ]
+   },
+   {
+    "name": "dementia & diet",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "KVXnVe8eOkM",
+      "seconds": 0,
+      "episode": "Insulin Doctor: The First Sign Of Dementia & The Keto Link"
+     }
+    ]
+   },
+   {
+    "name": "adhd",
+    "count": 17,
+    "moments": [
+     {
+      "videoId": "ycTZ_t-aiuU",
+      "seconds": 0,
+      "episode": "The ADHD Doctor: I've Scanned 250,000 Brains - Dr Daniel Amen"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-3": {
+  "label": "money",
+  "subtopics": [
+   {
+    "name": "buying a house",
+    "count": 101,
+    "moments": [
+     {
+      "videoId": "ORqd9QAC8OY",
+      "seconds": 0,
+      "episode": "Ramit Sethi: Do Not Buy A House! 10 Ways To Make REAL Money"
+     },
+     {
+      "videoId": "XTGlde-Pbd8",
+      "seconds": 0,
+      "episode": "Money Saving Experts: Putting Money In A Bank Makes You Poorer"
+     },
+     {
+      "videoId": "vOvLFT4v4LQ",
+      "seconds": 0,
+      "episode": "Morgan Housel: Do Not Buy A House! Do THIS Instead"
+     },
+     {
+      "videoId": "FoeQUNASmTU",
+      "seconds": 953,
+      "episode": "Passive Income Expert: Buying A House Makes You Poorer Than Renting"
+     }
+    ]
+   },
+   {
+    "name": "money hacks",
+    "count": 99,
+    "moments": [
+     {
+      "videoId": "u0o3IlsEQbI",
+      "seconds": 0,
+      "episode": "Daniel Priestley: The Exact Formula For Turning $100 into $100k Per Month"
+     },
+     {
+      "videoId": "sFkR34AMPw8",
+      "seconds": 0,
+      "episode": "Daniel Priestley: The 7,11,4 Hack That Turns $1 Into $10K Per Month"
+     },
+     {
+      "videoId": "jyCJeglqCe4",
+      "seconds": 139,
+      "episode": "How To Make Money: 7 Hacks That Are PROVEN To Work"
+     }
+    ]
+   },
+   {
+    "name": "getting rich from zero",
+    "count": 95,
+    "moments": [
+     {
+      "videoId": "hVlAOIUA71Y",
+      "seconds": 0,
+      "episode": "The SIMPLE Way To Earn $100,000 From Nothing"
+     },
+     {
+      "videoId": "XkxZCJ2pYqs",
+      "seconds": 0,
+      "episode": "Codie Sanchez: From $0 to Millions In 2 Years"
+     },
+     {
+      "videoId": "IYu_PDPqKFc",
+      "seconds": 1046,
+      "episode": "Codie Sanchez: They're Lying To You About How To Get Rich"
+     }
+    ]
+   },
+   {
+    "name": "spending rules",
+    "count": 29,
+    "moments": [
+     {
+      "videoId": "pz6jhMPA-2w",
+      "seconds": 0,
+      "episode": "Ramit Sethi: Never Split The Bill & Renting Isn't Wasting Money"
+     }
+    ]
+   },
+   {
+    "name": "cost of living",
+    "count": 13,
+    "moments": [
+     {
+      "videoId": "uxu37dqVR90",
+      "seconds": 0,
+      "episode": "The Savings Expert: The Cost Of Living Is About To Skyrocket"
+     },
+     {
+      "videoId": "RSyX_665sEw",
+      "seconds": 0,
+      "episode": "Jaspreet Singh: Under 45? You Won't Get A Pension"
+     }
+    ]
+   },
+   {
+    "name": "hard work & wealth",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "rKOx5qlLyaA",
+      "seconds": 952,
+      "episode": "Scott Galloway: Hard Work Doesn't Build Wealth"
+     },
+     {
+      "videoId": "5sCGZAcXKWg",
+      "seconds": 0,
+      "episode": "Kevin Hart: They're Lying To You About Becoming A Millionaire"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-4": {
+  "label": "business",
+  "subtopics": [
+   {
+    "name": "billion-dollar founders",
+    "count": 132,
+    "moments": [
+     {
+      "videoId": "w_35cUaU_NA",
+      "seconds": 0,
+      "episode": "Spotify Founder: How A 23 Year Old Introvert Built A $31 Billion Business"
+     },
+     {
+      "videoId": "ct2k6iXLurg",
+      "seconds": 0,
+      "episode": "Tom Bilyeu: From Broke & Sleeping On The Floor To A $1 Billion Business"
+     },
+     {
+      "videoId": "K8UgjzJTdHw",
+      "seconds": 219,
+      "episode": "Gymshark CEO: How I Built A $1.5 Billion Business At 19"
+     }
+    ]
+   },
+   {
+    "name": "starting from nothing",
+    "count": 56,
+    "moments": [
+     {
+      "videoId": "kxLmeUIXXtU",
+      "seconds": 0,
+      "episode": "Entrepreneurship Expert: How To Build A $1m Business Without Hard Work"
+     },
+     {
+      "videoId": "x3e73Qn6NOo",
+      "seconds": 0,
+      "episode": "Alex Hormozi: How To Turn $1,000 Into $100 Million"
+     }
+    ]
+   },
+   {
+    "name": "comeback stories",
+    "count": 51,
+    "moments": [
+     {
+      "videoId": "amUpZsEl5Rs",
+      "seconds": 0,
+      "episode": "Trinny Woodall: From Drug Addict To $300m Business Empire"
+     },
+     {
+      "videoId": "V7AYmOBahsU",
+      "seconds": 0,
+      "episode": "NastyGal Founder: I Was A Stripper! Then Built A $400m Business"
+     }
+    ]
+   },
+   {
+    "name": "business nightmares",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "PDg7m489d1M",
+      "seconds": 142,
+      "episode": "Billion Dollar NIGHTMARE: The Tragedy Of A Billion $$ Beauty Business"
+     }
+    ]
+   },
+   {
+    "name": "marketing vs product",
+    "count": 17,
+    "moments": [
+     {
+      "videoId": "lGSZqhFFhoI",
+      "seconds": 236,
+      "episode": "Five Guys CEO: How We Built A Burger Empire WITHOUT ANY Marketing"
+     },
+     {
+      "videoId": "rBM6lGk4-fk",
+      "seconds": 1075,
+      "episode": "Exact Formula Used To Build A $130 Billion Company"
+     }
+    ]
+   },
+   {
+    "name": "scaling frameworks",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "VsTMXuIV3OM",
+      "seconds": 348,
+      "episode": "The Woman Who Makes Millionaires: The PPF Framework"
+     }
+    ]
+   },
+   {
+    "name": "loneliness at the top",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "ia6Di_ytiSE",
+      "seconds": 0,
+      "episode": "Airbnb CEO: Airbnb Was Worth $100 BILLION & I Was Lonely & Deeply Sad"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-5": {
+  "label": "women",
+  "subtopics": [
+   {
+    "name": "fitness & dieting",
+    "count": 87,
+    "moments": [
+     {
+      "videoId": "HwVn3WMv5oI",
+      "seconds": 0,
+      "episode": "Women's Fitness Expert: Dieting & Exercise - Dr. Stephanie Estima"
+     },
+     {
+      "videoId": "P1CeHGJOX5g",
+      "seconds": 0,
+      "episode": "Women's Exercise Debate: The 7 Weight Loss Lies Women Believe"
+     },
+     {
+      "videoId": "It5_C6AF1pk",
+      "seconds": 0,
+      "episode": "Exercise & Nutrition Scientist: The Truth About Exercise On Your Period"
+     }
+    ]
+   },
+   {
+    "name": "dating & marriage",
+    "count": 80,
+    "moments": [
+     {
+      "videoId": "Ppyt3MptX5k",
+      "seconds": 0,
+      "episode": "Testosterone Expert: Why Women Find Fathers More Attractive"
+     },
+     {
+      "videoId": "6ikIGGi859w",
+      "seconds": 0,
+      "episode": "Paul Brunson: Women Need To Lower Their Standards?"
+     },
+     {
+      "videoId": "mS3bfCt0K88",
+      "seconds": 0,
+      "episode": "The Gottman Doctors: Women Tend to Be More Unhappily Married"
+     }
+    ]
+   },
+   {
+    "name": "sex & pleasure",
+    "count": 72,
+    "moments": [
+     {
+      "videoId": "PnpHwhTWw0c",
+      "seconds": 0,
+      "episode": "Sex Expert: What Women Actually Need To Enjoy Sex"
+     },
+     {
+      "videoId": "-pdCDq_MTj4",
+      "seconds": 0,
+      "episode": "Louise Perry: Casual Sex Is Almost Always Dangerous For Women"
+     }
+    ]
+   },
+   {
+    "name": "women's health",
+    "count": 65,
+    "moments": [
+     {
+      "videoId": "MM-Qhlxf1pM",
+      "seconds": 0,
+      "episode": "Dr Rachel Rubin: Your Doctor Was Never Taught About Women's Bodies"
+     },
+     {
+      "videoId": "kizDk8idpT8",
+      "seconds": 0,
+      "episode": "Hormone & Fertility Experts: We've Been Lied To About Women's Health"
+     }
+    ]
+   },
+   {
+    "name": "careers",
+    "count": 49,
+    "moments": [
+     {
+      "videoId": "SgPVgPYnT_M",
+      "seconds": 0,
+      "episode": "Girls Who Code Founder Reshma Saujani: Teaching Millions Of Women To Code"
+     }
+    ]
+   },
+   {
+    "name": "hormones & birth control",
+    "count": 36,
+    "moments": [
+     {
+      "videoId": "MGposaKNJKQ",
+      "seconds": 0,
+      "episode": "Women Health Expert: Birth Control Changes Who You Are"
+     }
+    ]
+   },
+   {
+    "name": "feminism",
+    "count": 36,
+    "moments": [
+     {
+      "videoId": "ZHuZ_8VYCWA",
+      "seconds": 0,
+      "episode": "DEBATE: Feminist Women Vs Non-Feminist Women"
+     }
+    ]
+   },
+   {
+    "name": "menopause",
+    "count": 15,
+    "moments": [
+     {
+      "videoId": "Cgo2mD4Pc54",
+      "seconds": 0,
+      "episode": "The Menopause Doctor: This Diet Delays Menopause"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-6": {
+  "label": "health",
+  "subtopics": [
+   {
+    "name": "food lies & sugar",
+    "count": 108,
+    "moments": [
+     {
+      "videoId": "It5DFXULOq0",
+      "seconds": 0,
+      "episode": "Max Lugavere: The One Food (WE ALL EAT) That's Killing Us Slowly"
+     },
+     {
+      "videoId": "Xm_PHZXGe-w",
+      "seconds": 0,
+      "episode": "They're Lying About 'Healthy' Foods & Sugar"
+     },
+     {
+      "videoId": "ZE_H7rijrVk",
+      "seconds": 0,
+      "episode": "No.1 Sugar Expert: You've Been Sold A Lie About Healthy Food"
+     }
+    ]
+   },
+   {
+    "name": "everyday habits",
+    "count": 105,
+    "moments": [
+     {
+      "videoId": "WLWbFVKFffM",
+      "seconds": 0,
+      "episode": "The Brain Doctor: 5 Popular Habits That Will Kill Your Brain Health"
+     },
+     {
+      "videoId": "FN0_ow76hU8",
+      "seconds": 0,
+      "episode": "The Mental Health Doctor: Your Phone Screen & Sitting Is Destroying Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "gut health",
+    "count": 82,
+    "moments": [
+     {
+      "videoId": "R-5H70SfbG8",
+      "seconds": 0,
+      "episode": "Dr Will Cole: The 4 Foods Fueling Inflammation & Disease"
+     },
+     {
+      "videoId": "w3dTmyZq4Qk",
+      "seconds": 0,
+      "episode": "The Microbiome Doctor: 3 Foods For Perfect Gut Health"
+     }
+    ]
+   },
+   {
+    "name": "calories & diet myths",
+    "count": 78,
+    "moments": [
+     {
+      "videoId": "Znoi6tBtYRc",
+      "seconds": 185,
+      "episode": "Layne Norton: Health Experts Are Wrong About Calories & Diet Coke"
+     },
+     {
+      "videoId": "ToUpAWW7u4c",
+      "seconds": 0,
+      "episode": "Dr Mike: The Top 10 Lies Health Experts Have Told You"
+     }
+    ]
+   },
+   {
+    "name": "women's health",
+    "count": 66,
+    "moments": [
+     {
+      "videoId": "MGposaKNJKQ",
+      "seconds": 0,
+      "episode": "Women Health Expert: Birth Control Changes Who You Are"
+     },
+     {
+      "videoId": "kizDk8idpT8",
+      "seconds": 0,
+      "episode": "Hormone & Fertility Experts: We've Been Lied To About Women's Health"
+     }
+    ]
+   },
+   {
+    "name": "alcohol",
+    "count": 60,
+    "moments": [
+     {
+      "videoId": "-Hwlvkfp698",
+      "seconds": 0,
+      "episode": "Kristen Holmes: Even A Little Alcohol Is Hurting Your Health"
+     },
+     {
+      "videoId": "Fg7U-BhiZGE",
+      "seconds": 0,
+      "episode": "Alcohol Rewires Your Brain - Dr. Sarah Wakeman"
+     }
+    ]
+   },
+   {
+    "name": "ageing & fat loss",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "D6wTuogebU8",
+      "seconds": 0,
+      "episode": "Dr Vonda Wright: Doing This For 30s Burns More Fat Than A Long Run"
+     }
+    ]
+   },
+   {
+    "name": "coffee",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "TqNrJNhcf5g",
+      "seconds": 0,
+      "episode": "James Hoffmann: The Link Between Coffee & Your Mental Health"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-7": {
+  "label": "sleep",
+  "subtopics": [
+   {
+    "name": "sleep myths",
+    "count": 76,
+    "moments": [
+     {
+      "videoId": "qxxnRMT9C-8",
+      "seconds": 0,
+      "episode": "World No.1 Sleep Expert: Magnesium Isn't Helping You Sleep"
+     },
+     {
+      "videoId": "ujRwf1HdNjk",
+      "seconds": 0,
+      "episode": "Harvard Professor: The 7 Big LIES About Exercise, Sleep, Running"
+     }
+    ]
+   },
+   {
+    "name": "insomnia",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "Desm53JJVMA",
+      "seconds": 0,
+      "episode": "The Extreme Sleep Scientist: The Painful Trick To Fix Insomnia"
+     }
+    ]
+   },
+   {
+    "name": "waking at 3am",
+    "count": 40,
+    "moments": [
+     {
+      "videoId": "pXlMKzcZlwM",
+      "seconds": 0,
+      "episode": "Sleep Doctor: If You Wake Up At 3AM, DO NOT Do This"
+     }
+    ]
+   },
+   {
+    "name": "athlete sleep",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "fybq6V74qRk",
+      "seconds": 133,
+      "episode": "Dr Cheri Mah: The Woman Who Helps NBA Stars To Sleep"
+     }
+    ]
+   },
+   {
+    "name": "sleep hacks",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "Us8n8VBQn_c",
+      "seconds": 0,
+      "episode": "Matthew Walker: The 6 Sleep Hacks You NEED"
+     }
+    ]
+   },
+   {
+    "name": "alcohol & sleep",
+    "count": 11,
+    "moments": [
+     {
+      "videoId": "-Hwlvkfp698",
+      "seconds": 0,
+      "episode": "Kristen Holmes: Even A Little Alcohol Is Hurting Your Health"
+     }
+    ]
+   },
+   {
+    "name": "exercise timing",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "hQ78Hpwrt80",
+      "seconds": 2426,
+      "episode": "The Muscle Growth Doctor: Exercise At Night Is A Terrible Idea"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-8": {
+  "label": "conversation",
+  "subtopics": [
+   {
+    "name": "being liked",
+    "count": 13,
+    "moments": [
+     {
+      "videoId": "q2cg1gEYWJQ",
+      "seconds": 219,
+      "episode": "Vanessa Van Edwards: The Weird Trick That Makes People Like You"
+     },
+     {
+      "videoId": "TYXzR5KahEg",
+      "seconds": 2141,
+      "episode": "Top Harvard Professor: The Psychology Of Why People Don't Like You"
+     }
+    ]
+   },
+   {
+    "name": "making friends",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "NcaQUH2K-wo",
+      "seconds": 3022,
+      "episode": "Simon Sinek: The Advice Young People NEED To Hear"
+     },
+     {
+      "videoId": "I3WUiD8HYn8",
+      "seconds": 142,
+      "episode": "Simon Sinek: Why You Can't Make Friends"
+     }
+    ]
+   },
+   {
+    "name": "manipulation defense",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "xDQyLnNAXr4",
+      "seconds": 0,
+      "episode": "Secret Service Agent: Stay In Control When Someone Tries To Manipulate You"
+     }
+    ]
+   },
+   {
+    "name": "difficult talks",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "H9kPmiV0B34",
+      "seconds": 4783,
+      "episode": "The Gottman Doctors: Affairs Can Save Your Relationship"
+     },
+     {
+      "videoId": "Uvy5mcLiWW0",
+      "seconds": 2959,
+      "episode": "World No.1 Divorce Lawyer: If You Do This, Your Marriage Is Already Over"
+     }
+    ]
+   },
+   {
+    "name": "spotting liars",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "zsuOSDb7gzQ",
+      "seconds": 4753,
+      "episode": "The Speaking Coach: The One Word All Liars Use"
+     }
+    ]
+   },
+   {
+    "name": "body language",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "VHUrdELKjDw",
+      "seconds": 1413,
+      "episode": "Body Language Expert: Stop Using This, It's Making People Dislike You"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-9": {
+  "label": "mind",
+  "subtopics": [
+   {
+    "name": "mindset & performance",
+    "count": 104,
+    "moments": [
+     {
+      "videoId": "nTiqySjdD6s",
+      "seconds": 0,
+      "episode": "The 1% Mindset: How to 1000x Your Success & Productivity"
+     },
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 0,
+      "episode": "The Mindset Doctor: Professor Steve Peters"
+     }
+    ]
+   },
+   {
+    "name": "fasting & the body-mind",
+    "count": 66,
+    "moments": [
+     {
+      "videoId": "MrjIXLQ_OdA",
+      "seconds": 0,
+      "episode": "The Fasting Expert: The Truth About Ozempic - Dr Mindy Pelz"
+     },
+     {
+      "videoId": "e2mQOGzHtQc",
+      "seconds": 0,
+      "episode": "The Miracle Doctor: Melt Belly Fat & Heal Your Injury - Dr Mindy Pelz"
+     }
+    ]
+   },
+   {
+    "name": "changing your mind",
+    "count": 55,
+    "moments": [
+     {
+      "videoId": "1o343YfhaYU",
+      "seconds": 0,
+      "episode": "Michael Pollan: How To Change Your Mind"
+     }
+    ]
+   },
+   {
+    "name": "limitless mind",
+    "count": 38,
+    "moments": [
+     {
+      "videoId": "t_pZ2D_nlD0",
+      "seconds": 188,
+      "episode": "Deepak Chopra: 5 Simple Steps To A Limitless Mind"
+     }
+    ]
+   },
+   {
+    "name": "reading people",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "9uSXOr-AdAU",
+      "seconds": 0,
+      "episode": "Chase Hughes: The 3 Dark Psychology Tricks To Read Anyone's Mind"
+     }
+    ]
+   },
+   {
+    "name": "healing fear",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "G4hkYDjPSFs",
+      "seconds": 0,
+      "episode": "Dr. Joe Dispenza: Living Without Fear & Anxiety Forever"
+     }
+    ]
+   },
+   {
+    "name": "negative thoughts",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "bzilnhq3Mkg",
+      "seconds": 1715,
+      "episode": "Marisa Peer: 3 Simple Steps To Remove Negative Thoughts"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-10": {
+  "label": "energy",
+  "subtopics": [
+   {
+    "name": "movement & sitting",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "A-8tPmQtYqs",
+      "seconds": 1223,
+      "episode": "Daniel Lieberman: They're Lying To You About Running, Breathing & Sitting"
+     }
+    ]
+   },
+   {
+    "name": "mitochondria & ageing",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "6xlmaorRY0w",
+      "seconds": 1352,
+      "episode": "The Mitochondria Doctor: Reverses Gray Hair & Fixes Disease"
+     },
+     {
+      "videoId": "PyhmvAL-iYw",
+      "seconds": 5887,
+      "episode": "Anti-Aging Expert: The Fast Way To Shrink Visceral Fat"
+     }
+    ]
+   },
+   {
+    "name": "sugar crashes",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "DnEJrgc1BCk",
+      "seconds": 3275,
+      "episode": "Jessie Inchausp\u00e9: The Scary New Research On Sugar"
+     },
+     {
+      "videoId": "Znoi6tBtYRc",
+      "seconds": 2263,
+      "episode": "Layne Norton: Health Experts Are Wrong About Calories"
+     }
+    ]
+   },
+   {
+    "name": "vitamins & creatine",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "JCTb3QSrGMQ",
+      "seconds": 2003,
+      "episode": "Rhonda Patrick: Missing This Vitamin Is Like Smoking"
+     }
+    ]
+   },
+   {
+    "name": "gut & inflammation",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "R-5H70SfbG8",
+      "seconds": 0,
+      "episode": "Dr Will Cole: The 4 Foods Fueling Inflammation"
+     }
+    ]
+   },
+   {
+    "name": "fat burning",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "3C185Gkgg0U",
+      "seconds": 2734,
+      "episode": "The Fat Burning Expert: Why You're Not Losing Belly Fat"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-11": {
+  "label": "family",
+  "subtopics": [
+   {
+    "name": "family & money stress",
+    "count": 7,
+    "moments": [
+     {
+      "videoId": "jFlnRBO8mcg",
+      "seconds": 881,
+      "episode": "The Savings Expert: Post-Traumatic Broke Syndrome"
+     },
+     {
+      "videoId": "uxu37dqVR90",
+      "seconds": 6372,
+      "episode": "The Savings Expert: The Cost Of Living Is About To Skyrocket"
+     }
+    ]
+   },
+   {
+    "name": "kids & screens",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "jSqCL7Npln0",
+      "seconds": 12050,
+      "episode": "Andrew Huberman: You Must Control Your Dopamine"
+     },
+     {
+      "videoId": "R6xbXOp7wDA",
+      "seconds": 2426,
+      "episode": "Dopamine Expert: What Alcohol Is Doing To Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "childhood trauma",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "USE89i0kiiQ",
+      "seconds": 611,
+      "episode": "Paul Conte: 10 Lies They Told You About Your Childhood Trauma"
+     },
+     {
+      "videoId": "1Rd9Iuxjb5k",
+      "seconds": 3346,
+      "episode": "Charlamagne tha God: Depression & Childhood Trauma"
+     }
+    ]
+   },
+   {
+    "name": "fathers",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "p7O0Zyn0SkM",
+      "seconds": 605,
+      "episode": "Jack Whitehall's Emotional Confession About His Dad"
+     }
+    ]
+   },
+   {
+    "name": "raising the next generation",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "rKOx5qlLyaA",
+      "seconds": 3789,
+      "episode": "Scott Galloway: We're Raising The Most Unhappy Generation In History"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-12": {
+  "label": "relationships",
+  "subtopics": [
+   {
+    "name": "toxic relationship habits",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 0,
+      "episode": "Lewis Howes: Top 6 Habits Destroying Your Relationships"
+     }
+    ]
+   },
+   {
+    "name": "failed relationships",
+    "count": 79,
+    "moments": [
+     {
+      "videoId": "TovCz1Qh_24",
+      "seconds": 173,
+      "episode": "Liam Payne: Darkest Moments & Failed Relationships"
+     },
+     {
+      "videoId": "xlYbp36HPb0",
+      "seconds": 91,
+      "episode": "Lucy Hale: Eating Disorders, Relationships & Addiction"
+     }
+    ]
+   },
+   {
+    "name": "sex & intimacy",
+    "count": 14,
+    "moments": [
+     {
+      "videoId": "QCaFWrT0j-g",
+      "seconds": 889,
+      "episode": "Esther Perel: The Relationship Crisis Killing Your Sex Life"
+     },
+     {
+      "videoId": "LLMCd3WbgGk",
+      "seconds": 1883,
+      "episode": "Orgasm Queen: 20 Minutes Before Sex"
+     },
+     {
+      "videoId": "MM-Qhlxf1pM",
+      "seconds": 4060,
+      "episode": "Dr Rachel Rubin: Women's Bodies"
+     }
+    ]
+   },
+   {
+    "name": "attachment & love",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "nTWXfo7narw",
+      "seconds": 0,
+      "episode": "Esther Perel: The 3 Attachment Styles"
+     },
+     {
+      "videoId": "H9kPmiV0B34",
+      "seconds": 321,
+      "episode": "The Gottman Doctors: If You See This, Walk Away"
+     }
+    ]
+   },
+   {
+    "name": "dating & marriage",
+    "count": 7,
+    "moments": [
+     {
+      "videoId": "PM9rgDBX9u0",
+      "seconds": 0,
+      "episode": "Dating Doctor: Start Dating Like It's Your Job"
+     },
+     {
+      "videoId": "oAgGirY-GUQ",
+      "seconds": 0,
+      "episode": "Divorce Expert: Slippage Is Tearing Marriages Apart"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-13": {
+  "label": "power",
+  "subtopics": [
+   {
+    "name": "manipulation & seduction",
+    "count": 79,
+    "moments": [
+     {
+      "videoId": "19_sGcrsWhg",
+      "seconds": 0,
+      "episode": "Robert Greene: We Are Making Dangerous, Lonely & Broken Men"
+     },
+     {
+      "videoId": "Qv70RMUFlu0",
+      "seconds": 0,
+      "episode": "Robert Greene: How To Seduce Anyone, Build Confidence & Become Powerful"
+     }
+    ]
+   },
+   {
+    "name": "war & geopolitics",
+    "count": 14,
+    "moments": [
+     {
+      "videoId": "pDKlaJM_vys",
+      "seconds": 0,
+      "episode": "The Iran War Expert: The Most Dangerous Stage Begins Now"
+     },
+     {
+      "videoId": "8qObdS-bhRM",
+      "seconds": 1149,
+      "episode": "WW3 Threat Assessment: World War III Has Quietly Started"
+     },
+     {
+      "videoId": "9JxaESJIGO0",
+      "seconds": 1030,
+      "episode": "Pierre Poilievre: Why America Is Quietly Abandoning Its Allies"
+     }
+    ]
+   },
+   {
+    "name": "ai power",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "Lf5oqGOCRCM",
+      "seconds": 0,
+      "episode": "Ed Zitron: They're LYING About AI"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 0,
+      "episode": "Yuval Noah Harari: They Are Lying About AI"
+     }
+    ]
+   },
+   {
+    "name": "financial power",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "PUO51DoSEqk",
+      "seconds": 0,
+      "episode": "Financial Crash Expert: The 90-Day Collapse Timeline"
+     },
+     {
+      "videoId": "Bu0xNDLNORU",
+      "seconds": 4658,
+      "episode": "Ray Dalio: I Predicted The 2008 CRASH"
+     }
+    ]
+   },
+   {
+    "name": "respect & status",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "DazRYdqZRDI",
+      "seconds": 248,
+      "episode": "Secret Agent: Authenticity Is Quietly Sabotaging You"
+     }
+    ]
+   },
+   {
+    "name": "police & the state",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 0,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-14": {
+  "label": "diet",
+  "subtopics": [
+   {
+    "name": "calories & weight loss lies",
+    "count": 100,
+    "moments": [
+     {
+      "videoId": "Gy_vcL1cpP8",
+      "seconds": 0,
+      "episode": "Giles Yeo: You've Been LIED To About Calories & Losing Weight"
+     },
+     {
+      "videoId": "Znoi6tBtYRc",
+      "seconds": 185,
+      "episode": "Layne Norton: Health Experts Are Wrong About Calories & Diet Coke"
+     },
+     {
+      "videoId": "4DWKf5RqU-s",
+      "seconds": 2060,
+      "episode": "The Glucose Expert: Calorie Counting Is A Load of BS"
+     }
+    ]
+   },
+   {
+    "name": "menopause diet",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "Cgo2mD4Pc54",
+      "seconds": 0,
+      "episode": "The Menopause Doctor: This Diet Delays Menopause"
+     }
+    ]
+   },
+   {
+    "name": "women's dieting",
+    "count": 39,
+    "moments": [
+     {
+      "videoId": "HwVn3WMv5oI",
+      "seconds": 0,
+      "episode": "Dr. Stephanie Estima: What Women NEED To Know About Dieting"
+     },
+     {
+      "videoId": "It5_C6AF1pk",
+      "seconds": 2846,
+      "episode": "Exercise & Nutrition Scientist: Exercise On Your Period"
+     }
+    ]
+   },
+   {
+    "name": "sugar",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "QXUNnXHXeVQ",
+      "seconds": 0,
+      "episode": "The Sugar Doctor: The Simple Diet That Prevents 80% of Disease"
+     }
+    ]
+   },
+   {
+    "name": "dna & diet",
+    "count": 32,
+    "moments": [
+     {
+      "videoId": "10enqcw2Qiw",
+      "seconds": 0,
+      "episode": "Gary Brecka: I Tested 100,000 People's DNA. This Diet Will Kill You"
+     }
+    ]
+   },
+   {
+    "name": "processed food",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "It5DFXULOq0",
+      "seconds": 1629,
+      "episode": "Max Lugavere: The One Food (WE ALL EAT) That's Killing Us Slowly"
+     },
+     {
+      "videoId": "dzUDhstqXbg",
+      "seconds": 0,
+      "episode": "The Junk Food Doctor: THIS Food Is Worse Than Smoking"
+     }
+    ]
+   },
+   {
+    "name": "keto & mental health",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "B7tnfSPySb0",
+      "seconds": 0,
+      "episode": "The Keto Psychiatrist: What Keto Is Really Doing To Your Body"
+     }
+    ]
+   },
+   {
+    "name": "fasting",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "jDG1m_b5Ih0",
+      "seconds": 1606,
+      "episode": "World No.1 Fasting Expert: The Link Between Cancer & Fasting"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-15": {
+  "label": "media",
+  "subtopics": [
+   {
+    "name": "social media damage",
+    "count": 45,
+    "moments": [
+     {
+      "videoId": "DM2jRSgjy1o",
+      "seconds": 0,
+      "episode": "Dustin Poirier: I Deleted Social Media After The Incident"
+     },
+     {
+      "videoId": "EScgrk7oEwU",
+      "seconds": 0,
+      "episode": "Brain Rot Emergency: These Internal Documents Prove They're Controlling You"
+     },
+     {
+      "videoId": "2ZKLaUbB33o",
+      "seconds": 1731,
+      "episode": "Dopamine Expert: How TikTok Is Physically Rewiring Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "news & politics",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 4707,
+      "episode": "Yuval Noah Harari: They Are Lying About AI"
+     },
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 2960,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     }
+    ]
+   },
+   {
+    "name": "focus & attention",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "kNOX7a7-kwQ",
+      "seconds": 1200,
+      "episode": "Johann Hari: How To Fix Your Focus & Stop Procrastinating"
+     }
+    ]
+   },
+   {
+    "name": "overthinking",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "iLlrIi9-NfQ",
+      "seconds": 1449,
+      "episode": "Dr Julie Smith: How To Detach From Overthinking & Anxiety"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-16": {
+  "label": "future",
+  "subtopics": [
+   {
+    "name": "ai deciding the future",
+    "count": 56,
+    "moments": [
+     {
+      "videoId": "P7Y-fynYsgE",
+      "seconds": 0,
+      "episode": "AI Expert Warning: 6 People Are Quietly Deciding Humanity's Future"
+     },
+     {
+      "videoId": "fpETS6q1Hww",
+      "seconds": 409,
+      "episode": "Daniel Priestley: AI Will Make Plumbers Earn More Than Lawyers"
+     },
+     {
+      "videoId": "BFU1OCkhBwo",
+      "seconds": 4206,
+      "episode": "Tristan Harris: What The World Looks Like In 2 Years"
+     }
+    ]
+   },
+   {
+    "name": "career crossroads",
+    "count": 76,
+    "moments": [
+     {
+      "videoId": "XtT4fI-NkXU",
+      "seconds": 245,
+      "episode": "Ivan Toney Opens Up About His Ban & His Future Team"
+     },
+     {
+      "videoId": "puc5pZVsFPY",
+      "seconds": 173,
+      "episode": "Tom Aspinall: Brain Damage & His Future In the UFC"
+     }
+    ]
+   },
+   {
+    "name": "economic future",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "32u5T6lO8qk",
+      "seconds": 3753,
+      "episode": "Billionaire's WARNING: The Crash Is Already Here"
+     },
+     {
+      "videoId": "XTGlde-Pbd8",
+      "seconds": 0,
+      "episode": "Money Saving Experts: Putting Money In A Bank Makes You Poorer"
+     }
+    ]
+   },
+   {
+    "name": "next generation",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "SgPVgPYnT_M",
+      "seconds": 686,
+      "episode": "Girls Who Code Founder: Teaching Millions Of Women To Code"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-17": {
+  "label": "mental",
+  "subtopics": [
+   {
+    "name": "phones & mental health",
+    "count": 52,
+    "moments": [
+     {
+      "videoId": "FN0_ow76hU8",
+      "seconds": 0,
+      "episode": "The Mental Health Doctor: Your Phone Screen Is Destroying Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "coffee & the mind",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "TqNrJNhcf5g",
+      "seconds": 0,
+      "episode": "James Hoffmann: The Link Between Coffee & Your Mental Health"
+     }
+    ]
+   },
+   {
+    "name": "influence & mentalism",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "4qfxHfBJ3Mw",
+      "seconds": 0,
+      "episode": "Oz Pearlman: This Small Mistake Makes People Dislike You"
+     }
+    ]
+   },
+   {
+    "name": "keto & mental illness",
+    "count": 27,
+    "moments": [
+     {
+      "videoId": "B7tnfSPySb0",
+      "seconds": 0,
+      "episode": "The Keto Psychiatrist: Can Keto Cure 43% Of Mental Illness?"
+     }
+    ]
+   },
+   {
+    "name": "depression stories",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "1Rd9Iuxjb5k",
+      "seconds": 1836,
+      "episode": "Charlamagne tha God: Depression & Childhood Trauma"
+     },
+     {
+      "videoId": "OEDzn83BxFo",
+      "seconds": 450,
+      "episode": "Frank Lampard Speaks Out About Chelsea"
+     },
+     {
+      "videoId": "FjrJ2DJN_pA",
+      "seconds": 2156,
+      "episode": "MrBeast: I Lost Tens Of Millions On Beast Games"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-18": {
+  "label": "society",
+  "subtopics": [
+   {
+    "name": "lonely & sexless society",
+    "count": 25,
+    "moments": [
+     {
+      "videoId": "Hik6OY-nk4c",
+      "seconds": 0,
+      "episode": "Jordan B Peterson: We've Built A Lonely & Sexless Society"
+     },
+     {
+      "videoId": "dm2qDrb3UVo",
+      "seconds": 353,
+      "episode": "Dr. K: The Porn Addiction Crisis No One Wants to Talk About"
+     }
+    ]
+   },
+   {
+    "name": "middle class decline",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "uLBsHXNEwAU",
+      "seconds": 0,
+      "episode": "DEBATE: The Death Of The Middle Class"
+     },
+     {
+      "videoId": "4yohVh4qcas",
+      "seconds": 6587,
+      "episode": "EMERGENCY DEBATE: Is A Financial Apocalypse Coming?"
+     }
+    ]
+   },
+   {
+    "name": "ai & jobs",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "s52O1JH2tnU",
+      "seconds": 4478,
+      "episode": "Uber CEO: AI Will Replace 9.4 Million Jobs At Uber"
+     },
+     {
+      "videoId": "P7Y-fynYsgE",
+      "seconds": 744,
+      "episode": "AI Expert: 6 People Deciding Humanity's Future"
+     }
+    ]
+   },
+   {
+    "name": "war warnings",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "UzOJiqN_DpM",
+      "seconds": 498,
+      "episode": "Yuval Noah Harari: More War Is Coming"
+     },
+     {
+      "videoId": "8qObdS-bhRM",
+      "seconds": 736,
+      "episode": "WW3 Threat Assessment"
+     }
+    ]
+   },
+   {
+    "name": "young men in crisis",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "KRxhnSkgxtk",
+      "seconds": 1996,
+      "episode": "Scott Galloway: The Crisis Among Young Men Is Getting Worse"
+     }
+    ]
+   },
+   {
+    "name": "gender debates",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "ZHuZ_8VYCWA",
+      "seconds": 0,
+      "episode": "DEBATE: Feminist Women Vs Non-Feminist Women"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-19": {
+  "label": "cancer",
+  "subtopics": [
+   {
+    "name": "food & cancer",
+    "count": 97,
+    "moments": [
+     {
+      "videoId": "MrjIXLQ_OdA",
+      "seconds": 0,
+      "episode": "Dr Mindy Pelz: These 3 Foods Are Leading To Cancer"
+     },
+     {
+      "videoId": "VaVC3PAWqLk",
+      "seconds": 0,
+      "episode": "The Cancer Doctor: This Common Food Is Making Cancer Worse"
+     },
+     {
+      "videoId": "LgsJ3V9pIG0",
+      "seconds": 0,
+      "episode": "Dr. William Li: This Common Food Is Feeding Your Cancer Cells"
+     }
+    ]
+   },
+   {
+    "name": "milk & ozempic",
+    "count": 51,
+    "moments": [
+     {
+      "videoId": "lbzn5iz8Mbo",
+      "seconds": 0,
+      "episode": "The Longevity Expert: Is There A Link Between Milk & Cancer?"
+     }
+    ]
+   },
+   {
+    "name": "fasting & cancer",
+    "count": 41,
+    "moments": [
+     {
+      "videoId": "jDG1m_b5Ih0",
+      "seconds": 0,
+      "episode": "World No.1 Fasting Expert: The Link Between Cancer & Fasting"
+     }
+    ]
+   },
+   {
+    "name": "prevention myths",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "ujRwf1HdNjk",
+      "seconds": 0,
+      "episode": "Harvard Professor: The 7 Big LIES About Exercise, Sleep & Cancer"
+     }
+    ]
+   },
+   {
+    "name": "sex & prostate",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "HUoPA6oP6do",
+      "seconds": 0,
+      "episode": "Dr Rena Malik: The Link Between Masturbating & Prostate Cancer"
+     }
+    ]
+   },
+   {
+    "name": "ignored research",
+    "count": 33,
+    "moments": [
+     {
+      "videoId": "kBm8Ho-_RXM",
+      "seconds": 0,
+      "episode": "Leading Cancer Researcher: They're Ignoring My Research"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-20": {
+  "label": "meaning",
+  "subtopics": [
+   {
+    "name": "happiness & meaning",
+    "count": 57,
+    "moments": [
+     {
+      "videoId": "_yZiNnQftxU",
+      "seconds": 0,
+      "episode": "Neil deGrasse Tyson: Do THIS Every Morning To Find Happiness & Meaning"
+     },
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 4064,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     },
+     {
+      "videoId": "NO_GdfSe9To",
+      "seconds": 4009,
+      "episode": "Dacher Keltner: How To FINALLY Beat Stress, Worry & Uncertainty"
+     }
+    ]
+   },
+   {
+    "name": "religion & belief",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "Esu8BXLBmZ4",
+      "seconds": 279,
+      "episode": "Atheist vs Christian vs Spiritual Thinker"
+     },
+     {
+      "videoId": "nrwNSSyKuD4",
+      "seconds": 4234,
+      "episode": "No.1 Christianity Expert: The Truth About Christianity"
+     }
+    ]
+   },
+   {
+    "name": "purpose & work",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 2527,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     },
+     {
+      "videoId": "Mvcu6UfY7d4",
+      "seconds": 1067,
+      "episode": "Strava Founder: How I Motivated 100 Million People"
+     }
+    ]
+   },
+   {
+    "name": "goals vs happiness",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "rtufWBLOXgw",
+      "seconds": 3902,
+      "episode": "James Clear: Your Goals Are Quietly Restricting Your Happiness"
+     }
+    ]
+   },
+   {
+    "name": "novelty & boredom",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "7KTwmEGsY5g",
+      "seconds": 1461,
+      "episode": "No.1 Neuroscientist: Your Life, Work & Sex Life Will Get Boring"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-21": {
+  "label": "technology",
+  "subtopics": [
+   {
+    "name": "ai hype & lies",
+    "count": 7,
+    "moments": [
+     {
+      "videoId": "Lf5oqGOCRCM",
+      "seconds": 1671,
+      "episode": "Ed Zitron: They're LYING About AI"
+     },
+     {
+      "videoId": "Cn8HBj8QAbk",
+      "seconds": 2706,
+      "episode": "AI Whistleblower Karen Hao: We Are Being Gaslit By AI Companies"
+     },
+     {
+      "videoId": "BFU1OCkhBwo",
+      "seconds": 4518,
+      "episode": "Tristan Harris: What The World Looks Like In 2 Years"
+     }
+    ]
+   },
+   {
+    "name": "tech & the economy",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "4yohVh4qcas",
+      "seconds": 4703,
+      "episode": "EMERGENCY DEBATE: They Lied About The Economy Recovering"
+     },
+     {
+      "videoId": "EVts3Ui_0AI",
+      "seconds": 3087,
+      "episode": "Global Forecaster: The Brutal 2026 Shift"
+     }
+    ]
+   },
+   {
+    "name": "big tech careers",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "eTkFItOG3Kk",
+      "seconds": 642,
+      "episode": "LinkedIn Founder Reid Hoffman: It's Time To Quit Your Job When You Feel This"
+     }
+    ]
+   },
+   {
+    "name": "ai & jobs",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "JMYQmGfTltY",
+      "seconds": 1736,
+      "episode": "AI AGENTS DEBATE: These Jobs Won't Exist In 24 Months"
+     }
+    ]
+   },
+   {
+    "name": "secret tech & ufos",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "V-z0k5xu1hM",
+      "seconds": 0,
+      "episode": "UFO Roundtable: Former CIA Scientist Proves Aliens Exist"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-22": {
+  "label": "truth",
+  "subtopics": [
+   {
+    "name": "supplements & creatine",
+    "count": 73,
+    "moments": [
+     {
+      "videoId": "JCTb3QSrGMQ",
+      "seconds": 0,
+      "episode": "Rhonda Patrick: The Truth About Creatine"
+     },
+     {
+      "videoId": "epAVydG6IxI",
+      "seconds": 0,
+      "episode": "Jeff Cavaliere: The TRUTH about Creatine"
+     }
+    ]
+   },
+   {
+    "name": "ai truth",
+    "count": 81,
+    "moments": [
+     {
+      "videoId": "I_w81rptxkc",
+      "seconds": 0,
+      "episode": "Tony Robbins: The Truth About AI"
+     },
+     {
+      "videoId": "Cn8HBj8QAbk",
+      "seconds": 0,
+      "episode": "Karen Hao: AI Companies Are Hiding The Truth"
+     }
+    ]
+   },
+   {
+    "name": "money truths",
+    "count": 85,
+    "moments": [
+     {
+      "videoId": "uxu37dqVR90",
+      "seconds": 0,
+      "episode": "The Savings Expert: The Truth About America Collapsing"
+     },
+     {
+      "videoId": "99xyy1nUpug",
+      "seconds": 0,
+      "episode": "Early Retirement Expert: A House Vs Stocks, The Truth"
+     }
+    ]
+   },
+   {
+    "name": "dating truths",
+    "count": 73,
+    "moments": [
+     {
+      "videoId": "AVSn8EYQ43I",
+      "seconds": 101,
+      "episode": "Hinge CEO: The Truth About Dating Apps"
+     },
+     {
+      "videoId": "Ppyt3MptX5k",
+      "seconds": 0,
+      "episode": "Testosterone Expert: The Truth About Dad Bod"
+     }
+    ]
+   },
+   {
+    "name": "personal confessions",
+    "count": 71,
+    "moments": [
+     {
+      "videoId": "VcFNahUxd3k",
+      "seconds": 114,
+      "episode": "Alex Scott: I've Never Told The FULL Truth About My Past"
+     },
+     {
+      "videoId": "knPqBc2qJ8E",
+      "seconds": 0,
+      "episode": "Alex Cooper: The Truth I Never Planned to Share"
+     }
+    ]
+   },
+   {
+    "name": "exercise myths",
+    "count": 50,
+    "moments": [
+     {
+      "videoId": "It5_C6AF1pk",
+      "seconds": 0,
+      "episode": "The Truth About Exercise On Your Period"
+     }
+    ]
+   },
+   {
+    "name": "dopamine & cold showers",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "jSqCL7Npln0",
+      "seconds": 0,
+      "episode": "Andrew Huberman: The Shocking Truth Behind Cold Showers"
+     }
+    ]
+   },
+   {
+    "name": "ufos & cover-ups",
+    "count": 30,
+    "moments": [
+     {
+      "videoId": "ZkNVSju99HY",
+      "seconds": 122,
+      "episode": "Ex-Pentagon Official: Top-Secret UFO Encounters Uncovered"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-23": {
+  "label": "science",
+  "subtopics": [
+   {
+    "name": "neuroscience of happiness",
+    "count": 53,
+    "moments": [
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 0,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     },
+     {
+      "videoId": "NO_GdfSe9To",
+      "seconds": 0,
+      "episode": "Dacher Keltner: How To FINALLY Beat Stress & Worry"
+     }
+    ]
+   },
+   {
+    "name": "brain fixes",
+    "count": 33,
+    "moments": [
+     {
+      "videoId": "Oipkl53n938",
+      "seconds": 0,
+      "episode": "The 6 Science Backed Brain Fixes Most People Are Ignoring"
+     },
+     {
+      "videoId": "5o-tRub-0pQ",
+      "seconds": 4971,
+      "episode": "The Exercise Neuroscientist: Exercise & Dementia Link"
+     }
+    ]
+   },
+   {
+    "name": "cosmos & existence",
+    "count": 23,
+    "moments": [
+     {
+      "videoId": "LiIs5X56JMI",
+      "seconds": 507,
+      "episode": "Brian Keating: Spending $200 Million To Explore Existence"
+     }
+    ]
+   },
+   {
+    "name": "habit science",
+    "count": 7,
+    "moments": [
+     {
+      "videoId": "v9VtjcRaRWc",
+      "seconds": 924,
+      "episode": "5 Scientific Rules for Making & Breaking Habits"
+     }
+    ]
+   },
+   {
+    "name": "nutrition science",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "R-5H70SfbG8",
+      "seconds": 1369,
+      "episode": "Dr Will Cole: Foods Fueling Inflammation"
+     },
+     {
+      "videoId": "QXUNnXHXeVQ",
+      "seconds": 0,
+      "episode": "The Sugar Doctor: The Diet That Prevents 80% of Disease"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-24": {
+  "label": "hope",
+  "subtopics": [
+   {
+    "name": "warnings to hear",
+    "count": 51,
+    "moments": [
+     {
+      "videoId": "UzOJiqN_DpM",
+      "seconds": 0,
+      "episode": "Yuval Noah Harari: An Urgent Warning They Hope You Ignore"
+     }
+    ]
+   },
+   {
+    "name": "resilience",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 1641,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     },
+     {
+      "videoId": "1Rd9Iuxjb5k",
+      "seconds": 5158,
+      "episode": "Charlamagne tha God: Depression & Childhood Trauma"
+     },
+     {
+      "videoId": "Fg7U-BhiZGE",
+      "seconds": 1511,
+      "episode": "Dr. Sarah Wakeman: Hope, Strength & Connection"
+     }
+    ]
+   },
+   {
+    "name": "hope in crisis",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "D3lhrrXb4WI",
+      "seconds": 5456,
+      "episode": "Kamala Harris: America Is At Breaking Point"
+     },
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 1103,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     }
+    ]
+   },
+   {
+    "name": "beating illness",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "VaVC3PAWqLk",
+      "seconds": 788,
+      "episode": "The Cancer Doctor: This Common Food Is Making Cancer Worse"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-25": {
+  "label": "culture",
+  "subtopics": [
+   {
+    "name": "company culture",
+    "count": 12,
+    "moments": [
+     {
+      "videoId": "ia6Di_ytiSE",
+      "seconds": 3134,
+      "episode": "Airbnb CEO: $100 BILLION & I Was Lonely"
+     },
+     {
+      "videoId": "w_35cUaU_NA",
+      "seconds": 4424,
+      "episode": "Spotify Founder: Building A $31 Billion Business"
+     },
+     {
+      "videoId": "lGSZqhFFhoI",
+      "seconds": 2424,
+      "episode": "Five Guys CEO: Building A Burger Empire Without Marketing"
+     }
+    ]
+   },
+   {
+    "name": "work & fulfilment",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "NZd9luVXB80",
+      "seconds": 1807,
+      "episode": "Marcus Buckingham: How To Find Ultimate Fulfilment At Work"
+     },
+     {
+      "videoId": "NcaQUH2K-wo",
+      "seconds": 2301,
+      "episode": "Simon Sinek: The Advice Young People NEED To Hear"
+     }
+    ]
+   },
+   {
+    "name": "culture wars",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "ZHuZ_8VYCWA",
+      "seconds": 1280,
+      "episode": "DEBATE: Feminist Women Vs Non-Feminist Women"
+     },
+     {
+      "videoId": "1g9VX34MSUA",
+      "seconds": 2769,
+      "episode": "Dr Gad Saad: The Cancelled Professor"
+     }
+    ]
+   },
+   {
+    "name": "sex culture",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "QCaFWrT0j-g",
+      "seconds": 2917,
+      "episode": "Esther Perel: The Relationship Crisis No One Talks About"
+     },
+     {
+      "videoId": "9gk3mNJs2FY",
+      "seconds": 4497,
+      "episode": "Dr Bill Von Hippel: We're Not Having Enough Sex"
+     }
+    ]
+   },
+   {
+    "name": "community",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Mvcu6UfY7d4",
+      "seconds": 582,
+      "episode": "Strava Founder: Motivating 100 Million People To Stay Active"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-26": {
+  "label": "history",
+  "subtopics": [
+   {
+    "name": "generational decline",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "rKOx5qlLyaA",
+      "seconds": 0,
+      "episode": "Scott Galloway: Raising The Most Unhappy Generation In History"
+     }
+    ]
+   },
+   {
+    "name": "war & empires",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "UzOJiqN_DpM",
+      "seconds": 247,
+      "episode": "Yuval Noah Harari: More War Is Coming"
+     },
+     {
+      "videoId": "49RT6SQ8n0Y",
+      "seconds": 2280,
+      "episode": "Ray Dalio: America & The UK's Decline Is Coming"
+     }
+    ]
+   },
+   {
+    "name": "economic history",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "uxu37dqVR90",
+      "seconds": 3815,
+      "episode": "The Savings Expert: America Collapsing"
+     },
+     {
+      "videoId": "32u5T6lO8qk",
+      "seconds": 627,
+      "episode": "Billionaire's WARNING: The Crash Is Already Here"
+     },
+     {
+      "videoId": "4yohVh4qcas",
+      "seconds": 5099,
+      "episode": "EMERGENCY DEBATE: Financial Apocalypse Coming?"
+     }
+    ]
+   },
+   {
+    "name": "ai & humanity",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "P7Y-fynYsgE",
+      "seconds": 145,
+      "episode": "AI Expert: 6 People Deciding Humanity's Future"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 857,
+      "episode": "Yuval Noah Harari: They Are Lying About AI"
+     }
+    ]
+   },
+   {
+    "name": "bitcoin",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "1aGpJQ8BMLI",
+      "seconds": 0,
+      "episode": "Michael Saylor: The Man Who Owns 4% Of All Bitcoin"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-27": {
+  "label": "intelligence",
+  "subtopics": [
+   {
+    "name": "espionage & surveillance",
+    "count": 35,
+    "moments": [
+     {
+      "videoId": "t38LbMVoPCs",
+      "seconds": 0,
+      "episode": "Top Intelligence Advisor: Epstein Was A Front. They Can See Everything"
+     }
+    ]
+   },
+   {
+    "name": "ai risk",
+    "count": 10,
+    "moments": [
+     {
+      "videoId": "P7Y-fynYsgE",
+      "seconds": 0,
+      "episode": "AI Expert: 6 People Deciding Humanity's Future"
+     },
+     {
+      "videoId": "Cn8HBj8QAbk",
+      "seconds": 441,
+      "episode": "Karen Hao: Gaslit By AI Companies"
+     },
+     {
+      "videoId": "giT0ytynSqg",
+      "seconds": 0,
+      "episode": "Godfather of AI: They Keep Silencing Me"
+     },
+     {
+      "videoId": "UclrVWafRAI",
+      "seconds": 1752,
+      "episode": "Dr. Roman Yampolskiy: Only 5 Jobs Will Remain In 2030"
+     }
+    ]
+   },
+   {
+    "name": "ai timelines",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "RwlgFC6S-OE",
+      "seconds": 450,
+      "episode": "Mo Gawdat: You Only Have 3 Years Left Before It Hits"
+     }
+    ]
+   },
+   {
+    "name": "reading behavior",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "RvjR9GM2kX8",
+      "seconds": 283,
+      "episode": "Chase Hughes: Instantly Read Any Room"
+     }
+    ]
+   },
+   {
+    "name": "consciousness",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Qifsxitq_q4",
+      "seconds": 1408,
+      "episode": "Professor Brian Greene: AI, Consciousness & The End of Humanity"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-28": {
+  "label": "anxiety",
+  "subtopics": [
+   {
+    "name": "anxiety tricks",
+    "count": 74,
+    "moments": [
+     {
+      "videoId": "iEo48f_Rs4w",
+      "seconds": 0,
+      "episode": "Mel Robbins: Saying These 2 Words Could Fix Your Anxiety"
+     },
+     {
+      "videoId": "fajtQSCHfvE",
+      "seconds": 0,
+      "episode": "Dr. Martha Beck: This Weird Trick Reduces Anxiety"
+     }
+    ]
+   },
+   {
+    "name": "fear & self-doubt",
+    "count": 61,
+    "moments": [
+     {
+      "videoId": "G4hkYDjPSFs",
+      "seconds": 0,
+      "episode": "Dr. Joe Dispenza: Living Without Fear & Anxiety Forever"
+     },
+     {
+      "videoId": "3eZJ_y68wsg",
+      "seconds": 0,
+      "episode": "Jocko Willink: Trick To Overcome Fear, Anxiety & Self-Doubt"
+     }
+    ]
+   },
+   {
+    "name": "stress & the body",
+    "count": 49,
+    "moments": [
+     {
+      "videoId": "IxVNR0Om-lA",
+      "seconds": 0,
+      "episode": "Mo Gawdat: Stress Is Causing 70% Of Heart Attacks In Young People"
+     }
+    ]
+   },
+   {
+    "name": "overthinking",
+    "count": 48,
+    "moments": [
+     {
+      "videoId": "iLlrIi9-NfQ",
+      "seconds": 0,
+      "episode": "Dr Julie Smith: How To Detach From Overthinking & Anxiety"
+     }
+    ]
+   },
+   {
+    "name": "health anxiety & ocd",
+    "count": 45,
+    "moments": [
+     {
+      "videoId": "1DV6I5hK6ro",
+      "seconds": 0,
+      "episode": "Jaackmaate: My Battle With Health Anxiety & OCD"
+     }
+    ]
+   },
+   {
+    "name": "addiction",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "EXUpMMde51E",
+      "seconds": 0,
+      "episode": "Russell Brand: Escaping A Lifetime Of Anxiety & Addiction"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-29": {
+  "label": "trauma",
+  "subtopics": [
+   {
+    "name": "celebrity trauma",
+    "count": 56,
+    "moments": [
+     {
+      "videoId": "1Rd9Iuxjb5k",
+      "seconds": 0,
+      "episode": "Charlamagne tha God: Depression & Childhood Trauma"
+     },
+     {
+      "videoId": "aivpDPCP7Q8",
+      "seconds": 0,
+      "episode": "Thierry Henry: I Was Depressed, Crying & Dealing With Trauma"
+     },
+     {
+      "videoId": "SkAZRNg-VWY",
+      "seconds": 1947,
+      "episode": "Jonathan Van Ness: Hitting Rock Bottom"
+     }
+    ]
+   },
+   {
+    "name": "childhood trauma",
+    "count": 55,
+    "moments": [
+     {
+      "videoId": "USE89i0kiiQ",
+      "seconds": 0,
+      "episode": "Paul Conte: 10 Lies About Your Childhood Trauma"
+     },
+     {
+      "videoId": "uPup-1pDepY",
+      "seconds": 2408,
+      "episode": "Gabor Mate: The Childhood Lie That's Ruining Our Lives"
+     }
+    ]
+   },
+   {
+    "name": "the body keeps score",
+    "count": 49,
+    "moments": [
+     {
+      "videoId": "Qx5J5nwDBTo",
+      "seconds": 0,
+      "episode": "The Body Trauma Expert: This Eye Movement Trick Can Fix Trauma"
+     }
+    ]
+   },
+   {
+    "name": "financial trauma",
+    "count": 42,
+    "moments": [
+     {
+      "videoId": "jFlnRBO8mcg",
+      "seconds": 0,
+      "episode": "The Savings Expert: Post-Traumatic Broke Syndrome"
+     }
+    ]
+   },
+   {
+    "name": "healing tricks",
+    "count": 24,
+    "moments": [
+     {
+      "videoId": "fajtQSCHfvE",
+      "seconds": 0,
+      "episode": "Dr. Martha Beck: Trick That Fixed My Childhood Trauma"
+     },
+     {
+      "videoId": "iEo48f_Rs4w",
+      "seconds": 1791,
+      "episode": "Mel Robbins: 2 Words That Could Fix Anxiety"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-30": {
+  "label": "fear",
+  "subtopics": [
+   {
+    "name": "overcoming fear",
+    "count": 61,
+    "moments": [
+     {
+      "videoId": "3eZJ_y68wsg",
+      "seconds": 0,
+      "episode": "Jocko Willink: Overcome Fear, Anxiety & Self-Doubt"
+     },
+     {
+      "videoId": "G4hkYDjPSFs",
+      "seconds": 0,
+      "episode": "Dr. Joe Dispenza: Living Without Fear & Anxiety Forever"
+     }
+    ]
+   },
+   {
+    "name": "facing it",
+    "count": 27,
+    "moments": [
+     {
+      "videoId": "p7O0Zyn0SkM",
+      "seconds": 0,
+      "episode": "Jack Whitehall: His Dad, His Biggest Fear & His New Life"
+     },
+     {
+      "videoId": "ajgwabD4_HE",
+      "seconds": 1571,
+      "episode": "World's Greatest Climber: If I Had One Last Climb"
+     }
+    ]
+   },
+   {
+    "name": "ai fears",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "BFU1OCkhBwo",
+      "seconds": 7235,
+      "episode": "Tristan Harris: What The World Looks Like In 2 Years"
+     },
+     {
+      "videoId": "Cn8HBj8QAbk",
+      "seconds": 1099,
+      "episode": "Karen Hao: Gaslit By AI Companies"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 4431,
+      "episode": "Yuval Noah Harari: They Are Lying About AI"
+     }
+    ]
+   },
+   {
+    "name": "regret & failure",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "H0lbv1pgMc0",
+      "seconds": 4118,
+      "episode": "Tony Hawk: Burnout, Obsession & Regrets"
+     },
+     {
+      "videoId": "Gy_vcL1cpP8",
+      "seconds": 681,
+      "episode": "Giles Yeo: Lied To About Losing Weight"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-31": {
+  "label": "community",
+  "subtopics": [
+   {
+    "name": "friendship & belonging",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "Mvcu6UfY7d4",
+      "seconds": 2603,
+      "episode": "Strava Founder: Motivating 100 Million People To Stay Active"
+     },
+     {
+      "videoId": "qRY-foz-ZAw",
+      "seconds": 2011,
+      "episode": "The Happiness Expert: Single Friends Will Keep You Single"
+     },
+     {
+      "videoId": "I3WUiD8HYn8",
+      "seconds": 3112,
+      "episode": "Simon Sinek: Why You Can't Make Friends"
+     }
+    ]
+   },
+   {
+    "name": "relationships",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "cLTUA1lneS0",
+      "seconds": 150,
+      "episode": "Jay Shetty: 8 Rules For Perfect Love & Amazing Sex"
+     },
+     {
+      "videoId": "H9kPmiV0B34",
+      "seconds": 5609,
+      "episode": "The Gottman Doctors: Affairs Can Save Your Relationship"
+     },
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 5368,
+      "episode": "Lewis Howes: 6 Habits Destroying Your Relationships"
+     }
+    ]
+   },
+   {
+    "name": "tribes & fandom",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "H0lbv1pgMc0",
+      "seconds": 680,
+      "episode": "Tony Hawk: The Culture & Community of Skating"
+     },
+     {
+      "videoId": "hxsnk90VwCo",
+      "seconds": 5708,
+      "episode": "World Expert on Love: Your Brain Already Picked Your Partner"
+     }
+    ]
+   },
+   {
+    "name": "local safety",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 2738,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     },
+     {
+      "videoId": "5cKDs7bIGPE",
+      "seconds": 0,
+      "episode": "JD Vance: They Tricked Me About Trump"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-32": {
+  "label": "nature",
+  "subtopics": [
+   {
+    "name": "the nature of happiness",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "NO_GdfSe9To",
+      "seconds": 1004,
+      "episode": "Dacher Keltner: How To Beat Stress, Worry & Uncertainty"
+     },
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 243,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     }
+    ]
+   },
+   {
+    "name": "human nature",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "OYg6BTjb90E",
+      "seconds": 2416,
+      "episode": "Top White House Advisor: The US Empire Is Declining"
+     },
+     {
+      "videoId": "AcK_zgJjnoo",
+      "seconds": 170,
+      "episode": "Human Lie Detector: The #1 Sign They're Lying"
+     }
+    ]
+   },
+   {
+    "name": "nature vs technology",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "HwmwyBgzj8c",
+      "seconds": 4043,
+      "episode": "Alex Hormozi: Stop Chasing AI, Build This Instead"
+     },
+     {
+      "videoId": "MGxcosNuC8k",
+      "seconds": 1235,
+      "episode": "Andrew Huberman: My Exact Routine"
+     }
+    ]
+   },
+   {
+    "name": "ageing & the body",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "6xlmaorRY0w",
+      "seconds": 6929,
+      "episode": "The Mitochondria Doctor: Feel Young Again"
+     },
+     {
+      "videoId": "eqPnptAtBJk",
+      "seconds": 6425,
+      "episode": "The Life-Extension Doctor: Early Death Risk"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-33": {
+  "label": "death",
+  "subtopics": [
+   {
+    "name": "life extension",
+    "count": 50,
+    "moments": [
+     {
+      "videoId": "eqPnptAtBJk",
+      "seconds": 0,
+      "episode": "The Life-Extension Doctor: What's Increasing Early-Death Risk"
+     }
+    ]
+   },
+   {
+    "name": "failure & regrets",
+    "count": 41,
+    "moments": [
+     {
+      "videoId": "mW6jgKCKqiA",
+      "seconds": 79,
+      "episode": "Piers Morgan: Dealing With Repeat Failure, Death Threats & Regrets"
+     }
+    ]
+   },
+   {
+    "name": "death of the middle class",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "uLBsHXNEwAU",
+      "seconds": 0,
+      "episode": "DEBATE: The Death Of The Middle Class"
+     }
+    ]
+   },
+   {
+    "name": "life after death",
+    "count": 33,
+    "moments": [
+     {
+      "videoId": "yfEQRqFo2bI",
+      "seconds": 0,
+      "episode": "Dr. Tara Swart: Evidence We Can Communicate After Death"
+     }
+    ]
+   },
+   {
+    "name": "beliefs about death",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Esu8BXLBmZ4",
+      "seconds": 4067,
+      "episode": "Atheist vs Christian vs Spiritual Thinker"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-34": {
+  "label": "depression",
+  "subtopics": [
+   {
+    "name": "celebrity stories",
+    "count": 106,
+    "moments": [
+     {
+      "videoId": "1m-2QhqdlfI",
+      "seconds": 93,
+      "episode": "will.i.am Opens Up: Depression, Creativity & ADHD"
+     },
+     {
+      "videoId": "FsztuzyXdhY",
+      "seconds": 247,
+      "episode": "Trevor Noah: My Depression Was Linked To ADHD"
+     },
+     {
+      "videoId": "1Rd9Iuxjb5k",
+      "seconds": 0,
+      "episode": "Charlamagne tha God: Depression & Childhood Trauma"
+     }
+    ]
+   },
+   {
+    "name": "diet & mood",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "B7tnfSPySb0",
+      "seconds": 0,
+      "episode": "The Keto Psychiatrist: Can Keto Cure Mental Illness?"
+     },
+     {
+      "videoId": "It5DFXULOq0",
+      "seconds": 3123,
+      "episode": "Max Lugavere: The Food Killing Us Slowly"
+     },
+     {
+      "videoId": "ZE_H7rijrVk",
+      "seconds": 1334,
+      "episode": "No.1 Sugar Expert: Sold A Lie About Healthy Food"
+     }
+    ]
+   },
+   {
+    "name": "hormones & mood",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "Ppyt3MptX5k",
+      "seconds": 3282,
+      "episode": "Testosterone Expert: The Truth About Dad Bod"
+     },
+     {
+      "videoId": "XDcESvzX58Y",
+      "seconds": 3391,
+      "episode": "The Ozempic Expert: People Are Being Overdosed"
+     }
+    ]
+   },
+   {
+    "name": "ai & mood",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "5wXlmlIXJOI",
+      "seconds": 4357,
+      "episode": "Brain Experts WARNING: Watch Before Using ChatGPT"
+     }
+    ]
+   },
+   {
+    "name": "healing",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Qx5J5nwDBTo",
+      "seconds": 0,
+      "episode": "The Body Trauma Expert: The Body Keeps The Score"
+     },
+     {
+      "videoId": "USE89i0kiiQ",
+      "seconds": 242,
+      "episode": "Paul Conte: Childhood Trauma Lies"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-35": {
+  "label": "wealth",
+  "subtopics": [
+   {
+    "name": "the hard work myth",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "rKOx5qlLyaA",
+      "seconds": 0,
+      "episode": "Scott Galloway: Hard Work Doesn't Build Wealth"
+     }
+    ]
+   },
+   {
+    "name": "pensions & saving",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "RSyX_665sEw",
+      "seconds": 0,
+      "episode": "Jaspreet Singh: Under 45? You Won't Get A Pension"
+     },
+     {
+      "videoId": "XTGlde-Pbd8",
+      "seconds": 0,
+      "episode": "Money Saving Experts: Banks Make You Poorer"
+     }
+    ]
+   },
+   {
+    "name": "economic collapse",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "4yohVh4qcas",
+      "seconds": 2723,
+      "episode": "EMERGENCY DEBATE: Financial Apocalypse Coming?"
+     },
+     {
+      "videoId": "OYg6BTjb90E",
+      "seconds": 1434,
+      "episode": "Top White House Advisor: US Empire Is Declining"
+     }
+    ]
+   },
+   {
+    "name": "passive income",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "NxTsA72O5x0",
+      "seconds": 0,
+      "episode": "Nischa Shah: My 65/25/10 Rule Built $200K Passive Income"
+     },
+     {
+      "videoId": "jFlnRBO8mcg",
+      "seconds": 0,
+      "episode": "The Savings Expert: Passive Income Is A Scam"
+     }
+    ]
+   },
+   {
+    "name": "money hacks",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "jyCJeglqCe4",
+      "seconds": 668,
+      "episode": "How To Make Money: 7 Hacks That Are PROVEN To Work"
+     }
+    ]
+   },
+   {
+    "name": "millionaire traits",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "VsTMXuIV3OM",
+      "seconds": 4192,
+      "episode": "The Woman Who Makes Millionaires: Only 1% Do This"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-36": {
+  "label": "emotion",
+  "subtopics": [
+   {
+    "name": "men & emotions",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "_J1lFZEBq2Y",
+      "seconds": 0,
+      "episode": "Gender Expert: Men Are Emotionally Dependent On Women"
+     }
+    ]
+   },
+   {
+    "name": "emotional confessions",
+    "count": 25,
+    "moments": [
+     {
+      "videoId": "p7O0Zyn0SkM",
+      "seconds": 0,
+      "episode": "Jack Whitehall's Emotional Confession About His Dad"
+     }
+    ]
+   },
+   {
+    "name": "emotional control",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "G4hkYDjPSFs",
+      "seconds": 0,
+      "episode": "Dr. Joe Dispenza: Your Mind Can Heal Itself"
+     },
+     {
+      "videoId": "rOYlOdDgYUU",
+      "seconds": 2674,
+      "episode": "Dr Joe Dispenza: You MUST Do This Before 10am"
+     }
+    ]
+   },
+   {
+    "name": "happiness science",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "NO_GdfSe9To",
+      "seconds": 0,
+      "episode": "Dacher Keltner: Beat Stress, Worry & Uncertainty"
+     },
+     {
+      "videoId": "qRY-foz-ZAw",
+      "seconds": 3601,
+      "episode": "The Happiness Expert: Obesity Is Contagious"
+     },
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 1837,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     }
+    ]
+   },
+   {
+    "name": "performance mindset",
+    "count": 8,
+    "moments": [
+     {
+      "videoId": "nTiqySjdD6s",
+      "seconds": 1407,
+      "episode": "The 1% Mindset: 1000x Your Success"
+     },
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 2232,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     }
+    ]
+   },
+   {
+    "name": "love & emotion",
+    "count": 7,
+    "moments": [
+     {
+      "videoId": "hxsnk90VwCo",
+      "seconds": 719,
+      "episode": "World Expert on Love: Your Brain Already Picked Your Partner"
+     },
+     {
+      "videoId": "QCaFWrT0j-g",
+      "seconds": 992,
+      "episode": "Esther Perel: The Relationship Crisis No One Talks About"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-37": {
+  "label": "knowledge",
+  "subtopics": [
+   {
+    "name": "ai & future knowledge",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "UclrVWafRAI",
+      "seconds": 1529,
+      "episode": "Dr. Roman Yampolskiy: Only 5 Jobs Remain In 2030"
+     },
+     {
+      "videoId": "S9a1nLw70p0",
+      "seconds": 3785,
+      "episode": "Mo Gawdat: The Next 15 Years Will Be Hell Before Heaven"
+     },
+     {
+      "videoId": "5wXlmlIXJOI",
+      "seconds": 3116,
+      "episode": "Brain Experts WARNING: Watch Before Using ChatGPT"
+     }
+    ]
+   },
+   {
+    "name": "persuasion & control",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "ZuiIvevLg40",
+      "seconds": 534,
+      "episode": "Former FBI Agent: Narcissists' Favourite Trick To Control You"
+     },
+     {
+      "videoId": "DazRYdqZRDI",
+      "seconds": 3532,
+      "episode": "Secret Agent: Authenticity Is Quietly Sabotaging You"
+     }
+    ]
+   },
+   {
+    "name": "money knowledge",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "Kl-I7sUcAOY",
+      "seconds": 4950,
+      "episode": "Alex Hormozi: Turn $0 to $10k Step By Step"
+     },
+     {
+      "videoId": "99xyy1nUpug",
+      "seconds": 4919,
+      "episode": "Early Retirement Expert: A House Vs Stocks"
+     }
+    ]
+   },
+   {
+    "name": "forecasting",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "EVts3Ui_0AI",
+      "seconds": 4177,
+      "episode": "Global Forecaster: The Brutal 2026 Shift"
+     }
+    ]
+   },
+   {
+    "name": "memory",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "1cRmjpBBn7s",
+      "seconds": 2463,
+      "episode": "The Memory Expert: Do You Want A Perfect Memory?"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-38": {
+  "label": "self",
+  "subtopics": [
+   {
+    "name": "self-doubt",
+    "count": 112,
+    "moments": [
+     {
+      "videoId": "IRCZ1Mt2a8M",
+      "seconds": 0,
+      "episode": "Jordan Peterson: STOP WASTING YOUR LIFE! Eliminate Self-Doubt"
+     },
+     {
+      "videoId": "jR8Zq0xuCz8",
+      "seconds": 123,
+      "episode": "Seth Rogen: Self-Doubts & Struggles Nobody Sees"
+     },
+     {
+      "videoId": "3eZJ_y68wsg",
+      "seconds": 0,
+      "episode": "Jocko Willink: Overcome Fear, Anxiety & Self-Doubt"
+     }
+    ]
+   },
+   {
+    "name": "self-love & overthinking",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "vIbLQQ1i56Y",
+      "seconds": 130,
+      "episode": "Secret Buddhist Practice To Stop Self Hate & Overthinking"
+     },
+     {
+      "videoId": "bzilnhq3Mkg",
+      "seconds": 3513,
+      "episode": "Marisa Peer: Remove Your Negative Thoughts"
+     }
+    ]
+   },
+   {
+    "name": "self-sabotage",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "q6KGsI6QzD4",
+      "seconds": 133,
+      "episode": "Africa Brooke: Victimhood & Self-sabotage Is Destroying The World"
+     }
+    ]
+   },
+   {
+    "name": "authenticity",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "cLTUA1lneS0",
+      "seconds": 2065,
+      "episode": "Jay Shetty: 8 Rules For Perfect Love"
+     },
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 106,
+      "episode": "Lewis Howes: Habits Destroying Your Relationships"
+     }
+    ]
+   },
+   {
+    "name": "self-control",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "xDQyLnNAXr4",
+      "seconds": 2448,
+      "episode": "Secret Service Agent: Stay In Control Under Manipulation"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-39": {
+  "label": "values",
+  "subtopics": [
+   {
+    "name": "relationship values",
+    "count": 9,
+    "moments": [
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 1872,
+      "episode": "Lewis Howes: 6 Habits Destroying Your Relationships"
+     },
+     {
+      "videoId": "cLTUA1lneS0",
+      "seconds": 3527,
+      "episode": "Jay Shetty: 8 Rules For Perfect Love"
+     },
+     {
+      "videoId": "6ikIGGi859w",
+      "seconds": 4355,
+      "episode": "Paul Brunson: 3 Traits To Never Let Go"
+     },
+     {
+      "videoId": "PM9rgDBX9u0",
+      "seconds": 3187,
+      "episode": "Dating Doctor: Start Dating Like It's Your Job"
+     }
+    ]
+   },
+   {
+    "name": "business values",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "rBM6lGk4-fk",
+      "seconds": 3611,
+      "episode": "I Said No to $3B From Mark Zuckerberg"
+     },
+     {
+      "videoId": "ia6Di_ytiSE",
+      "seconds": 3361,
+      "episode": "Airbnb CEO: Worth $100 BILLION & Lonely"
+     },
+     {
+      "videoId": "TB0yceuXmrI",
+      "seconds": 5643,
+      "episode": "Coinbase Founder: Building A $100 Billion Company"
+     }
+    ]
+   },
+   {
+    "name": "honesty & integrity",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "lGSZqhFFhoI",
+      "seconds": 2182,
+      "episode": "Five Guys CEO: A Burger Empire Without Marketing"
+     },
+     {
+      "videoId": "OEDzn83BxFo",
+      "seconds": 2548,
+      "episode": "Frank Lampard: What REALLY Happened At Chelsea"
+     }
+    ]
+   },
+   {
+    "name": "mental strength",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "iLlrIi9-NfQ",
+      "seconds": 1940,
+      "episode": "Dr Julie Smith: Detach From Overthinking"
+     },
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 3122,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     }
+    ]
+   },
+   {
+    "name": "habits & discipline",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "v9VtjcRaRWc",
+      "seconds": 1721,
+      "episode": "5 Scientific Rules for Making & Breaking Habits"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-40": {
+  "label": "responsibility",
+  "subtopics": [
+   {
+    "name": "owning your mind",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "iEo48f_Rs4w",
+      "seconds": 2929,
+      "episode": "Mel Robbins: 2 Words That Could Fix Anxiety"
+     },
+     {
+      "videoId": "bzilnhq3Mkg",
+      "seconds": 3334,
+      "episode": "Marisa Peer: Remove Your Negative Thoughts"
+     }
+    ]
+   },
+   {
+    "name": "habits & procrastination",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "rDdoUbCFn24",
+      "seconds": 3644,
+      "episode": "No.1 Habit & Procrastination Expert: Break Any Habit"
+     }
+    ]
+   },
+   {
+    "name": "leadership responsibility",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "D3lhrrXb4WI",
+      "seconds": 4658,
+      "episode": "Kamala Harris: America Is At Breaking Point"
+     },
+     {
+      "videoId": "qel8Fyt78fk",
+      "seconds": 2738,
+      "episode": "Bruno Fernandes: They Offered Me \u00a3200M, I Said No"
+     },
+     {
+      "videoId": "OsAlLgGf9JM",
+      "seconds": 2981,
+      "episode": "Chris Eubank Jr: The Night Before The Fight"
+     }
+    ]
+   },
+   {
+    "name": "relationship responsibility",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 1431,
+      "episode": "Lewis Howes: Habits Destroying Your Relationships"
+     }
+    ]
+   },
+   {
+    "name": "financial responsibility",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "RSyX_665sEw",
+      "seconds": 6412,
+      "episode": "Jaspreet Singh: You Won't Get A Pension"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-41": {
+  "label": "desire",
+  "subtopics": [
+   {
+    "name": "sex & desire",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "E5swtIjpxxA",
+      "seconds": 2282,
+      "episode": "The Orgasm Expert: How Often You Should Be Having Sex"
+     },
+     {
+      "videoId": "2Ait0WaCNCw",
+      "seconds": 3000,
+      "episode": "Tracey Cox: How To Have Great Sex EVERY Time"
+     },
+     {
+      "videoId": "LLMCd3WbgGk",
+      "seconds": 6612,
+      "episode": "Orgasm Queen: 20 Minutes Before Having Sex"
+     },
+     {
+      "videoId": "PnpHwhTWw0c",
+      "seconds": 6197,
+      "episode": "Sex Expert: What Women Actually Need"
+     }
+    ]
+   },
+   {
+    "name": "attraction",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "9gk3mNJs2FY",
+      "seconds": 5637,
+      "episode": "Dr Bill Von Hippel: Fat Makes You Attractive"
+     },
+     {
+      "videoId": "1g9VX34MSUA",
+      "seconds": 4969,
+      "episode": "Dr Gad Saad: Men Are Hardwired To Cheat"
+     },
+     {
+      "videoId": "6ikIGGi859w",
+      "seconds": 5786,
+      "episode": "Paul Brunson: Lower Your Standards?"
+     }
+    ]
+   },
+   {
+    "name": "dopamine & wanting",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "2ZKLaUbB33o",
+      "seconds": 4699,
+      "episode": "Dopamine Expert: TikTok Is Rewiring Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "sexless society",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Hik6OY-nk4c",
+      "seconds": 724,
+      "episode": "Jordan B Peterson: A Lonely & Sexless Society"
+     }
+    ]
+   },
+   {
+    "name": "desire & boredom",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "7KTwmEGsY5g",
+      "seconds": 0,
+      "episode": "No.1 Neuroscientist: Your Sex Life Will Get Boring"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-42": {
+  "label": "education",
+  "subtopics": [
+   {
+    "name": "health education gaps",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "MM-Qhlxf1pM",
+      "seconds": 6342,
+      "episode": "Dr Rachel Rubin: Doctors Never Taught About Women's Bodies"
+     },
+     {
+      "videoId": "ToUpAWW7u4c",
+      "seconds": 0,
+      "episode": "Dr Mike: Top 10 Lies Health Experts Have Told You"
+     },
+     {
+      "videoId": "Fg7U-BhiZGE",
+      "seconds": 3999,
+      "episode": "Dr. Sarah Wakeman: Alcohol Rewires Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "money education",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "RSyX_665sEw",
+      "seconds": 1044,
+      "episode": "Jaspreet Singh: The Pension Truth"
+     },
+     {
+      "videoId": "ZznpMh0DegE",
+      "seconds": 5877,
+      "episode": "Cathie Wood: Invest In This, Worth $1.5 Million by 2030"
+     }
+    ]
+   },
+   {
+    "name": "self-education",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 4882,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     },
+     {
+      "videoId": "nTiqySjdD6s",
+      "seconds": 4000,
+      "episode": "The 1% Mindset: 1000x Your Success"
+     },
+     {
+      "videoId": "w_35cUaU_NA",
+      "seconds": 322,
+      "episode": "Spotify Founder: A 23 Year Old's $31 Billion Business"
+     }
+    ]
+   },
+   {
+    "name": "ai & learning",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "5wXlmlIXJOI",
+      "seconds": 0,
+      "episode": "Brain Experts WARNING: Watch Before Using ChatGPT"
+     },
+     {
+      "videoId": "Lf5oqGOCRCM",
+      "seconds": 2695,
+      "episode": "Ed Zitron: They're LYING About AI"
+     }
+    ]
+   },
+   {
+    "name": "kids & learning",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "cialLfVZqm4",
+      "seconds": 7899,
+      "episode": "Child Attachment Expert: Hidden Dangers Of Daycare"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-43": {
+  "label": "belief",
+  "subtopics": [
+   {
+    "name": "self-belief",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "G1hqsr5mkzA",
+      "seconds": 0,
+      "episode": "Professor Steve Peters: The Mindset Doctor"
+     },
+     {
+      "videoId": "bzilnhq3Mkg",
+      "seconds": 264,
+      "episode": "Marisa Peer: Remove Your Negative Thoughts"
+     }
+    ]
+   },
+   {
+    "name": "belief at work",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "5Ty9qNpA0yk",
+      "seconds": 7250,
+      "episode": "The Diary Of A CEO Conversation"
+     },
+     {
+      "videoId": "NZd9luVXB80",
+      "seconds": 3010,
+      "episode": "Marcus Buckingham: Fulfilment At Work"
+     }
+    ]
+   },
+   {
+    "name": "perception",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 1349,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     },
+     {
+      "videoId": "7KTwmEGsY5g",
+      "seconds": 3032,
+      "episode": "No.1 Neuroscientist: Your Life Will Get Boring"
+     }
+    ]
+   },
+   {
+    "name": "influence",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "oIiv_335yus",
+      "seconds": 8001,
+      "episode": "Vinh Giang: This Speaking Mistake Makes People Dislike You"
+     },
+     {
+      "videoId": "9uSXOr-AdAU",
+      "seconds": 3092,
+      "episode": "Chase Hughes: Dark Psychology Tricks"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-44": {
+  "label": "identity",
+  "subtopics": [
+   {
+    "name": "self-image & memory",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "1cRmjpBBn7s",
+      "seconds": 523,
+      "episode": "The Memory Expert: Do You Want A Perfect Memory?"
+     }
+    ]
+   },
+   {
+    "name": "changing who you are",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "rCtvAvZtJyE",
+      "seconds": 2197,
+      "episode": "No.1 Neuroscientist: You Can Change Who You Are In 30 Days"
+     },
+     {
+      "videoId": "rOYlOdDgYUU",
+      "seconds": 4068,
+      "episode": "Dr Joe Dispenza: Do This Before 10am"
+     }
+    ]
+   },
+   {
+    "name": "happiness identity",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "VYta88JUbBs",
+      "seconds": 6327,
+      "episode": "Dr Rangan Chatterjee: 3 Steps To Core Happiness"
+     },
+     {
+      "videoId": "csA9YhzYvmk",
+      "seconds": 6107,
+      "episode": "Mo Gawdat: Made 51 Million People Happier"
+     }
+    ]
+   },
+   {
+    "name": "masculinity",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "19_sGcrsWhg",
+      "seconds": 7770,
+      "episode": "Robert Greene: Dangerous, Lonely & Broken Men"
+     }
+    ]
+   },
+   {
+    "name": "perception & reality",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "W0vTZrZny6A",
+      "seconds": 1736,
+      "episode": "Donald Hoffman: Seeing True Reality Would Kill Us"
+     }
+    ]
+   },
+   {
+    "name": "love & identity",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "hxsnk90VwCo",
+      "seconds": 5102,
+      "episode": "World Expert on Love: Your Brain Picked Your Partner"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-45": {
+  "label": "freedom",
+  "subtopics": [
+   {
+    "name": "financial freedom",
+    "count": 25,
+    "moments": [
+     {
+      "videoId": "qgeQ5kMVwRA",
+      "seconds": 0,
+      "episode": "Mohnish Pabrai: FASTEST Way To Financial Freedom"
+     }
+    ]
+   },
+   {
+    "name": "quitting the 9-5",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "hVlAOIUA71Y",
+      "seconds": 5028,
+      "episode": "Earn $100,000 From Nothing"
+     },
+     {
+      "videoId": "XkxZCJ2pYqs",
+      "seconds": 0,
+      "episode": "Codie Sanchez: $0 to Millions In 2 Years"
+     },
+     {
+      "videoId": "IYu_PDPqKFc",
+      "seconds": 145,
+      "episode": "Codie Sanchez: Turn $0 Into $1M"
+     }
+    ]
+   },
+   {
+    "name": "friendship & freedom",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "I3WUiD8HYn8",
+      "seconds": 2504,
+      "episode": "Simon Sinek: Why You Can't Make Friends"
+     }
+    ]
+   },
+   {
+    "name": "freedom from ai",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "HwmwyBgzj8c",
+      "seconds": 2510,
+      "episode": "Alex Hormozi: Stop Chasing AI"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 2373,
+      "episode": "Yuval Noah Harari: They Are Lying About AI"
+     }
+    ]
+   },
+   {
+    "name": "political freedom",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "OYg6BTjb90E",
+      "seconds": 0,
+      "episode": "Top White House Advisor: US Empire Is Declining"
+     },
+     {
+      "videoId": "9JxaESJIGO0",
+      "seconds": 3994,
+      "episode": "Pierre Poilievre: America Abandoning Its Allies"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-46": {
+  "label": "parent",
+  "subtopics": [
+   {
+    "name": "parenting mistakes",
+    "count": 50,
+    "moments": [
+     {
+      "videoId": "bOi_Y4ythYY",
+      "seconds": 0,
+      "episode": "The No.1 Brain Doctor: This Parenting Mistake Ruins Your Kids Brain"
+     }
+    ]
+   },
+   {
+    "name": "parenting & relationships",
+    "count": 6,
+    "moments": [
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 773,
+      "episode": "Lewis Howes: Habits Destroying Your Relationships"
+     },
+     {
+      "videoId": "hxsnk90VwCo",
+      "seconds": 3096,
+      "episode": "World Expert on Love: Your Brain Picked Your Partner"
+     }
+    ]
+   },
+   {
+    "name": "dads",
+    "count": 5,
+    "moments": [
+     {
+      "videoId": "Ppyt3MptX5k",
+      "seconds": 920,
+      "episode": "Testosterone Expert: Why Women Find Fathers Attractive"
+     }
+    ]
+   },
+   {
+    "name": "childhood wounds",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "uPup-1pDepY",
+      "seconds": 0,
+      "episode": "Gabor Mate: The Childhood Lie Ruining Our Lives"
+     },
+     {
+      "videoId": "SkAZRNg-VWY",
+      "seconds": 3900,
+      "episode": "Jonathan Van Ness: Hitting Rock Bottom"
+     }
+    ]
+   },
+   {
+    "name": "money & kids",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "pz6jhMPA-2w",
+      "seconds": 1257,
+      "episode": "Ramit Sethi: Never Split The Bill"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-47": {
+  "label": "psychology",
+  "subtopics": [
+   {
+    "name": "likability",
+    "count": 63,
+    "moments": [
+     {
+      "videoId": "TYXzR5KahEg",
+      "seconds": 0,
+      "episode": "Top Harvard Professor: The Psychology Of Why People Don't Like You"
+     },
+     {
+      "videoId": "zg4Ta7vXiIM",
+      "seconds": 0,
+      "episode": "The Charisma Teacher: Why People Don't Like You"
+     }
+    ]
+   },
+   {
+    "name": "dark psychology",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "9uSXOr-AdAU",
+      "seconds": 0,
+      "episode": "Chase Hughes: 3 Dark Psychology Tricks To Read Anyone"
+     },
+     {
+      "videoId": "RvjR9GM2kX8",
+      "seconds": 4928,
+      "episode": "Chase Hughes: Instantly Read Any Room"
+     }
+    ]
+   },
+   {
+    "name": "money psychology",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "vOvLFT4v4LQ",
+      "seconds": 0,
+      "episode": "Morgan Housel: Do Not Buy A House"
+     },
+     {
+      "videoId": "ORqd9QAC8OY",
+      "seconds": 235,
+      "episode": "Ramit Sethi: 10 Ways To Make REAL Money"
+     }
+    ]
+   },
+   {
+    "name": "happiness psychology",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "0DZK1nawEXQ",
+      "seconds": 243,
+      "episode": "Dr Tali Sharot: The Science Behind Happiness"
+     },
+     {
+      "videoId": "iLlrIi9-NfQ",
+      "seconds": 126,
+      "episode": "Dr Julie Smith: Detach From Overthinking"
+     }
+    ]
+   },
+   {
+    "name": "marketing psychology",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Hz3RWxJck68",
+      "seconds": 2579,
+      "episode": "Rory Sutherland: Marketing Secrets Apple & Tesla Use"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-48": {
+  "label": "aging",
+  "subtopics": [
+   {
+    "name": "creatine & fat loss",
+    "count": 83,
+    "moments": [
+     {
+      "videoId": "Jk7RAkFN4vk",
+      "seconds": 0,
+      "episode": "Dr. Darren Candow: Creatine Is The Fat Loss Secret"
+     },
+     {
+      "videoId": "JCTb3QSrGMQ",
+      "seconds": 0,
+      "episode": "Rhonda Patrick: Missing This Vitamin Is Like Smoking"
+     }
+    ]
+   },
+   {
+    "name": "visceral fat & toxins",
+    "count": 34,
+    "moments": [
+     {
+      "videoId": "PyhmvAL-iYw",
+      "seconds": 323,
+      "episode": "Anti-Aging Expert: Stop Touching Receipts Immediately"
+     }
+    ]
+   },
+   {
+    "name": "reversing aging",
+    "count": 26,
+    "moments": [
+     {
+      "videoId": "DnvWAP99r3Y",
+      "seconds": 248,
+      "episode": "Dr David Sinclair: Cells Appeared 75% Younger In Tests"
+     }
+    ]
+   },
+   {
+    "name": "ageing habits",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "D6wTuogebU8",
+      "seconds": 0,
+      "episode": "Dr Vonda Wright: 30s Burns More Fat Than A Long Run"
+     },
+     {
+      "videoId": "hQ78Hpwrt80",
+      "seconds": 5929,
+      "episode": "The Muscle Growth Doctor: Exercise At Night Is Terrible"
+     }
+    ]
+   },
+   {
+    "name": "peptides",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "jt5hHb6kzYM",
+      "seconds": 2405,
+      "episode": "Dr Alex Tatem: What Do Peptides Actually Do?"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-49": {
+  "label": "consciousness",
+  "subtopics": [
+   {
+    "name": "ai & consciousness",
+    "count": 42,
+    "moments": [
+     {
+      "videoId": "Qifsxitq_q4",
+      "seconds": 0,
+      "episode": "Professor Brian Greene: AI, Consciousness & The End of Humanity"
+     },
+     {
+      "videoId": "JMYQmGfTltY",
+      "seconds": 2451,
+      "episode": "AI AGENTS DEBATE: Jobs That Won't Exist In 24 Months"
+     }
+    ]
+   },
+   {
+    "name": "stress & awareness",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "IxVNR0Om-lA",
+      "seconds": 3650,
+      "episode": "Mo Gawdat: WARNING About Stress & Anxiety"
+     },
+     {
+      "videoId": "S9a1nLw70p0",
+      "seconds": 7213,
+      "episode": "Mo Gawdat: The Next 15 Years"
+     }
+    ]
+   },
+   {
+    "name": "psychedelics",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "1o343YfhaYU",
+      "seconds": 2203,
+      "episode": "Michael Pollan: How To Change Your Mind"
+     }
+    ]
+   },
+   {
+    "name": "perception of reality",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "W0vTZrZny6A",
+      "seconds": 6862,
+      "episode": "Donald Hoffman: Seeing True Reality Would Kill Us"
+     }
+    ]
+   },
+   {
+    "name": "the afterlife",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "yfEQRqFo2bI",
+      "seconds": 3883,
+      "episode": "Dr. Tara Swart: Communication After Death"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-50": {
+  "label": "fitness",
+  "subtopics": [
+   {
+    "name": "alcohol & performance",
+    "count": 53,
+    "moments": [
+     {
+      "videoId": "-Hwlvkfp698",
+      "seconds": 0,
+      "episode": "Kristen Holmes: Even A Little Alcohol Is Hurting Your Health"
+     }
+    ]
+   },
+   {
+    "name": "women's fitness",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "HwVn3WMv5oI",
+      "seconds": 0,
+      "episode": "Dr. Stephanie Estima: Women's Dieting & Exercise"
+     }
+    ]
+   },
+   {
+    "name": "longevity training",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "eqPnptAtBJk",
+      "seconds": 3291,
+      "episode": "The Life-Extension Doctor: Early Death Risk"
+     },
+     {
+      "videoId": "PyhmvAL-iYw",
+      "seconds": 9497,
+      "episode": "Anti-Aging Expert: Shrink Visceral Fat"
+     }
+    ]
+   },
+   {
+    "name": "motivation",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Mvcu6UfY7d4",
+      "seconds": 1649,
+      "episode": "Strava Founder: Motivating 100 Million People"
+     },
+     {
+      "videoId": "rtufWBLOXgw",
+      "seconds": 6741,
+      "episode": "James Clear: Your Goals Restrict Your Happiness"
+     }
+    ]
+   },
+   {
+    "name": "diet & the liver",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "zc8Nh4TMB1s",
+      "seconds": 4464,
+      "episode": "Dr David Unwin: The Toxic Ingredient Filling Your Liver With Fat"
+     },
+     {
+      "videoId": "QXUNnXHXeVQ",
+      "seconds": 328,
+      "episode": "The Sugar Doctor: The Diet That Prevents Disease"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-51": {
+  "label": "politics",
+  "subtopics": [
+   {
+    "name": "elections & division",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "7VxeyTfhBM8",
+      "seconds": 4058,
+      "episode": "Ivanka Trump: Signal From Noise"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 1684,
+      "episode": "Yuval Noah Harari: The Trump Kamala Election"
+     }
+    ]
+   },
+   {
+    "name": "policing & safety",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 3839,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     }
+    ]
+   },
+   {
+    "name": "democracy collapse",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "kwEtOyaFhCA",
+      "seconds": 1795,
+      "episode": "Anne Applebaum: The Next Stage Is Democracy Collapse"
+     },
+     {
+      "videoId": "uLBsHXNEwAU",
+      "seconds": 8533,
+      "episode": "DEBATE: The Death Of The Middle Class"
+     }
+    ]
+   },
+   {
+    "name": "political economy",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "rKOx5qlLyaA",
+      "seconds": 5851,
+      "episode": "Scott Galloway: The Most Unhappy Generation"
+     },
+     {
+      "videoId": "rBM6lGk4-fk",
+      "seconds": 5606,
+      "episode": "I Said No to $3B From Mark Zuckerberg"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-52": {
+  "label": "religion",
+  "subtopics": [
+   {
+    "name": "christianity debates",
+    "count": 4,
+    "moments": [
+     {
+      "videoId": "dLrvJeSugkM",
+      "seconds": 2711,
+      "episode": "No.1 Christianity Expert: If You Don't Believe In God"
+     },
+     {
+      "videoId": "nrwNSSyKuD4",
+      "seconds": 7895,
+      "episode": "No.1 Christianity Expert: The Case For Jesus"
+     },
+     {
+      "videoId": "Esu8BXLBmZ4",
+      "seconds": 0,
+      "episode": "Atheist vs Christian vs Spiritual Thinker"
+     }
+    ]
+   },
+   {
+    "name": "ufos & belief",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "PHpsdIHpLUE",
+      "seconds": 1107,
+      "episode": "Neil deGrasse Tyson: Whistleblowers Were Right About Aliens"
+     },
+     {
+      "videoId": "opB7_JXL0LA",
+      "seconds": 3215,
+      "episode": "Michio Kaku: They Are Lying About UFOs & Reality"
+     }
+    ]
+   },
+   {
+    "name": "faith & recovery",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "EXUpMMde51E",
+      "seconds": 1851,
+      "episode": "Russell Brand: Addiction & Finding Love"
+     }
+    ]
+   },
+   {
+    "name": "astrology",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "gW3vVIFRVhw",
+      "seconds": 7342,
+      "episode": "Neil deGrasse Tyson: The Harsh Truth About Horoscopes"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-53": {
+  "label": "leadership",
+  "subtopics": [
+   {
+    "name": "discipline",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "3eZJ_y68wsg",
+      "seconds": 0,
+      "episode": "Jocko Willink: Overcome Fear & Self-Doubt"
+     },
+     {
+      "videoId": "RvjR9GM2kX8",
+      "seconds": 881,
+      "episode": "Chase Hughes: Hack Your Discipline"
+     }
+    ]
+   },
+   {
+    "name": "founder leadership",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "lGSZqhFFhoI",
+      "seconds": 2906,
+      "episode": "Five Guys CEO: A Burger Empire Without Marketing"
+     },
+     {
+      "videoId": "rBM6lGk4-fk",
+      "seconds": 6524,
+      "episode": "I Said No to $3B From Zuckerberg"
+     }
+    ]
+   },
+   {
+    "name": "composure",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "xDQyLnNAXr4",
+      "seconds": 3313,
+      "episode": "Secret Service Agent: Stay In Control Under Manipulation"
+     }
+    ]
+   },
+   {
+    "name": "crisis leadership",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "nJeU72Rgjh4",
+      "seconds": 434,
+      "episode": "The Man Warning The West: Trump Is Changing The World"
+     },
+     {
+      "videoId": "pDKlaJM_vys",
+      "seconds": 2870,
+      "episode": "The Iran War Expert: The Most Dangerous Stage"
+     }
+    ]
+   },
+   {
+    "name": "success traits",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "uPXjt6beYbg",
+      "seconds": 3211,
+      "episode": "Adam Grant: Why Only 2% Become Successful"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-54": {
+  "label": "creativity",
+  "subtopics": [
+   {
+    "name": "creativity & adhd",
+    "count": 37,
+    "moments": [
+     {
+      "videoId": "1m-2QhqdlfI",
+      "seconds": 93,
+      "episode": "will.i.am Opens Up: Depression, Creativity & ADHD"
+     }
+    ]
+   },
+   {
+    "name": "creativity & stress",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "IxVNR0Om-lA",
+      "seconds": 1302,
+      "episode": "Mo Gawdat: Stress & Anxiety Warning"
+     }
+    ]
+   },
+   {
+    "name": "creative loneliness",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "ia6Di_ytiSE",
+      "seconds": 2569,
+      "episode": "Airbnb CEO: $100 Billion & Deeply Sad"
+     }
+    ]
+   },
+   {
+    "name": "overthinking blocks",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "iLlrIi9-NfQ",
+      "seconds": 2058,
+      "episode": "Dr Julie Smith: Detach From Overthinking"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-55": {
+  "label": "loneliness",
+  "subtopics": [
+   {
+    "name": "dealing with loneliness",
+    "count": 33,
+    "moments": [
+     {
+      "videoId": "D46zvJI-njU",
+      "seconds": 0,
+      "episode": "Simon Sinek: I FEEL LONELY! How To Deal With Loneliness"
+     }
+    ]
+   },
+   {
+    "name": "happiness & connection",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Itg00I2q8lk",
+      "seconds": 2356,
+      "episode": "Dr. Robert Waldinger: The Longest Ever Study On Human Happiness"
+     },
+     {
+      "videoId": "nYrjhv-AFZA",
+      "seconds": 941,
+      "episode": "Jay Shetty: 3 Simple Things A Happy Life Needs"
+     }
+    ]
+   },
+   {
+    "name": "loneliness & dating",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "i2sHBL8BjWI",
+      "seconds": 1997,
+      "episode": "Paul Brunson: What Predicts Divorce"
+     },
+     {
+      "videoId": "9gk3mNJs2FY",
+      "seconds": 5763,
+      "episode": "Dr Bill Von Hippel: We're Not Having Enough Sex"
+     }
+    ]
+   },
+   {
+    "name": "lonely men",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "19_sGcrsWhg",
+      "seconds": 3385,
+      "episode": "Robert Greene: Dangerous, Lonely & Broken Men"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-56": {
+  "label": "philosophy",
+  "subtopics": [
+   {
+    "name": "stoicism & discipline",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "PafvhTSC4yE",
+      "seconds": 245,
+      "episode": "Ryan Holiday: 2,000 Years Of Research On Successful People"
+     },
+     {
+      "videoId": "IRCZ1Mt2a8M",
+      "seconds": 4596,
+      "episode": "Jordan Peterson: Eliminate Self-Doubt & Dark Thoughts"
+     }
+    ]
+   },
+   {
+    "name": "philosophy of money",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "ORqd9QAC8OY",
+      "seconds": 120,
+      "episode": "Ramit Sethi: 10 Ways To Make REAL Money"
+     },
+     {
+      "videoId": "OYg6BTjb90E",
+      "seconds": 5008,
+      "episode": "Top White House Advisor: US Empire Declining"
+     }
+    ]
+   },
+   {
+    "name": "philosophy of health",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "MrjIXLQ_OdA",
+      "seconds": 868,
+      "episode": "Dr Mindy Pelz: The Truth About Ozempic"
+     },
+     {
+      "videoId": "KVXnVe8eOkM",
+      "seconds": 6620,
+      "episode": "Insulin Doctor: The First Sign Of Dementia"
+     }
+    ]
+   },
+   {
+    "name": "persuasion",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Hz3RWxJck68",
+      "seconds": 2579,
+      "episode": "Rory Sutherland: Marketing Secrets Apple & Tesla Use"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-57": {
+  "label": "friendship",
+  "subtopics": [
+   {
+    "name": "making friends",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "I3WUiD8HYn8",
+      "seconds": 1037,
+      "episode": "Simon Sinek: Why You Can't Make Friends"
+     },
+     {
+      "videoId": "D46zvJI-njU",
+      "seconds": 5089,
+      "episode": "Simon Sinek: How To Deal With Loneliness"
+     }
+    ]
+   },
+   {
+    "name": "being liked",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "VHUrdELKjDw",
+      "seconds": 202,
+      "episode": "Body Language Expert: Mistakes Making People Dislike You"
+     }
+    ]
+   },
+   {
+    "name": "friends & habits",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "I1i1kXw8L4M",
+      "seconds": 331,
+      "episode": "Lewis Howes: Habits Destroying Your Relationships"
+     },
+     {
+      "videoId": "jSqCL7Npln0",
+      "seconds": 12376,
+      "episode": "Andrew Huberman: Control Your Dopamine"
+     }
+    ]
+   },
+   {
+    "name": "friends & intimacy",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "9gk3mNJs2FY",
+      "seconds": 1022,
+      "episode": "Dr Bill Von Hippel: We're Not Having Enough Sex"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-58": {
+  "label": "startup",
+  "subtopics": [
+   {
+    "name": "building from scratch",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "kxLmeUIXXtU",
+      "seconds": 0,
+      "episode": "Entrepreneurship Expert: Build A $1m Business Without Hard Work"
+     },
+     {
+      "videoId": "w_35cUaU_NA",
+      "seconds": 3615,
+      "episode": "Spotify Founder: A $31 Billion Business"
+     }
+    ]
+   },
+   {
+    "name": "ai & startups",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "HwmwyBgzj8c",
+      "seconds": 165,
+      "episode": "Alex Hormozi: Stop Chasing AI, Build This Instead"
+     },
+     {
+      "videoId": "JMYQmGfTltY",
+      "seconds": 3987,
+      "episode": "AI AGENTS DEBATE: Jobs Gone In 24 Months"
+     }
+    ]
+   },
+   {
+    "name": "knowing when to quit",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "eTkFItOG3Kk",
+      "seconds": 7185,
+      "episode": "Reid Hoffman: Time To Quit Your Job When You Feel This"
+     }
+    ]
+   },
+   {
+    "name": "growth frameworks",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "VsTMXuIV3OM",
+      "seconds": 2529,
+      "episode": "The Woman Who Makes Millionaires: The PPF Framework"
+     }
+    ]
+   },
+   {
+    "name": "big bets",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "1aGpJQ8BMLI",
+      "seconds": 4364,
+      "episode": "Michael Saylor: I Made $15 Billion"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-59": {
+  "label": "gender",
+  "subtopics": [
+   {
+    "name": "emotional dependence",
+    "count": 31,
+    "moments": [
+     {
+      "videoId": "_J1lFZEBq2Y",
+      "seconds": 0,
+      "episode": "Gender Expert: Men Are Emotionally Dependent On Women"
+     }
+    ]
+   },
+   {
+    "name": "masculinity crisis",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "KRxhnSkgxtk",
+      "seconds": 1996,
+      "episode": "Scott Galloway: The Crisis Among Young Men"
+     },
+     {
+      "videoId": "gTnLQ3cobBM",
+      "seconds": 4436,
+      "episode": "Macklemore: Overcome Your Darkest Days"
+     }
+    ]
+   },
+   {
+    "name": "gender & relationships",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "i2sHBL8BjWI",
+      "seconds": 4323,
+      "episode": "Paul Brunson: The 70/30 Body Shape"
+     },
+     {
+      "videoId": "-MGyiqVjdKI",
+      "seconds": 6400,
+      "episode": "The Divorce Expert: Why Sex Is Causing Divorces"
+     }
+    ]
+   },
+   {
+    "name": "women's hormones",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Cgo2mD4Pc54",
+      "seconds": 1246,
+      "episode": "The Menopause Doctor: This Diet Delays Menopause"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-60": {
+  "label": "climate",
+  "subtopics": [
+   {
+    "name": "ai risk climate",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "bk-nQ7HF6k4",
+      "seconds": 4869,
+      "episode": "Mo Gawdat: The Dangers Of AI"
+     },
+     {
+      "videoId": "IxVNR0Om-lA",
+      "seconds": 216,
+      "episode": "Mo Gawdat: Stress & Anxiety Warning"
+     }
+    ]
+   },
+   {
+    "name": "cultural climate",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "ZHuZ_8VYCWA",
+      "seconds": 3111,
+      "episode": "DEBATE: Feminist Women Vs Non-Feminist Women"
+     },
+     {
+      "videoId": "q2cg1gEYWJQ",
+      "seconds": 7650,
+      "episode": "Vanessa Van Edwards: The Trick That Makes People Like You"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-61": {
+  "label": "justice",
+  "subtopics": [
+   {
+    "name": "truth & accountability",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "EScgrk7oEwU",
+      "seconds": 6414,
+      "episode": "Brain Rot Emergency: The Internal Documents"
+     },
+     {
+      "videoId": "dLrvJeSugkM",
+      "seconds": 2004,
+      "episode": "No.1 Christianity Expert: If You Don't Believe In God"
+     }
+    ]
+   },
+   {
+    "name": "fairness debates",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "Esu8BXLBmZ4",
+      "seconds": 7075,
+      "episode": "Atheist vs Christian vs Spiritual Thinker"
+     },
+     {
+      "videoId": "VYta88JUbBs",
+      "seconds": 2074,
+      "episode": "Dr Rangan Chatterjee: 3 Steps To Core Happiness"
+     }
+    ]
+   },
+   {
+    "name": "social norms",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "9gk3mNJs2FY",
+      "seconds": 6876,
+      "episode": "Dr Bill Von Hippel: We're Not Having Enough Sex"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-62": {
+  "label": "immigration",
+  "subtopics": [
+   {
+    "name": "border politics",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "5cKDs7bIGPE",
+      "seconds": 0,
+      "episode": "JD Vance: They Tricked Me About Trump"
+     },
+     {
+      "videoId": "78YN1e8UXdM",
+      "seconds": 2514,
+      "episode": "Yuval Noah Harari: The Trump Kamala Election"
+     }
+    ]
+   },
+   {
+    "name": "democracy & migration",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "kwEtOyaFhCA",
+      "seconds": 4490,
+      "episode": "Anne Applebaum: Democracy Collapse"
+     }
+    ]
+   },
+   {
+    "name": "global shifts",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "BFU1OCkhBwo",
+      "seconds": 0,
+      "episode": "Tristan Harris: The World In 2 Years"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-63": {
+  "label": "capitalism",
+  "subtopics": [
+   {
+    "name": "cost of living",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "uxu37dqVR90",
+      "seconds": 3344,
+      "episode": "The Savings Expert: America Collapsing & Cost Of Living"
+     }
+    ]
+   },
+   {
+    "name": "economic shift",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "EVts3Ui_0AI",
+      "seconds": 495,
+      "episode": "Global Forecaster: The Brutal 2026 Shift"
+     }
+    ]
+   },
+   {
+    "name": "money & happiness",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "nYrjhv-AFZA",
+      "seconds": 2414,
+      "episode": "Jay Shetty: 3 Simple Things A Happy Life Needs"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-64": {
+  "label": "equality",
+  "subtopics": [
+   {
+    "name": "gender equality",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "_J1lFZEBq2Y",
+      "seconds": 937,
+      "episode": "Gender Expert: Men Are Emotionally Dependent On Women"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-65": {
+  "label": "spirituality",
+  "subtopics": [
+   {
+    "name": "happiness & spirit",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "csA9YhzYvmk",
+      "seconds": 271,
+      "episode": "Mo Gawdat: Made 51 Million People Happier"
+     },
+     {
+      "videoId": "nYrjhv-AFZA",
+      "seconds": 2414,
+      "episode": "Jay Shetty: 3 Simple Things A Happy Life Needs"
+     }
+    ]
+   },
+   {
+    "name": "meaning & mortality",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "S9a1nLw70p0",
+      "seconds": 5174,
+      "episode": "Mo Gawdat: Hell Before We Get To Heaven"
+     },
+     {
+      "videoId": "UzOJiqN_DpM",
+      "seconds": 3787,
+      "episode": "Yuval Noah Harari: An Urgent Warning"
+     }
+    ]
+   },
+   {
+    "name": "spiritual practice",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "MGxcosNuC8k",
+      "seconds": 5630,
+      "episode": "Andrew Huberman: My Exact Daily Routine"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-66": {
+  "label": "ethics",
+  "subtopics": [
+   {
+    "name": "personal integrity",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "EXUpMMde51E",
+      "seconds": 1233,
+      "episode": "Russell Brand: Escaping Anxiety & Addiction"
+     },
+     {
+      "videoId": "OEDzn83BxFo",
+      "seconds": 5544,
+      "episode": "Frank Lampard: What REALLY Happened At Chelsea"
+     }
+    ]
+   },
+   {
+    "name": "public ethics",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "2q69Id3-Amk",
+      "seconds": 440,
+      "episode": "Sadiq Khan: The Dark Side Of The Police"
+     }
+    ]
+   },
+   {
+    "name": "ethics of happiness",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "csA9YhzYvmk",
+      "seconds": 6244,
+      "episode": "Mo Gawdat: Made 51 Million People Happier"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-67": {
+  "label": "morality",
+  "subtopics": [
+   {
+    "name": "morality without religion",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "Esu8BXLBmZ4",
+      "seconds": 6073,
+      "episode": "Atheist vs Christian vs Spiritual Thinker"
+     }
+    ]
+   }
+  ]
+ },
+ "topic-68": {
+  "label": "wellbeing",
+  "subtopics": [
+   {
+    "name": "mental wellbeing",
+    "count": 3,
+    "moments": [
+     {
+      "videoId": "IxVNR0Om-lA",
+      "seconds": 880,
+      "episode": "Mo Gawdat: Stress & Anxiety Warning"
+     },
+     {
+      "videoId": "FN0_ow76hU8",
+      "seconds": 3726,
+      "episode": "The Mental Health Doctor: Your Phone Is Destroying Your Brain"
+     }
+    ]
+   },
+   {
+    "name": "emotional wellbeing",
+    "count": 2,
+    "moments": [
+     {
+      "videoId": "p7O0Zyn0SkM",
+      "seconds": 2148,
+      "episode": "Jack Whitehall's Emotional Confession"
+     },
+     {
+      "videoId": "VsTMXuIV3OM",
+      "seconds": 1631,
+      "episode": "The Woman Who Makes Millionaires"
+     }
+    ]
+   },
+   {
+    "name": "physical wellbeing",
+    "count": 1,
+    "moments": [
+     {
+      "videoId": "_vX-_fq-c50",
+      "seconds": 3081,
+      "episode": "Wim Hof: Lying To You About Disease & Inflammation"
+     }
+    ]
+   }
+  ]
+ }
+}
