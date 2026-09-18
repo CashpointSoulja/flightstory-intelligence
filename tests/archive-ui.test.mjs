@@ -221,7 +221,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
 
 test('separates the source time window from its provisional label', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
-  assert.match(app, /class="source-window"[^>]*>\$\{formatTime\(item\.start\)\}–\$\{formatTime\(item\.end\)\}<\/span> · <span class="provenance-tag">\$\{item\.mapMatch \? 'MAP MATCH' : 'PROVISIONAL'\}<\/span>\$\{item\.virality \? ` · <span class="virality-badge virality-\$\{item\.virality\.tier === 'TOP CLIP' \? 'top' : 'strong'\}">\$\{escapeHtml\(item\.virality\.tier\)\}<\/span>` : ''\} · \$\{escapeHtml\(item\.guest\)\}/);
+  assert.match(app, /class="source-window"[^>]*>\$\{formatTime\(item\.start\)\}–\$\{formatTime\(item\.end\)\}<\/span> · <span class="provenance-tag">\$\{item\.mapMatch \? 'MAP MATCH' : 'PROVISIONAL'\}<\/span>\$\{item\.virality && item\.virality\.score >= 7 \? ` · <span class="virality-badge virality-\$\{item\.virality\.tier === 'TOP CLIP' \? 'top' : 'strong'\}">\$\{escapeHtml\(item\.virality\.tier\)\} · \$\{escapeHtml\(String\(item\.virality\.score\)\)\}<\/span>` : ''\} · \$\{escapeHtml\(item\.guest\)\}/);
 });
 
 test('mobile map filters stay visible as a compact horizontal strip and quiet copy remains readable', async () => {
