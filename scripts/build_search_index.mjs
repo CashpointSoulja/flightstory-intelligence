@@ -21,7 +21,7 @@ for (const file of files) {
     if (!segment?.text || segment.text.split(/\s+/).length < 8) continue;
     rows.push({ id: `${episode.id}:${index}`, episodeId: episode.id, episode: episode.title, guest: (() => {
       const title = episode.title && episode.title !== episode.id ? episode.title : '';
-      if (!title) return episode.id;
+      if (!title) return '';
       let candidate = title.includes(':') ? title.split(':')[0] : title.includes(' - ') ? title.split(' - ').at(-1) : '';
       candidate = candidate.trim();
       // Reject sentence-length candidates: a guest is a short name, not a title fragment.
