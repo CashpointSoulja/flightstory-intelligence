@@ -214,7 +214,7 @@ stars.geometry.setAttribute('position', new THREE.Float32BufferAttribute(starPos
 scene.add(stars);
 
 const headingMeta = stage.querySelector('.universe-heading span');
-headingMeta.textContent = `${topicNodes.length} TOPICS · ${videoNodes.length} VIDEOS · ${videoGraph.edges.length} LINKS`;
+headingMeta.textContent = `${topicNodes.length} TOPICS · ${videoGraph.indexedVideoCount || videoNodes.length} INDEXED VIDEOS · ${videoGraph.edges.length} LINKS`;
 window.dispatchEvent(new CustomEvent('archive:counts', { detail: { topics: topicNodes.length, episodes: videoNodes.length, evidence: evidenceNodes.length, graphTranscripts: graph.transcriptCount || 0 } }));
 const inspector = stage.querySelector('.universe-inspector');
 const inspectorTitle = inspector.querySelector('strong');
