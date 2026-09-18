@@ -342,3 +342,19 @@ test('transcript result cards route CREATE CLIP to the evidence panel presets', 
   assert.match(app, /event\.stopPropagation\(\);[\s\S]*?selectEvidence\(item\);[\s\S]*?#evidence-panel'\)\.scrollIntoView/);
   assert.doesNotMatch(app, /toggleSaved/);
 });
+
+test('clip maker preview embeds a windowed YouTube player that stops at the out-point', async () => {
+  const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
+  const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
+  const styles = await readFile(new URL('../public/style.css', import.meta.url), 'utf8');
+  assert.match(html, /<div class="clip-preview" id="clip-preview" hidden><div id="clip-preview-player"><\/div>/);
+  assert.match(app, /https:\/\/www\.youtube\.com\/iframe_api/);
+  assert.match(app, /cueVideoById'\]\(\{ videoId, startSeconds: start, endSeconds: end \}\)/);
+  assert.match(app, /position >= end - 0\.1/);
+  assert.match(app, /player\.pauseVideo\(\); player\.seekTo\(start, true\)/);
+  assert.match(app, /selectEvidence\(item, \{ autoplayPreview: true \}\)/);
+  assert.match(app, /mountClipPreview\(String\(item\.videoId\), previewStart, previewEnd, Boolean\(options\.autoplayPreview\)\)/);
+  assert.match(app, /aria-pressed="\$\{savedClip && Number\(savedClip\.requestedDuration\) === seconds\}"/);
+  assert.match(styles, /#clip-preview-player\{width:100%;aspect-ratio:16\/9/);
+  assert.match(styles, /\.clip-presets button\[aria-pressed="true"\]\{border-color:var\(--signal\)/);
+});

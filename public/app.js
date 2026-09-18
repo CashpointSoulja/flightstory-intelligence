@@ -20,6 +20,86 @@ const sourceAction = item => {
   return url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">WATCH ↗</a>` : '<span class="source-unavailable">Private source · public video link unavailable</span>';
 };
 
+// Clip preview: a YouTube player constrained to the clip window so a draft
+// plays only its own section and stops at the out-point.
+let clipPreviewApiPromise = null;
+let clipPreviewPlayer = null;
+let clipPreviewPoll = null;
+
+function loadYouTubeApi() {
+  if (window.YT && window.YT.Player) return Promise.resolve();
+  if (!clipPreviewApiPromise) {
+    clipPreviewApiPromise = new Promise((resolve, reject) => {
+      window.onYouTubeIframeAPIReady = resolve;
+      const script = document.createElement('script');
+      script.src = 'https://www.youtube.com/iframe_api';
+      script.onerror = () => reject(new Error('YouTube player failed to load.'));
+      document.head.appendChild(script);
+    });
+    clipPreviewApiPromise.catch(() => {});
+  }
+  return clipPreviewApiPromise;
+}
+
+function stopClipPreview() {
+  if (clipPreviewPoll) { clearInterval(clipPreviewPoll); clipPreviewPoll = null; }
+  if (clipPreviewPlayer && typeof clipPreviewPlayer.destroy === 'function') { try { clipPreviewPlayer.destroy(); } catch (error) {} }
+  clipPreviewPlayer = null;
+  const block = document.querySelector('#clip-preview');
+  if (block) {
+    block.hidden = true;
+    block.querySelectorAll('#clip-preview-player, iframe').forEach(node => node.remove());
+  }
+}
+
+function guardClipPreviewEnd(player, start, end) {
+  if (clipPreviewPoll) clearInterval(clipPreviewPoll);
+  clipPreviewPoll = setInterval(() => {
+    if (!player || typeof player.getCurrentTime !== 'function') return;
+    let position = 0;
+    try { position = Number(player.getCurrentTime()) || 0; } catch (error) { return; }
+    if (position >= end - 0.1) {
+      try { player.pauseVideo(); player.seekTo(start, true); } catch (error) {}
+      clearInterval(clipPreviewPoll);
+      clipPreviewPoll = null;
+    }
+  }, 200);
+}
+
+function mountClipPreview(videoId, start, end, autoplay) {
+  const block = document.querySelector('#clip-preview');
+  if (!block) return;
+  block.hidden = false;
+  const note = block.querySelector('[data-preview-window]');
+  if (note) note.textContent = `Preview ${formatTime(start)}\u2013${formatTime(end)} \u00b7 plays only this clip, then stops.`;
+  const holder = block.querySelector('#clip-preview-player');
+  if (clipPreviewPlayer && holder) {
+    try {
+      clipPreviewPlayer[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
+      return;
+    } catch (error) {}
+  }
+  if (clipPreviewPlayer) { try { clipPreviewPlayer.destroy(); } catch (error) {} clipPreviewPlayer = null; }
+  if (!holder) {
+    const fresh = document.createElement('div');
+    fresh.id = 'clip-preview-player';
+    block.insertBefore(fresh, note);
+  }
+  loadYouTubeApi().then(() => {
+    if (!document.querySelector('#clip-preview-player')) return;
+    clipPreviewPlayer = new YT.Player('clip-preview-player', {
+      videoId,
+      playerVars: { rel: 0, modestbranding: 1, playsinline: 1 },
+      events: {
+        onReady: event => {
+          event.target[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
+        },
+        onStateChange: event => { if (window.YT && event.data === YT.PlayerState.PLAYING) guardClipPreviewEnd(event.target, start, end); }
+      }
+    });
+  }).catch(() => stopClipPreview());
+}
+
 function renderQueue() {
   queueCount.textContent = queue.length;
   clipList.innerHTML = queue.length ? queue.map(item => {
@@ -41,7 +121,7 @@ function persistQueue(message = 'Saved on this device · not shared.') {
   if (queueStatus) queueStatus.textContent = saved ? message : 'Browser storage unavailable · changes will not survive reload.';
 }
 
-function selectEvidence(item) {
+function selectEvidence(item, options = {}) {
   selectedEvidence = item;
   window.selectedArchiveCitation = item;
   window.dispatchEvent(new CustomEvent('archive:citation-selected', { detail: item }));
@@ -53,16 +133,24 @@ function selectEvidence(item) {
     node.setAttribute('aria-current', String(selected));
   });
   evidenceContent.className = 'evidence-card';
-  const saved = queue.some(savedItem => String(savedItem.id) === String(item.id));
+  const savedClip = queue.find(savedItem => String(savedItem.id) === String(item.id));
+  const saved = Boolean(savedClip);
   const saveDisabled = Boolean(editingClipId);
   const url = watchUrl(item);
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(Math.round(item.start))}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
-  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span>${item.virality && item.virality.score >= 7 ? `<span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''}<h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
+  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span>${item.virality && item.virality.score >= 7 ? `<span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''}<h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${savedClip && Number(savedClip.requestedDuration) === seconds}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
-    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item);
+    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true });
   });
+  if (item.videoId) {
+    const previewStart = savedClip ? Number(savedClip.start) : Number(item.start);
+    const previewEnd = savedClip ? Number(savedClip.end) : Number(item.end);
+    mountClipPreview(String(item.videoId), previewStart, previewEnd, Boolean(options.autoplayPreview));
+  } else {
+    stopClipPreview();
+  }
 }
 
 function renderResults(result) {
@@ -100,7 +188,7 @@ function renderResults(result) {
     const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     document.querySelector('#evidence-panel').scrollIntoView({ behavior, block: 'nearest' });
   }));
-  if (current[0]) selectEvidence(current[0]); else { selectedEvidence = null; window.selectedArchiveCitation = null; window.dispatchEvent(new CustomEvent('archive:citation-selected', { detail: null })); if (evidenceStatus) evidenceStatus.textContent = isError ? 'UNAVAILABLE' : 'NOT FOUND'; evidenceContent.className = 'evidence-empty'; evidenceContent.innerHTML = `<div class="evidence-glow">∅</div><p>${isError ? 'Search could not complete.' : 'No supported moment found.'}<br>${isError ? 'Try again shortly.' : 'Try a different archive question.'}</p>`; }
+  if (current[0]) selectEvidence(current[0]); else { selectedEvidence = null; window.selectedArchiveCitation = null; window.dispatchEvent(new CustomEvent('archive:citation-selected', { detail: null })); if (evidenceStatus) evidenceStatus.textContent = isError ? 'UNAVAILABLE' : 'NOT FOUND'; stopClipPreview(); evidenceContent.className = 'evidence-empty'; evidenceContent.innerHTML = `<div class="evidence-glow">∅</div><p>${isError ? 'Search could not complete.' : 'No supported moment found.'}<br>${isError ? 'Try again shortly.' : 'Try a different archive question.'}</p>`; }
   document.querySelector('#search-status').textContent = isError ? 'The archive could not complete the search. Try again shortly.' : current.length ? `${current.length} source moment${current.length === 1 ? '' : 's'} found. Evidence is shown below.` : 'No supported source moment found.';
 }
 
