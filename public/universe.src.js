@@ -83,6 +83,18 @@ const catalogue = await fetch('/api/catalog').then(response => response.ok ? res
 const graph = await fetch('/topic-graph.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
 const videoGraph = await fetch('/video-links.json').then(response => response.ok ? response.json() : { nodes: [], edges: [] }).catch(() => ({ nodes: [], edges: [] }));
 const subtopicData = await fetch('/topic-subtopics.json').then(response => response.ok ? response.json() : {}).catch(() => ({}));
+const viralityData = await fetch('/virality.json').then(response => response.ok ? response.json() : {}).catch(() => ({}));
+// Validated clip-potential scores (public/virality.json: ids + timestamps only,
+// no transcript text). Used to sort sub-topic moments toward proven clip shapes.
+const viralityWindows = new Map();
+for (const w of viralityData.windows || []) { if (!viralityWindows.has(w.videoId)) viralityWindows.set(w.videoId, []); viralityWindows.get(w.videoId).push(w); }
+const viralityScoreOf = (videoId, seconds) => {
+  const wins = viralityWindows.get(videoId);
+  if (!wins || !Number.isFinite(Number(seconds))) return 0;
+  let best = 0;
+  for (const w of wins) if (Math.abs(Number(w.start) - Number(seconds)) <= 60) best = Math.max(best, Number(w.score));
+  return best;
+};
 
 function addNode(data, position, geometry, scale = 1) {
   const material = new THREE.MeshBasicMaterial({ color: data.color || 0x8c8792, transparent: true, opacity: data.kind === 'episode' ? .72 : 1 });
@@ -275,7 +287,7 @@ function selectNode(node) {
   openButton.hidden = data.kind === 'core';
   openButton.textContent = data.kind === 'subtopic' ? 'Search this sub-topic ↗' : data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(Math.round(data.seconds))} ↗`;
   inspectorMoments.replaceChildren();
-  const inspectorMomentItems = data.kind === 'topic' ? (data.sources || []) : data.kind === 'subtopic' ? (data.moments || []).map(moment => ({ title: moment.episode, url: `https://www.youtube.com/watch?v=${moment.videoId}`, seconds: moment.seconds })) : [];
+  const inspectorMomentItems = data.kind === 'topic' ? (data.sources || []) : data.kind === 'subtopic' ? [...(data.moments || [])].sort((a, b) => viralityScoreOf(b.videoId, b.seconds) - viralityScoreOf(a.videoId, a.seconds)).map(moment => { const v = viralityScoreOf(moment.videoId, moment.seconds); return { title: v >= 8.5 ? `${moment.episode} · TOP CLIP` : v >= 7 ? `${moment.episode} · STRONG CLIP` : moment.episode, url: `https://www.youtube.com/watch?v=${moment.videoId}`, seconds: moment.seconds }; }) : [];
   for (const moment of inspectorMomentItems) {
     const href = nodeSourceUrl({ source: moment.url, seconds: moment.seconds });
     if (!href) continue;
