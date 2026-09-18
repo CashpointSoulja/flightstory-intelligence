@@ -277,25 +277,8 @@ document.addEventListener('click', event => {
   form.requestSubmit();
 });
 
-async function initTrendingTopics() {
-  const strip = document.querySelector('#trending-topics');
-  if (!strip) return;
-  try {
-    const response = await fetch('/topic-graph.json');
-    if (!response.ok) return;
-    const graph = await response.json();
-    const topics = graph.nodes.sort((a, b) => b.occurrences - a.occurrences).slice(0, 6);
-    const mentions = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
-    strip.querySelector('.suggestions').innerHTML = topics.map(({ label, occurrences }) => `<button type="button" data-discovery-query="${escapeHtml(`What do guests say about ${label}?`)}">${escapeHtml(label)} · <span>${escapeHtml(mentions.format(occurrences).toLowerCase())} mentions</span></button>`).join('');
-    strip.hidden = topics.length === 0;
-  } catch {
-    strip.hidden = true;
-  }
-}
-
 renderQueue();
 initDiscovery();
-initTrendingTopics();
 const authScript = document.createElement('script');
 authScript.type = 'module';
 authScript.src = '/auth.js';

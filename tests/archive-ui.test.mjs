@@ -215,21 +215,6 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.doesNotMatch(app, /watch\?v=\$\{item\.videoId\}/);
 });
 
-test('loads trending archive topics and submits their natural questions through discovery chips', async () => {
-  const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
-  const html = await readFile(new URL('../public/index.html', import.meta.url), 'utf8');
-  assert.match(html, /id="trending-topics"[^>]*hidden><p[^>]*class="eyebrow">TRENDING IN THE ARCHIVE/);
-  assert.match(app, /async function initTrendingTopics\(\)[\s\S]*fetch\('\/topic-graph\.json'\)/);
-  assert.match(app, /if \(!response\.ok\) return/);
-  assert.match(app, /graph\.nodes\.sort\(\(a, b\) => b\.occurrences - a\.occurrences\)\.slice\(0, 6\)/);
-  assert.ok(app.includes('data-discovery-query="${escapeHtml(`What do guests say about ${label}?`)}"'));
-  assert.ok(app.includes('${escapeHtml(label)} · <span>${escapeHtml(mentions.format(occurrences).toLowerCase())} mentions</span>'));
-  assert.match(app, /notation: 'compact', maximumFractionDigits: 1/);
-  assert.match(app, /event\.target\.closest\('\[data-discovery-query\]'\)[\s\S]*query\.value = button\.dataset\.discoveryQuery;\s*form\.requestSubmit\(\)/);
-  assert.match(app, /catch \{\s*strip\.hidden = true/);
-  assert.match(app, /\ninitTrendingTopics\(\);/);
-});
-
 test('separates the source time window from its provisional label', async () => {
   const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
   assert.match(app, /class="source-window"[^>]*>\$\{formatTime\(item\.start\)\}–\$\{formatTime\(item\.end\)\}<\/span> · <span class="provenance-tag">\$\{item\.mapMatch \? 'MAP MATCH' : 'PROVISIONAL'\}<\/span> · \$\{escapeHtml\(item\.guest\)\}/);

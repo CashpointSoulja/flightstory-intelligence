@@ -34,4 +34,4 @@ html{scroll-behavior:smooth}body{background:#fff;color:var(--ink);font-family:va
 
 .discovery-layer,.clips,footer{display:none!important}.workspace-switch{display:flex;width:max-content;margin:0 auto 16px;padding:3px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.55)}.workspace-switch button{border:0;background:transparent;padding:9px 24px;border-radius:999px;color:var(--muted);font:12px monospace;cursor:pointer}.workspace-switch button[aria-selected="true"]{background:var(--ink);color:#fff}
 
-.trending-topics{width:min(700px,100%);margin-top:26px}.trending-topics .eyebrow{font-family:monospace}.trending-topics .suggestions{margin-top:12px}.trending-topics button{border-color:#c7c7c7}.trending-topics button span{color:var(--signal)}
+
