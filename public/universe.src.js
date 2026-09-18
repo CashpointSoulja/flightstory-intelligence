@@ -106,15 +106,16 @@ const topicColor = label => topicFamilies.find(([, pattern]) => pattern.test(lab
 const clusterCenters = [new THREE.Vector3(-4.4, 1.6, -.4), new THREE.Vector3(-2.1, -2.1, .2), new THREE.Vector3(.1, 2.5, -.2), new THREE.Vector3(2.7, .55, .3), new THREE.Vector3(4.3, -1.45, -.1)];
 const familyCounts = topicFamilies.map(([, pattern]) => graph.nodes.filter(topic => pattern.test(topic.label)).length);
 const familyIndexes = topicFamilies.map(() => 0);
+const maxOccurrences = Math.max(1, ...graph.nodes.map(topic => topic.occurrences || 0));
 const topicNodes = graph.nodes.map((topic, index) => {
   const family = topicFamilies.findIndex(([, pattern]) => pattern.test(topic.label));
   const familyIndex = Math.max(family, 0) % clusterCenters.length; const localIndex = familyIndexes[familyIndex]++; const localProgress = localIndex / Math.max(familyCounts[familyIndex] - 1, 1);
   const cluster = clusterCenters[familyIndex]; const theta = localIndex * 2.399963 + familyIndex * .7; const spread = 1.2 + Math.sqrt(localProgress) * 4.1;
   const position = new THREE.Vector3(cluster.x + Math.cos(theta) * spread, cluster.y + Math.sin(theta) * spread * .7, cluster.z + Math.sin(index * 1.73) * .75);
   topicPositions.set(topic.id, position);
-  return addNode({ id: topic.id, kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, sources: topic.sources, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, 1 + Math.min(topic.occurrences, 40) / 55);
+  return addNode({ id: topic.id, kind: 'topic', title: topic.label, occurrences: topic.occurrences, episodeCount: topic.episodeCount, seconds: topic.seconds, source: topic.source, sourceTitle: topic.sourceTitle, sources: topic.sources, query: topic.label, color: topicColor(topic.label) }, position, nodeGeometry, .7 + .6 * Math.sqrt((topic.occurrences || 0) / maxOccurrences));
 });
-const topicLabels = topicNodes.slice(0, 12).map(node => {
+const topicLabels = [...topicNodes].sort((a, b) => b.userData.occurrences - a.userData.occurrences).slice(0, 12).map(node => {
   const label = document.createElement('span');
   label.className = 'universe-node-label';
   label.textContent = node.userData.title;
@@ -170,14 +171,18 @@ const topicCoreLines = [];
 for (const node of topicNodes.slice(0, 36)) {
   const line = new THREE.Line(new THREE.BufferGeometry().setFromPoints([node.position, core.position]), new THREE.LineBasicMaterial({ color: 0x686271, transparent: true, opacity: .18 })); root.add(line); topicCoreLines.push(line);
 }
+// Thin only rendered connections; retain the full graphs for inspection.
+const topicEdgeWeights = graph.edges.map(edge => edge.weight).sort((a, b) => a - b);
+const topicEdgeThreshold = topicEdgeWeights[Math.floor(topicEdgeWeights.length * .85)] ?? Infinity;
+const visibleTopicEdges = graph.edges.filter(edge => edge.weight >= topicEdgeThreshold);
 const edgePositions = [];
-for (const edge of graph.edges) { const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target); if (from && to) edgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
-const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x665b78, transparent: true, opacity: .16 }));
+for (const edge of visibleTopicEdges) { const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target); if (from && to) edgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); }
+const graphLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0x665b78, transparent: true, opacity: .12 }));
 graphLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(edgePositions, 3));
 root.add(graphLines);
 // A small neural signal layer gives the concept field a living rhythm without adding hit targets.
 const neuralLinks = [];
-for (const [index, edge] of graph.edges.slice(0, 18).entries()) {
+for (const [index, edge] of visibleTopicEdges.slice(0, 18).entries()) {
   const from = topicPositions.get(edge.source); const to = topicPositions.get(edge.target);
   if (!from || !to) continue;
   const line = new THREE.Line(
@@ -187,10 +192,13 @@ for (const [index, edge] of graph.edges.slice(0, 18).entries()) {
   line.userData.signalPhase = index / 18;
   root.add(line); neuralLinks.push(line);
 }
+const videoEdgeWeights = videoGraph.edges.map(edge => edge.score).sort((a, b) => a - b);
+const videoEdgeThreshold = videoEdgeWeights[Math.floor(videoEdgeWeights.length * .90)] ?? Infinity;
+const visibleVideoEdges = videoGraph.edges.filter(edge => edge.score >= videoEdgeThreshold);
 const videoEdgePositions = [];
 const videoEdgePairs = [];
-for (const edge of videoGraph.edges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) { videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); if (videoEdgePairs.length < 220) videoEdgePairs.push([from, to]); } }
-const videoLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe5bd77, transparent: true, opacity: .24 }));
+for (const edge of visibleVideoEdges) { const from = videoPositions.get(edge.source); const to = videoPositions.get(edge.target); if (from && to) { videoEdgePositions.push(from.x, from.y, from.z, to.x, to.y, to.z); if (videoEdgePairs.length < 220) videoEdgePairs.push([from, to]); } }
+const videoLines = new THREE.LineSegments(new THREE.BufferGeometry(), new THREE.LineBasicMaterial({ color: 0xe5bd77, transparent: true, opacity: .12 }));
 videoLines.geometry.setAttribute('position', new THREE.Float32BufferAttribute(videoEdgePositions, 3));
 root.add(videoLines);
 const videoById = new Map(videoGraph.nodes.map(video => [video.id, video]));
@@ -332,9 +340,9 @@ function renderFrame(timestamp) {
   if (!reducedMotion) {
     root.rotation.y += .00045;
     stars.rotation.y -= .00012;
-    videoLines.material.opacity = (activeIds.size ? .25 : .08) + (Math.sin(now * 1.6) + 1) * .05;
+    videoLines.material.opacity = (activeIds.size ? .13 : .10) + (Math.sin(now * 1.6) + 1) * .01;
   } else {
-    videoLines.material.opacity = activeIds.size ? .25 : .16;
+    videoLines.material.opacity = activeIds.size ? .15 : .12;
   }
   for (const node of topicNodes) {
     node.material.opacity = activeIds.size ? (activeIds.has(node.userData.id) ? .95 : .20) : .72;

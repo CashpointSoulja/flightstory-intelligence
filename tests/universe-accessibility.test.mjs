@@ -2,6 +2,26 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
+test('floating labels are limited to the twelve most frequent topics', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+
+  assert.match(graph, /const topicLabels = \[\.\.\.topicNodes\]\.sort\(\(a, b\) => b\.userData\.occurrences - a\.userData\.occurrences\)\.slice\(0, 12\)\.map/);
+  assert.equal((graph.match(/label\.className = 'universe-node-label'/g) || []).length, 1);
+});
+
+test('rendered edges use percentile thresholds while inspection retains all connections', async () => {
+  const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
+
+  for (const [prefix, source, field, percentile] of [['topic', 'graph', 'weight', '85'], ['video', 'videoGraph', 'score', '90']]) {
+    assert.ok(graph.includes(`const ${prefix}EdgeWeights = ${source}.edges.map(edge => edge.${field}).sort((a, b) => a - b)`));
+    assert.ok(graph.includes(`${prefix}EdgeWeights[Math.floor(${prefix}EdgeWeights.length * .${percentile})] ?? Infinity`));
+    assert.ok(graph.includes(`${source}.edges.filter(edge => edge.${field} >= ${prefix}EdgeThreshold)`));
+    assert.ok(graph.includes(`for (const edge of visible${prefix === 'topic' ? 'Topic' : 'Video'}Edges)`));
+    assert.ok(graph.includes(`for (const edge of ${source}.edges) if (edge.source === data.id || edge.target === data.id)`));
+  }
+  assert.match(graph, /visibleTopicEdges\.slice\(0, 18\)/);
+});
+
 test('accessible archive nodes select in-app and keep source opening as a separate action', async () => {
   const graph = await readFile(new URL('../public/universe.src.js', import.meta.url), 'utf8');
 
