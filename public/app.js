@@ -24,6 +24,7 @@ const sourceAction = item => {
 // plays only its own section and stops at the out-point.
 let clipPreviewApiPromise = null;
 let clipPreviewPlayer = null;
+let clipPreviewReady = false;
 let clipPreviewPoll = null;
 
 function loadYouTubeApi() {
@@ -66,6 +67,16 @@ function guardClipPreviewEnd(player, start, end) {
   }, 200);
 }
 
+function armClipPreviewWatchdog() {
+  setTimeout(() => {
+    try {
+      if (!clipPreviewPlayer) return;
+      const state = typeof clipPreviewPlayer.getPlayerState === 'function' ? clipPreviewPlayer.getPlayerState() : -1;
+      if (!clipPreviewReady || state === -1) showClipPreviewFallback();
+    } catch (error) { showClipPreviewFallback(); }
+  }, 9000);
+}
+
 function showClipPreviewFallback() {
   stopClipPreview();
   const block = document.querySelector('#clip-preview');
@@ -83,6 +94,7 @@ function mountClipPreview(videoId, start, end, autoplay) {
   if (clipPreviewPlayer && holder) {
     try {
       clipPreviewPlayer[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
+      armClipPreviewWatchdog();
       return;
     } catch (error) {}
   }
@@ -94,22 +106,20 @@ function mountClipPreview(videoId, start, end, autoplay) {
   }
   loadYouTubeApi().then(() => {
     if (!document.querySelector('#clip-preview-player')) return;
+    clipPreviewReady = false;
     clipPreviewPlayer = new YT.Player('clip-preview-player', {
       videoId,
       playerVars: { rel: 0, modestbranding: 1, playsinline: 1, origin: window.location.origin },
       events: {
         onReady: event => {
+          clipPreviewReady = true;
           event.target[autoplay ? 'loadVideoById' : 'cueVideoById']({ videoId, startSeconds: start, endSeconds: end });
-          setTimeout(() => {
-            try {
-              if (clipPreviewPlayer === event.target && event.target.getPlayerState() === -1) showClipPreviewFallback();
-            } catch (error) {}
-          }, 7000);
         },
         onStateChange: event => { if (window.YT && event.data === YT.PlayerState.PLAYING) guardClipPreviewEnd(event.target, start, end); },
         onError: () => showClipPreviewFallback()
       }
     });
+    armClipPreviewWatchdog();
   }).catch(() => stopClipPreview());
 }
 

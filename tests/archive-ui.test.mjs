@@ -356,7 +356,8 @@ test('clip maker preview embeds a windowed YouTube player that stops at the out-
   assert.match(app, /mountClipPreview\(String\(item\.videoId\), previewStart, previewEnd, Boolean\(options\.autoplayPreview\)\)/);
   assert.match(app, /aria-pressed="\$\{Boolean\(savedClip && Number\(savedClip\.requestedDuration\) === seconds\)\}"/);
   assert.match(app, /onError: \(\) => showClipPreviewFallback\(\)/);
-  assert.match(app, /event\.target\.getPlayerState\(\) === -1\) showClipPreviewFallback\(\)/);
+  assert.match(app, /if \(!clipPreviewReady \|\| state === -1\) showClipPreviewFallback\(\)/);
+  assert.match(app, /armClipPreviewWatchdog\(\);/);
   assert.match(app, /Inline preview unavailable here - use the watch link to verify the cut\./);
   assert.match(app, /origin: window\.location\.origin/);
   assert.match(styles, /#clip-preview-player\{width:100%;aspect-ratio:16\/9/);
