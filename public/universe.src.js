@@ -25,7 +25,7 @@ styles.textContent = `
   .universe-ui{position:absolute;inset:0;pointer-events:none;font:10px 'neue-haas-grotesk-display',monospace;letter-spacing:.1em}.universe-ui>*{pointer-events:auto}
   .universe-access[open]{width:min(440px,calc(100vw - 32px))}.universe-access-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid rgba(241,240,237,.06)}.universe-access-row button,.universe-access-row a{padding:7px 6px;color:var(--muted);background:none;border:0;text-align:left;text-decoration:none;font:9px 'neue-haas-grotesk-display',monospace;cursor:pointer}.universe-access-row button{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:var(--paper);background:rgba(187,164,255,.1);outline-color:var(--lilac)}
   .universe-heading{position:absolute;left:18px;top:17px;color:var(--paper)}.universe-heading span{color:var(--muted);margin-left:12px}.universe-hint{position:absolute;left:50%;bottom:19px;transform:translateX(-50%);white-space:nowrap;color:#8b8393;font-size:9px}.universe-foot{position:absolute;right:18px;bottom:17px;text-align:right;color:var(--lilac);line-height:1.5}.universe-foot small{display:block;color:#8b8393;font-size:9px}.universe-inspector{position:absolute;left:18px;bottom:18px;max-width:300px;padding:10px 12px;border-left:1px solid var(--lilac);background:rgba(8,8,13,.82);backdrop-filter:blur(8px);opacity:0;transform:translateY(5px);transition:opacity .18s ease,transform .18s ease}.universe-inspector.visible{opacity:1;transform:none}.universe-inspector strong{display:block;color:var(--paper);font-size:11px;letter-spacing:.04em}.universe-inspector small{display:block;color:var(--muted);font-size:9px;line-height:1.5;margin-top:4px}.universe-inspector button{border:0;background:none;color:var(--lilac);font:9px 'neue-haas-grotesk-display';padding:8px 0 0;cursor:pointer}.universe-inspector-moments{display:grid;gap:3px;margin-top:8px;max-height:120px;overflow:auto}.universe-inspector-moments a{display:block;color:var(--lilac);font:9px 'neue-haas-grotesk-display';line-height:1.35;text-decoration:none}.universe-inspector-moments a:hover,.universe-inspector-moments a:focus-visible{color:var(--paper);text-decoration:underline}.universe-controls{position:absolute;right:18px;top:17px;display:flex;gap:6px}.universe-controls button{border:1px solid rgba(243,240,237,.16);background:rgba(8,8,13,.65);color:var(--muted);padding:6px 8px;border-radius:999px;font:9px 'neue-haas-grotesk-display';cursor:pointer}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:var(--lilac);color:var(--paper)}.universe-map-key{position:absolute;left:50%;top:25%;transform:translateX(-50%);display:flex;gap:25px;color:rgba(243,240,237,.78);font:10px 'neue-haas-grotesk-display';letter-spacing:.16em}.universe-map-key span{position:relative}.universe-map-key span+span:before{content:'→';position:absolute;left:-18px;color:var(--lilac)}
-  @media(max-width:700px){.universe-node-label,.universe-map-key{display:none}.universe-node-label--row{display:block!important;right:12px!important;font-size:10px}.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;bottom:12px}}
+  @media(max-width:700px){.universe-node-label,.universe-map-key{display:none}.universe-node-label--row{display:block!important;right:12px!important;font-size:10px}.universe-controls{top:auto;right:12px;bottom:12px}.universe-hint{bottom:49px;font-size:8px}.universe-foot{right:12px;bottom:55px}.universe-heading{left:12px;top:12px}.universe-inspector{left:12px;right:12px;top:auto;bottom:12px;max-height:132px;overflow:auto}.universe-stage.is-focused .universe-inspector-moments{display:none}}
 `;
 
 styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
@@ -311,6 +311,7 @@ function enterTopicFocus(node) {
   if (focusedTopicNode === node) return;
   exitTopicFocus(true);
   focusedTopicNode = node;
+  stage.classList.add('is-focused');
   const data = node.userData;
   const center = node.position;
   const subtopics = subtopicData[data.id]?.subtopics;
@@ -356,6 +357,7 @@ function enterTopicFocus(node) {
 function exitTopicFocus(keepCamera = false) {
   if (!focusedTopicNode) return;
   focusedTopicNode = null;
+  stage.classList.remove('is-focused');
   for (const mesh of focusMomentNodes) { root.remove(mesh); mesh.material.dispose(); const at = nodes.indexOf(mesh); if (at >= 0) nodes.splice(at, 1); }
   focusMomentNodes.length = 0;
   for (const line of focusMomentLines) { root.remove(line); line.geometry.dispose(); line.material.dispose(); }
