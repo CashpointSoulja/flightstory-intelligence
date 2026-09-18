@@ -9,7 +9,8 @@ for (const file of files) {
   const episode = JSON.parse(await readFile(join(dir, file), 'utf8'));
   let info;
   try { info = JSON.parse(await readFile(join(dir, '..', 'raw', `${episode.id}.info.json`), 'utf8')); } catch { info = { channel_id: episode.source?.channelId }; }
-  if (info.channel_id !== 'UCGq-a57w-aPwyi3pW7XLiHw') continue;
+  // Filter on channel only when channel info exists; corpus pushes may not include raw/*.info.json.
+  if (info.channel_id && info.channel_id !== 'UCGq-a57w-aPwyi3pW7XLiHw') continue;
   const videoId = episode.url.match(/[?&]v=([^&]+)/)?.[1] || episode.id;
   const segments = episode.segments || [];
   const stride = Math.max(1, Math.floor(segments.length / 24));

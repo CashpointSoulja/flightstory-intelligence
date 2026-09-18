@@ -444,7 +444,7 @@ test('workspace search requires a valid session and exact workspace membership',
 test('workspace search refuses absent corpus but treats no match as a grounded empty result', async () => {
   const options = {
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
-    authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }), search: async () => null, openAIKey: ''
+    authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }), search: async () => null, openAIKey: '', loadIndex: async () => null
   };
   await withServer({ ...options, workspaceSearch: async () => ({ availableCount: 0, segments: [] }) }, async url => {
     assert.equal((await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' })).status, 503);
@@ -455,6 +455,23 @@ test('workspace search refuses absent corpus but treats no match as a grounded e
     const result = await response.json();
     assert.deepEqual(result.citations, []);
     assert.match(result.answer, /could not verify/i);
+  });
+});
+
+test('workspace search falls back to the bundled private index when the corpus function is not deployed', async () => {
+  const segment = { id: 'seg-1', guest: 'Casey', episode: 'Indexed interview', quote: 'The launch moved to Friday after the storm.', start: 5, end: 9 };
+  await withServer({
+    mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
+    authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
+    workspaceSearch: async () => { throw new Error('not deployed'); },
+    loadIndex: async () => ({ segments: [segment] }),
+    search: async () => null, openAIKey: ''
+  }, async url => {
+    const response = await post(url, JSON.stringify({ query: 'launch moved' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' });
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.citations[0].id, 'seg-1');
+    assert.equal(result.citations[0].quote, segment.quote);
   });
 });
 

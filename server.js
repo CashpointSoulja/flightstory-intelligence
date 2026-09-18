@@ -30,6 +30,12 @@ const searchAccessMode = process.env.SEARCH_ACCESS_MODE || 'demo';
 const flightstoryWorkspaceId = process.env.FLIGHTSTORY_WORKSPACE_ID || '';
 const catalogPath = join(root, 'public', 'catalog.json');
 let topicGraphPromise;
+// Private full-corpus index (data/search-index.json): internal workspace fallback, never statically served.
+let privateIndexPromise;
+function loadPrivateIndex() {
+  privateIndexPromise ??= readFile(join(root, 'data', 'search-index.json'), 'utf8').then(JSON.parse).catch(() => null);
+  return privateIndexPromise;
+}
 let topicMomentsPromise;
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
@@ -395,7 +401,7 @@ async function body(request) {
 function send(response, status, data, type = 'application/json') { response.writeHead(status, { 'content-type': `${type}; charset=utf-8`, 'cache-control': 'no-store' }); response.end(type === 'application/json' ? JSON.stringify(data) : data); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png' };
 
-export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
+export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
   const hits = new Map();
   const publicRoot = resolve(root, 'public');
   const server = http.createServer(async (request, response) => {
@@ -567,9 +573,15 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         }
         let result;
         try { result = await workspaceSearch(token, query.trim(), { workspaceId, url: insforge.url, anonKey: insforge.anonKey }); }
-        catch { return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' }); }
-        if (!result || !Number.isInteger(result.availableCount) || result.availableCount < 1 || !Array.isArray(result.segments)) return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' });
-        items = result.segments;
+        catch { result = null; }
+        if (result && (!Number.isInteger(result.availableCount) || result.availableCount < 1 || !Array.isArray(result.segments))) result = null;
+        if (result) items = result.segments;
+        else {
+          // Fall back to the bundled private corpus index (still behind workspace auth + quota above).
+          const index = await loadIndex();
+          if (!index?.segments?.length) return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' });
+          items = index.segments;
+        }
       } else if (mode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
