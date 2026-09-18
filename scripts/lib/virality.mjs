@@ -34,7 +34,7 @@ function properNounCount(text) {
   return m ? new Set(m).size : 0;
 }
 
-export function scoreWindow(rawText, t) {
+export function scoreWindow(rawText, t, weights = {}) {
   const text = dedupeWords(rawText);
   if (text.length < MIN_UNIQUE_CHARS) return null;
   const reasons = [];
@@ -50,7 +50,9 @@ export function scoreWindow(rawText, t) {
 
   // 2. Viral pattern family (0-2)
   const famHits = Object.entries(CLUSTERS).filter(([, re]) => re.test(text)).map(([k]) => k);
-  score += Math.min(2, famHits.length);
+  // Outcome feedback re-weights pattern families (see mark_posted.mjs); default weight 1.
+  const famPoints = Math.min(2, famHits.reduce((sum, k) => sum + (weights[k] ?? 1), 0));
+  score += famPoints;
   if (famHits.length) reasons.push(`patterns: ${famHits.join(',')}`);
 
   // 3. Standalone completeness (0-2)

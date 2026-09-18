@@ -8,6 +8,18 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { scoreWindow, WINDOW_S, STEP_S } from './lib/virality.mjs';
 
+// Feedback loop: real posting outcomes re-weight pattern families.
+// viral +0.5, hit +0.25, ok +0.1, flop -0.25 per recorded outcome; clamp [0.5, 2].
+const OUTCOME_DELTA = { viral: 0.5, hit: 0.25, ok: 0.1, flop: -0.25 };
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+const outcomes = JSON.parse(await readFile(new URL('../data/virality-outcomes.json', import.meta.url), 'utf8').catch(() => '{"outcomes":[]}'));
+const clusterWeights = {};
+for (const o of outcomes.outcomes || []) {
+  const delta = OUTCOME_DELTA[o.outcome] ?? 0;
+  for (const c of o.clusters || []) clusterWeights[c] = clamp((clusterWeights[c] ?? 1) + delta, 0.5, 2);
+}
+if (Object.keys(clusterWeights).length) console.log('outcome re-weights:', clusterWeights);
+
 const KEEP_TOP = 600;
 const MIN_SCORE = 5;
 const NMS_RADIUS_S = 90;
@@ -26,7 +38,7 @@ for (const segs of byEpisode.values()) {
   for (let t = 0; t <= epEnd - 20; t += STEP_S) {
     const inWin = segs.filter(s => Number(s.start) >= t && Number(s.start) < t + WINDOW_S);
     if (!inWin.length) continue;
-    const r = scoreWindow(inWin.map(s => s.quote).join(' '), t);
+    const r = scoreWindow(inWin.map(s => s.quote).join(' '), t, clusterWeights);
     if (!r || r.score < MIN_SCORE) continue;
     windows.push({
       episodeId: inWin[0].episodeId, videoId: inWin[0].videoId,
@@ -48,6 +60,8 @@ const top = kept.slice(0, KEEP_TOP);
 const out = {
   generatedAt: new Date().toISOString(),
   method: `heuristic rubric proxies, ${WINDOW_S}s windows step ${STEP_S}, NMS ${NMS_RADIUS_S}s; rubric validated vs DOAC top shorts (hits >=7 vs random max 6, calibrate_virality.mjs)`,
+  outcomeWeights: clusterWeights,
+  outcomesUsed: (outcomes.outcomes || []).length,
   scoredWindows: kept.length,
   tiers: {
     topClip: kept.filter(w => w.score >= 8.5).length,

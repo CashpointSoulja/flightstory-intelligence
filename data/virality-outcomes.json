@@ -1,0 +1,70 @@
+{
+ "outcomes": [
+  {
+   "videoId": "PyhmvAL-iYw",
+   "start": 3690,
+   "outcome": "viral",
+   "views": 4500000,
+   "notes": "BEWARE OF BLACK PLASTICS short",
+   "postedAt": "2026-09-18T15:31:54.048Z",
+   "heuristicScore": 7,
+   "clusters": [
+    "hiddenDanger",
+    "chemicals"
+   ]
+  },
+  {
+   "videoId": "AcK_zgJjnoo",
+   "start": 0,
+   "outcome": "viral",
+   "views": 3800000,
+   "notes": "SPOT A PSYCHOPATH IN FIVE SECONDS short",
+   "postedAt": "2026-09-18T15:31:54.186Z",
+   "heuristicScore": 7,
+   "clusters": [
+    "hiddenDanger",
+    "contrarian",
+    "actionable"
+   ]
+  },
+  {
+   "videoId": "PyhmvAL-iYw",
+   "start": 3870,
+   "outcome": "viral",
+   "views": 2000000,
+   "notes": "STOP TOUCHING RECEIPTS short",
+   "postedAt": "2026-09-18T15:31:54.324Z",
+   "heuristicScore": 7,
+   "clusters": [
+    "chemicals",
+    "actionable"
+   ]
+  },
+  {
+   "videoId": "Cn8HBj8QAbk",
+   "start": 570,
+   "outcome": "hit",
+   "views": 1500000,
+   "notes": "THEY'RE HIDING THE TRUTH ABOUT AI short",
+   "postedAt": "2026-09-18T15:31:54.465Z",
+   "heuristicScore": 7,
+   "clusters": [
+    "doom",
+    "prediction"
+   ]
+  },
+  {
+   "videoId": "t38LbMVoPCs",
+   "start": 0,
+   "outcome": "hit",
+   "views": 1400000,
+   "notes": "CIA AGENT BELIEVES EPSTEIN WAS A SPY short",
+   "postedAt": "2026-09-18T15:31:54.599Z",
+   "heuristicScore": 7,
+   "clusters": [
+    "insiderSecret",
+    "powerStructures"
+   ]
+  }
+ ]
+}
