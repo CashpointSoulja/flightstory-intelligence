@@ -273,13 +273,13 @@ function selectNode(node) {
   inspectorTitle.textContent = data.kind === 'connection' ? `${data.fromVideo?.title || 'Source A'} ↔ ${data.toVideo?.title || 'Source B'}` : data.title;
   inspectorMeta.textContent = data.kind === 'core' ? 'archive activation point · search to explore' : data.kind === 'connection' ? `${Math.round((data.score || 0) * 100)}% semantic similarity · ${data.relationship}` : data.kind === 'evidence' ? `${data.guest} · ${formatTime(data.seconds)} · indexed moment` : data.kind === 'subtopic' ? `"${data.topic}" sub-topic · ${data.count || 0} mentions · ${(data.moments || []).length} episode${(data.moments || []).length === 1 ? '' : 's'}` : data.kind === 'moment' ? `"${data.topic}" moment · ${data.count || 1} mentions in this episode · ${formatTime(data.seconds)}` : data.kind === 'video' ? `semantic video node · ${data.title.slice(0, 48)} · source video` : `${data.occurrences} mentions · ${data.sourceTitle || 'indexed episode'} · ${formatTime(data.seconds)}`;
   openButton.hidden = data.kind === 'core';
-  openButton.textContent = data.kind === 'subtopic' ? 'Search this sub-topic ↗' : data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(data.seconds)} ↗`;
+  openButton.textContent = data.kind === 'subtopic' ? 'Search this sub-topic ↗' : data.kind === 'connection' ? 'Open source A ↗' : data.kind === 'evidence' || data.kind === 'video' ? 'Watch source ↗' : data.kind === 'moment' ? `Open moment at ${formatTime(data.seconds)} ↗` : `Open source at ${formatTime(Math.round(data.seconds))} ↗`;
   inspectorMoments.replaceChildren();
   const inspectorMomentItems = data.kind === 'topic' ? (data.sources || []) : data.kind === 'subtopic' ? (data.moments || []).map(moment => ({ title: moment.episode, url: `https://www.youtube.com/watch?v=${moment.videoId}`, seconds: moment.seconds })) : [];
   for (const moment of inspectorMomentItems) {
     const href = nodeSourceUrl({ source: moment.url, seconds: moment.seconds });
     if (!href) continue;
-    const link = document.createElement('a'); link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `${moment.title} · ${formatTime(moment.seconds)} ↗`; inspectorMoments.appendChild(link);
+    const link = document.createElement('a'); link.href = href; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = `${moment.title} · ${formatTime(Math.round(moment.seconds))} ↗`; inspectorMoments.appendChild(link);
   }
   inspector.hidden = false;
   inspector.classList.add('visible');
@@ -407,7 +407,7 @@ function resize() { const width = host.clientWidth; const height = host.clientHe
 new ResizeObserver(resize).observe(host);
 resize();
 
-function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.transform = 'translate(9px,-50%)'; label.style.opacity = point.z < 1 ? '.82' : '0'; } focusMomentLabels.forEach(({ label }, index) => { label.style.left = 'auto'; label.style.right = '18px'; label.style.top = `${64 + index * 24}px`; label.style.transform = 'none'; label.style.textAlign = 'right'; label.style.opacity = '.82'; }); }
+function updateTopicLabels() { const width = stage.clientWidth; const height = stage.clientHeight; hintEl.style.opacity = width < 900 && focusedTopicNode ? '0' : ''; const point = new THREE.Vector3(); for (const { node, label } of topicLabels) { node.getWorldPosition(point).project(camera); label.style.left = `${(point.x * .5 + .5) * width}px`; label.style.top = `${(-point.y * .5 + .5) * height}px`; label.style.transform = 'translate(9px,-50%)'; label.style.opacity = point.z < 1 ? '.82' : '0'; } focusMomentLabels.forEach(({ label }, index) => { label.style.left = 'auto'; label.style.right = '18px'; label.style.top = `${64 + index * 24}px`; label.style.transform = 'none'; label.style.textAlign = 'right'; label.style.opacity = '.82'; }); }
 function canRender({ ready, inView, visible }) { return ready && inView && visible; }
 function shouldAnimate({ reduced, inView, visible }) { return !reduced && inView && visible; }
 function requestRender() {
