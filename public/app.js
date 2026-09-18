@@ -269,11 +269,35 @@ function initDiscovery() {
   `;
   document.head.appendChild(style);
   clips.insertAdjacentHTML('beforebegin', `<section class="discovery-layer" id="discovery-layer"><div class="discovery-intro"><span class="section-kicker">DISCOVERY LAYER</span><h2>See what the archive is connecting.</h2><p>Similarity earns attention. Evidence earns trust. Connections stay explainable and open back to source moments.</p></div><div class="discovery-grid"><article class="signal-card"><div class="signal-meta"><span>SAMPLE THREAD</span><span><b data-archive-count="evidence">—</b> CITATIONS</span></div><h3>Conversation has observable signals.</h3><div class="signal-people"><span>One indexed guest</span><b>↔</b><span><b data-archive-count="evidence">—</b> source moments</span></div><p>Vanessa Van Edwards links talking too much, loneliness and better conversation starters. Transcript wording is provisional; open the source to verify.</p><button class="signal-action" type="button" data-discovery-query="What did Vanessa Van Edwards say about talking too much?">Open evidence ↗</button></article><article class="signal-card opportunity"><div class="signal-meta"><span>GRAPH METADATA</span><span><b data-archive-count="topics">—</b> TOPICS</span></div><h3>The next connection is waiting in the archive.</h3><div class="signal-reasons"><span><b data-archive-count="eligibleEpisodes">—</b> eligible for transcription · <b data-archive-count="catalogueRecords">—</b> catalogued episodes</span><span><b data-archive-count="graphTranscripts">—</b> transcript links mapped</span></div><p>Search coverage appears with each result. Every supported moment links back to its source.</p><button class="signal-action" type="button" data-discovery-query="What did Vanessa Van Edwards say about conversation?">Review indexed evidence ↗</button></article></div></section>`);
-  document.querySelectorAll('[data-discovery-query]').forEach(button => button.addEventListener('click', () => { query.value = button.dataset.discoveryQuery; form.requestSubmit(); }));
+
+}
+
+document.addEventListener('click', event => {
+  const button = event.target.closest('[data-discovery-query]');
+  if (!button) return;
+  query.value = button.dataset.discoveryQuery;
+  form.requestSubmit();
+});
+
+async function initTrendingTopics() {
+  const strip = document.querySelector('#trending-topics');
+  if (!strip) return;
+  try {
+    const response = await fetch('/topic-graph.json');
+    if (!response.ok) return;
+    const graph = await response.json();
+    const topics = graph.nodes.sort((a, b) => b.occurrences - a.occurrences).slice(0, 6);
+    const mentions = new Intl.NumberFormat('en', { notation: 'compact', maximumFractionDigits: 1 });
+    strip.querySelector('.suggestions').innerHTML = topics.map(({ label, occurrences }) => `<button type="button" data-discovery-query="${escapeHtml(`What do guests say about ${label}?`)}">${escapeHtml(label)} · <span>${escapeHtml(mentions.format(occurrences).toLowerCase())} mentions</span></button>`).join('');
+    strip.hidden = topics.length === 0;
+  } catch {
+    strip.hidden = true;
+  }
 }
 
 renderQueue();
 initDiscovery();
+initTrendingTopics();
 const authScript = document.createElement('script');
 authScript.type = 'module';
 authScript.src = '/auth.js';
