@@ -19,7 +19,14 @@ for (const file of files) {
   for (let index = 0; index < segments.length; index += stride) {
     const segment = segments[index];
     if (!segment?.text || segment.text.split(/\s+/).length < 8) continue;
-    rows.push({ id: `${episode.id}:${index}`, episodeId: episode.id, episode: episode.title, guest: episode.title && episode.title !== episode.id && episode.title.includes(':') ? episode.title.split(':')[0] : (episode.title || episode.id), videoId, start: Number(segment.start) || 0, end: Number(segment.end) || Number(segment.start) || 0, quote: segment.text, searchText: `${episode.title} ${segment.text}`, transcriptStatus: 'provisional', speakerStatus: 'unknown' });
+    rows.push({ id: `${episode.id}:${index}`, episodeId: episode.id, episode: episode.title, guest: (() => {
+      const title = episode.title && episode.title !== episode.id ? episode.title : '';
+      if (!title) return episode.id;
+      let candidate = title.includes(':') ? title.split(':')[0] : title.includes(' - ') ? title.split(' - ').at(-1) : '';
+      candidate = candidate.trim();
+      // Reject sentence-length candidates: a guest is a short name, not a title fragment.
+      return candidate && candidate.split(/\s+/).length <= 6 ? candidate : '';
+    })(), videoId, start: Number(segment.start) || 0, end: Number(segment.end) || Number(segment.start) || 0, quote: segment.text, searchText: `${episode.title} ${segment.text}`, transcriptStatus: 'provisional', speakerStatus: 'unknown' });
   }
 }
 await writeFile(output, JSON.stringify({ generatedAt: new Date().toISOString(), sourceCount: new Set(rows.map(row => row.episodeId)).size, segments: rows }, null, 2));
