@@ -13,11 +13,11 @@ for (const file of files) {
   if (info.channel_id && info.channel_id !== 'UCGq-a57w-aPwyi3pW7XLiHw') continue;
   const videoId = episode.url.match(/[?&]v=([^&]+)/)?.[1] || episode.id;
   const segments = episode.segments || [];
-  const stride = Math.max(1, Math.floor(segments.length / 24));
+  const stride = Math.max(1, Math.floor(segments.length / 48));
   for (let index = 0; index < segments.length; index += stride) {
     const segment = segments[index];
     if (!segment?.text || segment.text.split(/\s+/).length < 8) continue;
-    rows.push({ id: `${episode.id}:${index}`, episodeId: episode.id, episode: episode.title, guest: episode.title.split(':')[0], videoId, start: Number(segment.start) || 0, end: Number(segment.end) || Number(segment.start) || 0, quote: segment.text, searchText: `${episode.title} ${segment.text}`, transcriptStatus: 'provisional', speakerStatus: 'unknown' });
+    rows.push({ id: `${episode.id}:${index}`, episodeId: episode.id, episode: episode.title, guest: episode.title && episode.title !== episode.id && episode.title.includes(':') ? episode.title.split(':')[0] : (episode.title || episode.id), videoId, start: Number(segment.start) || 0, end: Number(segment.end) || Number(segment.start) || 0, quote: segment.text, searchText: `${episode.title} ${segment.text}`, transcriptStatus: 'provisional', speakerStatus: 'unknown' });
   }
 }
 await writeFile(output, JSON.stringify({ generatedAt: new Date().toISOString(), sourceCount: new Set(rows.map(row => row.episodeId)).size, segments: rows }, null, 2));
