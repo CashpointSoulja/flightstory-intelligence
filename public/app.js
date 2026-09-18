@@ -9,13 +9,6 @@ const count = document.querySelector('#result-count');
 const heading = document.querySelector('#question-heading');
 const queueCount = document.querySelector('#queue-count');
 const clipList = document.querySelector('#clip-list');
-document.querySelectorAll('[data-workspace]').forEach(button => button.addEventListener('click', () => {
-  const clips = button.dataset.workspace === 'clips';
-  document.querySelectorAll('[data-workspace]').forEach(tab => tab.setAttribute('aria-selected', String(tab === button)));
-  const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-  if (clips) document.querySelector('#clips')?.scrollIntoView({ behavior, block: 'start' });
-  else { document.querySelector('#universe')?.scrollIntoView({ behavior, block: 'start' }); query.focus({ preventScroll: true }); }
-}));
 let current = [];
 let queue = loadSavedItems(() => window.localStorage);
 let searchRequest = 0;
