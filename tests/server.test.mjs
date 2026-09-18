@@ -423,7 +423,7 @@ test('workspace search requires a valid session and exact workspace membership',
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async token => token === 'valid-token' ? 'authorized' : token === 'not-a-member' ? 'forbidden' : 'unauthenticated',
     workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
-    workspaceSearch: async () => ({ availableCount: 1, segments: corpus }),
+    workspaceSearch: async () => ({ availableCount: 1, segments: corpus }), loadIndex: async () => null,
     search: async (_query, { items }) => ({ answer: 'Local evidence.', citations: items, mode: 'local-fallback' })
   };
   await withServer(options, async url => {
@@ -446,10 +446,10 @@ test('workspace search refuses absent corpus but treats no match as a grounded e
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }), search: async () => null, openAIKey: '', loadIndex: async () => null
   };
-  await withServer({ ...options, workspaceSearch: async () => ({ availableCount: 0, segments: [] }) }, async url => {
+  await withServer({ ...options, loadIndex: async () => null, workspaceSearch: async () => ({ availableCount: 0, segments: [] }) }, async url => {
     assert.equal((await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' })).status, 503);
   });
-  await withServer({ ...options, workspaceSearch: async () => ({ availableCount: 4, segments: [] }) }, async url => {
+  await withServer({ ...options, loadIndex: async () => null, workspaceSearch: async () => ({ availableCount: 4, segments: [] }) }, async url => {
     const response = await post(url, JSON.stringify({ query: 'launch' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' });
     assert.equal(response.status, 200);
     const result = await response.json();
@@ -472,6 +472,22 @@ test('workspace search falls back to the bundled private index when the corpus f
     const result = await response.json();
     assert.equal(result.citations[0].id, 'seg-1');
     assert.equal(result.citations[0].quote, segment.quote);
+  });
+});
+
+test('workspace search tops up thin FTS results from the bundled private index', async () => {
+  const segment = { id: 'idx-1', guest: 'Matthew Walker', episode: 'Sleep interview', quote: 'Sleep deprivation exhausts the brain and body.', start: 627, end: 640 };
+  await withServer({
+    mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
+    authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
+    workspaceSearch: async () => ({ availableCount: 247, segments: [] }),
+    loadIndex: async () => ({ segments: [segment] }),
+    search: async (_query, { items }) => ({ answer: 'Local evidence.', citations: items, mode: 'local-fallback' })
+  }, async url => {
+    const response = await post(url, JSON.stringify({ query: 'sleep deprivation exhaustion' }), { 'content-type': 'application/json', authorization: 'Bearer valid-token' });
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.deepEqual(result.citations.map(item => item.id), ['idx-1']);
   });
 });
 
@@ -527,7 +543,7 @@ test('workspace synthesis falls back if a source ID and its supporting quote do 
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
     workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
-    workspaceSearch: async () => ({ availableCount: 1, segments: [segment] }),
+    workspaceSearch: async () => ({ availableCount: 1, segments: [segment] }), loadIndex: async () => null,
     openAIKey: 'test-key',
     fetchImpl: async () => new Response(JSON.stringify({ output_text: JSON.stringify({ claims: [
       { text: 'The launch moved to Friday.', sourceId: 'segment-1', quote: 'The team doubled in size.' },

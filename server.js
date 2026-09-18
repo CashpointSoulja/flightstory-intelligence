@@ -582,6 +582,19 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           if (!index?.segments?.length) return send(response, 503, { error: 'Workspace transcript search is not configured. Approved transcript data and the workspace search function must be deployed first.' });
           items = index.segments;
         }
+        // FTS can return zero rows for loose natural-language queries; top up from the private index so the LLM still gets candidates.
+        if (result && items.length < 4) {
+          const index = await loadIndex();
+          if (index?.segments?.length) {
+            const topUp = rankEvidence(query.trim(), index.segments);
+            const minOverlap = Math.min(1, topUp.contentWordCount) || 1;
+            const seen = new Set(items.map(item => item.id));
+            for (const { item, score } of topUp.items) {
+              if (items.length >= 24) break;
+              if (score >= minOverlap && !seen.has(item.id)) { items.push(item); seen.add(item.id); }
+            }
+          }
+        }
       } else if (mode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
