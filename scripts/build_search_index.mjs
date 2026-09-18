@@ -1,5 +1,6 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const dir = process.argv[2] || 'data/episodes';
 const output = process.argv[3] || 'data/search-index.json';
@@ -31,3 +32,13 @@ for (const file of files) {
 }
 await writeFile(output, JSON.stringify({ generatedAt: new Date().toISOString(), sourceCount: new Set(rows.map(row => row.episodeId)).size, segments: rows }, null, 2));
 console.log(JSON.stringify({ sources: new Set(rows.map(row => row.episodeId)).size, segments: rows.length, output }));
+
+// Auto-score newly indexed episodes for clip potential (offline heuristic,
+// zero API spend) and refresh the public badge/sort artifact. A scoring
+// failure never fails the index build.
+try {
+  execFileSync(process.execPath, [new URL('./score_virality.mjs', import.meta.url).pathname], { stdio: 'inherit' });
+  execFileSync(process.execPath, [new URL('./bake_virality_public.mjs', import.meta.url).pathname], { stdio: 'inherit' });
+} catch (error) {
+  console.warn(`Virality scoring skipped: ${error?.message || error}`);
+}
