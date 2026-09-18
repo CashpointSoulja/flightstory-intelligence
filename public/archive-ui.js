@@ -15,7 +15,7 @@ export function watchUrl(item) {
   const videoId = typeof item?.videoId === 'string' ? item.videoId.trim() : '';
   if (!videoId) return null;
   const start = Number(item.start);
-  return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${Number.isFinite(start) ? Math.max(0, start) : 0}s`;
+  return `https://www.youtube.com/watch?v=${encodeURIComponent(videoId)}&t=${Number.isFinite(start) ? Math.max(0, Math.round(start)) : 0}s`;
 }
 
 export function removeSavedItem(items, id) {

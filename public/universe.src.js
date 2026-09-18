@@ -143,7 +143,7 @@ function nodeSourceUrl(data) {
   try {
     const url = new URL(source);
     if (!['http:', 'https:'].includes(url.protocol)) return null;
-    url.searchParams.set('t', `${Math.max(0, Number(data.seconds) || 0)}s`);
+    url.searchParams.set('t', `${Math.max(0, Math.round(Number(data.seconds) || 0))}s`);
     return url.href;
   } catch { return null; }
 }

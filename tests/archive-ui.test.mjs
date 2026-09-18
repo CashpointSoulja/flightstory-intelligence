@@ -34,7 +34,7 @@ test('nearby graph dots get a small pointer target without selecting empty map s
 });
 
 test('only creates YouTube links when a source has a video id', () => {
-  assert.equal(watchUrl({ videoId: 'video-123', start: 5.5 }), 'https://www.youtube.com/watch?v=video-123&t=5.5s');
+  assert.equal(watchUrl({ videoId: 'video-123', start: 5.5 }), 'https://www.youtube.com/watch?v=video-123&t=6s');
   assert.equal(watchUrl({ start: 5 }), null);
   assert.equal(watchUrl({ videoId: '  ', start: 5 }), null);
 });
