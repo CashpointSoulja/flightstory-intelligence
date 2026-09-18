@@ -541,6 +541,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       // ponytail: per-process fixed-window limiter; use shared storage before multi-instance production.
       if (!takeRateLimit()) return;
       const t0 = Date.now();
+      let diag = '';
       // Cache only the public demo path: workspace auth/quota must run on every request.
       const cacheable = mode === 'demo' && !search;
       const cacheKey = cacheable ? searchCacheKey(mode, query.trim()) : null;
@@ -575,6 +576,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         try { result = await workspaceSearch(token, query.trim(), { workspaceId, url: insforge.url, anonKey: insforge.anonKey }); }
         catch { result = null; }
         if (result && (!Number.isInteger(result.availableCount) || result.availableCount < 1 || !Array.isArray(result.segments))) result = null;
+        diag = `rpcN:${result ? result.segments.length : -1}`;
         if (result) items = result.segments;
         else {
           // Fall back to the bundled private corpus index (still behind workspace auth + quota above).
@@ -595,6 +597,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
             }
           }
         }
+        diag += ` itemsN:${items.length}`;
       } else if (mode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
@@ -659,7 +662,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       }
       const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
       if (cacheKey) searchCacheSet(searchCache, cacheKey, publicResult);
-      response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", router;desc="${routeModelState.failed ? model : routeModelState.name}", total;dur=${Date.now() - t0}`);
+      response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", router;desc="${routeModelState.failed ? model : routeModelState.name}", total;dur=${Date.now() - t0}${diag ? `, diag;desc="${diag}"` : ''}`);
       send(response, 200, publicResult);
       return;
     }
