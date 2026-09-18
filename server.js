@@ -12,6 +12,7 @@ const insforgeAnonKey = process.env.NEXT_PUBLIC_INSFORGE_ANON_KEY || '';
 const searchAccessMode = process.env.SEARCH_ACCESS_MODE || 'demo';
 const flightstoryWorkspaceId = process.env.FLIGHTSTORY_WORKSPACE_ID || '';
 const catalogPath = join(root, 'public', 'catalog.json');
+let topicGraphPromise;
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
 
@@ -504,7 +505,35 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           ? await search(query.trim(), { items, mode })
           : await searchOpenAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: openAITimeoutMs, items, workspace: mode === 'workspace' });
       } catch (error) { console.error(`OpenAI search fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`); result = null; }
-      const finalResult = result || searchLocal(query.trim(), items);
+      let finalResult = result || searchLocal(query.trim(), items);
+      if (mode === 'demo' && !finalResult.citations.length) {
+        topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
+        const graph = await topicGraphPromise;
+        const words = queryWords(query);
+        const matches = graph.nodes.map(node => {
+          const tokens = normalizedName(node.label).split(' ');
+          const score = words.filter(word => tokens.some(token => token === word || (token.length >= 4 && token.startsWith(word)))).length;
+          return { node, score };
+        }).filter(({ score }) => score >= 1)
+          .sort((a, b) => b.score - a.score || b.node.occurrences - a.node.occurrences)
+          .slice(0, 2);
+        if (matches.length) {
+          finalResult = {
+            answer: 'No verified quote in the indexed demo excerpts, but the archive map connects this to these topics. Each source opens the video at the moment the topic appears.',
+            citations: matches.flatMap(({ node }) => [...node.sources].sort((a, b) => b.count - a.count).slice(0, 3).map((src, i) => {
+              const videoId = new URL(src.url).searchParams.get('v');
+              const start = Math.floor(src.seconds);
+              return {
+                id: `${node.id}:${videoId}:${i}`, episode: src.title, guest: node.label, videoId,
+                start, end: start + 30, quote: `${src.count} mentions of "${node.label}" in this episode`,
+                note: 'Archive map topic match. Transcript quote not available in this demo; verify in the source.',
+                mapMatch: true
+              };
+            })),
+            mode: 'topic-map'
+          };
+        }
+      }
       const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
       send(response, 200, publicResult);
       return;

@@ -216,6 +216,28 @@ test('public demo searches only its three built-in excerpts and never calls work
   });
 });
 
+test('public demo falls back to topic map sources and still refuses unmatched topics', async () => {
+  await withServer({ mode: 'demo', openAIKey: '' }, async url => {
+    const response = await post(url, JSON.stringify({ query: 'sleep' }));
+    assert.equal(response.status, 200);
+    const result = await response.json();
+    assert.equal(result.mode, 'topic-map');
+    assert.ok(result.citations.length > 0);
+    assert.equal('refusal' in result, false);
+    for (const citation of result.citations) {
+      assert.equal(citation.mapMatch, true);
+      assert.equal(typeof citation.start, 'number');
+      assert.ok(citation.videoId);
+    }
+    const unmatched = await post(url, JSON.stringify({ query: 'zzqqx nonsense' }));
+    assert.equal(unmatched.status, 200);
+    assert.deepEqual(await unmatched.json(), {
+      answer: 'I could not verify that in the indexed archive. Try another topic or ask about a different guest.',
+      citations: [], mode: 'local-demo'
+    });
+  });
+});
+
 test('workspace index counts are not exposed by the public status endpoint', async () => {
   await withServer({ mode: 'workspace' }, async url => {
     const status = await (await fetch(`${url}/api/index-status`)).json();
