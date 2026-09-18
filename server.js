@@ -646,7 +646,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       }
       const publicResult = mode === 'demo' && finalResult.mode === 'local-fallback' ? { ...finalResult, mode: 'local-demo' } : finalResult;
       if (cacheKey) searchCacheSet(searchCache, cacheKey, publicResult);
-      response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", total;dur=${Date.now() - t0}`);
+      response.setHeader('server-timing', `cache;desc="${cacheKey ? 'miss' : 'off'}", router;desc="${routeModelState.failed ? model : routeModelState.name}", total;dur=${Date.now() - t0}`);
       send(response, 200, publicResult);
       return;
     }
