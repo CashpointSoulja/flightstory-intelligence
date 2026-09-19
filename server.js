@@ -549,7 +549,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
     response.setHeader('referrer-policy', 'strict-origin-when-cross-origin');
     response.setHeader('x-frame-options', 'DENY');
     response.setHeader('permissions-policy', 'camera=(), microphone=(), geolocation=()');
-    response.setHeader('content-security-policy', "default-src 'self'; script-src 'self' https://esm.sh; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.insforge.app https://esm.sh; object-src 'none'; base-uri 'self'; frame-ancestors 'none'");
+    response.setHeader('content-security-policy', "default-src 'self'; script-src 'self' https://esm.sh https://www.youtube.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https://*.insforge.app https://esm.sh; frame-src https://www.youtube.com https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'");
     const pathname = (() => { try { return new URL(request.url, 'http://localhost').pathname; } catch { return ''; } })();
     const boardMatch = /^\/api\/boards\/([0-9a-f-]+)\/clips$/i.exec(pathname);
     const clipMatch = /^\/api\/clips\/([0-9a-f-]+)\/(range|submit|review)$/i.exec(pathname);
