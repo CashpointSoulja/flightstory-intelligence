@@ -21,7 +21,14 @@ if (config.searchAccessMode === 'workspace') {
   button.className = 'auth-button';
   button.type = 'button';
   nav?.appendChild(button);
-  const { data } = await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }));
+  // Anonymous visitors have no InsForge session cookie; probing getCurrentUser() anyway
+  // makes the SDK POST /api/auth/refresh, which 401s noisily in devtools on every load.
+  // The CSRF cookie is the only persisted sign-in marker (the SDK's token store is
+  // in-memory), so skip the probe when it is absent.
+  const hasSessionMarker = document.cookie.split(';').some(part => part.trim().startsWith('insforge_csrf_token='));
+  const { data } = hasSessionMarker
+    ? await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }))
+    : { data: { user: null } };
   if (data?.user) {
     if (hint) hint.firstChild.textContent = 'Full-corpus workspace search active. GPT Spark sends your question and matched excerpts to OpenAI. ';
     window.flightstoryAuth = { searchAccessMode: config.searchAccessMode, user: data.user, getAccessToken: () => insforge.getHttpClient().getValidAccessToken() };
