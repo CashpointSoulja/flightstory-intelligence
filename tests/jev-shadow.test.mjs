@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createServer } from '../server.js';
-import { runJevShadow, shadowLogLine, topicsFromAnswer, JEV_TIMEOUT_MS, NONE_OPTION } from '../jev-shadow.mjs';
+import { runJevShadow, shadowLogLine, topicsFromAnswer, primaryTopicsFromAnswer, JEV_PRIMARY_MIN_PROBABILITY, JEV_TIMEOUT_MS, NONE_OPTION } from '../jev-shadow.mjs';
 
 const labels = ['sleep', 'brain', 'love'];
 const choice = (pick, probabilities) => ({ answers: { topic: { type: 'choice', choice: pick, probabilities } } });
@@ -243,7 +243,171 @@ test('JEV_ENABLED=false is a no-op: no gateway call, no log, identical response'
   });
 });
 
-test('the default jev config is disabled when JEV_ENABLED is unset', async () => {
+test('jev primary keeps only labels above the absolute probability floor', () => {
+  assert.equal(JEV_PRIMARY_MIN_PROBABILITY, 0.25);
+  // 0.2 clears the abstain option but not the serving floor, so it is not routed.
+  assert.deepEqual(primaryTopicsFromAnswer({ type: 'choice', choice: 'sleep', probabilities: { sleep: 0.7, brain: 0.2, love: 0.05, [NONE_OPTION]: 0.05 } }, labels), ['sleep']);
+  assert.deepEqual(primaryTopicsFromAnswer({ type: 'choice', choice: 'sleep', probabilities: { sleep: 0.4, brain: 0.35, love: 0.2, [NONE_OPTION]: 0.05 } }, labels), ['sleep', 'brain']);
+  // Ordered by probability, not by the order the gateway happened to serialise.
+  assert.deepEqual(primaryTopicsFromAnswer({ type: 'choice', choice: 'love', probabilities: { sleep: 0.26, brain: 0.3, love: 0.44 } }, labels), ['love', 'brain', 'sleep']);
+  // Never more than the three the nano router is capped at.
+  assert.equal(primaryTopicsFromAnswer({ type: 'choice', choice: 'sleep', probabilities: { sleep: 0.25, brain: 0.25, love: 0.25, money: 0.25 } }, [...labels, 'money']).length, 3);
+});
+
+test('jev primary abstains when the none option wins, and rejects malformed answers', () => {
+  assert.deepEqual(primaryTopicsFromAnswer({ type: 'choice', choice: NONE_OPTION, probabilities: { sleep: 0.3, brain: 0.1, [NONE_OPTION]: 0.6 } }, labels), []);
+  // A tie is not a win for any label either: the router declines rather than guess.
+  assert.deepEqual(primaryTopicsFromAnswer({ type: 'choice', choice: NONE_OPTION, probabilities: { sleep: 0.5, [NONE_OPTION]: 0.5 } }, labels), []);
+  // Abstaining is a valid answer; only structurally bad output is a failure.
+  assert.equal(primaryTopicsFromAnswer({ type: 'choice', choice: 'cryptocurrency', probabilities: { cryptocurrency: 0.9 } }, labels), null);
+  assert.equal(primaryTopicsFromAnswer({ type: 'boolean', probability: 0.9 }, labels), null);
+  assert.equal(primaryTopicsFromAnswer(null, labels), null);
+});
+
+test('jev primary mode maps probabilities through runJevShadow and reports failures unchanged', async () => {
+  const served = await runJevShadow('how do I sleep better', labels, {
+    apiKey: 'gateway-key', mode: 'primary',
+    fetchImpl: gatewayOk(choice('sleep', { sleep: 0.6, brain: 0.24, [NONE_OPTION]: 0.16 }))
+  });
+  assert.deepEqual(served.topics, ['sleep'], 'the primary floor applies, not the shadow ranking');
+  assert.equal(served.error, null);
+  const abstained = await runJevShadow('who won the league', labels, {
+    apiKey: 'gateway-key', mode: 'primary',
+    fetchImpl: gatewayOk(choice(NONE_OPTION, { sleep: 0.2, [NONE_OPTION]: 0.8 }))
+  });
+  assert.deepEqual(abstained.topics, [], 'abstaining is a route of zero labels, not an error');
+  assert.equal(abstained.error, null);
+});
+
+// Primary-mode server wiring: nano's mock always answers ['sleep'], so any other routed
+// label in the response can only have come from Jev.
+const primaryJev = extra => ({ enabled: true, mode: 'primary', apiKey: 'gateway-key', timeoutMs: 650, ...extra });
+
+test('jev primary serves its own labels and logs its decision with probabilities immediately', async () => {
+  const lines = [];
+  const nanoCalls = [];
+  await withServer(demoOptions({
+    fetchImpl: nanoReturns(['sleep'], nanoCalls),
+    jev: primaryJev({ log: line => lines.push(line), fetchImpl: gatewayOk(choice('brain', { brain: 0.6, love: 0.3, sleep: 0.05, [NONE_OPTION]: 0.05 })) })
+  }), async url => {
+    const result = await (await post(url, 'how do I stop waking up exhausted')).json();
+    assert.equal(result.mode, 'ai-topic-map');
+    assert.ok(result.citations.length > 0);
+    assert.ok(result.citations.every(citation => ['brain', 'love'].includes(citation.guest)), 'jev decides the route in primary mode');
+    const [log] = await waitForLines(lines, 1);
+    assert.equal(log.mode, 'primary');
+    assert.equal(log.decided, 'jev');
+    assert.deepEqual(log.jev, ['brain', 'love'], 'sleep at 0.05 is below the serving floor');
+    assert.deepEqual(log.jevProbs, { brain: 0.6, love: 0.3 }, 'served labels carry their belief mass for audit');
+    // Serverless freezes the instance at response end, so a success-path comparison
+    // chained on nano would never be written; nano fields are null, not awaited.
+    assert.equal(log.nano, null);
+    assert.equal(log.agreement, null);
+    assert.equal(log.error, null);
+    assert.equal(nanoCalls.length, 1, 'nano still starts in parallel as the instant fallback');
+  });
+});
+
+test('jev primary abstaining serves zero labels instead of the nano route', async () => {
+  const lines = [];
+  await withServer(demoOptions({
+    fetchImpl: nanoReturns(['sleep']),
+    jev: primaryJev({ log: line => lines.push(line), fetchImpl: gatewayOk(choice(NONE_OPTION, { sleep: 0.2, brain: 0.1, [NONE_OPTION]: 0.7 })) })
+  }), async url => {
+    const result = await (await post(url, 'how do I stop waking up exhausted')).json();
+    assert.notEqual(result.mode, 'ai-topic-map', 'an abstain must not be served as an AI topic route');
+    const [log] = await waitForLines(lines, 1);
+    assert.deepEqual(log.jev, []);
+    assert.equal(log.decided, 'jev', 'abstaining is jev deciding, not a fallback');
+    assert.equal(log.error, null);
+  });
+});
+
+test('a jev primary timeout falls back to the nano route on the same deadline', async () => {
+  const lines = [];
+  await withServer(demoOptions({
+    fetchImpl: nanoReturns(['sleep']),
+    jev: primaryJev({
+      timeoutMs: 25, log: line => lines.push(line),
+      fetchImpl: (_url, { signal }) => new Promise((_, reject) => signal.addEventListener('abort', () => reject(Object.assign(new Error('aborted'), { name: 'AbortError' }))))
+    })
+  }), async url => {
+    const result = await (await post(url, 'how do I stop waking up exhausted')).json();
+    assert.equal(result.mode, 'ai-topic-map');
+    assert.ok(result.citations.every(citation => citation.guest === 'sleep'), 'nano decides when jev times out');
+    const [log] = await waitForLines(lines, 1);
+    assert.equal(log.mode, 'primary');
+    assert.equal(log.error, 'timeout');
+    assert.equal(log.decided, 'nano');
+    assert.deepEqual(log.jev, []);
+    assert.deepEqual(log.nano, ['sleep']);
+  });
+});
+
+test('jev primary falls back to nano on invalid output, a gateway error, and a missing key', async () => {
+  const cases = [
+    { name: 'invalid-output', jev: { fetchImpl: gatewayOk(choice('cryptocurrency', { cryptocurrency: 0.9, [NONE_OPTION]: 0.1 })) } },
+    { name: 'http-500', jev: { fetchImpl: async () => new Response('boom', { status: 500 }) } },
+    { name: 'no-key', jev: { apiKey: '', fetchImpl: async () => { throw new Error('the gateway must not be called without a key'); } } }
+  ];
+  for (const { name, jev } of cases) {
+    const lines = [];
+    await withServer(demoOptions({
+      fetchImpl: nanoReturns(['sleep']),
+      jev: primaryJev({ ...jev, log: line => lines.push(line) })
+    }), async url => {
+      const result = await (await post(url, 'how do I stop waking up exhausted')).json();
+      assert.equal(result.mode, 'ai-topic-map', `${name}: the nano path still serves`);
+      assert.ok(result.citations.every(citation => citation.guest === 'sleep'), `${name}: nano decides`);
+      const [log] = await waitForLines(lines, 1);
+      assert.equal(log.error, name, `${name}: the failure kind is recorded`);
+      assert.equal(log.mode, 'primary');
+      assert.equal(log.decided, 'nano');
+      assert.deepEqual(log.nano, ['sleep']);
+    });
+  }
+});
+
+test('shadow mode is unchanged by the primary path and an unknown mode stays shadow', async () => {
+  // Jev picks brain in both cases; the shadow must never reach the response.
+  const shadowFetch = gatewayOk(choice('brain', { brain: 0.8, sleep: 0.15, [NONE_OPTION]: 0.05 }));
+  for (const mode of ['shadow', undefined, 'PRIMARY-ish']) {
+    const lines = [];
+    await withServer(demoOptions({
+      fetchImpl: nanoReturns(['sleep']),
+      jev: { enabled: true, mode, apiKey: 'gateway-key', timeoutMs: 650, log: line => lines.push(line), fetchImpl: shadowFetch }
+    }), async url => {
+      const result = await (await post(url, 'how do I stop waking up exhausted')).json();
+      assert.ok(result.citations.every(citation => citation.guest === 'sleep'), `mode ${mode}: nano decides in shadow mode`);
+      const [log] = await waitForLines(lines, 1);
+      assert.equal(log.mode, undefined, `mode ${mode}: the shadow log shape is untouched`);
+      assert.equal(log.decided, undefined);
+      // Shadow keeps its relative ranking: sleep stays above the abstain option.
+      assert.deepEqual(log.jev, ['brain', 'sleep']);
+    });
+  }
+});
+
+test('JEV_ENABLED=false stays a no-op even with JEV_MODE=primary', async () => {
+  let gatewayCalls = 0;
+  const lines = [];
+  let baseline;
+  await withServer(demoOptions({ fetchImpl: nanoReturns(['sleep']) }), async url => {
+    baseline = await (await post(url, 'how do I stop waking up exhausted')).json();
+  });
+  await withServer(demoOptions({
+    fetchImpl: nanoReturns(['sleep']),
+    jev: { enabled: false, mode: 'primary', apiKey: 'gateway-key', timeoutMs: 650, log: line => lines.push(line), fetchImpl: async () => { gatewayCalls++; return new Response('{}'); } }
+  }), async url => {
+    assert.deepEqual(await (await post(url, 'how do I stop waking up exhausted')).json(), baseline);
+    await new Promise(resolve => setTimeout(resolve, 150));
+    assert.equal(gatewayCalls, 0);
+    assert.equal(lines.length, 0);
+  });
+});
+
+test('the default jev config is shadow mode and disabled when JEV_ENABLED is unset', async () => {
+  assert.equal(process.env.JEV_MODE, undefined);
   assert.equal(process.env.JEV_ENABLED, undefined);
   let gatewayCalls = 0;
   const originalFetch = globalThis.fetch;

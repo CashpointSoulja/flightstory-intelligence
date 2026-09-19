@@ -201,6 +201,57 @@ function jevShadow(query, graph, nanoPromise, nanoStart, config) {
   }).catch(() => {});
 }
 
+// JEV_MODE=primary: Jev decides the route and the nano router becomes its silent
+// fallback. Both calls start together, so a Jev failure costs no extra latency (the nano
+// promise is already in flight). The returned promise has exactly the nano promise's
+// contract - graph nodes, and on fallback the nano promise itself, rejection included -
+// so the call sites' existing error handling is untouched.
+//
+// Logging respects the serverless freeze: anything chained on the nano promise after a
+// Jev success would run after the response is sent and be silently dropped (proven on
+// production by the shadow-mode dark launch). So on success Jev's decision and belief
+// probabilities are logged immediately, before the labels are returned. Only on
+// fallback does the log wait for nano - the caller awaits the nano promise, so that
+// comparison lands before the response and survives.
+function jevPrimary(query, graph, nanoPromise, nanoStart, config) {
+  const labels = graph?.nodes?.map(node => node.label) ?? [];
+  const byLabel = new Map((graph?.nodes ?? []).map(node => [normalizedName(node.label), node]));
+  const nano = nanoPromise.then(
+    nodes => ({ topics: nodes.map(node => node.label), ms: Date.now() - nanoStart }),
+    () => ({ topics: [], ms: Date.now() - nanoStart })
+  );
+  const fallback = reason => {
+    console.error(`Jev primary fallback to nano: ${reason}`);
+    return nanoPromise;
+  };
+  return import('./jev-shadow.mjs').then(async mod => {
+    const result = await mod.runJevShadow(query, labels, { ...config, mode: 'primary' });
+    if (result.error) {
+      nano.then(nanoResult => config.log(mod.shadowLogLine({
+        query, nano: nanoResult.topics, jev: result.topics,
+        nanoMs: nanoResult.ms, jevMs: result.latencyMs, error: result.error,
+        mode: 'primary', decided: 'nano'
+      }))).catch(() => {});
+      return fallback(result.error);
+    }
+    config.log(mod.shadowLogLine({
+      query, nano: null, jev: result.topics, jevProbs: result.probs,
+      nanoMs: null, jevMs: result.latencyMs,
+      mode: 'primary', decided: 'jev'
+    }));
+    // Labels are matched back to graph nodes the same way the nano route does it.
+    return result.topics.map(label => byLabel.get(normalizedName(label))).filter(Boolean);
+  }, () => fallback('module load failed'));
+}
+
+// The only entry point the request path uses: returns the promise of nodes to serve.
+// Disabled or shadow mode serves the nano promise unchanged.
+function jevRoute(query, graph, nanoPromise, nanoStart, config) {
+  if (config?.enabled && config.mode === 'primary') return jevPrimary(query, graph, nanoPromise, nanoStart, config);
+  jevShadow(query, graph, nanoPromise, nanoStart, config);
+  return nanoPromise;
+}
+
 function excerptPassWillCallOpenAI(query, items, boostItem) {
   const ranking = rankEvidence(query, items, boostItem);
   if (!ranking.contentWordCount && !ranking.guestScoped) return false;
@@ -483,6 +534,8 @@ const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/cs
 
 export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, loadViralityScores = loadVirality, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL), jev = {
   enabled: ['true', '1'].includes(String(process.env.JEV_ENABLED || '').toLowerCase()),
+  // Anything other than an explicit "primary" (including unset) stays in shadow mode.
+  mode: String(process.env.JEV_MODE || '').toLowerCase() === 'primary' ? 'primary' : 'shadow',
   apiKey: process.env.AI_GATEWAY_API_KEY || '',
   fetchImpl: fetch,
   timeoutMs: JEV_SHADOW_TIMEOUT_MS,
@@ -697,8 +750,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           .then(graph => {
             const nanoStart = Date.now();
             const routed = searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name });
-            jevShadow(query.trim(), graph, routed, nanoStart, jev);
-            return routed;
+            return jevRoute(query.trim(), graph, routed, nanoStart, jev);
           })
           .catch(error => {
             if ([400, 404].includes(error?.status)) routeModelState.failed = true;
@@ -727,9 +779,9 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
           const nanoStart = Date.now();
           const routed = searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name });
           // searchTopicsAI returns [] without calling out when there is no key; only
-          // shadow the invocations that actually route.
-          if (openAIKey) jevShadow(query.trim(), graph, routed, nanoStart, jev);
-          try { aiNodes = await routed; }
+          // shadow (or hand over to Jev) the invocations that actually route.
+          const decided = openAIKey ? jevRoute(query.trim(), graph, routed, nanoStart, jev) : routed;
+          try { aiNodes = await decided; }
           catch (error) {
             if ([400, 404].includes(error?.status)) routeModelState.failed = true;
             console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`);
