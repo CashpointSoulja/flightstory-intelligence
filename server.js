@@ -175,6 +175,32 @@ async function searchTopicsAI(query, { apiKey, fetchImpl = fetch, timeoutMs = 12
   return picked;
 }
 
+// Jev shadow A/B (JEV_ENABLED=false by default, a strict no-op when disabled: the
+// shadow module is not even imported). When enabled it scores alongside the nano topic
+// router on the same cache misses, runs concurrently, and is never awaited before the
+// response is sent. The nano router's labels stay the only ones used, so there is no
+// user-visible change; the only output is one line of JSON per invocation.
+const JEV_SHADOW_TIMEOUT_MS = 650;
+function jevShadow(query, graph, nanoPromise, nanoStart, config) {
+  if (!config?.enabled) return;
+  const labels = graph?.nodes?.map(node => node.label) ?? [];
+  const nano = nanoPromise.then(
+    nodes => ({ topics: nodes.map(node => node.label), ms: Date.now() - nanoStart }),
+    () => ({ topics: [], ms: Date.now() - nanoStart })
+  );
+  const jev = import('./jev-shadow.mjs').then(
+    async mod => ({ mod, result: await mod.runJevShadow(query, labels, config) }),
+    () => null
+  );
+  Promise.all([nano, jev]).then(([nanoResult, outcome]) => {
+    if (!outcome) return void console.error('Jev shadow skipped: module load failed');
+    config.log(outcome.mod.shadowLogLine({
+      query, nano: nanoResult.topics, jev: outcome.result.topics,
+      nanoMs: nanoResult.ms, jevMs: outcome.result.latencyMs, error: outcome.result.error
+    }));
+  }).catch(() => {});
+}
+
 function excerptPassWillCallOpenAI(query, items, boostItem) {
   const ranking = rankEvidence(query, items, boostItem);
   if (!ranking.contentWordCount && !ranking.guestScoped) return false;
@@ -455,7 +481,13 @@ async function body(request) {
 function send(response, status, data, type = 'application/json') { response.writeHead(status, { 'content-type': `${type}; charset=utf-8`, 'cache-control': 'no-store' }); response.end(type === 'application/json' ? JSON.stringify(data) : data); }
 const types = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.png': 'image/png' };
 
-export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, loadViralityScores = loadVirality, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL) } = {}) {
+export function createServer({ search, mode = searchAccessMode, workspaceId = flightstoryWorkspaceId, insforge = { url: insforgeUrl, anonKey: insforgeAnonKey }, authorizeWorkspace = verifyWorkspaceMember, workspaceSearch = searchWorkspaceCorpus, loadIndex = loadPrivateIndex, loadDemo = loadDemoIndex, loadViralityScores = loadVirality, workspaceQuota = consumeWorkspaceSearchQuota, workspaceOps = workspaceOperations, openAIKey = process.env.OPENAI_API_KEY, fetchImpl = fetch, openAITimeoutMs = 12_000, limit = 20, windowMs = 60_000, now = Date.now, vercel = Boolean(process.env.VERCEL), jev = {
+  enabled: ['true', '1'].includes(String(process.env.JEV_ENABLED || '').toLowerCase()),
+  apiKey: process.env.AI_GATEWAY_API_KEY || '',
+  fetchImpl: fetch,
+  timeoutMs: JEV_SHADOW_TIMEOUT_MS,
+  log: line => console.log(line)
+} } = {}) {
   const hits = new Map();
   const publicRoot = resolve(root, 'public');
   const server = http.createServer(async (request, response) => {
@@ -662,7 +694,12 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
       if (effectiveMode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items, boostItem)) {
         topicGraphPromise ??= readFile(join(root, 'public', 'topic-graph.json'), 'utf8').then(JSON.parse);
         topicPromise = topicGraphPromise
-          .then(graph => searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }))
+          .then(graph => {
+            const nanoStart = Date.now();
+            const routed = searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name });
+            jevShadow(query.trim(), graph, routed, nanoStart, jev);
+            return routed;
+          })
           .catch(error => {
             if ([400, 404].includes(error?.status)) routeModelState.failed = true;
             console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`);
@@ -687,7 +724,12 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         let aiNodes;
         if (topicPromise) aiNodes = await topicPromise;
         else {
-          try { aiNodes = await searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name }); }
+          const nanoStart = Date.now();
+          const routed = searchTopicsAI(query.trim(), { apiKey: openAIKey, fetchImpl, timeoutMs: demoTimeoutMs, graph, modelOverride: routeModelState.failed ? model : routeModelState.name });
+          // searchTopicsAI returns [] without calling out when there is no key; only
+          // shadow the invocations that actually route.
+          if (openAIKey) jevShadow(query.trim(), graph, routed, nanoStart, jev);
+          try { aiNodes = await routed; }
           catch (error) {
             if ([400, 404].includes(error?.status)) routeModelState.failed = true;
             console.error(`OpenAI topic route fallback: ${error?.name || 'Error'} ${error?.status || ''} ${error?.message || ''}`);
