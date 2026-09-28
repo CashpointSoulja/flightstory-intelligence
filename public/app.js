@@ -182,17 +182,17 @@ function announceClipSaved(item, duration) {
     toast.setAttribute('role', 'status');
     document.body.append(toast);
   }
-  toast.innerHTML = `<span class="clip-toast-star" aria-hidden="true">★</span><span><b>${duration}s clip saved</b>${escapeHtml(item.guest || item.episode || '')} · ${formatTime(item.start)}</span><a href="#clips">View saved</a>`;
+  toast.innerHTML = `<span class="clip-toast-star" aria-hidden="true">★</span><span><b>${Math.round(item.end - item.start) || duration}s clip saved</b>${escapeHtml(item.guest || item.episode || '')} · ${formatTime(item.start)}</span><a href="#clips">View saved</a>`;
   toast.classList.add('show');
   clearTimeout(clipToastTimer);
   clipToastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
 }
 
-function markCitationSaved(id) {
+function markCitationSaved(id, saved = true) {
   document.querySelectorAll('[data-save-citation]').forEach(button => {
     if (button.dataset.saveCitation !== String(id)) return;
-    button.classList.add('is-saved');
-    button.innerHTML = '<i aria-hidden="true">★</i>SAVED';
+    button.classList.toggle('is-saved', saved);
+    button.innerHTML = saved ? '<i aria-hidden="true">★</i>SAVED' : '<i aria-hidden="true">+</i>CREATE CLIP';
   });
 }
 
@@ -351,6 +351,7 @@ clipList.addEventListener('click', event => {
   if (!button) return;
   if (editingClipId) return;
   queue = removeSavedItem(queue, button.dataset.removeSaved);
+  if (!queue.some(item => String(item.id) === button.dataset.removeSaved)) markCitationSaved(button.dataset.removeSaved, false);
   persistQueue('Draft removed from this device.');
   renderQueue();
   if (selectedEvidence) selectEvidence(selectedEvidence);
