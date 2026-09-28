@@ -3,6 +3,8 @@ import { formatTime, watchUrl } from './archive-ui.js';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[character]));
 const seconds = ms => (ms / 1000).toFixed(3).replace(/\.?0+$/, '');
+const MIN_CLIP_START_MS = 120_000;
+const floorRangeMs = (startMs, endMs) => startMs >= MIN_CLIP_START_MS ? { startMs, endMs } : { startMs: MIN_CLIP_START_MS, endMs: MIN_CLIP_START_MS + endMs - startMs };
 const secondsToMs = value => {
   if (value === null || value === undefined || value === '') return null;
   const scaled = Number(value) * 1000;
@@ -47,8 +49,7 @@ export function citationClipInput(citation) {
   if (!Number.isSafeInteger(startMs) || startMs < 0 || !Number.isSafeInteger(endMs) || endMs <= startMs) return null;
   return {
     segmentId: citation.id,
-    startMs,
-    endMs,
+    ...floorRangeMs(startMs, endMs),
     title: String(citation.episode || '').slice(0, 200),
     hook: String(citation.quote || '').slice(0, 2000)
   };
@@ -324,7 +325,7 @@ export function rangeEditInput(startSeconds, endSeconds, clip) {
   const startMs = secondsToMs(startSeconds);
   const endMs = secondsToMs(endSeconds);
   if (startMs === null || endMs === null || startMs < 0 || endMs <= startMs) return null;
-  return { startMs, endMs, title: clip.title || null, hook: clip.hook || null };
+  return { ...floorRangeMs(startMs, endMs), title: clip.title || null, hook: clip.hook || null };
 }
 
 export function sourceHeading(citation) {

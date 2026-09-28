@@ -31,9 +31,11 @@ styles.textContent = `
 styles.textContent += '@media(prefers-reduced-motion:reduce){.universe-inspector{transition:none}}';
 styles.textContent += '.universe-stage{background:#f1f1ef}.universe-node-label{color:rgba(17,17,19,.72);text-shadow:0 1px 8px rgba(255,255,255,.9)}.universe-node-label--row{border-left-color:rgba(238,98,91,.4)}.universe-node-label--row:hover{color:#111113;border-left-color:#ee625b}.universe-heading{color:#111113}.universe-heading span,.universe-hint,.universe-foot small{color:#77777b}.universe-map-key{color:rgba(17,17,19,.72)}.universe-controls button{border-color:rgba(17,17,19,.18);background:rgba(255,255,255,.78);color:#55545a}.universe-controls button:hover,.universe-controls button:focus-visible{border-color:#ee625b;color:#111113}.universe-inspector{background:rgba(255,255,255,.9);border-left-color:#ee625b}.universe-inspector strong{color:#111113}.universe-inspector button{color:#c84b46}.universe-access-list{background:rgba(255,255,255,.94);border-color:#dededb}.universe-access-row{border-bottom-color:rgba(17,17,19,.1)}.universe-access-row button,.universe-access-row a{color:#77777b}.universe-access-row button[aria-pressed="true"],.universe-access-row button:hover,.universe-access-row button:focus-visible,.universe-access-row a:hover,.universe-access-row a:focus-visible{color:#111113;background:rgba(238,98,91,.1)}';
 document.head.appendChild(styles);
-host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">BROWSE THE ARCHIVE MAP <span>INDEXING IN PROGRESS</span></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-controls"><button type="button" data-back hidden>← FULL MAP</button><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
+const mapSkeleton = host.querySelector('.map-skeleton');
+host.innerHTML = `<div class="universe-stage"><div class="universe-ui"><div class="universe-heading">BROWSE THE ARCHIVE MAP <span>LOADING MAP…</span></div><div class="universe-hint">DRAG TO ORBIT · SCROLL TO ZOOM · CLICK A NODE</div><div class="universe-controls"><button type="button" data-back hidden>← FULL MAP</button><button type="button" data-reset>RESET VIEW</button><button type="button" data-focus>FOCUS EVIDENCE</button></div><div class="universe-inspector" hidden tabindex="-1" role="region" aria-label="Selected archive node" aria-live="polite"><strong></strong><small></small><button type="button" data-open hidden>Inspect source ↗</button></div></div></div>`;
 
 const stage = host.querySelector('.universe-stage');
+if (mapSkeleton) stage.append(mapSkeleton);
 const canvas = document.createElement('canvas');
 canvas.setAttribute('role', 'img');
 canvas.setAttribute('aria-label', '3D archive map. Use Browse featured archive nodes to select a topic, video, or citation; use its separate source link to open the original.');
@@ -501,3 +503,13 @@ if (typeof IntersectionObserver === 'function') {
 }
 rendererReady = true;
 requestRender();
+if (mapSkeleton) {
+  if (graph.nodes.length) {
+    requestAnimationFrame(() => stage.classList.add('is-ready'));
+    setTimeout(() => mapSkeleton.remove(), 900);
+  } else {
+    stage.classList.add('is-unavailable');
+    const skeletonStatus = mapSkeleton.querySelector('.map-skeleton-status');
+    if (skeletonStatus) skeletonStatus.textContent = 'Map unavailable right now - search still works.';
+  }
+}

@@ -30,7 +30,7 @@ if (config.searchAccessMode === 'workspace') {
     ? await insforge.auth.getCurrentUser().catch(() => ({ data: { user: null } }))
     : { data: { user: null } };
   if (data?.user) {
-    if (hint) hint.firstChild.textContent = 'Full-corpus workspace search active. GPT Spark sends your question and matched excerpts to OpenAI. ';
+    if (hint) hint.firstChild.textContent = 'Full-corpus workspace search active. Your question and matched excerpts are sent to the AI search step. ';
     window.flightstoryAuth = { searchAccessMode: config.searchAccessMode, user: data.user, getAccessToken: () => insforge.getHttpClient().getValidAccessToken() };
     const { initSharedReview } = await import('./shared-review.js');
     await initSharedReview(window.flightstoryAuth);
@@ -44,5 +44,5 @@ if (config.searchAccessMode === 'workspace') {
   }
   }
 } else if (hint) {
-  hint.firstChild.textContent = 'Search indexed conversations for moments to publish. GPT Spark · fast OpenAI pass when configured. ';
+  hint.firstChild.textContent = 'Search indexed conversations for moments to publish. ';
 }

@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, loadSavedItems, nearestNodeWithinRadius, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
+import { floorClipWindow, formatTime, graphLayerVisibility, graphNodeIsVisible, isValidClipRange, isValidQuery, MIN_CLIP_START_S, startsInContent, loadSavedItems, nearestNodeWithinRadius, persistSavedItems, removeSavedItem, watchUrl } from '../public/archive-ui.js';
 import { boardClipsPageUrl, canSaveSharedDraft, citationClipInput, isValidClipPage, mergeClipPage, rangeEditInput, setReviewButtonsDisabled, sourceHeading } from '../public/shared-review.js';
 
 test('formats whole and fractional seconds as readable timestamps', () => {
@@ -195,7 +195,7 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.match(app, /result\.mode === 'local-demo' \? 'LOCAL MATCH · DEMO EXCERPTS'/);
   assert.match(app, /const answer = result\.mode === 'local-demo' \? '' : Array\.isArray\(result\.claims\)/);
   assert.match(app, /\['ai_match', 'ai-match'\]\.includes\(result\.mode\) \? 'AI MATCH · EXCERPTS ONLY'/);
-  assert.match(app, /result\.mode === 'openai' \? 'GPT SPARK · FAST AI PASS'/);
+  assert.match(app, /result\.mode === 'openai' \? 'AI SEARCH · VERIFIED QUOTES'/);
   assert.match(app, /claim\.citationIds\.map\(id =>/);
   assert.match(app, /data-claim-source=/);
   assert.match(app, /content\.querySelectorAll\('\[data-claim-source\]'\)/);
@@ -210,9 +210,10 @@ test('describes AI results, local saves, and the distinct archive count scopes h
   assert.doesNotMatch(app, /LIVE CONNECTION/);
   assert.match(graph, /ARCHIVE MAP/);
   assert.doesNotMatch(graph, /EVIDENCE UNIVERSE/);
-  assert.match(html, /GPT Spark finds moments to publish/);
+  assert.match(html, /Search indexed conversations for moments to publish/);
   assert.match(auth, /Search the public archive demo instantly - no sign-in needed\. FlightStory team: sign in for the full corpus/);
-  assert.match(auth, /Full-corpus workspace search active\. GPT Spark sends your question and matched excerpts to OpenAI/);
+  assert.match(auth, /Full-corpus workspace search active\. Your question and matched excerpts are sent to the AI search step/);
+  for (const source of [html, app, auth]) assert.doesNotMatch(source.replace(/result\.mode === 'openai'/g, ''), /GPT|OpenAI/i);
   assert.match(auth, /data-demo-search-count/);
   assert.match(auth, /demoSearchCount\.hidden = true/);
   assert.match(app, /Private source · public video link unavailable/);
@@ -379,4 +380,20 @@ test('intro-montage citations remap to the real in-episode utterance', async () 
   const psych = demo.segments.find(s => s.id === 'AcK_zgJjnoo:0');
   assert.ok(psych.start > 2000, 'demo citation points into the episode body');
   assert.equal(psych.introRemapped, true);
+});
+
+test('clip windows never start before 2:00 and keep their requested length', async () => {
+  assert.equal(MIN_CLIP_START_S, 120);
+  assert.deepEqual(floorClipWindow(-7.5, 22.5), { start: 120, end: 150 });
+  assert.deepEqual(floorClipWindow(100, 190), { start: 120, end: 210 });
+  assert.deepEqual(floorClipWindow(300, 330), { start: 300, end: 330 });
+  assert.equal(startsInContent({ start: 0 }), false);
+  assert.equal(startsInContent({ start: 119.9 }), false);
+  assert.equal(startsInContent({ start: 120 }), true);
+  assert.equal(citationClipInput({ id: '11111111-1111-4111-8111-111111111111', start: 5, end: 20, episode: 'E', quote: 'Q' }).startMs, 120000);
+  assert.deepEqual(rangeEditInput('10', '40', { title: 'T', hook: 'H' }), { startMs: 120000, endMs: 150000, title: 'T', hook: 'H' });
+  const app = await readFile(new URL('../public/app.js', import.meta.url), 'utf8');
+  assert.doesNotMatch(app, /Math\.max\(0, center/);
+  assert.match(app, /floorClipWindow\(center - requested \/ 2, center \+ requested \/ 2\)/);
+  assert.match(app, /\.filter\(startsInContent\)/);
 });

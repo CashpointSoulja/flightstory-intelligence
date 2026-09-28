@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import http from 'node:http';
+import { readFile } from 'node:fs/promises';
 import handler, { canEditClip, canReviewClip, createServer } from '../server.js';
 
 async function withServer(options, run) {
@@ -308,7 +309,7 @@ test('public demo finds the best conversation starter for singular and plural ic
       const result = await response.json();
       assert.equal(result.mode, 'local-demo');
       assert.deepEqual(result.citations.map(item => item.id), ['vanessa-highlight']);
-      assert.deepEqual([result.citations[0].start, result.citations[0].end], [66, 81]);
+      assert.deepEqual([result.citations[0].start, result.citations[0].end], [562.56, 601.52]);
     }
     const unrelated = await post(url, JSON.stringify({ query: 'What are good Mars mining stocks?' }));
     const result = await unrelated.json();
@@ -319,8 +320,8 @@ test('public demo finds the best conversation starter for singular and plural ic
 
 test('scopes named guest questions before ranking and keeps explicit comparisons', async () => {
   const corpus = [
-    { id: 'v1', guest: 'Vanessa Van Edwards', episode: 'V episode', quote: 'She notices when people talk too much.', start: 1, end: 2 },
-    { id: 'j1', guest: 'Professor Jiang', episode: 'J episode', quote: 'He describes a launch process.', start: 3, end: 4 }
+    { id: 'v1', guest: 'Vanessa Van Edwards', episode: 'V episode', quote: 'She notices when people talk too much.', start: 121, end: 122 },
+    { id: 'j1', guest: 'Professor Jiang', episode: 'J episode', quote: 'He describes a launch process.', start: 123, end: 124 }
   ];
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
@@ -366,7 +367,7 @@ test('public demo uses OpenAI when configured and labels local fallback honestly
 test('sends only meaningful matches to OpenAI while keeping guest-only searches', async () => {
   const prompts = [];
   const corpus = [
-    { id: 'q2cg1gEYWJQ:0', episode: 'Vanessa Van Edwards', guest: 'Vanessa Van Edwards', quote: 'How do you know you talk too much? First thing is non-verbal cues.', start: 0, end: 18 },
+    { id: 'q2cg1gEYWJQ:0', episode: 'Vanessa Van Edwards', guest: 'Vanessa Van Edwards', quote: 'How do you know you talk too much? First thing is non-verbal cues.', start: 2754.24, end: 2771.36 },
     { id: 'q2cg1gEYWJQ:782', episode: 'Vanessa Van Edwards', guest: 'Vanessa Van Edwards', quote: 'They want to hear about progress too.', start: 782, end: 790 }
   ];
   await withServer({
@@ -401,7 +402,7 @@ test('falls back locally when the OpenAI request times out', async () => {
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
     workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
-    workspaceSearch: async () => ({ availableCount: 1, segments: [{ id: 'segment-1', guest: 'Vanessa Van Edwards', episode: 'Public interview', quote: 'How do you know you talk too much? First thing is non-verbal cues.', start: 0, end: 18 }] }),
+    workspaceSearch: async () => ({ availableCount: 1, segments: [{ id: 'segment-1', guest: 'Vanessa Van Edwards', episode: 'Public interview', quote: 'How do you know you talk too much? First thing is non-verbal cues.', start: 2754.24, end: 2771.36 }] }),
     openAIKey: 'test-key',
     openAITimeoutMs: 20,
     fetchImpl: (_url, { signal }) => new Promise((_, reject) => {
@@ -418,7 +419,7 @@ test('falls back locally when the OpenAI request times out', async () => {
 });
 
 test('workspace search requires a valid session and exact workspace membership', async () => {
-  const corpus = [{ id: 'private-1', guest: 'Casey', episode: 'Private episode', quote: 'A private launch moment.', start: 5, end: 9 }];
+  const corpus = [{ id: 'private-1', guest: 'Casey', episode: 'Private episode', quote: 'A private launch moment.', start: 125, end: 129 }];
   const options = {
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async token => token === 'valid-token' ? 'authorized' : token === 'not-a-member' ? 'forbidden' : 'unauthenticated',
@@ -462,7 +463,7 @@ test('workspace search refuses absent corpus but treats no match as a grounded e
 });
 
 test('workspace search falls back to the bundled private index when the corpus function is not deployed', async () => {
-  const segment = { id: 'seg-1', guest: 'Casey', episode: 'Indexed interview', quote: 'The launch moved to Friday after the storm.', start: 5, end: 9 };
+  const segment = { id: 'seg-1', guest: 'Casey', episode: 'Indexed interview', quote: 'The launch moved to Friday after the storm.', start: 125, end: 129 };
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized', workspaceQuota: async () => ({ allowed: true, retryAfterSeconds: 0 }),
@@ -509,7 +510,7 @@ test('uncited model answers fall back to supported local evidence', async () => 
 });
 
 test('workspace synthesis requires and verifies one exact supporting quote and source ID', async () => {
-  const segment = { id: 'segment-1', guest: 'Casey', episode: 'Private interview', quote: 'The launch moved to Friday.', start: 5, end: 9 };
+  const segment = { id: 'segment-1', guest: 'Casey', episode: 'Private interview', quote: 'The launch moved to Friday.', start: 125, end: 129 };
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
@@ -541,7 +542,7 @@ test('workspace synthesis requires and verifies one exact supporting quote and s
 });
 
 test('workspace synthesis falls back if a source ID and its supporting quote do not match', async () => {
-  const segment = { id: 'segment-1', guest: 'Casey', episode: 'Private interview', quote: 'The launch moved to Friday.', start: 5, end: 9 };
+  const segment = { id: 'segment-1', guest: 'Casey', episode: 'Private interview', quote: 'The launch moved to Friday.', start: 125, end: 129 };
   await withServer({
     mode: 'workspace', workspaceId: 'workspace-test', insforge: { url: 'https://example.insforge.app', anonKey: 'anon' },
     authorizeWorkspace: async () => 'authorized',
@@ -796,10 +797,10 @@ test('never serves the legacy transcript search index when the file exists', asy
 
 test('virality boost reorders equal-relevance local results toward proven clip potential', async () => {
   const segments = [
-    { id: 'a', episodeId: 'epA', episode: 'Show A', guest: 'Guest A', videoId: 'vidA0000001', start: 100, end: 109, quote: 'the zephyr protocol explained plainly', searchText: 'Show A the zephyr protocol explained plainly' },
-    { id: 'b', episodeId: 'epB', episode: 'Show B', guest: 'Guest B', videoId: 'vidB0000002', start: 100, end: 109, quote: 'the zephyr protocol explained plainly', searchText: 'Show B the zephyr protocol explained plainly' }
+    { id: 'a', episodeId: 'epA', episode: 'Show A', guest: 'Guest A', videoId: 'vidA0000001', start: 300, end: 309, quote: 'the zephyr protocol explained plainly', searchText: 'Show A the zephyr protocol explained plainly' },
+    { id: 'b', episodeId: 'epB', episode: 'Show B', guest: 'Guest B', videoId: 'vidB0000002', start: 300, end: 309, quote: 'the zephyr protocol explained plainly', searchText: 'Show B the zephyr protocol explained plainly' }
   ];
-  const viralMap = new Map([['vidB0000002', [{ start: 100, end: 160, score: 7, tier: 'STRONG' }]]]);
+  const viralMap = new Map([['vidB0000002', [{ start: 300, end: 360, score: 7, tier: 'STRONG' }]]]);
   await withServer({ mode: 'demo', openAIKey: '', loadDemo: async () => segments, loadViralityScores: async () => viralMap }, async url => {
     const result = await (await post(url, JSON.stringify({ query: 'zephyr protocol' }))).json();
     assert.equal(result.citations.length, 2);
@@ -822,4 +823,35 @@ test('citations carry virality tier for the clip badge when a scored window matc
     assert.equal(result.citations[0].virality.tier, 'TOP CLIP');
     assert.equal(result.citations[0].virality.score, 9);
   });
+});
+
+test('no citation starts inside the cold-open teaser (first 2:00) in any search mode', async () => {
+  const demo = [
+    { id: 'teaser:0', episode: 'Episode', guest: 'Eric Weinstein', videoId: 'teaser', quote: 'Epstein was an intelligence asset.', start: 0, end: 15.16 },
+    { id: 'teaser:119', episode: 'Episode', guest: 'Eric Weinstein', videoId: 'teaser', quote: 'Epstein was running an operation.', start: 119.9, end: 130 },
+    { id: 'teaser:900', episode: 'Episode', guest: 'Eric Weinstein', videoId: 'teaser', quote: 'Epstein was not who people think.', start: 900, end: 915 }
+  ];
+  let searched;
+  await withServer({ loadDemo: async () => demo, search: async (_query, { items }) => { searched = items; return null; } }, async url => {
+    const result = await (await post(url, JSON.stringify({ query: 'What did Eric Weinstein say about Epstein?' }))).json();
+    assert.deepEqual(searched.map(item => item.id), ['teaser:900']);
+    assert.deepEqual(result.citations.map(item => item.id), ['teaser:900']);
+  });
+  await withServer({ loadDemo: async () => demo, search: async () => ({ answer: 'x', citations: demo, mode: 'openai' }) }, async url => {
+    const result = await (await post(url, JSON.stringify({ query: 'What did Eric Weinstein say about Epstein?' }))).json();
+    assert.ok(result.citations.length && result.citations.every(item => item.start >= 120));
+  });
+  await withServer({ loadDemo: async () => null }, async url => {
+    for (const query of ['What did Vanessa Van Edwards say about talking too much?', 'What is a good icebreaker?', 'loneliness and voice notes']) {
+      const result = await (await post(url, JSON.stringify({ query }))).json();
+      assert.ok(result.citations.every(item => item.start >= 120), query);
+    }
+  });
+});
+
+test('bundled demo index keeps real content for every episode once teasers are dropped', async () => {
+  const demo = JSON.parse(await readFile(new URL('../public/demo-index.json', import.meta.url), 'utf8'));
+  const videos = new Set(demo.segments.map(item => item.videoId));
+  const kept = new Set(demo.segments.filter(item => item.start >= 120).map(item => item.videoId));
+  assert.equal(kept.size, videos.size);
 });
