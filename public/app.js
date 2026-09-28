@@ -182,7 +182,7 @@ function announceClipSaved(item, duration) {
     toast.setAttribute('role', 'status');
     document.body.append(toast);
   }
-  toast.innerHTML = `<span class="clip-toast-star" aria-hidden="true">★</span><span><b>${Math.round(item.end - item.start) || duration}s clip saved</b>${escapeHtml(item.guest || item.episode || '')} · ${formatTime(item.start)}</span><a href="#clips">View saved</a>`;
+  toast.innerHTML = `<span class="clip-toast-star" aria-hidden="true">★</span><span><b>${duration}s clip saved</b>${escapeHtml(item.guest || item.episode || '')} · ${formatTime(item.start)}</span><a href="#clips">View saved</a>`;
   toast.classList.add('show');
   clearTimeout(clipToastTimer);
   clipToastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
@@ -221,9 +221,10 @@ function selectEvidence(item, options = {}) {
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(Math.round(item.start))}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
   evidenceContent.innerHTML = `<div class="evidence-who">${tierChip(item, 'lg')}<span class="guest">${escapeHtml(item.guest || 'Guest not listed').toUpperCase()}</span></div><h3>${escapeHtml(item.episode)}</h3><div class="evidence-stamp"><span>EXACT MOMENT</span><strong>${formatTime(item.start)}</strong><small>to ${formatTime(item.end)}</small></div><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${Boolean(savedClip && Number(savedClip.requestedDuration) === seconds)}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
-    const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
-    const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
-    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${Math.round(clip.end - clip.start) || duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
+    const requested = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
+    const clip = { ...item, start: Math.max(0, center - requested / 2), end: center + requested / 2, requestedDuration: requested, reviewStatus: 'draft' };
+    const duration = Math.round(clip.end - clip.start) || requested;
+    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
   });
   if (item.videoId) {
     const previewStart = savedClip ? Number(savedClip.start) : Number(item.start);
