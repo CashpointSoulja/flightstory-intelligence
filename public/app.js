@@ -20,6 +20,31 @@ const sourceAction = item => {
   return url ? `<a href="${escapeHtml(url)}" target="_blank" rel="noreferrer">WATCH ↗</a>` : '<span class="source-unavailable">Private source · public video link unavailable</span>';
 };
 
+const TIERS = {
+  'TOP CLIP': { key: 'top', rank: 0, label: 'TOP CLIP' },
+  STRONG: { key: 'strong', rank: 1, label: 'STRONG' },
+  SOLID: { key: 'solid', rank: 2, label: 'SOLID' }
+};
+const tierOf = item => (item && item.virality && TIERS[item.virality.tier]) || null;
+const tierChip = (item, size = '') => {
+  const tier = tierOf(item);
+  if (!tier) return '';
+  const score = Number(item.virality.score);
+  return `<span class="tier-chip tier-${tier.key}${size ? ` tier-chip--${size}` : ''}" title="Clip potential ${Number.isFinite(score) ? `${score}/10` : ''}"><b>${tier.label}</b>${Number.isFinite(score) ? `<i>${escapeHtml(String(score))}<small>/10</small></i>` : ''}</span>`;
+};
+const rankByClipPotential = items => items
+  .map((item, order) => ({ item, order, tier: tierOf(item) }))
+  .sort((a, b) => (a.tier ? a.tier.rank : 9) - (b.tier ? b.tier.rank : 9) || (Number(b.item.virality?.score) || 0) - (Number(a.item.virality?.score) || 0) || a.order - b.order)
+  .map(entry => entry.item);
+const tierSummary = items => {
+  const counts = { top: 0, strong: 0, solid: 0 };
+  items.forEach(item => { const tier = tierOf(item); if (tier) counts[tier.key] += 1; });
+  const parts = [[counts.top, 'TOP CLIP', 'top'], [counts.strong, 'STRONG', 'strong'], [counts.solid, 'SOLID', 'solid']].filter(([n]) => n);
+  if (!parts.length) return '';
+  return `<div class="tier-summary">${parts.map(([n, label, key]) => `<span class="tier-count tier-${key}"><b>${n}</b> ${label}</span>`).join('')}<span class="tier-summary-note">Ranked by clip potential</span></div>`;
+};
+const narrowViewport = () => matchMedia('(max-width: 900px)').matches;
+
 // Clip preview: a YouTube player constrained to the clip window so a draft
 // plays only its own section and stops at the out-point.
 let clipPreviewApiPromise = null;
@@ -161,7 +186,7 @@ function selectEvidence(item, options = {}) {
   const saveDisabled = Boolean(editingClipId);
   const url = watchUrl(item);
   const sourceLink = url ? `<a class="watch" href="${escapeHtml(url)}" target="_blank" rel="noreferrer">▶ Watch from ${formatTime(Math.round(item.start))}</a>` : '<p class="source-unavailable">Private source · public video link unavailable</p>';
-  evidenceContent.innerHTML = `<span class="guest">${escapeHtml(item.guest).toUpperCase()}</span>${item.virality && item.virality.score >= 7 ? `<span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''}<h3>${escapeHtml(item.episode)}</h3><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${Boolean(savedClip && Number(savedClip.requestedDuration) === seconds)}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
+  evidenceContent.innerHTML = `<div class="evidence-who">${tierChip(item, 'lg')}<span class="guest">${escapeHtml(item.guest || 'Guest not listed').toUpperCase()}</span></div><h3>${escapeHtml(item.episode)}</h3><div class="evidence-stamp"><span>EXACT MOMENT</span><strong>${formatTime(item.start)}</strong><small>to ${formatTime(item.end)}</small></div><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${Boolean(savedClip && Number(savedClip.requestedDuration) === seconds)}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
@@ -177,7 +202,7 @@ function selectEvidence(item, options = {}) {
 }
 
 function renderResults(result) {
-  current = result.citations || [];
+  current = rankByClipPotential(result.citations || []);
   const isError = result.mode === 'error';
   content.setAttribute('aria-busy', 'false');
   count.textContent = isError ? 'TRY AGAIN' : current.length ? `${current.length} ${current.length === 1 ? 'MOMENT' : 'MOMENTS'}` : 'NO MATCH';
@@ -188,10 +213,15 @@ function renderResults(result) {
       ? `<div class="claim-list">${result.claims.map(claim => `<p class="answer-claim">${escapeHtml(claim.text)} <span class="claim-sources">${claim.citationIds.map(id => { const number = citationNumbers.get(String(id)); return number ? `<button class="claim-source" type="button" data-claim-source="${escapeHtml(id)}" aria-label="Open source ${number}">[${number}]</button>` : ''; }).join(' ')}</span></p>`).join('')}</div>`
       : `<div class="answer">${escapeHtml(result.refusal || result.answer || 'I could not verify that in the indexed archive.')}</div>`
     : `<div class="answer">${escapeHtml(result.answer || '')}</div>`;
-  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${answer}${current.map((item, index) => { const saved = queue.some(savedItem => String(savedItem.id) === String(item.id)); return `<article class="citation" data-id="${escapeHtml(item.id)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">0${index + 1}</span><div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">${item.mapMatch ? 'MAP MATCH' : 'PROVISIONAL'}</span>${item.virality && item.virality.score >= 7 ? ` · <span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''} · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><button class="citation-save" type="button" data-save-citation="${escapeHtml(item.id)}">${saved ? 'SAVED' : 'CREATE CLIP'}</button><span class="citation-arrow">↗</span></article>`; }).join('')}`;
+  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${tierSummary(current)}${answer}${current.map((item, index) => { const saved = queue.some(savedItem => String(savedItem.id) === String(item.id)); const tier = tierOf(item); return `<article class="citation" data-id="${escapeHtml(item.id)}" data-tier="${tier ? tier.key : 'none'}" style="--i:${Math.min(index, 12)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">${String(index + 1).padStart(2, '0')}</span><div><div class="citation-head">${tierChip(item)}<span class="citation-when">▶ ${formatTime(item.start)}</span>${item.guest ? `<span class="citation-guest">${escapeHtml(item.guest)}</span>` : ''}</div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">${item.mapMatch ? 'MAP MATCH' : 'PROVISIONAL'}</span>${item.virality && item.virality.score >= 7 ? ` · <span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''} · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><button class="citation-save" type="button" data-save-citation="${escapeHtml(item.id)}">${saved ? 'SAVED' : 'CREATE CLIP'}</button><span class="citation-arrow">↗</span></article>`; }).join('')}`;
   current.forEach(item => {
     const card = document.querySelector(`[data-id="${item.id}"]`);
     card.addEventListener('click', () => selectEvidence(item));
+    card.addEventListener('click', event => {
+      if (event.target.closest('button, a') || !narrowViewport()) return;
+      const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      document.querySelector('#evidence-panel').scrollIntoView({ behavior, block: 'start' });
+    });
     card.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectEvidence(item); }
     });
@@ -238,8 +268,9 @@ form.addEventListener('submit', async event => {
   document.querySelector('#search-status').textContent = 'Searching public-source archive. Results will appear here.';
   if (evidenceStatus) evidenceStatus.textContent = 'WAITING';
   evidenceContent.className = 'evidence-empty';
-  evidenceContent.innerHTML = '<span>○</span><p>Checking the new question…</p>';
-  content.innerHTML = '<div class="welcome"><div class="welcome-node">◌</div><h3>Following the signal…</h3><p>Searching the indexed conversations and checking the evidence.</p></div>';
+  content.innerHTML = `<div class="search-loading"><p class="search-loading-label"><span class="source-dot"></span>Searching the archive and checking every quote…</p>${'<div class="citation-skeleton" aria-hidden="true"><i></i><span><b></b><b></b><b></b></span></div>'.repeat(3)}</div>`;
+  evidenceContent.innerHTML = '<div class="evidence-skeleton" aria-hidden="true"><b></b><b></b><b></b></div><p>Finding the exact moment…</p>';
+  document.querySelector('#archive').dataset.state = 'active';
   focusResults();
   try {
     const headers = { 'content-type': 'application/json' };
@@ -316,6 +347,13 @@ clipList.addEventListener('submit', event => {
 
 const sampleQuestion = 'What did Vanessa Van Edwards say about talking too much?';
 query.addEventListener('input', () => query.setCustomValidity(''));
+document.addEventListener('keydown', event => {
+  if (event.key !== '/' || event.metaKey || event.ctrlKey || event.altKey) return;
+  const target = event.target;
+  if (target instanceof HTMLElement && (target.isContentEditable || ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName))) return;
+  event.preventDefault();
+  query.focus();
+});
 document.querySelector('#sample-question').addEventListener('click', () => {
   query.value = sampleQuestion;
   query.focus();
