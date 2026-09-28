@@ -239,7 +239,7 @@ function renderResults(result) {
   const isError = result.mode === 'error';
   content.setAttribute('aria-busy', 'false');
   count.textContent = isError ? 'TRY AGAIN' : current.length ? `${current.length} ${current.length === 1 ? 'MOMENT' : 'MOMENTS'}` : 'NO MATCH';
-  const source = isError ? 'ARCHIVE ERROR' : result.mode === 'ai-topic-map' ? 'GPT SPARK · TOPIC MATCH' : result.mode === 'topic-map' ? 'ARCHIVE MAP · TOPIC MATCH' : result.mode === 'local-demo' ? 'LOCAL MATCH · DEMO EXCERPTS' : ['ai_match', 'ai-match'].includes(result.mode) ? 'AI MATCH · EXCERPTS ONLY' : result.mode === 'openai' ? 'GPT SPARK · FAST AI PASS' : 'LOCAL FALLBACK';
+  const source = isError ? 'ARCHIVE ERROR' : result.mode === 'ai-topic-map' ? 'AI SEARCH · TOPIC MATCH' : result.mode === 'topic-map' ? 'ARCHIVE MAP · TOPIC MATCH' : result.mode === 'local-demo' ? 'LOCAL MATCH · DEMO EXCERPTS' : ['ai_match', 'ai-match'].includes(result.mode) ? 'AI MATCH · EXCERPTS ONLY' : result.mode === 'openai' ? 'AI SEARCH · VERIFIED QUOTES' : 'LOCAL FALLBACK';
   const citationNumbers = new Map(current.map((item, index) => [String(item.id), index + 1]));
   const answer = result.mode === 'local-demo' ? '' : Array.isArray(result.claims)
     ? result.claims.length

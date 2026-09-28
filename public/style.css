@@ -301,3 +301,10 @@ footer{display:flex!important;gap:20px;padding:22px max(20px,calc((100vw - 1280p
 .evidence-stamp{flex-wrap:wrap;row-gap:4px}.evidence-stamp span{flex-basis:100%;white-space:nowrap}
 @media(min-width:701px){:root{--gutter:max(clamp(24px,4vw,56px),calc((100vw - 1280px)/2))}.topbar,.chat-home,.thread,.clips,footer{padding-left:var(--gutter);padding-right:var(--gutter)}}
 .clips .clip-actions{justify-content:flex-start}
+/* FlightStory wordmark: fs monogram + Flight (bold) Story (regular) */
+.brand{gap:10px;font:400 17px/1 var(--display);letter-spacing:-.03em;text-transform:none;color:var(--ink)}
+.brand img.brand-mark{display:block;width:28px;height:28px;border-radius:0;background:none;object-fit:contain}
+.brand-word b{font-weight:800}
+.brand-word i{margin-left:6px;color:var(--muted);font-style:normal;font-weight:400;letter-spacing:-.02em}
+@media(max-width:700px){.brand{font-size:16px}.brand img.brand-mark{width:24px;height:24px}.brand-word i{display:inline}}
+@media(max-width:360px){.brand-word i{display:none}}
