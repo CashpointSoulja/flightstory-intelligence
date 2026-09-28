@@ -159,8 +159,41 @@ function renderQueue() {
     const actions = editingClipId
       ? editing ? sourceAction({ ...item, start }) : '<span class="editing-lock">Finish the open edit first.</span>'
       : `${sourceAction({ ...item, start })}<button class="edit-cut" type="button" data-edit-saved="${escapeHtml(id)}" aria-expanded="false">EDIT CUT</button><button class="mark-reviewed" type="button" data-review-saved="${escapeHtml(id)}" aria-pressed="${reviewed}">${reviewed ? 'REOPEN' : 'MARK REVIEWED'}</button><button class="remove-saved" type="button" data-remove-saved="${escapeHtml(id)}" aria-label="Remove ${escapeHtml(item.episode)} from clip drafts">REMOVE</button>`;
-    return `<article class="clip-item"><div class="clip-summary"><strong>${escapeHtml(item.episode)}</strong><small>${escapeHtml(item.guest)} · ${formatTime(start)}–${formatTime(end)} · ${reviewed ? 'REVIEWED LOCALLY' : 'LOCAL DRAFT'}</small></div><div class="clip-actions">${actions}</div><form class="cut-editor" data-edit-cut="${escapeHtml(id)}"${editing ? '' : ' hidden'}><label>IN <small>seconds</small><input type="number" name="start" min="0" step="0.1" value="${start}" required></label><label>OUT <small>seconds</small><input type="number" name="end" min="0" step="0.1" value="${end}" required></label><p class="cut-note">Source duration unavailable · verify the out-point in the video.</p><div class="cut-actions"><button type="submit">Save range</button><button type="button" data-cancel-edit="${escapeHtml(id)}">Cancel</button></div><p class="cut-error" data-range-error role="status" aria-live="polite"></p></form></article>`;
-  }).join('') : '<div class="clip-empty">No clip drafts yet. Search, then create a local draft.</div>';
+    const length = Math.max(0, Math.round(end - start));
+    const thumb = item.videoId ? `<img src="https://i.ytimg.com/vi/${encodeURIComponent(String(item.videoId))}/mqdefault.jpg" alt="" loading="lazy" decoding="async">` : '<span class="clip-thumb-fallback" aria-hidden="true">★</span>';
+    return `<article class="clip-item" data-status="${reviewed ? 'reviewed' : 'draft'}" data-tier="${tierOf(item) ? tierOf(item).key : 'none'}"><div class="clip-thumb">${thumb}<span class="clip-length">${length}s</span><span class="clip-at">▶ ${formatTime(start)}</span></div><div class="clip-summary"><div class="clip-tags">${tierChip(item)}<span class="clip-state">${reviewed ? '✓ REVIEWED' : 'DRAFT'}</span></div><strong>${escapeHtml(item.episode)}</strong>${item.quote ? `<q class="clip-quote">${escapeHtml(item.quote)}</q>` : ''}<small>${escapeHtml(item.guest)} · ${formatTime(start)}–${formatTime(end)} · ${reviewed ? 'REVIEWED LOCALLY' : 'LOCAL DRAFT'}</small></div><div class="clip-actions">${actions}</div><form class="cut-editor" data-edit-cut="${escapeHtml(id)}"${editing ? '' : ' hidden'}><label>IN <small>seconds</small><input type="number" name="start" min="0" step="0.1" value="${start}" required></label><label>OUT <small>seconds</small><input type="number" name="end" min="0" step="0.1" value="${end}" required></label><p class="cut-note">Source duration unavailable · verify the out-point in the video.</p><div class="cut-actions"><button type="submit">Save range</button><button type="button" data-cancel-edit="${escapeHtml(id)}">Cancel</button></div><p class="cut-error" data-range-error role="status" aria-live="polite"></p></form></article>`;
+  }).join('') : '<div class="clip-empty"><span class="clip-empty-star" aria-hidden="true">★</span><strong>Your best moments land here.</strong>No clip drafts yet. Search, then create a local draft.</div>';
+  const total = document.querySelector('#clips-total');
+  if (total) total.textContent = queue.length;
+  const reviewedTotal = document.querySelector('#clips-reviewed');
+  if (reviewedTotal) reviewedTotal.textContent = queue.filter(item => item.reviewStatus === 'reviewed').length;
+  document.querySelector('#clips')?.setAttribute('data-count', String(queue.length));
+}
+
+let clipToastTimer;
+function announceClipSaved(item, duration) {
+  const count = document.querySelector('#queue-count');
+  if (count) { count.classList.remove('bump'); void count.offsetWidth; count.classList.add('bump'); }
+  let toast = document.querySelector('#clip-toast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'clip-toast';
+    toast.className = 'clip-toast';
+    toast.setAttribute('role', 'status');
+    document.body.append(toast);
+  }
+  toast.innerHTML = `<span class="clip-toast-star" aria-hidden="true">★</span><span><b>${duration}s clip saved</b>${escapeHtml(item.guest || item.episode || '')} · ${formatTime(item.start)}</span><a href="#clips">View saved</a>`;
+  toast.classList.add('show');
+  clearTimeout(clipToastTimer);
+  clipToastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
+}
+
+function markCitationSaved(id) {
+  document.querySelectorAll('[data-save-citation]').forEach(button => {
+    if (button.dataset.saveCitation !== String(id)) return;
+    button.classList.add('is-saved');
+    button.innerHTML = '<i aria-hidden="true">★</i>SAVED';
+  });
 }
 
 function persistQueue(message = 'Saved on this device · not shared.') {
@@ -190,7 +223,7 @@ function selectEvidence(item, options = {}) {
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
-    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true });
+    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
   });
   if (item.videoId) {
     const previewStart = savedClip ? Number(savedClip.start) : Number(item.start);
@@ -213,7 +246,7 @@ function renderResults(result) {
       ? `<div class="claim-list">${result.claims.map(claim => `<p class="answer-claim">${escapeHtml(claim.text)} <span class="claim-sources">${claim.citationIds.map(id => { const number = citationNumbers.get(String(id)); return number ? `<button class="claim-source" type="button" data-claim-source="${escapeHtml(id)}" aria-label="Open source ${number}">[${number}]</button>` : ''; }).join(' ')}</span></p>`).join('')}</div>`
       : `<div class="answer">${escapeHtml(result.refusal || result.answer || 'I could not verify that in the indexed archive.')}</div>`
     : `<div class="answer">${escapeHtml(result.answer || '')}</div>`;
-  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${tierSummary(current)}${answer}${current.map((item, index) => { const saved = queue.some(savedItem => String(savedItem.id) === String(item.id)); const tier = tierOf(item); return `<article class="citation" data-id="${escapeHtml(item.id)}" data-tier="${tier ? tier.key : 'none'}" style="--i:${Math.min(index, 12)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">${String(index + 1).padStart(2, '0')}</span><div><div class="citation-head">${tierChip(item)}<span class="citation-when">▶ ${formatTime(item.start)}</span>${item.guest ? `<span class="citation-guest">${escapeHtml(item.guest)}</span>` : ''}</div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">${item.mapMatch ? 'MAP MATCH' : 'PROVISIONAL'}</span>${item.virality && item.virality.score >= 7 ? ` · <span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''} · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><button class="citation-save" type="button" data-save-citation="${escapeHtml(item.id)}">${saved ? 'SAVED' : 'CREATE CLIP'}</button><span class="citation-arrow">↗</span></article>`; }).join('')}`;
+  content.innerHTML = `<div class="source-row"><span class="source-dot"></span>${source} · ${isError ? 'SEARCH UNAVAILABLE' : current.length ? 'EVIDENCE FOUND' : 'ARCHIVE REFUSAL'}</div>${tierSummary(current)}${answer}${current.map((item, index) => { const saved = queue.some(savedItem => String(savedItem.id) === String(item.id)); const tier = tierOf(item); return `<article class="citation" data-id="${escapeHtml(item.id)}" data-tier="${tier ? tier.key : 'none'}" style="--i:${Math.min(index, 12)}" role="button" tabindex="0" aria-current="false"><span class="citation-index">${String(index + 1).padStart(2, '0')}</span><div><div class="citation-head">${tierChip(item)}<span class="citation-when">▶ ${formatTime(item.start)}</span>${item.guest ? `<span class="citation-guest">${escapeHtml(item.guest)}</span>` : ''}</div><div class="citation-title">${escapeHtml(item.quote)}</div><div class="citation-meta"><span class="source-window">${formatTime(item.start)}–${formatTime(item.end)}</span> · <span class="provenance-tag">${item.mapMatch ? 'MAP MATCH' : 'PROVISIONAL'}</span>${item.virality && item.virality.score >= 7 ? ` · <span class="virality-badge virality-${item.virality.tier === 'TOP CLIP' ? 'top' : 'strong'}">${escapeHtml(item.virality.tier)} · ${escapeHtml(String(item.virality.score))}</span>` : ''} · ${escapeHtml(item.guest)} · ${escapeHtml(item.episode)}</div></div><button class="citation-save${saved ? ' is-saved' : ''}" type="button" data-save-citation="${escapeHtml(item.id)}"><i aria-hidden="true">${saved ? '★' : '+'}</i>${saved ? 'SAVED' : 'CREATE CLIP'}</button><span class="citation-arrow">↗</span></article>`; }).join('')}`;
   current.forEach(item => {
     const card = document.querySelector(`[data-id="${item.id}"]`);
     card.addEventListener('click', () => selectEvidence(item));
