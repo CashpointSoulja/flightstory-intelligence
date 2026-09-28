@@ -223,7 +223,7 @@ function selectEvidence(item, options = {}) {
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const duration = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
     const clip = { ...item, start: Math.max(0, center - duration / 2), end: center + duration / 2, requestedDuration: duration, reviewStatus: 'draft' };
-    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
+    queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${Math.round(clip.end - clip.start) || duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
   });
   if (item.videoId) {
     const previewStart = savedClip ? Number(savedClip.start) : Number(item.start);
