@@ -1,4 +1,4 @@
-import { formatTime, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, watchUrl } from './archive-ui.js';
+import { floorClipWindow, formatTime, isValidClipRange, isValidQuery, loadSavedItems, persistSavedItems, removeSavedItem, startsInContent, watchUrl } from './archive-ui.js';
 
 const form = document.querySelector('#search-form');
 const query = document.querySelector('#query');
@@ -10,7 +10,7 @@ const heading = document.querySelector('#question-heading');
 const queueCount = document.querySelector('#queue-count');
 const clipList = document.querySelector('#clip-list');
 let current = [];
-let queue = loadSavedItems(() => window.localStorage);
+let queue = loadSavedItems(() => window.localStorage).map(item => ({ ...item, ...floorClipWindow(item.start, item.end) }));
 let searchRequest = 0;
 let selectedEvidence = null;
 let editingClipId = null;
@@ -161,7 +161,7 @@ function renderQueue() {
       : `${sourceAction({ ...item, start })}<button class="edit-cut" type="button" data-edit-saved="${escapeHtml(id)}" aria-expanded="false">EDIT CUT</button><button class="mark-reviewed" type="button" data-review-saved="${escapeHtml(id)}" aria-pressed="${reviewed}">${reviewed ? 'REOPEN' : 'MARK REVIEWED'}</button><button class="remove-saved" type="button" data-remove-saved="${escapeHtml(id)}" aria-label="Remove ${escapeHtml(item.episode)} from clip drafts">REMOVE</button>`;
     const length = Math.max(0, Math.round(end - start));
     const thumb = item.videoId ? `<img src="https://i.ytimg.com/vi/${encodeURIComponent(String(item.videoId))}/mqdefault.jpg" alt="" loading="lazy" decoding="async">` : '<span class="clip-thumb-fallback" aria-hidden="true">★</span>';
-    return `<article class="clip-item" data-status="${reviewed ? 'reviewed' : 'draft'}" data-tier="${tierOf(item) ? tierOf(item).key : 'none'}"><div class="clip-thumb">${thumb}<span class="clip-length">${length}s</span><span class="clip-at">▶ ${formatTime(start)}</span></div><div class="clip-summary"><div class="clip-tags">${tierChip(item)}<span class="clip-state">${reviewed ? '✓ REVIEWED' : 'DRAFT'}</span></div><strong>${escapeHtml(item.episode)}</strong>${item.quote ? `<q class="clip-quote">${escapeHtml(item.quote)}</q>` : ''}<small>${escapeHtml(item.guest)} · ${formatTime(start)}–${formatTime(end)} · ${reviewed ? 'REVIEWED LOCALLY' : 'LOCAL DRAFT'}</small></div><div class="clip-actions">${actions}</div><form class="cut-editor" data-edit-cut="${escapeHtml(id)}"${editing ? '' : ' hidden'}><label>IN <small>seconds</small><input type="number" name="start" min="0" step="0.1" value="${start}" required></label><label>OUT <small>seconds</small><input type="number" name="end" min="0" step="0.1" value="${end}" required></label><p class="cut-note">Source duration unavailable · verify the out-point in the video.</p><div class="cut-actions"><button type="submit">Save range</button><button type="button" data-cancel-edit="${escapeHtml(id)}">Cancel</button></div><p class="cut-error" data-range-error role="status" aria-live="polite"></p></form></article>`;
+    return `<article class="clip-item" data-status="${reviewed ? 'reviewed' : 'draft'}" data-tier="${tierOf(item) ? tierOf(item).key : 'none'}"><div class="clip-thumb">${thumb}<span class="clip-length">${length}s</span><span class="clip-at">▶ ${formatTime(start)}</span></div><div class="clip-summary"><div class="clip-tags">${tierChip(item)}<span class="clip-state">${reviewed ? '✓ REVIEWED' : 'DRAFT'}</span></div><strong>${escapeHtml(item.episode)}</strong>${item.quote ? `<q class="clip-quote">${escapeHtml(item.quote)}</q>` : ''}<small>${escapeHtml(item.guest)} · ${formatTime(start)}–${formatTime(end)} · ${reviewed ? 'REVIEWED LOCALLY' : 'LOCAL DRAFT'}</small></div><div class="clip-actions">${actions}</div><form class="cut-editor" data-edit-cut="${escapeHtml(id)}"${editing ? '' : ' hidden'}><label>IN <small>seconds</small><input type="number" name="start" min="120" step="0.1" value="${start}" required></label><label>OUT <small>seconds</small><input type="number" name="end" min="0" step="0.1" value="${end}" required></label><p class="cut-note">Source duration unavailable · verify the out-point in the video.</p><div class="cut-actions"><button type="submit">Save range</button><button type="button" data-cancel-edit="${escapeHtml(id)}">Cancel</button></div><p class="cut-error" data-range-error role="status" aria-live="polite"></p></form></article>`;
   }).join('') : '<div class="clip-empty"><span class="clip-empty-star" aria-hidden="true">★</span><strong>Your best moments land here.</strong>No clip drafts yet. Search, then create a local draft.</div>';
   const total = document.querySelector('#clips-total');
   if (total) total.textContent = queue.length;
@@ -222,7 +222,7 @@ function selectEvidence(item, options = {}) {
   evidenceContent.innerHTML = `<div class="evidence-who">${tierChip(item, 'lg')}<span class="guest">${escapeHtml(item.guest || 'Guest not listed').toUpperCase()}</span></div><h3>${escapeHtml(item.episode)}</h3><div class="evidence-stamp"><span>EXACT MOMENT</span><strong>${formatTime(item.start)}</strong><small>to ${formatTime(item.end)}</small></div><div class="transcript">“${escapeHtml(item.quote)}”</div>${sourceLink}<div class="clip-presets" role="group" aria-label="Create clip length"><span>${saved ? 'SAVED' : 'CREATE CLIP'}</span>${[15,30,60,90].map(seconds => `<button type="button" data-clip-seconds="${seconds}" aria-pressed="${Boolean(savedClip && Number(savedClip.requestedDuration) === seconds)}"${saveDisabled ? ' disabled title="Finish or cancel the open cut edit first."' : ''}>${seconds}s</button>`).join('')}</div><p class="clip-note">${saved ? 'Clip saved on this device. Pick another length to replace it.' : 'Pick a length to create the clip.'} Source window ${formatTime(item.start)}–${formatTime(item.end)} · ${item.mapMatch ? 'archive map topic match; open the source to find the exact moment.' : 'provisional transcript excerpt; verify in the source before review.'}</p>`;
   evidenceContent.querySelectorAll('[data-clip-seconds]').forEach(button => button.onclick = () => {
     const requested = Number(button.dataset.clipSeconds); const center = (Number(item.start) + Number(item.end)) / 2;
-    const clip = { ...item, start: Math.max(0, center - requested / 2), end: center + requested / 2, requestedDuration: requested, reviewStatus: 'draft' };
+    const clip = { ...item, ...floorClipWindow(center - requested / 2, center + requested / 2), requestedDuration: requested, reviewStatus: 'draft' };
     const duration = Math.round(clip.end - clip.start) || requested;
     queue = [...queue.filter(savedItem => String(savedItem.id) !== String(item.id)), clip]; persistQueue(`${duration}s clip draft created.`); renderQueue(); selectEvidence(item, { autoplayPreview: true }); announceClipSaved(clip, duration); markCitationSaved(item.id);
   });
@@ -236,7 +236,7 @@ function selectEvidence(item, options = {}) {
 }
 
 function renderResults(result) {
-  current = rankByClipPotential(result.citations || []);
+  current = rankByClipPotential((result.citations || []).filter(startsInContent));
   const isError = result.mode === 'error';
   content.setAttribute('aria-busy', 'false');
   count.textContent = isError ? 'TRY AGAIN' : current.length ? `${current.length} ${current.length === 1 ? 'MOMENT' : 'MOMENTS'}` : 'NO MATCH';
@@ -365,11 +365,10 @@ clipList.addEventListener('submit', event => {
   const id = editor.dataset.editCut;
   const item = queue.find(candidate => String(candidate.id) === id);
   if (!item) return;
-  const start = Number(editor.elements.namedItem('start').value);
-  const end = Number(editor.elements.namedItem('end').value);
+  const { start, end } = floorClipWindow(editor.elements.namedItem('start').value, editor.elements.namedItem('end').value);
   const error = editor.querySelector('[data-range-error]');
   if (!isValidClipRange(start, end, item.durationSeconds)) {
-    error.textContent = 'Out must be after in; both times must be zero or later.';
+    error.textContent = 'Out must be after in, and the cut must fit inside the episode.';
     return;
   }
   queue = queue.map(candidate => String(candidate.id) === id ? { ...candidate, start, end, reviewStatus: 'draft' } : candidate);

@@ -26,6 +26,20 @@ export function isValidQuery(value) {
   return typeof value === 'string' && value.trim().length >= 2 && value.length <= 500;
 }
 
+export const MIN_CLIP_START_S = 120;
+
+export function startsInContent(item) {
+  return Number(item?.start) >= MIN_CLIP_START_S;
+}
+
+export function floorClipWindow(startValue, endValue) {
+  const start = Number(startValue);
+  const duration = Number(endValue) - start;
+  if (!Number.isFinite(start) || !Number.isFinite(duration)) return { start, end: Number(endValue) };
+  const floored = Math.max(MIN_CLIP_START_S, start);
+  return { start: floored, end: floored + duration };
+}
+
 export function isValidClipRange(startValue, endValue, durationSeconds) {
   const start = Number(startValue);
   const end = Number(endValue);

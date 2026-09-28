@@ -68,13 +68,16 @@ function viralityFor(map, item) {
   return best;
 }
 function viralityBoost(v) { return !v ? 0 : v.score >= 8.5 ? 2.5 : v.score >= 7 ? 1.5 : v.score >= 5 ? 0.5 : 0; }
+// Owner rule: nothing may start inside an episode's cold-open teaser (first 2:00).
+const MIN_CLIP_START_S = 120;
+const startsInContent = item => Number(item?.start) >= MIN_CLIP_START_S;
 const BOARD_CLIP_PAGE_SIZE = 50;
 const BOARD_CLIP_MAX_OFFSET = 100_000;
 
 const evidence = [
-  { id: 'vanessa-talk-too-much', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 0, end: 18, topic: 'conversation talk too much cues', quote: 'How do you know you talk too much? So, first thing is non-verbal cues. Someone is checking out if they are opening their mouth as if to say something. I call it like the open fish.', note: 'A practical conversational cue: notice when the other person is trying to enter the conversation.' },
-  { id: 'vanessa-loneliness', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 33, end: 65, topic: 'conversation loneliness technology voice notes', quote: "And because we're having less conversations, one in six people worldwide are affected by loneliness. And I now more than ever am sending 9-minute voice notes to my friends.", note: 'A cultural observation: technology changes the amount and shape of human conversation.' },
-  { id: 'vanessa-highlight', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 66, end: 81, topic: 'conversation networking questions highlight day', quote: 'The best conversation starter was actually what was the highlight of your day? Because the moment we asked how are you, what do you do? They ran out of things to talk about.', note: 'A tested conversation prompt that creates a richer opening than generic small talk.' }
+  { id: 'vanessa-talk-too-much', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 2754.24, end: 2771.36, topic: 'conversation talk too much cues', quote: "15 to 45 seconds 45 seconds the most. Second non-verbal cues someone is checking out if they are opening their mouth as if to say something. That is a subtle cue that someone wants a turn but they are going to wait. So if someone is opening their mouth I call it like the open fish." },
+  { id: 'vanessa-loneliness', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 2658.72, end: 2693.52, topic: 'conversation loneliness technology voice notes', quote: "And that is because we're able to do so much work asynchronously. We also spend so much time on our on our self-care, our longevity, our workouts that we are just doing less with other people. And one in six people worldwide are affected by loneliness. And I think that is because we are having less conversation. And if we're having it, it's happening asynchronously or and this is the last hardest point is we are now talking to technology more than talking to each other. And I don't just mean through technology. Yes, we've been talking through technology for a long time, but only recently are we talking to technology." },
+  { id: 'vanessa-highlight', episode: 'Vanessa Van Edwards: The Weird Trick That Makes People Like You', guest: 'Vanessa Van Edwards', videoId: 'q2cg1gEYWJQ', start: 562.56, end: 601.52, topic: 'conversation networking questions highlight day', quote: "The facts are dead ends, right? So, they're there it's very hard for someone to break out of that fact because they're stuck in that social that social script. The best conversation starter was actually a sneaker. I was like, interesting that this one did best by lot. It was, \"What was the highlight of your day?\" Now, what this question does psychologically, it sounds casual. Well, first of all, it's not too deep. A mistake that extroverts can make is they ask too deep too question too quickly, right? They they're like, \"What is your greatest goal in life?\" And you're like, \"I don't know you.\" Right? So, it's not too deep, but it's a subtle replacement for how are you? You're actually asking the other person's brain to search for optimism." },
 ];
 function normalizedName(value) { return value.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().replace(/\s+/g, ' '); }
 function canonicalGuest(value) {
@@ -742,6 +745,7 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         }
         diag += ` itemsN:${items.length}`;
       } else if (effectiveMode !== 'demo') return send(response, 503, { error: 'Search access mode is misconfigured.' });
+      items = items.filter(startsInContent);
       const demoTimeoutMs = Math.min(openAITimeoutMs, 6_000);
       let topicPromise = null;
       if (effectiveMode === 'demo' && openAIKey && !search && !excerptPassWillCallOpenAI(query.trim(), items, boostItem)) {
@@ -797,23 +801,26 @@ export function createServer({ search, mode = searchAccessMode, workspaceId = fl
         }).filter(({ score }) => score >= 1))
           .sort((a, b) => b.score - a.score || b.node.occurrences - a.node.occurrences)
           .slice(0, 2);
-        if (matches.length) {
+        const topicCitations = matches.flatMap(({ node }) => [...node.sources].sort((a, b) => b.count - a.count)
+          .map(src => {
+            const videoId = new URL(src.url).searchParams.get('v');
+            return { src, videoId, start: moments[`${node.id}:${videoId}`] ?? Math.floor(src.seconds) };
+          })
+          .filter(startsInContent).slice(0, 3).map(({ src, videoId, start }, i) => ({
+            id: `${node.id}:${videoId}:${i}`, episode: src.title, guest: node.label, videoId,
+            start, end: start + 30, quote: `${src.count} mentions of "${node.label}" in this episode`,
+            note: 'Archive map topic match. Transcript quote not available in this demo; verify in the source.',
+            mapMatch: true
+          })));
+        if (topicCitations.length) {
           finalResult = {
             answer: 'No verified quote in the indexed demo excerpts, but the archive map connects this to these topics. Each source opens the video at the moment the topic appears.',
-            citations: matches.flatMap(({ node }) => [...node.sources].sort((a, b) => b.count - a.count).slice(0, 3).map((src, i) => {
-              const videoId = new URL(src.url).searchParams.get('v');
-              const start = moments[`${node.id}:${videoId}`] ?? Math.floor(src.seconds);
-              return {
-                id: `${node.id}:${videoId}:${i}`, episode: src.title, guest: node.label, videoId,
-                start, end: start + 30, quote: `${src.count} mentions of "${node.label}" in this episode`,
-                note: 'Archive map topic match. Transcript quote not available in this demo; verify in the source.',
-                mapMatch: true
-              };
-            })),
+            citations: topicCitations,
             mode: aiMode ? 'ai-topic-map' : 'topic-map'
           };
         }
       }
+      if (finalResult.citations?.length) finalResult = { ...finalResult, citations: finalResult.citations.filter(startsInContent) };
       // Attach validated virality scores to citations for the clip-potential badge (badge commit; revert to remove).
       if (finalResult.citations?.length) {
         finalResult = { ...finalResult, citations: finalResult.citations.map(item => {

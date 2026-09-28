@@ -3,6 +3,8 @@ import { formatTime, watchUrl } from './archive-ui.js';
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-8][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[character]));
 const seconds = ms => (ms / 1000).toFixed(3).replace(/\.?0+$/, '');
+const MIN_CLIP_START_MS = 120_000;
+const floorRangeMs = (startMs, endMs) => startMs >= MIN_CLIP_START_MS ? { startMs, endMs } : { startMs: MIN_CLIP_START_MS, endMs: MIN_CLIP_START_MS + endMs - startMs };
 const secondsToMs = value => {
   if (value === null || value === undefined || value === '') return null;
   const scaled = Number(value) * 1000;
@@ -47,8 +49,7 @@ export function citationClipInput(citation) {
   if (!Number.isSafeInteger(startMs) || startMs < 0 || !Number.isSafeInteger(endMs) || endMs <= startMs) return null;
   return {
     segmentId: citation.id,
-    startMs,
-    endMs,
+    ...floorRangeMs(startMs, endMs),
     title: String(citation.episode || '').slice(0, 200),
     hook: String(citation.quote || '').slice(0, 2000)
   };
@@ -133,7 +134,7 @@ export async function initSharedReview(auth) {
       ? 'Only the clip creator can edit or submit this draft.'
       : 'Only the clip creator can edit this draft.';
     return `<article class="shared-clip" data-clip="${escapeHtml(clip.id)}" data-title="${escapeHtml(clip.title || '')}" data-hook="${escapeHtml(clip.hook || '')}"><div class="shared-clip-copy"><span class="shared-state">${escapeHtml(statusLabel)}</span><h3>${escapeHtml(clip.title || episode.title || 'Untitled clip')}</h3><p class="shared-meta">${escapeHtml(episode.guest || 'Unknown guest')} · ${formatTime(startMs / 1000)}–${formatTime(endMs / 1000)}</p><blockquote>${escapeHtml(source.text || clip.hook || 'Source transcript unavailable.')}</blockquote>${sourceUrl ? `<a class="shared-source" href="${escapeHtml(sourceUrl)}" target="_blank" rel="noreferrer">Watch source ↗</a>` : ''}${review.note ? `<p class="review-note"><strong>${escapeHtml(review.decision || 'Review')}:</strong> ${escapeHtml(review.note)}</p>` : ''}</div>
-        ${editable ? `<form data-range-form><label>In <small>seconds</small><input name="start" type="number" min="0" step="0.001" value="${seconds(startMs)}" required></label><label>Out <small>seconds</small><input name="end" type="number" min="0" step="0.001" value="${seconds(endMs)}" required></label><button type="submit">Save range</button></form>` : ''}
+        ${editable ? `<form data-range-form><label>In <small>seconds</small><input name="start" type="number" min="120" step="0.001" value="${seconds(startMs)}" required></label><label>Out <small>seconds</small><input name="end" type="number" min="0" step="0.001" value="${seconds(endMs)}" required></label><button type="submit">Save range</button></form>` : ''}
         <div class="shared-clip-actions">${submit ? '<button type="button" data-submit>Submit for review</button>' : ''}${editableStatus && !editable ? `<p>${creatorMessage}</p>` : ''}${clip.status === 'needs_review' && clip.canReview === true ? '<textarea data-review-note maxlength="2000" aria-label="Review note" placeholder="Add a note for the producer (optional)"></textarea><button type="button" data-review="approved">Approve</button><button type="button" data-review="rejected">Request changes</button>' : ''}${clip.status === 'needs_review' && clip.canReview !== true ? '<p>Waiting for an eligible teammate to review.</p>' : ''}</div></article>`;
   }
 
@@ -324,7 +325,7 @@ export function rangeEditInput(startSeconds, endSeconds, clip) {
   const startMs = secondsToMs(startSeconds);
   const endMs = secondsToMs(endSeconds);
   if (startMs === null || endMs === null || startMs < 0 || endMs <= startMs) return null;
-  return { startMs, endMs, title: clip.title || null, hook: clip.hook || null };
+  return { ...floorRangeMs(startMs, endMs), title: clip.title || null, hook: clip.hook || null };
 }
 
 export function sourceHeading(citation) {
